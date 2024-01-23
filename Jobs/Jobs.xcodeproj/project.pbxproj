@@ -8,18 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C52B5ED2DC000EBCD1 /* JobsApp.swift */; };
-		699750C82B5ED2DC000EBCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C72B5ED2DC000EBCD1 /* ContentView.swift */; };
+		699750C82B5ED2DC000EBCD1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C72B5ED2DC000EBCD1 /* MainView.swift */; };
 		699750CA2B5ED2DD000EBCD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 699750C92B5ED2DD000EBCD1 /* Assets.xcassets */; };
 		699750CE2B5ED2DD000EBCD1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 699750CD2B5ED2DD000EBCD1 /* Preview Assets.xcassets */; };
+		699750D52B5FD7E1000EBCD1 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750D42B5FD7E1000EBCD1 /* Job.swift */; };
+		699750D72B5FF413000EBCD1 /* NewJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750D62B5FF413000EBCD1 /* NewJobView.swift */; };
+		699750D92B6007AD000EBCD1 /* EditJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750D82B6007AD000EBCD1 /* EditJobView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		699750C22B5ED2DC000EBCD1 /* Jobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		699750C52B5ED2DC000EBCD1 /* JobsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsApp.swift; sourceTree = "<group>"; };
-		699750C72B5ED2DC000EBCD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		699750C72B5ED2DC000EBCD1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		699750C92B5ED2DD000EBCD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		699750CB2B5ED2DD000EBCD1 /* Jobs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jobs.entitlements; sourceTree = "<group>"; };
 		699750CD2B5ED2DD000EBCD1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		699750D42B5FD7E1000EBCD1 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
+		699750D62B5FF413000EBCD1 /* NewJobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewJobView.swift; sourceTree = "<group>"; };
+		699750D82B6007AD000EBCD1 /* EditJobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditJobView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,8 +59,11 @@
 			isa = PBXGroup;
 			children = (
 				699750C52B5ED2DC000EBCD1 /* JobsApp.swift */,
-				699750C72B5ED2DC000EBCD1 /* ContentView.swift */,
+				699750C72B5ED2DC000EBCD1 /* MainView.swift */,
+				699750D82B6007AD000EBCD1 /* EditJobView.swift */,
+				699750D62B5FF413000EBCD1 /* NewJobView.swift */,
 				699750C92B5ED2DD000EBCD1 /* Assets.xcassets */,
+				699750D42B5FD7E1000EBCD1 /* Job.swift */,
 				699750CB2B5ED2DD000EBCD1 /* Jobs.entitlements */,
 				699750CC2B5ED2DD000EBCD1 /* Preview Content */,
 			);
@@ -139,8 +148,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				699750C82B5ED2DC000EBCD1 /* ContentView.swift in Sources */,
+				699750D92B6007AD000EBCD1 /* EditJobView.swift in Sources */,
+				699750C82B5ED2DC000EBCD1 /* MainView.swift in Sources */,
+				699750D52B5FD7E1000EBCD1 /* Job.swift in Sources */,
 				699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */,
+				699750D72B5FF413000EBCD1 /* NewJobView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +282,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Jobs/Preview Content\"";
-				DEVELOPMENT_TEAM = 9FVDFCLP22;
+				DEVELOPMENT_TEAM = 4YCTKB8W6U;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -308,7 +320,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Jobs/Preview Content\"";
-				DEVELOPMENT_TEAM = 9FVDFCLP22;
+				DEVELOPMENT_TEAM = 4YCTKB8W6U;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
