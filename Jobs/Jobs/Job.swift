@@ -14,7 +14,7 @@ public final class Job {
     var company: String
     var dateAdded: Date
     var notes: String
-    var jobApplicationStatus: JobApplicationStatus
+    var jobApplicationStatus: JobApplicationStatus.RawValue
     
     init(title: String,
         company: String,
@@ -25,11 +25,11 @@ public final class Job {
         self.company = company
         self.dateAdded = dateAdded
         self.notes = notes
-        self.jobApplicationStatus = jobApplicationStatus
+        self.jobApplicationStatus = jobApplicationStatus.rawValue
     }
     
     var icon: Image {
-        switch jobApplicationStatus {
+        switch JobApplicationStatus(rawValue: jobApplicationStatus)! {
         case .notApplied:
             Image(systemName: "clock")
         case .applied:

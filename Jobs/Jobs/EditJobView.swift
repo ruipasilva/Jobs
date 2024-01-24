@@ -35,7 +35,7 @@ struct EditJobView: View {
                 Button("Update") {
                     job.title = title
                     job.company = company
-                    job.jobApplicationStatus = jobApplicationStatus
+                    job.jobApplicationStatus = jobApplicationStatus.rawValue
                     dismiss()
                 }
             }
@@ -43,11 +43,7 @@ struct EditJobView: View {
         .onAppear {
             title = job.title
             company = job.company
-            jobApplicationStatus = job.jobApplicationStatus
+            jobApplicationStatus = JobApplicationStatus(rawValue: job.jobApplicationStatus)!
         }
     }
 }
-
-//#Preview {
-//    EditJobView()
-//}

@@ -14,6 +14,7 @@
 		699750D52B5FD7E1000EBCD1 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750D42B5FD7E1000EBCD1 /* Job.swift */; };
 		699750D72B5FF413000EBCD1 /* NewJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750D62B5FF413000EBCD1 /* NewJobView.swift */; };
 		699750D92B6007AD000EBCD1 /* EditJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750D82B6007AD000EBCD1 /* EditJobView.swift */; };
+		699750DB2B614E61000EBCD1 /* JobListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750DA2B614E61000EBCD1 /* JobListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		699750D42B5FD7E1000EBCD1 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
 		699750D62B5FF413000EBCD1 /* NewJobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewJobView.swift; sourceTree = "<group>"; };
 		699750D82B6007AD000EBCD1 /* EditJobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditJobView.swift; sourceTree = "<group>"; };
+		699750DA2B614E61000EBCD1 /* JobListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				699750C52B5ED2DC000EBCD1 /* JobsApp.swift */,
 				699750C72B5ED2DC000EBCD1 /* MainView.swift */,
+				699750DA2B614E61000EBCD1 /* JobListView.swift */,
 				699750D82B6007AD000EBCD1 /* EditJobView.swift */,
 				699750D62B5FF413000EBCD1 /* NewJobView.swift */,
 				699750C92B5ED2DD000EBCD1 /* Assets.xcassets */,
@@ -150,6 +153,7 @@
 			files = (
 				699750D92B6007AD000EBCD1 /* EditJobView.swift in Sources */,
 				699750C82B5ED2DC000EBCD1 /* MainView.swift in Sources */,
+				699750DB2B614E61000EBCD1 /* JobListView.swift in Sources */,
 				699750D52B5FD7E1000EBCD1 /* Job.swift in Sources */,
 				699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */,
 				699750D72B5FF413000EBCD1 /* NewJobView.swift in Sources */,

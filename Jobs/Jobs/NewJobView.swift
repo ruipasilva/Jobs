@@ -37,7 +37,3 @@ struct NewJobView: View {
         }
     }
 }
-
-#Preview {
-    NewJobView()
-}
