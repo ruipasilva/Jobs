@@ -10,20 +10,21 @@ import SwiftData
 
 @Model
 public final class Job {
-    var title: String
-    var company: String
-    var dateAdded: Date
-    var notes: String
-    var jobApplicationStatus: JobApplicationStatus.RawValue
+    // All properties need a default value as cloudKit needs it
+    var title: String = ""
+    var company: String = ""
+    var dateAdded: Date = Date.now
+    var notes: String = ""
+    var jobApplicationStatus: JobApplicationStatus.RawValue = JobApplicationStatus.notApplied.rawValue
     var salary: String?
     var location: String?
-    var locationType: LocationType.RawValue
+    var locationType: LocationType.RawValue = LocationType.onSite.rawValue
     var recruiterName: String?
     var recruiterNumber: String?
     var recruiterEmail: String?
     var interviewDate: Date?
-    var addToCalendar: Bool
-    var addToCalendarDate: Date
+    var addToCalendar: Bool = false
+    var addToCalendarDate: Date?
     var jobURLPosting: String?
     
     init(title: String,
@@ -31,7 +32,7 @@ public final class Job {
          dateAdded: Date = Date.now,
          notes: String = "",
          jobApplicationStatus: JobApplicationStatus = .notApplied,
-         salary: String? = "",
+         salary: String? = nil,
          location: String? = nil,
          locationType: LocationType = .onSite,
          recruiterName: String? = nil,
