@@ -15,17 +15,47 @@ public final class Job {
     var dateAdded: Date
     var notes: String
     var jobApplicationStatus: JobApplicationStatus.RawValue
+    var salary: String?
+    var location: String?
+    var locationType: LocationType.RawValue
+    var recruiterName: String?
+    var recruiterNumber: String?
+    var recruiterEmail: String?
+    var interviewDate: Date?
+    var addToCalendar: Bool
+    var addToCalendarDate: Date
+    var jobURLPosting: String?
     
     init(title: String,
-        company: String,
-        dateAdded: Date = Date.now,
+         company: String,
+         dateAdded: Date = Date.now,
          notes: String = "",
-         jobApplicationStatus: JobApplicationStatus = .notApplied) {
+         jobApplicationStatus: JobApplicationStatus = .notApplied,
+         salary: String? = "",
+         location: String? = nil,
+         locationType: LocationType = .onSite,
+         recruiterName: String? = nil,
+         recruiterNumber: String? = nil,
+         recruiterEmail: String? = nil,
+         interviewDate: Date = Date.distantFuture,
+         addToCalendar: Bool = false,
+         addToCalendarDate: Date = Date.now,
+         jobURLPosting: String? = nil) {
         self.title = title
         self.company = company
         self.dateAdded = dateAdded
         self.notes = notes
         self.jobApplicationStatus = jobApplicationStatus.rawValue
+        self.salary = salary
+        self.location = location
+        self.locationType = locationType.rawValue
+        self.recruiterName = recruiterName
+        self.recruiterNumber = recruiterNumber
+        self.recruiterEmail = recruiterEmail
+        self.interviewDate = interviewDate
+        self.addToCalendar = addToCalendar
+        self.addToCalendarDate = addToCalendarDate
+        self.jobURLPosting = jobURLPosting
     }
     
     var icon: Image {
@@ -42,28 +72,6 @@ public final class Job {
             Image(systemName: "x.circle")
         }
     }
- 
+    
 }
 
-enum JobApplicationStatus: Int, Codable, Identifiable, CaseIterable {
-    case notApplied, applied, interviewing, accepted, rejected
-    
-    var id: Self {
-        self
-    }
-    
-    var status: String {
-        switch self {
-        case .notApplied:
-            "Not applied"
-        case .applied:
-            "Applied"
-        case .interviewing:
-            "Interviewing"
-        case .accepted:
-            "Hired"
-        case .rejected:
-            "Rejected"
-        }
-    }
-}

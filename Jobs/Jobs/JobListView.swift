@@ -12,7 +12,7 @@ struct JobListView: View {
     @Environment(\.modelContext) private var context
     @Query private var jobs: [Job]
     
-    init(sortOrder: SortOrder) {
+    init(sortOrder: SortOrder, filterString: String) {
         let sortDescriptors: [SortDescriptor<Job>] = switch sortOrder {
         case .status:
             [SortDescriptor(\Job.company), SortDescriptor(\Job.title)]
@@ -21,7 +21,12 @@ struct JobListView: View {
         case .company:
             [SortDescriptor(\Job.company)]
         }
-        _jobs = Query(sort: sortDescriptors)
+        let predicate = #Predicate<Job> { job in
+            job.company.localizedStandardContains(filterString) ||
+            job.title.localizedStandardContains(filterString) ||
+            filterString.isEmpty
+        }
+        _jobs = Query(filter: predicate, sort: sortDescriptors)
     }
     
     var body: some View {
