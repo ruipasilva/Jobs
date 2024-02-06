@@ -50,8 +50,7 @@ struct JobListView: View {
                                         .font(.subheadline)
                                 }
                                 Spacer()
-                                Text("Status")
-                                job.icon
+                                Text(job.status)
                             }
                         }
                     }

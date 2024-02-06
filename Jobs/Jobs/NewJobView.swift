@@ -11,6 +11,7 @@ struct NewJobView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var appViewModel: AppViewModel
+    @FocusState private var focusState: Bool
     
     @State private var title = ""
     @State private var company = ""
@@ -23,7 +24,9 @@ struct NewJobView: View {
         NavigationStack {
             Form {
                 TextField("Job Title", text: $title)
+                    .focused($focusState)
                 TextField("Compnay Name", text: $company)
+                    .focused($focusState)
                 
                 Button("Create") {
                     let newJob = Job(title: title, company: company)
@@ -33,10 +36,20 @@ struct NewJobView: View {
                 .disabled(title.isEmpty || company.isEmpty)
                 Button(appViewModel.isNewJobExpanded ? "Collapse" : "Expand") {
                     appViewModel.setPresentationDetents()
+                    if focusState {
+                        focusState.toggle()
+                    }
                 }
             }
             .onChange(of: appViewModel.selectedDetent, {
                 appViewModel.setPresentationDetents()
+            })
+            .onChange(of: focusState, { oldValue, newValue in
+                if oldValue {
+                    appViewModel.isNewJobExpanded = false
+                } else {
+                    appViewModel.isNewJobExpanded = true
+                }
             })
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

@@ -74,5 +74,20 @@ public final class Job {
         }
     }
     
+    var status: String {
+        switch JobApplicationStatus(rawValue: jobApplicationStatus)! {
+        case .notApplied:
+            "Not Applied"
+        case .applied:
+            "Applied"
+        case .interviewing:
+            "Interviewing"
+        case .accepted:
+            "Accepted"
+        case .rejected:
+            "Rejected"
+        }
+    }
+    
 }
 
