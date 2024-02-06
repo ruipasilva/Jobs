@@ -9,21 +9,23 @@ import SwiftUI
 import SwiftData
 
 struct MainView: View {
-    @Environment(\.modelContext) private var context
+    @ObservedObject private var appViewModel: AppViewModel
     @Query(sort: \Job.company) private var jobs: [Job]
-    @State private var isShowingNewJob = false
-    @State private var sortOrder = SortOrder.company
     
-    @State private var filter = ""
+    public init(appViewModel: AppViewModel) {
+        self.appViewModel = appViewModel
+    }
     
     var body: some View {
         NavigationStack {
-            JobListView(sortOrder: sortOrder, filterString: filter)
-                .searchable(text: $filter, prompt: "Search for companies or job titles")
+            JobListView(appViewModel: appViewModel,
+                        sortOrder: appViewModel.sortOrder,
+                        filterString: appViewModel.filter)
+            .searchable(text: $appViewModel.filter, prompt: "Search for companies or job titles")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
-                        isShowingNewJob = true
+                        appViewModel.isShowingNewJob = true
                     }, label: {
                         Image(systemName: "plus")
                     })
@@ -31,7 +33,7 @@ struct MainView: View {
                 
                 ToolbarItem(placement: .topBarLeading) {
                     Menu {
-                        Picker("Sort", selection: $sortOrder) {
+                        Picker("Sort", selection: $appViewModel.sortOrder) {
                             ForEach(SortOrder.allCases) {
                                 Text($0.status)
                             }
@@ -41,8 +43,12 @@ struct MainView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isShowingNewJob) {
-                NewJobView()
+            .sheet(isPresented: $appViewModel.isShowingNewJob) {
+                NewJobView(appViewModel: appViewModel)
+                    .presentationDetents(appViewModel.availableDetents, selection: $appViewModel.selectedDetent)
+                    .onDisappear(perform: {
+                        appViewModel.onDismissNewJobSheet()
+                    })
             }
         }
     }

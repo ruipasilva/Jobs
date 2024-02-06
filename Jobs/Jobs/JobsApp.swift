@@ -10,10 +10,12 @@ import SwiftData
 
 @main
 struct JobsApp: App {
+    @StateObject private var appViewModel = AppViewModel()
+    
     let container: ModelContainer
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainView(appViewModel: appViewModel)
         }
         .modelContainer(container)
     }

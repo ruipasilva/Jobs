@@ -9,10 +9,14 @@ import SwiftUI
 import SwiftData
 
 struct JobListView: View {
+    @ObservedObject private var appViewModel: AppViewModel
     @Environment(\.modelContext) private var context
     @Query private var jobs: [Job]
     
-    init(sortOrder: SortOrder, filterString: String) {
+    init(appViewModel: AppViewModel,
+         sortOrder: SortOrder,
+         filterString: String) {
+        self.appViewModel = appViewModel
         let sortDescriptors: [SortDescriptor<Job>] = switch sortOrder {
         case .status:
             [SortDescriptor(\Job.company), SortDescriptor(\Job.title)]
