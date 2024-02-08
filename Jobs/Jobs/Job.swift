@@ -22,9 +22,11 @@ public final class Job {
     var recruiterName: String?
     var recruiterNumber: String?
     var recruiterEmail: String?
-    var interviewDate: Date?
+    var followUp: Bool = false
+    var followUpDate: Date?
     var addToCalendar: Bool = false
     var addToCalendarDate: Date?
+    var isEventAllDay: Bool?
     var jobURLPosting: String?
     
     init(title: String,
@@ -38,9 +40,11 @@ public final class Job {
          recruiterName: String? = nil,
          recruiterNumber: String? = nil,
          recruiterEmail: String? = nil,
-         interviewDate: Date = Date.distantFuture,
+         followUp: Bool = false,
+         followUpDate: Date? = Date.now,
          addToCalendar: Bool = false,
          addToCalendarDate: Date = Date.now,
+         isEventAllDay: Bool? = false,
          jobURLPosting: String? = nil) {
         self.title = title
         self.company = company
@@ -53,9 +57,11 @@ public final class Job {
         self.recruiterName = recruiterName
         self.recruiterNumber = recruiterNumber
         self.recruiterEmail = recruiterEmail
-        self.interviewDate = interviewDate
+        self.followUp = followUp
+        self.followUpDate = followUpDate
         self.addToCalendar = addToCalendar
         self.addToCalendarDate = addToCalendarDate
+        self.isEventAllDay = isEventAllDay
         self.jobURLPosting = jobURLPosting
     }
     

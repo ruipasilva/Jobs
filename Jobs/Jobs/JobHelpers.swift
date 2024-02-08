@@ -23,7 +23,7 @@ public enum JobApplicationStatus: Int, Codable, Identifiable, CaseIterable {
         case .interviewing:
             "Interviewing"
         case .accepted:
-            "Hired"
+            "Accepted"
         case .rejected:
             "Rejected"
         }
@@ -31,16 +31,16 @@ public enum JobApplicationStatus: Int, Codable, Identifiable, CaseIterable {
 }
 
 public enum LocationType: Int, Codable, Identifiable, CaseIterable {
-    case onSite, remote, hybrid
+    case remote, onSite, hybrid
     
     public var id: Self { self }
     
     var type: String {
         switch self {
-        case .onSite:
-            "On Site"
         case .remote:
             "Remote"
+        case .onSite:
+            "On Site"
         case .hybrid:
             "Hybrid"
         }

@@ -45,11 +45,8 @@ struct MainView: View {
             }
             .sheet(isPresented: $appViewModel.isShowingNewJob) {
                 NewJobView(appViewModel: appViewModel)
-                    .presentationDetents(appViewModel.availableDetents, selection: $appViewModel.selectedDetent)
-                    .onDisappear(perform: {
-                        appViewModel.onDismissNewJobSheet()
-                    })
             }
         }
+        .tint(.mint)
     }
 }
