@@ -29,7 +29,8 @@ public final class Job {
     var isEventAllDay: Bool?
     var jobURLPosting: String?
     
-    init(title: String,
+    init(
+         title: String,
          company: String,
          dateAdded: Date = Date.now,
          notes: String = "",

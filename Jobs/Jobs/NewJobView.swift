@@ -71,16 +71,16 @@ struct NewJobView: View {
                 Section {
                     Toggle("Follow up", isOn: $followUp.animation())
                     
+                    
                     if followUp {
                         DatePicker(
                             selection: $followUpDate,
-                            in: Date.now ... Date.distantFuture,
-                            displayedComponents: [.date]
+                            displayedComponents: [.date, .hourAndMinute]
                         ) {
                             Text("Reminder:")
                         }
                     }
-                                        
+                    
                     Toggle("Add Interview To Calendar", isOn: $addInterviewToCalendar.animation())
                     
                     if addInterviewToCalendar {
@@ -100,7 +100,7 @@ struct NewJobView: View {
                 } footer: {
                     Text("A Follow up will send a local notification to your device. Adding to calendar will create an event in the Calendar app.")
                 }
-
+                
                 Section {
                     FloatingTextField(title: "Name", text: $recruiterName, image: "person.circle")
                         .keyboardType(.namePhonePad)
@@ -111,7 +111,7 @@ struct NewJobView: View {
                 } header: {
                     Text("Contacts")
                 }
-
+                
                 
                 
                 Section {
@@ -123,6 +123,16 @@ struct NewJobView: View {
                 }
                 
             }
+            .onChange(of: followUp) { _, _ in
+                if followUp {
+                    appViewModel.requestAuthNotifications()
+                }
+            }
+            .onChange(of: addInterviewToCalendar, { _, _ in
+                if addInterviewToCalendar {
+                    appViewModel.requestAuthCalendar()
+                }
+            })
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
@@ -151,6 +161,13 @@ struct NewJobView: View {
                                          jobURLPosting: url
                         )
                         context.insert(newJob)
+                        if followUp {
+                            appViewModel.scheduleNotification(company: company, title: title, followUpDate: followUpDate)
+                        }
+                        
+                        if addInterviewToCalendar {
+                            appViewModel.addReminderToCalendar(eventAllDay: isEventAllDay, company: company, title: title, addToCalendarDate: addInterviewToCalendarDate)
+                        }
                         dismiss()
                     }
                     .disabled(title.isEmpty || company.isEmpty)
