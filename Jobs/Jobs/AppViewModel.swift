@@ -15,18 +15,28 @@ public final class AppViewModel: ObservableObject {
     @Published public var isNewJobExpanded = false
     @Published public var sortOrder = SortOrder.company
     @Published public var filter = ""
+    @Published public var showingCancelActionSheet = false
+    
+    public func isTitleOrCompanyEmpty(title: String, company: String) -> Bool {
+        return title.isEmpty || company.isEmpty
+    }
 }
 
 // MARK: Calendar helpers
 
 extension AppViewModel {
-    func requestAuthCalendar() {
-        let eventStore = EKEventStore()
-        eventStore.requestAccess(to: .event) { _, _ in
+    public func requestAuthCalendar(addInterviewToCalendar: Bool) async {
+        if addInterviewToCalendar {
+            let eventStore = EKEventStore()
+            do {
+                guard try await eventStore.requestWriteOnlyAccessToEvents() else { return }
+            } catch {
+                print("Something went wrong when allowing access to the calendar")
+            }
         }
     }
 
-    func addReminderToCalendar(eventAllDay: Bool, company: String, title: String, addToCalendarDate: Date) {
+    private func addReminderToCalendar(eventAllDay: Bool, company: String, title: String, addToCalendarDate: Date) {
         let eventStore = EKEventStore()
         let event = EKEvent(eventStore: eventStore)
         event.title = "Interview with \(company)"
@@ -42,25 +52,40 @@ extension AppViewModel {
             print("failed to save event with error : \(error)")
         }
     }
+    
+    public func scheduleCalendarEvent(addEventToCalendar: Bool, eventAllDay: Bool, company: String, title: String, addToCalendarDate: Date) {
+        if addEventToCalendar {
+            addReminderToCalendar(eventAllDay: eventAllDay, company: company, title: title, addToCalendarDate: addToCalendarDate)
+        }
+    }
 }
 
 // MARK: Notifications helpers
 
 extension AppViewModel {
-    public func requestAuthNotifications() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
-            if success {
-                print("All Set For Notifications")
-            } else if let error = error {
-                print(error.localizedDescription)
+    
+    public func scheduleNotification(followUp: Bool, company: String, title: String, followUpDate: Date) {
+        if followUp {
+            scheduleNotification(company: company, title: title, followUpDate: followUpDate)
+        }
+    }
+    
+    public func requestAuthNotifications(followUp: Bool) {
+        if followUp {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
+                if success {
+                    print("All Set For Notifications")
+                } else if let error = error {
+                    print(error.localizedDescription)
+                }
             }
         }
     }
 
-    func scheduleNotification(company: String, title: String, followUpDate: Date) {
+    private func scheduleNotification(company: String, title: String, followUpDate: Date) {
         let content = UNMutableNotificationContent()
 
-        content.title = "Job Tracker: \(title) at \(company)"
+        content.title = "Jobs: \(title) at \(company)"
         content.body = "Have you followed up on your job application?"
         content.sound = UNNotificationSound.default
         
