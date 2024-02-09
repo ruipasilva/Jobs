@@ -16,37 +16,37 @@ public final class Job {
     var dateAdded: Date = Date.now
     var notes: String = ""
     var jobApplicationStatus: JobApplicationStatus.RawValue = JobApplicationStatus.notApplied.rawValue
-    var salary: String?
-    var location: String?
+    var salary: String = ""
+    var location: String = ""
     var locationType: LocationType.RawValue = LocationType.onSite.rawValue
-    var recruiterName: String?
-    var recruiterNumber: String?
-    var recruiterEmail: String?
+    var recruiterName: String = ""
+    var recruiterNumber: String = ""
+    var recruiterEmail: String = ""
     var followUp: Bool = false
-    var followUpDate: Date?
+    var followUpDate: Date = Date.now
     var addToCalendar: Bool = false
-    var addToCalendarDate: Date?
-    var isEventAllDay: Bool?
-    var jobURLPosting: String?
+    var addToCalendarDate: Date = Date.now
+    var isEventAllDay: Bool = false
+    var jobURLPosting: String = ""
     
     init(
          title: String,
          company: String,
          dateAdded: Date = Date.now,
-         notes: String = "",
+         notes: String,
          jobApplicationStatus: JobApplicationStatus = .notApplied,
-         salary: String? = nil,
-         location: String? = nil,
+         salary: String,
+         location: String,
          locationType: LocationType = .onSite,
-         recruiterName: String? = nil,
-         recruiterNumber: String? = nil,
-         recruiterEmail: String? = nil,
-         followUp: Bool = false,
-         followUpDate: Date? = Date.now,
-         addToCalendar: Bool = false,
+         recruiterName: String,
+         recruiterNumber: String,
+         recruiterEmail: String,
+         followUp: Bool,
+         followUpDate: Date = Date.now,
+         addToCalendar: Bool,
          addToCalendarDate: Date = Date.now,
-         isEventAllDay: Bool? = false,
-         jobURLPosting: String? = nil) {
+         isEventAllDay: Bool,
+         jobURLPosting: String) {
         self.title = title
         self.company = company
         self.dateAdded = dateAdded

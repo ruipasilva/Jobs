@@ -197,9 +197,7 @@ struct NewJobView: View {
             Button("Save") {
                 let newJob = Job(title: title,
                                  company: company,
-                                 dateAdded: Date.now,
-                                 notes: notes,
-                                 jobApplicationStatus: jobApplicationStatus,
+                                 notes: notes, jobApplicationStatus: jobApplicationStatus,
                                  salary: salary,
                                  location: location,
                                  locationType: locationType,
@@ -210,9 +208,8 @@ struct NewJobView: View {
                                  followUpDate: followUpDate,
                                  addToCalendar: addInterviewToCalendar,
                                  addToCalendarDate: addInterviewToCalendarDate,
-                                 isEventAllDay: addInterviewToCalendar ? isEventAllDay : false,
-                                 jobURLPosting: url
-                )
+                                 isEventAllDay: isEventAllDay,
+                                 jobURLPosting: url)
                 context.insert(newJob)
                 
                 appViewModel.scheduleNotification(followUp: followUp, company: company, title: title, followUpDate: followUpDate)

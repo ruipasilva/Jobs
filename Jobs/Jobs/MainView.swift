@@ -23,30 +23,37 @@ struct MainView: View {
                         filterString: appViewModel.filter)
             .searchable(text: $appViewModel.filter, prompt: "Search for companies or job titles")
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(action: {
-                        appViewModel.isShowingNewJob = true
-                    }, label: {
-                        Image(systemName: "plus")
-                    })
-                }
-                
-                ToolbarItem(placement: .topBarLeading) {
-                    Menu {
-                        Picker("Sort", selection: $appViewModel.sortOrder) {
-                            ForEach(SortOrder.allCases) {
-                                Text($0.status)
-                            }
-                        }
-                    } label: {
-                        Text("Sort")
-                    }
-                }
+                toolbarTrailing
+                toolBarLeading
             }
             .sheet(isPresented: $appViewModel.isShowingNewJob) {
                 NewJobView(appViewModel: appViewModel)
             }
         }
         .tint(.mint)
+    }
+    
+    private var toolBarLeading: some ToolbarContent {
+        ToolbarItem(placement: .topBarLeading) {
+            Menu {
+                Picker("Sort", selection: $appViewModel.sortOrder) {
+                    ForEach(SortOrder.allCases) {
+                        Text($0.status)
+                    }
+                }
+            } label: {
+                Text("Sort")
+            }
+        }
+    }
+    
+    private var toolbarTrailing: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button(action: {
+                appViewModel.isShowingNewJob = true
+            }, label: {
+                Image(systemName: "plus")
+            })
+        }
     }
 }
