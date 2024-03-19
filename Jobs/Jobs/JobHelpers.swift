@@ -10,9 +10,7 @@ import Foundation
 public enum JobApplicationStatus: Int, Codable, Identifiable, CaseIterable {
     case notApplied, applied, interviewing, accepted, rejected
     
-    public var id: Self {
-        self
-    }
+    public var id: Self { self }
     
     var status: String {
         switch self {

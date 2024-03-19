@@ -28,61 +28,160 @@ struct EditJobView: View {
     @State private var recruiterNumber = ""
     @State private var url = ""
     @State private var notes = ""
-//
+    
+    @State private var isShowingPasteLink = false
+    @State private var isShowingRecruiterDetails = false
+    
     var body: some View {
-        NavigationStack {
-            VStack {
-                TextField("Job Title", text: $title)
-                TextField("Company Name", text: $company)
-                HStack {
-                    Text("Status")
-                    Picker("Status", selection: $jobApplicationStatus) {
-                        ForEach(JobApplicationStatus.allCases) { status in
-                            Text(status.status).tag(status)
+        GeometryReader { geo in
+            ScrollView {
+                VStack {
+                    Text(company)
+                        .font(.title)
+                    Text(title)
+                        .font(.body)
+                        .foregroundStyle(Color(UIColor.secondaryLabel))
+                    Form {
+                        Section {
+                            Picker("Status", selection: $jobApplicationStatus) {
+                                ForEach(JobApplicationStatus.allCases, id: \.id) { status in
+                                    Text(status.status).tag(status)
+                                }
+                            }
                         }
+                        
+                        Section {
+                            Picker("Location", selection: $locationType.animation()) {
+                                ForEach(LocationType.allCases, id: \.self) { type in
+                                    Text(type.type).tag(type)
+                                }
+                            }
+                            if locationType == .onSite  || locationType == .hybrid {
+                                TextField("Add Location", text: $location)
+                            }
+                            HStack {
+                                Text("Salary")
+                                Spacer()
+                                TextField("Amount", text: $salary)
+                                    .multilineTextAlignment(.trailing)
+                                    .keyboardType(.numberPad)
+                            }
+                            HStack {
+                                Text("Job Posting")
+                                    .onTapGesture {
+                                        withAnimation {
+                                            isShowingPasteLink.toggle()
+                                        }
+                                    }
+                                Spacer()
+                                Button {
+                                } label: {
+                                    Image(systemName: "arrow.up.forward.app.fill")
+                                        .imageScale(.large)
+                                        .tint(.accentColor)
+                                }
+                                .disabled(url.isEmpty)
+                            }
+                            
+                            if isShowingPasteLink {
+                                TextField("Paste link", text: $url)
+                            }
+                        }
+                        
+                        Section {
+                            HStack {
+                                Button(action: {
+                                    withAnimation {
+                                        isShowingRecruiterDetails.toggle()
+                                    }
+                                }, label: {
+                                    Image(systemName: isShowingRecruiterDetails ? "menubar.arrow.up.rectangle" : "menubar.arrow.down.rectangle")
+                                        .imageScale(.small)
+                                })
+                                
+                                TextField("Recruiter's name", text: $recruiterName)
+                                Spacer()
+                                Image(systemName: "phone.circle.fill")
+                                    .foregroundStyle(Color.accentColor)
+                                    .imageScale(.large)
+                                    .disabled(recruiterNumber.isEmpty)
+                                Image(systemName: "envelope.circle.fill")
+                                    .foregroundStyle(Color.accentColor)
+                                    .imageScale(.large)
+                                    .disabled(recruiterEmail.isEmpty)
+                            }
+                            if isShowingRecruiterDetails {
+                                TextField("Phone number", text: $recruiterNumber)
+                                    .keyboardType(.numberPad)
+                                TextField("Email", text: $recruiterEmail)
+                                    .keyboardType(.emailAddress)
+                            }
+                            
+                        }
+                        
+                        Section {
+                            TextField("Notes", text: $notes, axis: .vertical)
+                                .lineLimit(5...10)
+                        } header: {
+                            Text("Your notes")
+                        }
+                    }
+                    .frame(height: geo.size.height)
+                    
+                    //                    .scrollContentBackground(.visible)
+                    .toolbar {
+                        toolbarTrailing
                     }
                 }
             }
-            .padding()
-            .toolbar {
-                Button("Update") {
-                    job.title = title
-                    job.company = company
-                    job.jobApplicationStatus = jobApplicationStatus.rawValue
-                    location = location
-                    locationType = locationType
-                    salary = salary
-                    followUp = followUp
-                    followUpDate = followUpDate
-                    addInterviewToCalendar = addInterviewToCalendar
-                    addInterviewToCalendarDate = addInterviewToCalendarDate
-                    isEventAllDay = isEventAllDay
-                    recruiterName = recruiterName
-                    recruiterEmail = recruiterEmail
-                    recruiterNumber = recruiterNumber
-                    url = url
-                    notes = notes
-                    dismiss()
-                }
+        }
+        .background(Color(uiColor: .systemGroupedBackground))
+        
+        .onAppear {
+            setProperties()
+        }
+    }
+    
+    private var toolbarTrailing: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button("Update") {
+                job.title = title
+                job.company = company
+                job.jobApplicationStatus = jobApplicationStatus.rawValue
+                job.location = location
+                job.locationType = locationType.rawValue
+                job.salary = salary
+                followUp = followUp
+                followUpDate = followUpDate
+                addInterviewToCalendar = addInterviewToCalendar
+                addInterviewToCalendarDate = addInterviewToCalendarDate
+                isEventAllDay = isEventAllDay
+                job.recruiterName = recruiterName
+                job.recruiterEmail = recruiterEmail
+                job.recruiterNumber = recruiterNumber
+                job.jobURLPosting = url
+                job.notes = notes
+                dismiss()
             }
         }
-        .onAppear {
-            title = job.title
-            company = job.company
-            jobApplicationStatus = JobApplicationStatus(rawValue: job.jobApplicationStatus)!
-            location = job.location
-            locationType = LocationType(rawValue: job.locationType)!
-            salary = job.salary
-            followUp = job.followUp
-            followUpDate = job.followUpDate
-            addInterviewToCalendar = job.addToCalendar
-            addInterviewToCalendarDate = job.addToCalendarDate
-            isEventAllDay = job.isEventAllDay
-            recruiterName = job.recruiterName
-            recruiterEmail = job.recruiterEmail
-            recruiterNumber = job.recruiterNumber
-            url = job.jobURLPosting
-            notes = job.notes
-        }
+    }
+    
+    private func setProperties() {
+        title = job.title
+        company = job.company
+        jobApplicationStatus = JobApplicationStatus(rawValue: job.jobApplicationStatus)!
+        location = job.location
+        locationType = LocationType(rawValue: job.locationType)!
+        salary = job.salary
+        followUp = job.followUp
+        followUpDate = job.followUpDate
+        addInterviewToCalendar = job.addToCalendar
+        addInterviewToCalendarDate = job.addToCalendarDate
+        isEventAllDay = job.isEventAllDay
+        recruiterName = job.recruiterName
+        recruiterEmail = job.recruiterEmail
+        recruiterNumber = job.recruiterNumber
+        url = job.jobURLPosting
+        notes = job.notes
     }
 }

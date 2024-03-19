@@ -197,7 +197,8 @@ struct NewJobView: View {
             Button("Save") {
                 let newJob = Job(title: title,
                                  company: company,
-                                 notes: notes, jobApplicationStatus: jobApplicationStatus,
+                                 notes: notes, 
+                                 jobApplicationStatus: jobApplicationStatus,
                                  salary: salary,
                                  location: location,
                                  locationType: locationType,

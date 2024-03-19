@@ -13,6 +13,7 @@ struct JobsApp: App {
     @StateObject private var appViewModel = AppViewModel()
     
     let container: ModelContainer
+    
     var body: some Scene {
         WindowGroup {
             MainView(appViewModel: appViewModel)
