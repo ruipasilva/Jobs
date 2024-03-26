@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6938C7562B72E66D004B9237 /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6938C7552B72E66D004B9237 /* FloatingTextField.swift */; };
 		696208532B6A891B0045DD39 /* JobHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696208522B6A891B0045DD39 /* JobHelpers.swift */; };
 		696208572B6A98730045DD39 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696208562B6A98730045DD39 /* AppViewModel.swift */; };
+		698006752BB37DF9007C725E /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698006742BB37DF9007C725E /* FloatingTextField.swift */; };
 		699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C52B5ED2DC000EBCD1 /* JobsApp.swift */; };
 		699750C82B5ED2DC000EBCD1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C72B5ED2DC000EBCD1 /* MainView.swift */; };
 		699750CA2B5ED2DD000EBCD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 699750C92B5ED2DD000EBCD1 /* Assets.xcassets */; };
@@ -21,11 +21,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6938C7552B72E66D004B9237 /* FloatingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloatingTextField.swift; path = "../../../../../Downloads/JobTracker-main/JobTracker/JobTracker/FloatingTextField.swift"; sourceTree = "<group>"; };
 		696208522B6A891B0045DD39 /* JobHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobHelpers.swift; sourceTree = "<group>"; };
 		696208542B6A8F620045DD39 /* JobsDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobsDebug.entitlements; sourceTree = "<group>"; };
 		696208552B6A8FE70045DD39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		696208562B6A98730045DD39 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		698006742BB37DF9007C725E /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		699750C22B5ED2DC000EBCD1 /* Jobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		699750C52B5ED2DC000EBCD1 /* JobsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsApp.swift; sourceTree = "<group>"; };
 		699750C72B5ED2DC000EBCD1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -73,9 +73,9 @@
 				699750C52B5ED2DC000EBCD1 /* JobsApp.swift */,
 				699750C72B5ED2DC000EBCD1 /* MainView.swift */,
 				699750DA2B614E61000EBCD1 /* JobListView.swift */,
+				698006742BB37DF9007C725E /* FloatingTextField.swift */,
 				699750D82B6007AD000EBCD1 /* EditJobView.swift */,
 				699750D62B5FF413000EBCD1 /* NewJobView.swift */,
-				6938C7552B72E66D004B9237 /* FloatingTextField.swift */,
 				696208562B6A98730045DD39 /* AppViewModel.swift */,
 				699750C92B5ED2DD000EBCD1 /* Assets.xcassets */,
 				699750D42B5FD7E1000EBCD1 /* Job.swift */,
@@ -168,7 +168,7 @@
 				696208532B6A891B0045DD39 /* JobHelpers.swift in Sources */,
 				696208572B6A98730045DD39 /* AppViewModel.swift in Sources */,
 				699750C82B5ED2DC000EBCD1 /* MainView.swift in Sources */,
-				6938C7562B72E66D004B9237 /* FloatingTextField.swift in Sources */,
+				698006752BB37DF9007C725E /* FloatingTextField.swift in Sources */,
 				699750DB2B614E61000EBCD1 /* JobListView.swift in Sources */,
 				699750D52B5FD7E1000EBCD1 /* Job.swift in Sources */,
 				699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */,

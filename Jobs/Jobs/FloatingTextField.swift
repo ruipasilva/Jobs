@@ -1,4 +1,9 @@
-// Copyright © 2023 Rui Silva. All rights reserved.
+//
+//  FloatingTextField.swift
+//  Jobs
+//
+//  Created by Rui Silva on 26/03/2024.
+//
 
 import SwiftUI
 
