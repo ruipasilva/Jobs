@@ -11,6 +11,7 @@ import SwiftData
 struct MainView: View {
     @ObservedObject private var appViewModel: AppViewModel
     @Query(sort: \Job.company) private var jobs: [Job]
+    @AppStorage("sortOrdering") var sortOrdering: SortOrdering = .title
     
     public init(appViewModel: AppViewModel) {
         self.appViewModel = appViewModel
@@ -19,7 +20,7 @@ struct MainView: View {
     var body: some View {
         NavigationStack {
             JobListView(appViewModel: appViewModel,
-                        sortOrder: appViewModel.sortOrder,
+                        sortOrder: appViewModel.sortOrdering,
                         filterString: appViewModel.filter)
             .searchable(text: $appViewModel.filter, prompt: "Search for companies or job titles")
             .toolbar {
@@ -31,15 +32,35 @@ struct MainView: View {
             }
         }
         .tint(.mint)
+        .onAppear(perform: {
+            appViewModel.sortOrdering = sortOrdering
+        })
     }
     
     private var toolBarLeading: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             Menu {
-                Picker("Sort", selection: $appViewModel.sortOrder) {
-                    ForEach(SortOrder.allCases) {
-                        Text($0.status)
-                    }
+                ForEach(SortOrdering.allCases, id: \.id) { sort in
+                    Button(action: {
+                        appViewModel.sortOrdering = sort
+                        sortOrdering = sort
+                    }, label: {
+                        Label(sort.status, systemImage: "")
+                    })
+                }
+                
+                Section("Order") {
+                    Button(action: {
+                        appViewModel.ascendingDescending = .forward
+                    }, label: {
+                        Label("Ascending", systemImage: "arrow.down")
+                    })
+                    
+                    Button(action: {
+                        appViewModel.ascendingDescending = .reverse
+                    }, label: {
+                        Label("Descending", systemImage: "arrow.up")
+                    })
                 }
             } label: {
                 Text("Sort")

@@ -14,16 +14,18 @@ struct JobListView: View {
     @Query private var jobs: [Job]
     
     init(appViewModel: AppViewModel,
-         sortOrder: SortOrder,
+         sortOrder: SortOrdering,
          filterString: String) {
         self.appViewModel = appViewModel
         let sortDescriptors: [SortDescriptor<Job>] = switch sortOrder {
-        case .status:
-            [SortDescriptor(\Job.company), SortDescriptor(\Job.title)]
+//        case .status:
+//            [SortDescriptor(\Job.company), SortDescriptor(\Job.title)]
         case .title:
-            [SortDescriptor(\Job.title)]
+            [SortDescriptor(\Job.title, order: appViewModel.ascendingDescending)]
         case .company:
-            [SortDescriptor(\Job.company)]
+            [SortDescriptor(\Job.company, order: appViewModel.ascendingDescending)]
+        case .salary:
+            [SortDescriptor(\Job.salary, order: appViewModel.ascendingDescending)]
         }
         let predicate = #Predicate<Job> { job in
             job.company.localizedStandardContains(filterString) ||
