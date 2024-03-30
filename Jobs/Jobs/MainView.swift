@@ -12,6 +12,7 @@ struct MainView: View {
     @ObservedObject private var appViewModel: AppViewModel
     @Query(sort: \Job.company) private var jobs: [Job]
     @AppStorage("sortOrdering") var sortOrdering: SortOrdering = .title
+    @State var ascendingDescending: SortOrder = .forward
     
     public init(appViewModel: AppViewModel) {
         self.appViewModel = appViewModel
@@ -42,22 +43,21 @@ struct MainView: View {
             Menu {
                 ForEach(SortOrdering.allCases, id: \.id) { sort in
                     Button(action: {
-                        appViewModel.sortOrdering = sort
-                        sortOrdering = sort
+                        sortOrder(sorting: sort)
                     }, label: {
-                        Label(sort.status, systemImage: "")
+                        Text(sort.status)
                     })
                 }
                 
                 Section("Order") {
                     Button(action: {
-                        appViewModel.ascendingDescending = .forward
+                        appViewModel.sortAscendingOrDescending(order: .forward)
                     }, label: {
                         Label("Ascending", systemImage: "arrow.down")
                     })
                     
                     Button(action: {
-                        appViewModel.ascendingDescending = .reverse
+                        appViewModel.sortAscendingOrDescending(order: .reverse)
                     }, label: {
                         Label("Descending", systemImage: "arrow.up")
                     })
@@ -76,5 +76,10 @@ struct MainView: View {
                 Image(systemName: "plus")
             })
         }
+    }
+    
+    private func sortOrder(sorting: SortOrdering) {
+        appViewModel.sortListOrder(sorting: sorting)
+        sortOrdering = sorting
     }
 }

@@ -147,9 +147,9 @@ struct EditJobView: View {
             Button("Update") {
                 job.title = title
                 job.company = company
-                job.jobApplicationStatus = jobApplicationStatus.rawValue
+                job.jobApplicationStatus = jobApplicationStatus
                 job.location = location
-                job.locationType = locationType.rawValue
+                job.locationType = locationType
                 job.salary = salary
                 followUp = followUp
                 followUpDate = followUpDate
@@ -169,9 +169,9 @@ struct EditJobView: View {
     private func setProperties() {
         title = job.title
         company = job.company
-        jobApplicationStatus = JobApplicationStatus(rawValue: job.jobApplicationStatus)!
+        jobApplicationStatus = job.jobApplicationStatus
         location = job.location
-        locationType = LocationType(rawValue: job.locationType)!
+        locationType = job.locationType
         salary = job.salary
         followUp = job.followUp
         followUpDate = job.followUpDate

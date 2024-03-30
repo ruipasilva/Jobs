@@ -21,6 +21,14 @@ public final class AppViewModel: ObservableObject {
     public func isTitleOrCompanyEmpty(title: String, company: String) -> Bool {
         return title.isEmpty || company.isEmpty
     }
+    
+    public func sortListOrder(sorting: SortOrdering) {
+        self.sortOrdering = sorting
+    }
+    
+    public func sortAscendingOrDescending(order: SortOrder){
+        ascendingDescending = order
+    }
 }
 
 // MARK: Calendar helpers

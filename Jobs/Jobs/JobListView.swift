@@ -19,8 +19,8 @@ struct JobListView: View {
         self.appViewModel = appViewModel
         
         let sortDescriptors: [SortDescriptor<Job>] = switch sortOrder {
-        case .status:
-            [SortDescriptor(\Job.jobApplicationStatus, order: appViewModel.ascendingDescending)]
+//        case .status:
+//            [SortDescriptor(\Job.status, order: appViewModel.ascendingDescending)]
         case .title:
             [SortDescriptor(\Job.title, order: appViewModel.ascendingDescending)]
         case .company:

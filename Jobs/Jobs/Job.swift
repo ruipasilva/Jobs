@@ -15,10 +15,10 @@ public final class Job {
     var company: String = ""
     var dateAdded: Date = Date.now
     var notes: String = ""
-    var jobApplicationStatus: JobApplicationStatus.RawValue = JobApplicationStatus.notApplied.rawValue
+    var jobApplicationStatus: JobApplicationStatus = JobApplicationStatus.notApplied
     var salary: String = ""
     var location: String = ""
-    var locationType: LocationType.RawValue = LocationType.onSite.rawValue
+    var locationType: LocationType = LocationType.onSite
     var recruiterName: String = ""
     var recruiterNumber: String = ""
     var recruiterEmail: String = ""
@@ -51,10 +51,10 @@ public final class Job {
         self.company = company
         self.dateAdded = dateAdded
         self.notes = notes
-        self.jobApplicationStatus = jobApplicationStatus.rawValue
+        self.jobApplicationStatus = jobApplicationStatus
         self.salary = salary
         self.location = location
-        self.locationType = locationType.rawValue
+        self.locationType = locationType
         self.recruiterName = recruiterName
         self.recruiterNumber = recruiterNumber
         self.recruiterEmail = recruiterEmail
@@ -67,7 +67,7 @@ public final class Job {
     }
     
     var icon: Image {
-        switch JobApplicationStatus(rawValue: jobApplicationStatus)! {
+        switch jobApplicationStatus {
         case .notApplied:
             Image(systemName: "clock")
         case .applied:
@@ -82,7 +82,7 @@ public final class Job {
     }
     
     var status: String {
-        switch JobApplicationStatus(rawValue: jobApplicationStatus)! {
+        switch jobApplicationStatus {
         case .notApplied:
             "Not Applied"
         case .applied:
