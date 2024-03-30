@@ -41,13 +41,11 @@ struct MainView: View {
     private var toolBarLeading: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             Menu {
-                ForEach(SortOrdering.allCases, id: \.id) { sort in
-                    Button(action: {
-                        sortOrder(sorting: sort)
-                    }, label: {
-                        Text(sort.status)
-                    })
-                }
+                Picker("Sort", selection: $appViewModel.sortOrdering) {
+                        ForEach(SortOrdering.allCases) {
+                            Text($0.status)
+                        }
+                    }
                 
                 Section("Order") {
                     Button(action: {
