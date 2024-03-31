@@ -44,7 +44,7 @@ struct JobListView: View {
                 List {
                     ForEach(jobs) { job in
                         NavigationLink {
-                            EditJobView(job: job)
+                            EditJobView(appViewModel: appViewModel, job: job)
                         } label: {
                             HStack {
                                 LazyVStack(alignment: .leading) {

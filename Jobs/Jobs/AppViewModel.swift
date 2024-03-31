@@ -9,11 +9,12 @@ import Foundation
 import SwiftData
 import UserNotifications
 import EventKit
+import UIKit
 
 public final class AppViewModel: ObservableObject {
     @Published public var isShowingNewJob = false
     @Published public var isNewJobExpanded = false
-    @Published public var sortOrdering = SortOrdering.company
+    @Published public var sortOrdering = SortOrdering.title
     @Published public var ascendingDescending: SortOrder = .forward
     @Published public var filter = ""
     @Published public var showingCancelActionSheet = false

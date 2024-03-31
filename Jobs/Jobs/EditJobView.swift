@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct EditJobView: View {
+    @ObservedObject private var appViewModel: AppViewModel
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
-    let job: Job
+    
+    private let job: Job
     
     @State private var title = ""
     @State private var company = ""
@@ -32,113 +34,153 @@ struct EditJobView: View {
     @State private var isShowingPasteLink = false
     @State private var isShowingRecruiterDetails = false
     
+    public init(appViewModel: AppViewModel,
+                job: Job) {
+        self.appViewModel = appViewModel
+        self.job = job
+    }
+    
     var body: some View {
         GeometryReader { geo in
             ScrollView {
                 VStack {
-                    Text(company)
-                        .font(.title)
-                    Text(title)
-                        .font(.body)
-                        .foregroundStyle(Color(UIColor.secondaryLabel))
-                    Form {
-                        Section {
-                            Picker("Status", selection: $jobApplicationStatus) {
-                                ForEach(JobApplicationStatus.allCases, id: \.id) { status in
-                                    Text(status.status).tag(status)
-                                }
-                            }
-                        }
-                        
-                        Section {
-                            Picker("Location", selection: $locationType.animation()) {
-                                ForEach(LocationType.allCases, id: \.self) { type in
-                                    Text(type.type).tag(type)
-                                }
-                            }
-                            if locationType == .onSite  || locationType == .hybrid {
-                                TextField("Add Location", text: $location)
-                            }
-                            HStack {
-                                Text("Salary")
-                                Spacer()
-                                TextField("Amount", text: $salary)
-                                    .multilineTextAlignment(.trailing)
-                                    .keyboardType(.numberPad)
-                            }
-                            HStack {
-                                Text("Job Posting")
-                                    .onTapGesture {
-                                        withAnimation {
-                                            isShowingPasteLink.toggle()
-                                        }
-                                    }
-                                Spacer()
-                                Button {
-                                } label: {
-                                    Image(systemName: "arrow.up.forward.app.fill")
-                                        .imageScale(.large)
-                                        .tint(.accentColor)
-                                }
-                                .disabled(url.isEmpty)
-                            }
-                            
-                            if isShowingPasteLink {
-                                TextField("Paste link", text: $url)
-                            }
-                        }
-                        
-                        Section {
-                            HStack {
-                                Button(action: {
-                                    withAnimation {
-                                        isShowingRecruiterDetails.toggle()
-                                    }
-                                }, label: {
-                                    Image(systemName: isShowingRecruiterDetails ? "menubar.arrow.up.rectangle" : "menubar.arrow.down.rectangle")
-                                        .imageScale(.small)
-                                })
-                                
-                                TextField("Recruiter's name", text: $recruiterName)
-                                Spacer()
-                                Image(systemName: "phone.circle.fill")
-                                    .foregroundStyle(Color.accentColor)
-                                    .imageScale(.large)
-                                    .disabled(recruiterNumber.isEmpty)
-                                Image(systemName: "envelope.circle.fill")
-                                    .foregroundStyle(Color.accentColor)
-                                    .imageScale(.large)
-                                    .disabled(recruiterEmail.isEmpty)
-                            }
-                            if isShowingRecruiterDetails {
-                                TextField("Phone number", text: $recruiterNumber)
-                                    .keyboardType(.numberPad)
-                                TextField("Email", text: $recruiterEmail)
-                                    .keyboardType(.emailAddress)
-                            }
-                            
-                        }
-                        
-                        Section {
-                            TextField("Notes", text: $notes, axis: .vertical)
-                                .lineLimit(5...10)
-                        } header: {
-                            Text("Your notes")
-                        }
-                    }
-                    .frame(height: geo.size.height)
-                    
+                    titleView
+                    formView
+                        .frame(height: geo.size.height)
                     //                    .scrollContentBackground(.visible)
-                    .toolbar {
-                        toolbarTrailing
-                    }
+                        .toolbar {
+                            toolbarTrailing
+                        }
                 }
             }
         }
         .background(Color(uiColor: .systemGroupedBackground))
-        
         .onAppear {
             setProperties()
+        }
+    }
+    
+    private var titleView: some View {
+        Group {
+            Text(company)
+                .font(.title)
+            Text(title)
+                .font(.body)
+                .foregroundStyle(Color(UIColor.secondaryLabel))
+        }
+    }
+    
+    private var formView: some View {
+        Form {
+            jobStatusView
+            extraInfoView
+            recruiterInfoView
+            notesView
+        }
+        
+    }
+    
+    private var jobStatusView: some View {
+        Section {
+            Picker("Status", selection: $jobApplicationStatus) {
+                ForEach(JobApplicationStatus.allCases, id: \.id) { status in
+                    Text(status.status).tag(status)
+                }
+            }
+        }
+    }
+    
+    private var extraInfoView: some View {
+        Section {
+            Picker("Location", selection: $locationType.animation()) {
+                ForEach(LocationType.allCases, id: \.self) { type in
+                    Text(type.type).tag(type)
+                }
+            }
+            if locationType == .onSite  || locationType == .hybrid {
+                TextField("Add Location", text: $location)
+            }
+            HStack {
+                Text("Salary")
+                Spacer()
+                TextField("Amount", text: $salary)
+                    .multilineTextAlignment(.trailing)
+                    .keyboardType(.numberPad)
+            }
+            HStack {
+                Text("Job Posting")
+                    .onTapGesture {
+                        withAnimation {
+                            isShowingPasteLink.toggle()
+                        }
+                    }
+                Spacer()
+                Image(systemName: "arrow.up.forward.app.fill")
+                    .imageScale(.large)
+                    .foregroundStyle(Color.accentColor)
+                    .disabled(url.isEmpty)
+                    .onTapGesture {
+                        // open job link
+                    }
+            }
+            
+            if isShowingPasteLink {
+                TextField("Paste link", text: $url)
+            }
+        }
+    }
+    
+    private var recruiterInfoView: some View {
+        Section {
+            HStack {
+                Image(systemName: isShowingRecruiterDetails ? "menubar.arrow.up.rectangle" : "menubar.arrow.down.rectangle")
+                    .imageScale(.small)
+                    .foregroundStyle(Color.accentColor)
+                    .onTapGesture {
+                        withAnimation {
+                            isShowingRecruiterDetails.toggle()
+                        }
+                    }
+                
+                TextField("Recruiter's name", text: $recruiterName)
+                Spacer()
+                Image(systemName: "phone.circle.fill")
+                    .foregroundStyle(Color.accentColor)
+                    .imageScale(.large)
+                    .onTapGesture {
+                        // Call recruiter
+                    }
+                    .disabled(recruiterNumber.isEmpty)
+                
+                
+                Image(systemName: "envelope.circle.fill")
+                    .foregroundStyle(Color.accentColor)
+                    .imageScale(.large)
+                    .onTapGesture {
+                        EmailHelper.shared.askUserForTheirPreference(email: recruiterEmail,
+                                                                     subject: "Interview at \(company) follow up",
+                                                                     body: "Hi, \(recruiterName)")
+                    }
+                    .disabled(recruiterEmail.isEmpty)
+            }
+            if isShowingRecruiterDetails {
+                TextField("Phone number", text: $recruiterNumber)
+                    .keyboardType(.numberPad)
+                TextField("Email", text: $recruiterEmail)
+                    .keyboardType(.emailAddress)
+            }
+        }
+    header: {
+        Text("Recruiter Info")
+    }
+    }
+    
+    private var notesView: some View {
+        Section {
+            TextField("Notes", text: $notes, axis: .vertical)
+                .lineLimit(5...10)
+        } header: {
+            Text("Your notes")
         }
     }
     

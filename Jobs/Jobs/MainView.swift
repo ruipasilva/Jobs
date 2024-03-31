@@ -36,16 +36,19 @@ struct MainView: View {
         .onAppear(perform: {
             appViewModel.sortOrdering = sortOrdering
         })
+        .onChange(of: appViewModel.sortOrdering) { oldValue, newValue in
+            sortOrdering = appViewModel.sortOrdering
+        }
     }
     
     private var toolBarLeading: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             Menu {
                 Picker("Sort", selection: $appViewModel.sortOrdering) {
-                        ForEach(SortOrdering.allCases) {
-                            Text($0.status)
-                        }
+                    ForEach(SortOrdering.allCases) {
+                        Text($0.status)
                     }
+                }
                 
                 Section("Order") {
                     Button(action: {
