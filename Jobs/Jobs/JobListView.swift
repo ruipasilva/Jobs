@@ -19,8 +19,8 @@ struct JobListView: View {
         self.appViewModel = appViewModel
         
         let sortDescriptors: [SortDescriptor<Job>] = switch sortOrder {
-//        case .status:
-//            [SortDescriptor(\Job.status, order: appViewModel.ascendingDescending)]
+            //        case .status:
+            //            [SortDescriptor(\Job.status, order: appViewModel.ascendingDescending)]
         case .title:
             [SortDescriptor(\Job.title, order: appViewModel.ascendingDescending)]
         case .company:
@@ -41,27 +41,17 @@ struct JobListView: View {
             if jobs.isEmpty {
                 ContentUnavailableView("No jobs yet", systemImage: "folder")
             } else {
-                List {
-                    ForEach(jobs) { job in
-                        NavigationLink {
-                            EditJobView(appViewModel: appViewModel, job: job)
-                        } label: {
-                            HStack {
-                                LazyVStack(alignment: .leading) {
-                                    Text(job.company)
-                                    Text(job.title)
-                                        .font(.subheadline)
-                                }
-                                Spacer()
-                                Text(job.status)
-                            }
-                        }
+                ForEach(jobs) { job in
+                    NavigationLink {
+                        EditJobView(appViewModel: appViewModel, job: job)
+                    } label: {
+                        MainListCellView(job: job) {}
                     }
-                    .onDelete { indexSet in
-                        indexSet.forEach { index in
-                            let book = jobs[index]
-                            context.delete(book)
-                        }
+                }
+                .onDelete { indexSet in
+                    indexSet.forEach { index in
+                        let book = jobs[index]
+                        context.delete(book)
                     }
                 }
             }
