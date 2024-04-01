@@ -39,13 +39,34 @@ struct JobListView: View {
     var body: some View {
         Group {
             if jobs.isEmpty {
-                ContentUnavailableView("No jobs yet", systemImage: "folder")
+                emptyList
             } else {
+                list
+            }
+        }
+    }
+    
+    private var emptyList: some View {
+        ContentUnavailableView("No jobs yet", systemImage: "folder")
+    }
+    
+    private var list: some View {
+        List {
+            Section {
+                RectanglesView(appViewModel: appViewModel)
+            }
+            .listRowInsets(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
+            .listRowSeparator(.hidden)
+            Section {
                 ForEach(jobs) { job in
-                    NavigationLink {
-                        EditJobView(appViewModel: appViewModel, job: job)
-                    } label: {
-                        MainListCellView(job: job) {}
+                    ZStack {
+                        MainListCellView(job: job)
+                        NavigationLink {
+                            EditJobView(appViewModel: appViewModel, job: job)
+                        } label: {
+                            EmptyView()
+                        }
+                        .opacity(0)
                     }
                 }
                 .onDelete { indexSet in
@@ -54,7 +75,14 @@ struct JobListView: View {
                         context.delete(book)
                     }
                 }
+                .listRowBackground(Color.clear)
+                .listRowSpacing(6)
+                
             }
+            .listRowInsets(.init(top: 4, leading: 16, bottom: 4, trailing: 16))
+            .listRowSeparator(.hidden)
         }
+        
+        .listStyle(.plain)
     }
 }

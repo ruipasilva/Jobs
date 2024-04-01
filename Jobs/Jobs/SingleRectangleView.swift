@@ -10,6 +10,7 @@ import SwiftUI
 struct SingleRectangleView: View {
     
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     @ObservedObject var appViewModel: AppViewModel
     
@@ -29,7 +30,7 @@ struct SingleRectangleView: View {
                     .padding(.vertical, 16)
                     .padding(.horizontal, 16)
             }
-            .frame(height: UIScreen.main.bounds.width/3)
+            .frame(height: horizontalSizeClass == .compact ? UIScreen.main.bounds.width/3 : UIScreen.main.bounds.width/9)
             .padding(.bottom, 36)
         })
     }

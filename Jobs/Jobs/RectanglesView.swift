@@ -21,13 +21,12 @@ struct RectanglesView: View {
 //    ) var jobsInterviewing: FetchedResults<Job>
 //    
     var columns: [GridItem] {
-      Array(repeating: .init(.adaptive(minimum: 110)), count: 2)
+      Array(repeating: .init(.flexible()), count: 2)
     }
     var body: some View {
         LazyVGrid(columns: columns, spacing: 16) {
             SingleRectangleView(appViewModel: appViewModel, totalJobs: 3, interviewStatus: JobApplicationStatus.applied.status, SFSymbol: "clock", circleColor: .orange) {}
             SingleRectangleView(appViewModel: appViewModel, totalJobs: 2, interviewStatus: JobApplicationStatus.interviewing.status, SFSymbol: "checkmark", circleColor: .mint) {}
         }
-        .padding(.horizontal)
     }
 }

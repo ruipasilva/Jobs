@@ -12,8 +12,7 @@ struct MainListCellView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var job: Job
-    
-    var action: () -> Void
+
     
     var body: some View {
         ZStack {
@@ -22,7 +21,6 @@ struct MainListCellView: View {
                 .padding(.horizontal, 16)
             
         }
-        .padding(.horizontal, 16)
         .frame(height: 83)
     }
     
@@ -49,7 +47,6 @@ struct MainListCellView: View {
                         .font(.body)
                         .foregroundColor(Color.init(UIColor.label))
                         .padding(.bottom, 2)
-                    
                     Spacer()
                     Text(job.jobApplicationStatus.status)
                         .font(.subheadline)
@@ -59,8 +56,6 @@ struct MainListCellView: View {
                     .font(.subheadline)
                     .foregroundColor(Color.init(UIColor.secondaryLabel))
             }
-            
-            
         }
     }
 }

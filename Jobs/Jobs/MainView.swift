@@ -20,25 +20,19 @@ struct MainView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack {
-                    RectanglesView(appViewModel: appViewModel)
-                    JobListView(appViewModel: appViewModel,
-                                sortOrder: appViewModel.sortOrdering,
-                                filterString: appViewModel.filter)
-                }
+            JobListView(appViewModel: appViewModel,
+                        sortOrder: appViewModel.sortOrdering,
+                        filterString: appViewModel.filter)
                 .padding(.bottom, 10)
-            }
-            .background(Color(UIColor.systemBackground))
-            .searchable(text: $appViewModel.filter, prompt: "Search for companies or job titles")
-            .toolbar {
-                toolbarTrailing
-                toolBarLeading
-            }
-            .sheet(isPresented: $appViewModel.isShowingNewJob) {
-                NewJobView(appViewModel: appViewModel)
-            }
-            
+                .background(Color(UIColor.systemBackground))
+                .searchable(text: $appViewModel.filter, prompt: "Search for companies or job titles")
+                .toolbar {
+                    toolbarTrailing
+                    toolBarLeading
+                }
+                .sheet(isPresented: $appViewModel.isShowingNewJob) {
+                    NewJobView(appViewModel: appViewModel)
+                }
         }
         .tint(.mint)
         .onAppear(perform: {
