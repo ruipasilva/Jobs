@@ -25,7 +25,6 @@ struct EditJobView: View {
                     titleView
                     formView
                         .frame(height: geo.size.height)
-                    //                    .scrollContentBackground(.visible)
                         .toolbar {
                             toolbarTrailing
                         }
@@ -75,7 +74,7 @@ struct EditJobView: View {
                     Text(type.type).tag(type)
                 }
             }
-            if editJobViewModel.locationType == .onSite  || editJobViewModel.locationType == .hybrid {
+            if !editJobViewModel.isLocationRemote() {
                 TextField("Add Location", text: $editJobViewModel.location)
             }
             HStack {
@@ -89,17 +88,17 @@ struct EditJobView: View {
                 Text("Job Posting")
                     .onTapGesture {
                         withAnimation {
-                            editJobViewModel.isShowingPasteLink.toggle()
+                            editJobViewModel.isShowingJobLink()
                         }
                     }
                 Spacer()
                 Image(systemName: "arrow.up.forward.app.fill")
                     .imageScale(.large)
                     .foregroundStyle(Color.accentColor)
-                    .disabled(editJobViewModel.url.isEmpty)
                     .onTapGesture {
                         // open job link
                     }
+                    .disabled(editJobViewModel.url.isEmpty)
             }
             
             if editJobViewModel.isShowingPasteLink {

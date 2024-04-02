@@ -29,13 +29,20 @@ public final class NewJobViewModel: ObservableObject {
     @Published public var notes = ""
     
     @Published public var showingCancelActionSheet = false
-    
+
     public func isTitleOrCompanyEmpty(title: String, company: String) -> Bool {
         return title.isEmpty || company.isEmpty
     }
     
-    @MainActor
-    public func addNewJob(context: ModelContext) {
+    public func isLocationRemote() -> Bool {
+        return locationType == .remote
+    }
+    
+    public func showDiscardDialog() {
+       showingCancelActionSheet = true
+    }
+ 
+    private func addNewJob(context: ModelContext) {
         let newJob = Job(title: title,
                          company: company,
                          notes: notes,
@@ -53,6 +60,21 @@ public final class NewJobViewModel: ObservableObject {
                          isEventAllDay: isEventAllDay,
                          jobURLPosting: url)
         context.insert(newJob)
+    }
+    
+    public func saveJob(context: ModelContext) {
+        addNewJob(context: context)
+        
+        scheduleNotification(followUp: followUp,
+                             company: company,
+                             title: title,
+                             followUpDate: followUpDate)
+        
+        scheduleCalendarEvent(addEventToCalendar: addInterviewToCalendar,
+                              eventAllDay: isEventAllDay,
+                              company: company,
+                              title: title,
+                              addToCalendarDate: addInterviewToCalendarDate)
     }
 }
 
@@ -87,7 +109,7 @@ extension NewJobViewModel {
         }
     }
     
-    public func scheduleCalendarEvent(addEventToCalendar: Bool, eventAllDay: Bool, company: String, title: String, addToCalendarDate: Date) {
+    private func scheduleCalendarEvent(addEventToCalendar: Bool, eventAllDay: Bool, company: String, title: String, addToCalendarDate: Date) {
         if addEventToCalendar {
             addReminderToCalendar(eventAllDay: eventAllDay, company: company, title: title, addToCalendarDate: addToCalendarDate)
         }
@@ -98,7 +120,7 @@ extension NewJobViewModel {
 
 extension NewJobViewModel {
     
-    public func scheduleNotification(followUp: Bool, company: String, title: String, followUpDate: Date) {
+    private func scheduleNotification(followUp: Bool, company: String, title: String, followUpDate: Date) {
         if followUp {
             scheduleNotification(company: company, title: title, followUpDate: followUpDate)
         }

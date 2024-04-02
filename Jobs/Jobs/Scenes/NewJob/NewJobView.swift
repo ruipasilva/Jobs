@@ -74,7 +74,7 @@ struct NewJobView: View {
             }
             .pickerStyle(.segmented)
             
-            if newJobViewModel.locationType == .onSite  || newJobViewModel.locationType == .hybrid {
+            if !newJobViewModel.isLocationRemote() {
                 FloatingTextField(title: "Location", text: $newJobViewModel.location, image: "mappin")
             }
         } header: {
@@ -155,12 +155,11 @@ struct NewJobView: View {
                 if newJobViewModel.isTitleOrCompanyEmpty(title: newJobViewModel.title, company: newJobViewModel.company) {
                     dismiss()
                 } else {
-                    newJobViewModel.showingCancelActionSheet = true
+                    newJobViewModel.showDiscardDialog()
                 }
-            }.confirmationDialog(
-                "Are you sure you want to discard this job?",
-                isPresented: $newJobViewModel.showingCancelActionSheet,
-                titleVisibility: .visible
+            }.confirmationDialog("Are you sure you want to discard this job?",
+                                 isPresented: $newJobViewModel.showingCancelActionSheet,
+                                 titleVisibility: .visible
             ) {
                 Button(role: .destructive, action: {
                     dismiss()
@@ -174,19 +173,7 @@ struct NewJobView: View {
     private var toolbarTrailing: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button("Save") {
-                newJobViewModel.addNewJob(context: context)
-                
-                newJobViewModel.scheduleNotification(followUp: newJobViewModel.followUp, 
-                                                     company: newJobViewModel.company,
-                                                     title: newJobViewModel.title, 
-                                                     followUpDate: newJobViewModel.followUpDate)
-                
-                newJobViewModel.scheduleCalendarEvent(addEventToCalendar: newJobViewModel.addInterviewToCalendar, 
-                                                      eventAllDay: newJobViewModel.isEventAllDay,
-                                                      company: newJobViewModel.company,
-                                                      title: newJobViewModel.title,
-                                                      addToCalendarDate: newJobViewModel.addInterviewToCalendarDate)
-                
+                newJobViewModel.saveJob(context: context)
                 dismiss()
             }
             .disabled(newJobViewModel.isTitleOrCompanyEmpty(title: newJobViewModel.title, company: newJobViewModel.company))

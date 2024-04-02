@@ -28,6 +28,14 @@ public final class EditJobViewModel: ObservableObject {
     @Published public var isShowingPasteLink = false
     @Published public var isShowingRecruiterDetails = false
     
+    public func isLocationRemote() -> Bool {
+        return locationType == .remote
+    }
+    
+    public func isShowingJobLink() {
+        isShowingPasteLink.toggle()
+    }
+    
     public func updateJob(job: Job) {
         job.title = title
         job.company = company

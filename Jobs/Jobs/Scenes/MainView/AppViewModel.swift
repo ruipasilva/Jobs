@@ -23,16 +23,6 @@ public final class AppViewModel: ObservableObject {
     public func sortAscendingOrDescending(order: SortOrder){
         ascendingDescending = order
     }
-    
-    public func getEditJobViewModel() -> EditJobViewModel {
-        let viewModel = EditJobViewModel()
-        return viewModel
-    }
-    
-    public func getNewJobViewModel() -> NewJobViewModel {
-        let viewModel = NewJobViewModel()
-        return viewModel
-    }
 }
 
 
