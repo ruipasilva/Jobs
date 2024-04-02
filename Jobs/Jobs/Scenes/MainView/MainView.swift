@@ -68,6 +68,7 @@ struct MainView: View {
             } label: {
                 Text("Sort")
             }
+            .disabled(jobs.isEmpty)
         }
     }
     

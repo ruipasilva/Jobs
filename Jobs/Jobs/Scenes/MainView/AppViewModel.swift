@@ -27,6 +27,11 @@ public final class AppViewModel: ObservableObject {
     public func showNewJobSheet() {
         isShowingNewJob = true
     }
+    
+    public func setApplicationStatus(job: Job, status: JobApplicationStatus) {
+        job.jobApplicationStatus = status
+        job.jobApplicationStatusPrivate = status.status
+    }
 }
 
 

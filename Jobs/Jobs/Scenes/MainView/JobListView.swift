@@ -54,6 +54,7 @@ struct JobListView: View {
         List {
             Section {
                 RectanglesView(appViewModel: appViewModel)
+                    .listRowBackground(Color.clear)
             }
             .listRowInsets(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
             .listRowSeparator(.hidden)
@@ -67,6 +68,9 @@ struct JobListView: View {
                             EmptyView()
                         }
                         .opacity(0)
+                    }
+                    .swipeActions(edge: .leading, allowsFullSwipe: false ) {
+                        makeSwipeView(job: job)
                     }
                 }
                 .onDelete { indexSet in
@@ -82,5 +86,40 @@ struct JobListView: View {
             .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
+    }
+    
+    private func makeSwipeView(job: Job) -> some View {
+        Group {
+            Button(action: {
+                appViewModel.setApplicationStatus(job: job, status: .applied)
+            }) {
+                Label {
+                    Text("Applied")
+                } icon: {
+                    Image(systemName: "person.badge.clock.fill")
+                }
+                .tint(.orange)
+            }
+            Button(action: {
+                appViewModel.setApplicationStatus(job: job, status: .interviewing)
+            }) {
+                Label {
+                    Text("Interview")
+                } icon: {
+                    Image(systemName: "person.3.fill")
+                }
+            }
+            
+            Button(action: {
+                appViewModel.setApplicationStatus(job: job, status: .accepted)
+            }) {
+                Label {
+                    Text("Accepted")
+                } icon: {
+                    Image(systemName: "person.fill.checkmark")
+                }
+                .tint(.indigo)
+            }
+        }
     }
 }
