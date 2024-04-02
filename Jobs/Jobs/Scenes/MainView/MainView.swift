@@ -74,7 +74,7 @@ struct MainView: View {
     private var toolbarTrailing: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button(action: {
-                appViewModel.isShowingNewJob = true
+                appViewModel.showNewJobSheet()
             }, label: {
                 Image(systemName: "plus")
             })

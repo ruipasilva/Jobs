@@ -23,6 +23,10 @@ public final class AppViewModel: ObservableObject {
     public func sortAscendingOrDescending(order: SortOrder){
         ascendingDescending = order
     }
+    
+    public func showNewJobSheet() {
+        isShowingNewJob = true
+    }
 }
 
 
