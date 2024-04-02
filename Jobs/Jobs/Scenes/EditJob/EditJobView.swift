@@ -8,35 +8,13 @@
 import SwiftUI
 
 struct EditJobView: View {
-    @ObservedObject private var appViewModel: AppViewModel
+    @StateObject private var editJobViewModel = EditJobViewModel()
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     
     private let job: Job
     
-    @State private var title = ""
-    @State private var company = ""
-    @State private var jobApplicationStatus = JobApplicationStatus.notApplied
-    @State private var location = ""
-    @State private var locationType = LocationType.remote
-    @State private var salary = ""
-    @State private var followUp = false
-    @State private var followUpDate = Date.distantPast
-    @State private var addInterviewToCalendar = false
-    @State private var addInterviewToCalendarDate = Date.distantPast
-    @State private var isEventAllDay = false
-    @State private var recruiterName = ""
-    @State private var recruiterEmail = ""
-    @State private var recruiterNumber = ""
-    @State private var url = ""
-    @State private var notes = ""
-    
-    @State private var isShowingPasteLink = false
-    @State private var isShowingRecruiterDetails = false
-    
-    public init(appViewModel: AppViewModel,
-                job: Job) {
-        self.appViewModel = appViewModel
+    public init(job: Job) {
         self.job = job
     }
     
@@ -56,15 +34,15 @@ struct EditJobView: View {
         }
         .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {
-            setProperties()
+            editJobViewModel.setProperties(job: job)
         }
     }
     
     private var titleView: some View {
         Group {
-            Text(company)
+            Text(editJobViewModel.company)
                 .font(.title)
-            Text(title)
+            Text(editJobViewModel.title)
                 .font(.body)
                 .foregroundStyle(Color(UIColor.secondaryLabel))
         }
@@ -82,7 +60,7 @@ struct EditJobView: View {
     
     private var jobStatusView: some View {
         Section {
-            Picker("Status", selection: $jobApplicationStatus) {
+            Picker("Status", selection: $editJobViewModel.jobApplicationStatus) {
                 ForEach(JobApplicationStatus.allCases, id: \.id) { status in
                     Text(status.status).tag(status)
                 }
@@ -92,18 +70,18 @@ struct EditJobView: View {
     
     private var extraInfoView: some View {
         Section {
-            Picker("Location", selection: $locationType.animation()) {
+            Picker("Location", selection: $editJobViewModel.locationType.animation()) {
                 ForEach(LocationType.allCases, id: \.self) { type in
                     Text(type.type).tag(type)
                 }
             }
-            if locationType == .onSite  || locationType == .hybrid {
-                TextField("Add Location", text: $location)
+            if editJobViewModel.locationType == .onSite  || editJobViewModel.locationType == .hybrid {
+                TextField("Add Location", text: $editJobViewModel.location)
             }
             HStack {
                 Text("Salary")
                 Spacer()
-                TextField("Amount", text: $salary)
+                TextField("Amount", text: $editJobViewModel.salary)
                     .multilineTextAlignment(.trailing)
                     .keyboardType(.numberPad)
             }
@@ -111,21 +89,21 @@ struct EditJobView: View {
                 Text("Job Posting")
                     .onTapGesture {
                         withAnimation {
-                            isShowingPasteLink.toggle()
+                            editJobViewModel.isShowingPasteLink.toggle()
                         }
                     }
                 Spacer()
                 Image(systemName: "arrow.up.forward.app.fill")
                     .imageScale(.large)
                     .foregroundStyle(Color.accentColor)
-                    .disabled(url.isEmpty)
+                    .disabled(editJobViewModel.url.isEmpty)
                     .onTapGesture {
                         // open job link
                     }
             }
             
-            if isShowingPasteLink {
-                TextField("Paste link", text: $url)
+            if editJobViewModel.isShowingPasteLink {
+                TextField("Paste link", text: $editJobViewModel.url)
             }
         }
     }
@@ -133,16 +111,16 @@ struct EditJobView: View {
     private var recruiterInfoView: some View {
         Section {
             HStack {
-                Image(systemName: isShowingRecruiterDetails ? "menubar.arrow.up.rectangle" : "menubar.arrow.down.rectangle")
+                Image(systemName: editJobViewModel.isShowingRecruiterDetails ? "menubar.arrow.up.rectangle" : "menubar.arrow.down.rectangle")
                     .imageScale(.small)
                     .foregroundStyle(Color.accentColor)
                     .onTapGesture {
                         withAnimation {
-                            isShowingRecruiterDetails.toggle()
+                            editJobViewModel.isShowingRecruiterDetails.toggle()
                         }
                     }
                 
-                TextField("Recruiter's name", text: $recruiterName)
+                TextField("Recruiter's name", text: $editJobViewModel.recruiterName)
                 Spacer()
                 Image(systemName: "phone.circle.fill")
                     .foregroundStyle(Color.accentColor)
@@ -150,23 +128,23 @@ struct EditJobView: View {
                     .onTapGesture {
                         // Call recruiter
                     }
-                    .disabled(recruiterNumber.isEmpty)
+                    .disabled(editJobViewModel.recruiterNumber.isEmpty)
                 
                 
                 Image(systemName: "envelope.circle.fill")
                     .foregroundStyle(Color.accentColor)
                     .imageScale(.large)
                     .onTapGesture {
-                        EmailHelper.shared.askUserForTheirPreference(email: recruiterEmail,
-                                                                     subject: "Interview at \(company) follow up",
-                                                                     body: "Hi, \(recruiterName)")
+                        EmailHelper.shared.askUserForTheirPreference(email: editJobViewModel.recruiterEmail,
+                                                                     subject: "Interview at \(editJobViewModel.company) follow up",
+                                                                     body: "Hi, \(editJobViewModel.recruiterName)")
                     }
-                    .disabled(recruiterEmail.isEmpty)
+                    .disabled(editJobViewModel.recruiterEmail.isEmpty)
             }
-            if isShowingRecruiterDetails {
-                TextField("Phone number", text: $recruiterNumber)
+            if editJobViewModel.isShowingRecruiterDetails {
+                TextField("Phone number", text: $editJobViewModel.recruiterNumber)
                     .keyboardType(.numberPad)
-                TextField("Email", text: $recruiterEmail)
+                TextField("Email", text: $editJobViewModel.recruiterEmail)
                     .keyboardType(.emailAddress)
             }
         }
@@ -177,7 +155,7 @@ struct EditJobView: View {
     
     private var notesView: some View {
         Section {
-            TextField("Notes", text: $notes, axis: .vertical)
+            TextField("Notes", text: $editJobViewModel.notes, axis: .vertical)
                 .lineLimit(5...10)
         } header: {
             Text("Your notes")
@@ -187,43 +165,9 @@ struct EditJobView: View {
     private var toolbarTrailing: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button("Update") {
-                job.title = title
-                job.company = company
-                job.jobApplicationStatus = jobApplicationStatus
-                job.location = location
-                job.locationType = locationType
-                job.salary = salary
-                followUp = followUp
-                followUpDate = followUpDate
-                addInterviewToCalendar = addInterviewToCalendar
-                addInterviewToCalendarDate = addInterviewToCalendarDate
-                isEventAllDay = isEventAllDay
-                job.recruiterName = recruiterName
-                job.recruiterEmail = recruiterEmail
-                job.recruiterNumber = recruiterNumber
-                job.jobURLPosting = url
-                job.notes = notes
+                editJobViewModel.updateJob(job: job)
                 dismiss()
             }
         }
-    }
-    
-    private func setProperties() {
-        title = job.title
-        company = job.company
-        jobApplicationStatus = job.jobApplicationStatus
-        location = job.location
-        locationType = job.locationType
-        salary = job.salary
-        followUp = job.followUp
-        followUpDate = job.followUpDate
-        addInterviewToCalendar = job.addToCalendar
-        addInterviewToCalendarDate = job.addToCalendarDate
-        isEventAllDay = job.isEventAllDay
-        recruiterName = job.recruiterName
-        recruiterEmail = job.recruiterEmail
-        recruiterNumber = job.recruiterNumber
-        url = job.jobURLPosting
-        notes = job.notes
     }
 }

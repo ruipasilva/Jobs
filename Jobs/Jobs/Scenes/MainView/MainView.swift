@@ -31,7 +31,7 @@ struct MainView: View {
                     toolBarLeading
                 }
                 .sheet(isPresented: $appViewModel.isShowingNewJob) {
-                    NewJobView(appViewModel: appViewModel)
+                    NewJobView()
                 }
         }
         .tint(.mint)

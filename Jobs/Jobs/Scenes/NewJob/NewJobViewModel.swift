@@ -1,40 +1,64 @@
 //
-//  AppViewModel.swift
+//  NewJobViewModel.swift
 //  Jobs
 //
-//  Created by Rui Silva on 31/01/2024.
+//  Created by Rui Silva on 02/04/2024.
 //
 
 import Foundation
-import SwiftData
 import UserNotifications
 import EventKit
-import UIKit
+import SwiftData
 
-public final class AppViewModel: ObservableObject {
-    @Published public var isShowingNewJob = false
-    @Published public var isNewJobExpanded = false
-    @Published public var sortOrdering = SortOrdering.title
-    @Published public var ascendingDescending: SortOrder = .forward
-    @Published public var filter = ""
+public final class NewJobViewModel: ObservableObject {
+    @Published public var title = ""
+    @Published public var company = ""
+    @Published public var jobApplicationStatus = JobApplicationStatus.notApplied
+    @Published public var location: String = ""
+    @Published public var locationType = LocationType.remote
+    @Published public var salary = ""
+    @Published public var followUp = false
+    @Published public var followUpDate = Date.now
+    @Published public var addInterviewToCalendar = false
+    @Published public var addInterviewToCalendarDate = Date.now
+    @Published public var isEventAllDay = false
+    @Published public var recruiterName = ""
+    @Published public var recruiterEmail = ""
+    @Published public var recruiterNumber = ""
+    @Published public var url = ""
+    @Published public var notes = ""
+    
     @Published public var showingCancelActionSheet = false
     
     public func isTitleOrCompanyEmpty(title: String, company: String) -> Bool {
         return title.isEmpty || company.isEmpty
     }
     
-    public func sortListOrder(sorting: SortOrdering) {
-        self.sortOrdering = sorting
-    }
-    
-    public func sortAscendingOrDescending(order: SortOrder){
-        ascendingDescending = order
+    @MainActor
+    public func addNewJob(context: ModelContext) {
+        let newJob = Job(title: title,
+                         company: company,
+                         notes: notes,
+                         jobApplicationStatus: jobApplicationStatus,
+                         salary: salary,
+                         location: location,
+                         locationType: locationType,
+                         recruiterName: recruiterName,
+                         recruiterNumber: recruiterNumber,
+                         recruiterEmail: recruiterEmail,
+                         followUp: followUp,
+                         followUpDate: followUpDate,
+                         addToCalendar: addInterviewToCalendar,
+                         addToCalendarDate: addInterviewToCalendarDate,
+                         isEventAllDay: isEventAllDay,
+                         jobURLPosting: url)
+        context.insert(newJob)
     }
 }
 
 // MARK: Calendar helpers
 
-extension AppViewModel {
+extension NewJobViewModel {
     public func requestAuthCalendar(addInterviewToCalendar: Bool) async {
         if addInterviewToCalendar {
             let eventStore = EKEventStore()
@@ -72,7 +96,7 @@ extension AppViewModel {
 
 // MARK: Notifications helpers
 
-extension AppViewModel {
+extension NewJobViewModel {
     
     public func scheduleNotification(followUp: Bool, company: String, title: String, followUpDate: Date) {
         if followUp {

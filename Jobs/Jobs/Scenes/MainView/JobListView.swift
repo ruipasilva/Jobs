@@ -62,7 +62,7 @@ struct JobListView: View {
                     ZStack {
                         MainListCellView(job: job)
                         NavigationLink {
-                            EditJobView(appViewModel: appViewModel, job: job)
+                            EditJobView(job: job)
                         } label: {
                             EmptyView()
                         }

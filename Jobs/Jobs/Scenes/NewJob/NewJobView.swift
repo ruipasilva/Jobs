@@ -10,29 +10,8 @@ import SwiftUI
 struct NewJobView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject private var appViewModel: AppViewModel
+    @StateObject private var newJobViewModel = NewJobViewModel()
     @FocusState private var focusState: Bool
-    
-    @State private var title = ""
-    @State private var company = ""
-    @State private var jobApplicationStatus = JobApplicationStatus.notApplied
-    @State private var location: String = ""
-    @State private var locationType = LocationType.remote
-    @State private var salary = ""
-    @State private var followUp = false
-    @State private var followUpDate = Date.now
-    @State private var addInterviewToCalendar = false
-    @State private var addInterviewToCalendarDate = Date.now
-    @State private var isEventAllDay = false
-    @State private var recruiterName = ""
-    @State private var recruiterEmail = ""
-    @State private var recruiterNumber = ""
-    @State private var url = ""
-    @State private var notes = ""
-    
-    public init(appViewModel: AppViewModel) {
-        self.appViewModel = appViewModel
-    }
     
     var body: some View {
         NavigationStack {
@@ -47,12 +26,12 @@ struct NewJobView: View {
             }
             .navigationTitle("New Job")
             .navigationBarTitleDisplayMode(.inline)
-            .onChange(of: followUp) { _, _ in
-                appViewModel.requestAuthNotifications(followUp: followUp)
+            .onChange(of: newJobViewModel.followUp) { _, _ in
+                newJobViewModel.requestAuthNotifications(followUp: newJobViewModel.followUp)
             }
-            .onChange(of: addInterviewToCalendar, { _, _ in
+            .onChange(of: newJobViewModel.addInterviewToCalendar, { _, _ in
                 Task {
-                    await appViewModel.requestAuthCalendar(addInterviewToCalendar: addInterviewToCalendar)
+                    await newJobViewModel.requestAuthCalendar(addInterviewToCalendar: newJobViewModel.addInterviewToCalendar)
                 }
             })
             .toolbar {
@@ -64,10 +43,10 @@ struct NewJobView: View {
     
     private var mainInfoView: some View {
         Section {
-            FloatingTextField(title: "Company Name", text: $company, image: "building.2")
+            FloatingTextField(title: "Company Name", text: $newJobViewModel.company, image: "building.2")
                 .submitLabel(.continue)
                 .focused($focusState)
-            FloatingTextField(title: "Job Title", text: $title, image: "person")
+            FloatingTextField(title: "Job Title", text: $newJobViewModel.title, image: "person")
                 .focused($focusState)
         } header: {
             Text("Main Info")
@@ -76,7 +55,7 @@ struct NewJobView: View {
     
     private var statusView: some View {
         Section {
-            Picker("Status", selection: $jobApplicationStatus) {
+            Picker("Status", selection: $newJobViewModel.jobApplicationStatus) {
                 ForEach(JobApplicationStatus.allCases, id: \.id) { status in
                     Text(status.status).tag(status)
                 }
@@ -88,15 +67,15 @@ struct NewJobView: View {
     
     private var locationView: some View {
         Section {
-            Picker("Job Type", selection: $locationType.animation()) {
+            Picker("Job Type", selection: $newJobViewModel.locationType.animation()) {
                 ForEach(LocationType.allCases, id: \.self) { location in
                     Text(location.type).tag(location)
                 }
             }
             .pickerStyle(.segmented)
             
-            if locationType == .onSite  || locationType == .hybrid {
-                FloatingTextField(title: "Location", text: $location, image: "mappin")
+            if newJobViewModel.locationType == .onSite  || newJobViewModel.locationType == .hybrid {
+                FloatingTextField(title: "Location", text: $newJobViewModel.location, image: "mappin")
             }
         } header: {
             Text("Location")
@@ -105,28 +84,28 @@ struct NewJobView: View {
     
     private var remindersView: some View {
         Section {
-            Toggle("Follow up", isOn: $followUp.animation())
+            Toggle("Follow up", isOn: $newJobViewModel.followUp.animation())
             
             
-            if followUp {
+            if newJobViewModel.followUp {
                 DatePicker(
-                    selection: $followUpDate,
+                    selection: $newJobViewModel.followUpDate,
                     displayedComponents: [.date, .hourAndMinute]
                 ) {
                     Text("Reminder:")
                 }
             }
             
-            Toggle("Add Interview To Calendar", isOn: $addInterviewToCalendar.animation())
+            Toggle("Add Interview To Calendar", isOn: $newJobViewModel.addInterviewToCalendar.animation())
             
-            if addInterviewToCalendar {
-                Toggle(isOn: $isEventAllDay) {
+            if newJobViewModel.addInterviewToCalendar {
+                Toggle(isOn: $newJobViewModel.isEventAllDay) {
                     Text("All day")
                 }
                 DatePicker(
-                    selection: $addInterviewToCalendarDate,
+                    selection: $newJobViewModel.addInterviewToCalendarDate,
                     in: Date.now...,
-                    displayedComponents: isEventAllDay ? .date : [.date, .hourAndMinute]
+                    displayedComponents: newJobViewModel.isEventAllDay ? .date : [.date, .hourAndMinute]
                 ) {
                     Text("Date:")
                 }
@@ -140,11 +119,11 @@ struct NewJobView: View {
     
     private var recruitersInfoView: some View {
         Section {
-            FloatingTextField(title: "Name", text: $recruiterName, image: "person.circle")
+            FloatingTextField(title: "Name", text: $newJobViewModel.recruiterName, image: "person.circle")
                 .keyboardType(.namePhonePad)
-            FloatingTextField(title: "Email", text: $recruiterEmail, image: "envelope")
+            FloatingTextField(title: "Email", text: $newJobViewModel.recruiterEmail, image: "envelope")
                 .keyboardType(.emailAddress)
-            FloatingTextField(title: "Number", text: $recruiterNumber, image: "phone")
+            FloatingTextField(title: "Number", text: $newJobViewModel.recruiterNumber, image: "phone")
                 .keyboardType(.numberPad)
         } header: {
             Text("Contacts")
@@ -153,9 +132,9 @@ struct NewJobView: View {
     
     private var otherInfoView: some View {
         Section {
-            FloatingTextField(title: "Salary", text: $salary, image: "creditcard")
+            FloatingTextField(title: "Salary", text: $newJobViewModel.salary, image: "creditcard")
                 .keyboardType(.numberPad)
-            FloatingTextField(title: "URL", text: $url, image: "link")
+            FloatingTextField(title: "URL", text: $newJobViewModel.url, image: "link")
         } header: {
             Text("Extra Info")
         }
@@ -163,7 +142,7 @@ struct NewJobView: View {
     
     private var notesView: some View {
         Section {
-            TextField("Notes", text: $notes, axis: .vertical)
+            TextField("Notes", text: $newJobViewModel.notes, axis: .vertical)
                 .lineLimit(5...10)
         } header: {
             Text("Your notes")
@@ -173,14 +152,14 @@ struct NewJobView: View {
     private var toolbarLeading: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             Button("Cancel") {
-                if appViewModel.isTitleOrCompanyEmpty(title: title, company: company) {
+                if newJobViewModel.isTitleOrCompanyEmpty(title: newJobViewModel.title, company: newJobViewModel.company) {
                     dismiss()
                 } else {
-                    appViewModel.showingCancelActionSheet = true
+                    newJobViewModel.showingCancelActionSheet = true
                 }
             }.confirmationDialog(
                 "Are you sure you want to discard this job?",
-                isPresented: $appViewModel.showingCancelActionSheet,
+                isPresented: $newJobViewModel.showingCancelActionSheet,
                 titleVisibility: .visible
             ) {
                 Button(role: .destructive, action: {
@@ -195,31 +174,22 @@ struct NewJobView: View {
     private var toolbarTrailing: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button("Save") {
-                let newJob = Job(title: title,
-                                 company: company,
-                                 notes: notes, 
-                                 jobApplicationStatus: jobApplicationStatus,
-                                 salary: salary,
-                                 location: location,
-                                 locationType: locationType,
-                                 recruiterName: recruiterName,
-                                 recruiterNumber: recruiterNumber,
-                                 recruiterEmail: recruiterEmail,
-                                 followUp: followUp,
-                                 followUpDate: followUpDate,
-                                 addToCalendar: addInterviewToCalendar,
-                                 addToCalendarDate: addInterviewToCalendarDate,
-                                 isEventAllDay: isEventAllDay,
-                                 jobURLPosting: url)
-                context.insert(newJob)
+                newJobViewModel.addNewJob(context: context)
                 
-                appViewModel.scheduleNotification(followUp: followUp, company: company, title: title, followUpDate: followUpDate)
+                newJobViewModel.scheduleNotification(followUp: newJobViewModel.followUp, 
+                                                     company: newJobViewModel.company,
+                                                     title: newJobViewModel.title, 
+                                                     followUpDate: newJobViewModel.followUpDate)
                 
-                appViewModel.scheduleCalendarEvent(addEventToCalendar: addInterviewToCalendar, eventAllDay: isEventAllDay, company: company, title: title, addToCalendarDate: addInterviewToCalendarDate)
+                newJobViewModel.scheduleCalendarEvent(addEventToCalendar: newJobViewModel.addInterviewToCalendar, 
+                                                      eventAllDay: newJobViewModel.isEventAllDay,
+                                                      company: newJobViewModel.company,
+                                                      title: newJobViewModel.title,
+                                                      addToCalendarDate: newJobViewModel.addInterviewToCalendarDate)
                 
                 dismiss()
             }
-            .disabled(appViewModel.isTitleOrCompanyEmpty(title: title, company: company))
+            .disabled(newJobViewModel.isTitleOrCompanyEmpty(title: newJobViewModel.title, company: newJobViewModel.company))
         }
     }
 }
