@@ -20,6 +20,7 @@ extension EmailHelper {
         }
         
         let alertController = UIAlertController(title: nil, message: "Pick your favourite email app", preferredStyle: .actionSheet)
+        
         alertController.addAction(UIAlertAction(title: "Mail", style: .default) { action in
             self.open(presentingViewController, .applemail, email: email, subject: subject, body: body)
         })
@@ -67,7 +68,7 @@ extension EmailHelper {
                                          _ isSuccess: Bool,
                                          appName: String) {
         guard isSuccess else {
-            let alertController = UIAlertController(title: nil, message: "You must install \(appName) first", preferredStyle: .alert)
+            let alertController = UIAlertController(title: nil, message: "You must install \(appName) first.", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
             presentingViewController.present(alertController, animated: true)
             return

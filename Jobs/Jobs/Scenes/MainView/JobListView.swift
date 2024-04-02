@@ -77,12 +77,10 @@ struct JobListView: View {
                 }
                 .listRowBackground(Color.clear)
                 .listRowSpacing(6)
-                
             }
             .listRowInsets(.init(top: 4, leading: 16, bottom: 4, trailing: 16))
             .listRowSeparator(.hidden)
         }
-        
         .listStyle(.plain)
     }
 }
