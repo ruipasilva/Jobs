@@ -146,10 +146,9 @@ struct EditJobView: View {
                 TextField("Email", text: $editJobViewModel.recruiterEmail)
                     .keyboardType(.emailAddress)
             }
+        } header: {
+            Text("Recruiter Info")
         }
-    header: {
-        Text("Recruiter Info")
-    }
     }
     
     private var notesView: some View {

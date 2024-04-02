@@ -6,27 +6,37 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct RectanglesView: View {
-    @ObservedObject var appViewModel: AppViewModel
+    @ObservedObject private var appViewModel: AppViewModel
     
-//    @FetchRequest(
-//        sortDescriptors: [SortDescriptor(\.companyName)],
-//        predicate: NSPredicate(format: "interviewStatus == %@", "Applied")
-//    ) var jobsApllied: FetchedResults<Job>
-//    
-//    @FetchRequest(
-//        sortDescriptors: [SortDescriptor(\.companyName)],
-//        predicate: NSPredicate(format: "interviewStatus == %@", "Interviewing")
-//    ) var jobsInterviewing: FetchedResults<Job>
-//    
+    @Query private var appliedJobs: [Job]
+    @Query private var interviewingJobs: [Job]
+    
     var columns: [GridItem] {
       Array(repeating: .init(.flexible()), count: 2)
     }
+    
+    public init(appViewModel: AppViewModel) {
+        self.appViewModel = appViewModel
+        
+        let appliedFilter = #Predicate<Job> { job in
+            job.jobApplicationStatusPrivate == "Applied"
+        }
+        
+        let interviewingFilter = #Predicate<Job> { job in
+            job.jobApplicationStatusPrivate == "Interviewing"
+        }
+
+        _appliedJobs = Query(filter: appliedFilter)
+        _interviewingJobs = Query(filter: interviewingFilter)
+    }
+    
     var body: some View {
         LazyVGrid(columns: columns, spacing: 16) {
-            SingleRectangleView(appViewModel: appViewModel, totalJobs: 3, interviewStatus: JobApplicationStatus.applied.status, SFSymbol: "clock", circleColor: .orange) {}
-            SingleRectangleView(appViewModel: appViewModel, totalJobs: 2, interviewStatus: JobApplicationStatus.interviewing.status, SFSymbol: "checkmark", circleColor: .mint) {}
+            SingleRectangleView(appViewModel: appViewModel, totalJobs: appliedJobs.count, interviewStatus: JobApplicationStatus.applied.status, SFSymbol: "clock", circleColor: .orange) {}
+            SingleRectangleView(appViewModel: appViewModel, totalJobs: interviewingJobs.count, interviewStatus: JobApplicationStatus.interviewing.status, SFSymbol: "checkmark", circleColor: .mint) {}
         }
     }
 }

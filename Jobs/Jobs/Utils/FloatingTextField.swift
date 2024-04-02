@@ -11,7 +11,7 @@ struct FloatingTextField: View {
     let title: String
     @Binding public var text: String
     let image: String
-// kj
+    
     var body: some View {
         HStack {
             Image(systemName: image)

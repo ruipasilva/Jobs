@@ -19,7 +19,6 @@ struct MainListCellView: View {
             roundedRectangle
             infoView
                 .padding(.horizontal, 16)
-            
         }
         .frame(height: 83)
     }
@@ -27,7 +26,6 @@ struct MainListCellView: View {
     private var roundedRectangle: some View {
         RoundedRectangle(cornerRadius: 8)
             .fill(colorScheme == .dark ? Color.init(UIColor.secondarySystemBackground) : Color.init(UIColor.systemGroupedBackground))
-        //                .fill(Color.init(UIColor.systemGroupedBackground))
     }
     
     private var infoView: some View {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum JobApplicationStatus: Codable, Identifiable, CaseIterable {
+public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable {
     case notApplied, applied, interviewing, accepted, rejected
     
     public var id: Self { self }
@@ -48,7 +48,7 @@ public enum LocationType: Codable, Identifiable, CaseIterable {
 public enum SortOrdering: Int, Identifiable, CaseIterable {
     
     /// Add case status when SwiftData allows sort by enums
-    case title, company, salary
+    case title, company, salary, status
     
     public var id: Self {
         self
@@ -62,8 +62,8 @@ public enum SortOrdering: Int, Identifiable, CaseIterable {
             "Company"
         case .salary:
             "Salary"
-//        case .status:
-//            "Status"
+        case .status:
+            "Status"
         }
     }
 }

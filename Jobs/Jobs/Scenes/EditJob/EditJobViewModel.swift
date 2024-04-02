@@ -10,7 +10,9 @@ import Foundation
 public final class EditJobViewModel: ObservableObject {
     @Published public var title = ""
     @Published public var company = ""
+    @Published public var applicationStatusPrivate = ""
     @Published public var jobApplicationStatus = JobApplicationStatus.notApplied
+    @Published public var jobApplicationStatusPrivate = ""
     @Published public var location = ""
     @Published public var locationType = LocationType.remote
     @Published public var salary = ""
@@ -40,6 +42,7 @@ public final class EditJobViewModel: ObservableObject {
         job.title = title
         job.company = company
         job.jobApplicationStatus = jobApplicationStatus
+        job.jobApplicationStatusPrivate = jobApplicationStatus.status
         job.location = location
         job.locationType = locationType
         job.salary = salary
@@ -73,5 +76,4 @@ public final class EditJobViewModel: ObservableObject {
         url = job.jobURLPosting
         notes = job.notes
     }
-    
 }

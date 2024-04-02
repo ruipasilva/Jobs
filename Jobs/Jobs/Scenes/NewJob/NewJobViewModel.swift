@@ -14,6 +14,7 @@ public final class NewJobViewModel: ObservableObject {
     @Published public var title = ""
     @Published public var company = ""
     @Published public var jobApplicationStatus = JobApplicationStatus.notApplied
+    @Published public var jobApplicationStatusPrivate = ""
     @Published public var location: String = ""
     @Published public var locationType = LocationType.remote
     @Published public var salary = ""
@@ -47,6 +48,7 @@ public final class NewJobViewModel: ObservableObject {
                          company: company,
                          notes: notes,
                          jobApplicationStatus: jobApplicationStatus,
+                         jobApplicationStatusPrivate: jobApplicationStatus.status,
                          salary: salary,
                          location: location,
                          locationType: locationType,

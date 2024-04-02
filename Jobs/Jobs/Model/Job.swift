@@ -16,6 +16,7 @@ public final class Job {
     var dateAdded: Date = Date.now
     var notes: String = ""
     var jobApplicationStatus: JobApplicationStatus = JobApplicationStatus.notApplied
+    var jobApplicationStatusPrivate: String = ""
     var salary: String = ""
     var location: String = ""
     var locationType: LocationType = LocationType.onSite
@@ -35,6 +36,7 @@ public final class Job {
          dateAdded: Date = Date.now,
          notes: String,
          jobApplicationStatus: JobApplicationStatus = .notApplied,
+         jobApplicationStatusPrivate: String,
          salary: String,
          location: String,
          locationType: LocationType = .onSite,
@@ -47,24 +49,25 @@ public final class Job {
          addToCalendarDate: Date = Date.now,
          isEventAllDay: Bool,
          jobURLPosting: String) {
-        self.title = title
-        self.company = company
-        self.dateAdded = dateAdded
-        self.notes = notes
-        self.jobApplicationStatus = jobApplicationStatus
-        self.salary = salary
-        self.location = location
-        self.locationType = locationType
-        self.recruiterName = recruiterName
-        self.recruiterNumber = recruiterNumber
-        self.recruiterEmail = recruiterEmail
-        self.followUp = followUp
-        self.followUpDate = followUpDate
-        self.addToCalendar = addToCalendar
-        self.addToCalendarDate = addToCalendarDate
-        self.isEventAllDay = isEventAllDay
-        self.jobURLPosting = jobURLPosting
-    }
+             self.title = title
+             self.company = company
+             self.dateAdded = dateAdded
+             self.notes = notes
+             self.jobApplicationStatusPrivate = jobApplicationStatusPrivate
+             self.jobApplicationStatus = jobApplicationStatus
+             self.salary = salary
+             self.location = location
+             self.locationType = locationType
+             self.recruiterName = recruiterName
+             self.recruiterNumber = recruiterNumber
+             self.recruiterEmail = recruiterEmail
+             self.followUp = followUp
+             self.followUpDate = followUpDate
+             self.addToCalendar = addToCalendar
+             self.addToCalendarDate = addToCalendarDate
+             self.isEventAllDay = isEventAllDay
+             self.jobURLPosting = jobURLPosting
+         }
     
     var icon: Image {
         switch jobApplicationStatus {
