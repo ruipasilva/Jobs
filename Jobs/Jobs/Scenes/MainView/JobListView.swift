@@ -61,7 +61,8 @@ struct JobListView: View {
             Section {
                 ForEach(jobs) { job in
                     ZStack {
-                        MainListCellView(job: job)
+                        MainListCellView(appViewModel: appViewModel,
+                                         job: job)
                         NavigationLink {
                             EditJobView(job: job)
                         } label: {

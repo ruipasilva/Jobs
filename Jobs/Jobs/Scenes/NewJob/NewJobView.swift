@@ -10,8 +10,12 @@ import SwiftUI
 struct NewJobView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var newJobViewModel = NewJobViewModel()
+    @ObservedObject private var newJobViewModel: NewJobViewModel
     @FocusState private var focusState: Bool
+    
+    public init(newJobViewModel: NewJobViewModel) {
+        self.newJobViewModel = newJobViewModel
+    }
     
     var body: some View {
         NavigationStack {
@@ -46,6 +50,11 @@ struct NewJobView: View {
             FloatingTextField(title: "Company Name", text: $newJobViewModel.company, image: "building.2")
                 .submitLabel(.continue)
                 .focused($focusState)
+                .onChange(of: newJobViewModel.company) { _, _ in
+                    Task {
+                        await newJobViewModel.getLogo(company: newJobViewModel.company)
+                    }
+                }
             FloatingTextField(title: "Job Title", text: $newJobViewModel.title, image: "person")
                 .focused($focusState)
         } header: {

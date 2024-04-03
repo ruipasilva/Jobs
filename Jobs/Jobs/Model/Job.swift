@@ -29,9 +29,9 @@ public final class Job {
     var addToCalendarDate: Date = Date.now
     var isEventAllDay: Bool = false
     var jobURLPosting: String = ""
+    var logoURL: String = ""
     
-    init(
-         title: String,
+    init(title: String,
          company: String,
          dateAdded: Date = Date.now,
          notes: String,
@@ -48,7 +48,8 @@ public final class Job {
          addToCalendar: Bool,
          addToCalendarDate: Date = Date.now,
          isEventAllDay: Bool,
-         jobURLPosting: String) {
+         jobURLPosting: String,
+         logoURL: String) {
              self.title = title
              self.company = company
              self.dateAdded = dateAdded
@@ -67,6 +68,7 @@ public final class Job {
              self.addToCalendarDate = addToCalendarDate
              self.isEventAllDay = isEventAllDay
              self.jobURLPosting = jobURLPosting
+        self.logoURL = logoURL
          }
     
     var icon: Image {

@@ -28,8 +28,15 @@ public final class NewJobViewModel: ObservableObject {
     @Published public var recruiterNumber = ""
     @Published public var url = ""
     @Published public var notes = ""
+    @Published public var logoURL = ""
     
     @Published public var showingCancelActionSheet = false
+    
+    private let networkManager: NetworkManaging
+    
+    public init(networkManager: NetworkManaging) {
+        self.networkManager = networkManager
+    }
 
     public func isTitleOrCompanyEmpty(title: String, company: String) -> Bool {
         return title.isEmpty || company.isEmpty
@@ -41,6 +48,18 @@ public final class NewJobViewModel: ObservableObject {
     
     public func showDiscardDialog() {
        showingCancelActionSheet = true
+    }
+    
+    @MainActor
+    public func getLogo(company: String) async {
+        do {
+            let logo = try await networkManager.fetchData(query: company)
+            
+            self.logoURL = logo.first?.logo ?? ""
+    
+        } catch {
+            print(error.localizedDescription)
+        }
     }
  
     private func addNewJob(context: ModelContext) {
@@ -60,7 +79,8 @@ public final class NewJobViewModel: ObservableObject {
                          addToCalendar: addInterviewToCalendar,
                          addToCalendarDate: addInterviewToCalendarDate,
                          isEventAllDay: isEventAllDay,
-                         jobURLPosting: url)
+                         jobURLPosting: url,
+                         logoURL: logoURL)
         context.insert(newJob)
     }
     

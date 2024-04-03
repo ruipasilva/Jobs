@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct MainListCellView: View {
-    
+    @ObservedObject private var appViewModel: AppViewModel
     @Environment(\.colorScheme) var colorScheme
     
     var job: Job
 
+    public init(appViewModel: AppViewModel, job: Job) {
+        self.appViewModel = appViewModel
+        self.job = job
+    }
     
     var body: some View {
         ZStack {
@@ -31,12 +35,21 @@ struct MainListCellView: View {
     private var infoView: some View {
         HStack {
             ZStack {
-                RoundedRectangle(cornerRadius: 6)
-                    .fill(Color.white)
-                Image(systemName: "suitcase.fill")
-                    .resizable()
-                    .foregroundColor(.mint)
-                    .frame(width: 36, height: 36)
+                AsyncImage(url: URL(string: job.logoURL)) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                    case let .success(image):
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(8)
+                    case .failure(_):
+                        defaultImage
+                    @unknown default:
+                        defaultImage
+                    }
+                }
             }
             .frame(width: 55, height: 55)
             VStack(alignment: .leading) {
@@ -55,6 +68,13 @@ struct MainListCellView: View {
                     .foregroundColor(Color.init(UIColor.secondaryLabel))
             }
         }
+    }
+    
+    private var defaultImage: some View {
+        Image(systemName: "suitcase.fill")
+            .resizable()
+            .foregroundColor(.mint)
+            .frame(width: 36, height: 36)
     }
 }
 

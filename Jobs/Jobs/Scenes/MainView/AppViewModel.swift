@@ -16,6 +16,12 @@ public final class AppViewModel: ObservableObject {
     @Published public var ascendingDescending: SortOrder = .forward
     @Published public var filter = ""
     
+    public let networkManager: NetworkManaging
+    
+    init(networkManager: NetworkManaging = NetworkManager()) {
+        self.networkManager = networkManager
+    }
+    
     public func sortListOrder(sorting: SortOrdering) {
         self.sortOrdering = sorting
     }
