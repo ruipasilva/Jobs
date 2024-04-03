@@ -26,3 +26,9 @@ public enum NetworkError: Error {
         }
     }
 }
+
+public enum LoadingLogoState {
+    case na
+    case success(data: [CompanyInfo])
+    case failed(error: NetworkError)
+}

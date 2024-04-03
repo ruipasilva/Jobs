@@ -38,7 +38,7 @@ public final class NewJobViewModel: ObservableObject {
         self.networkManager = networkManager
     }
 
-    public func isTitleOrCompanyEmpty(title: String, company: String) -> Bool {
+    public func isTitleOrCompanyEmpty() -> Bool {
         return title.isEmpty || company.isEmpty
     }
     

@@ -22,7 +22,16 @@ struct EditJobView: View {
         GeometryReader { geo in
             ScrollView {
                 VStack {
-                    titleView
+                    Group {
+                        imageView
+                        titleView
+                    }
+                    .onTapGesture {
+                        Task {
+                            editJobViewModel.isShowingLogoDetails = true
+                            await editJobViewModel.getLogos(company: job.company)
+                        }
+                    }
                     formView
                         .frame(height: geo.size.height)
                         .toolbar {
@@ -30,11 +39,40 @@ struct EditJobView: View {
                         }
                 }
             }
+            .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
+                LogoOptionsView(editJobViewModel: editJobViewModel, job: job)
+            }
         }
         .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {
             editJobViewModel.setProperties(job: job)
         }
+    }
+    
+    private var imageView: some View {
+        AsyncImage(url: URL(string: job.logoURL)) { phase in
+            switch phase {
+            case .empty:
+                defaultImage
+            case let .success(image):
+                image
+                    .cornerRadius(8)
+                    .shadow(radius: 2)
+                    .padding(.top, 10)
+            case .failure(_):
+                defaultImage
+            @unknown default:
+                defaultImage
+            }
+        }
+            
+    }
+    
+    private var defaultImage: some View {
+        Image(systemName: "suitcase.fill")
+            .resizable()
+            .foregroundColor(.mint)
+            .frame(width: 64, height: 64)
     }
     
     private var titleView: some View {

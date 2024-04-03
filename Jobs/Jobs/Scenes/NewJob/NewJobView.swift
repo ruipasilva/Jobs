@@ -161,7 +161,7 @@ struct NewJobView: View {
     private var toolbarLeading: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             Button("Cancel") {
-                if newJobViewModel.isTitleOrCompanyEmpty(title: newJobViewModel.title, company: newJobViewModel.company) {
+                if newJobViewModel.isTitleOrCompanyEmpty() {
                     dismiss()
                 } else {
                     newJobViewModel.showDiscardDialog()
@@ -185,7 +185,7 @@ struct NewJobView: View {
                 newJobViewModel.saveJob(context: context)
                 dismiss()
             }
-            .disabled(newJobViewModel.isTitleOrCompanyEmpty(title: newJobViewModel.title, company: newJobViewModel.company))
+            .disabled(newJobViewModel.isTitleOrCompanyEmpty())
         }
     }
 }

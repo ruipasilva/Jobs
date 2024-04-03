@@ -38,7 +38,7 @@ struct MainListCellView: View {
                 AsyncImage(url: URL(string: job.logoURL)) { phase in
                     switch phase {
                     case .empty:
-                        ProgressView()
+                        defaultImage
                     case let .success(image):
                         image
                             .resizable()
