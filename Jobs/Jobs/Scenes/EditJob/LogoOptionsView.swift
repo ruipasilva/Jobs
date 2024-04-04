@@ -32,27 +32,62 @@ struct LogoOptionsView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                TextField("Company Name", text: $logoOptionsViewModel.company)
-                    .padding()
-                    .onChange(of: logoOptionsViewModel.company) { oldValue, newValue in
-                        Task {
-                            await logoOptionsViewModel.getLogos(company: logoOptionsViewModel.company)
+            
+            Form {
+                Section {
+                    FloatingTextField(title: "Company Name", text: $logoOptionsViewModel.company, image: "building.2")
+                        .onChange(of: logoOptionsViewModel.company) { _, _ in
+                            Task {
+                                await logoOptionsViewModel.getLogos(company: logoOptionsViewModel.company)
+                            }
                         }
-                    }
-                TextField("Job Title", text: $logoOptionsViewModel.title)
-                    .padding()
-                
-                switch logoOptionsViewModel.loadingLogoState {
-                case .na:
-                    ProgressView()
-                case let .success(data):
-                    logoList(logoData: data)
-                case let .failed(error):
-                    Text(error.title)
+                        
+                    FloatingTextField(title: "Job Title", text: $logoOptionsViewModel.title, image: "person")
+                } header: {
+                    Text("Edit Main Info")
                 }
-                Spacer()
+                
+                Section {
+                    switch logoOptionsViewModel.loadingLogoState {
+                    case .na:
+                        ProgressView()
+                    case let .success(data):
+                        ForEach(data, id: \.logo) { data in
+                            Button(action: {
+                                logoOptionsViewModel.logoURL = data.logo
+                            }, label: {
+                                HStack {
+                                    AsyncImage(url: URL(string: data.logo), scale: 3)
+                                        .cornerRadius(4)
+                                        .shadow(radius: 2)
+                                    VStack(alignment: .leading) {
+                                        Text(data.name)
+                                            .font(.body)
+                                            .foregroundColor(Color.init(UIColor.label))
+                                        Text(data.domain)
+                                            .font(.subheadline)
+                                            .foregroundColor(Color.init(UIColor.secondaryLabel))
+                                    }
+                                    .foregroundStyle(Color(uiColor: .darkText))
+                                    .padding(.leading, 6)
+                                    Spacer()
+                                    if logoOptionsViewModel.logoURL == data.logo {
+                                        Text("Current")
+                                            .padding(4)
+                                            .foregroundColor(Color.init(UIColor.secondaryLabel))
+                                            .cornerRadius(6)
+                                    }
+                                }
+                            })
+                        }
+                    case let .failed(error):
+                        Text(error.title)
+                    }
+                } header: {
+                    Text("Please pick a logo")
+                }
             }
+            
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Update") {
@@ -67,6 +102,7 @@ struct LogoOptionsView: View {
                     }
                 }
             }
+            
         }
     }
     
