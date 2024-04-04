@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 public final class EditJobViewModel: ObservableObject {
     @Published public var title = ""
@@ -35,7 +36,9 @@ public final class EditJobViewModel: ObservableObject {
     @Published public var tempLogo: String = ""
     @Published public var loadingLogoState: LoadingLogoState = .na
     
-    private let networkManager: NetworkManaging
+    public let networkManager: NetworkManaging
+    
+    private var subcriptions = Set<AnyCancellable>()
     
     init(networkManager: NetworkManaging = NetworkManager()) {
         self.networkManager = networkManager
@@ -89,29 +92,18 @@ public final class EditJobViewModel: ObservableObject {
         logoURL = job.logoURL
     }
     
-    public func onEditInfoAppear(job: Job,
-                                 logo: inout String,
-                                 company: inout String,
-                                 title: inout String) {
-        logoURL = job.logoURL
-        company = job.company
-        title = job.title
-    }
-    
-    public func updateInfoWithLogo(job: Job) {
-        job.company = company
-        job.title = title
-        job.logoURL = logoURL
-    }
-    
-    public func cancelInfoWithLogo(tempCompany: String, tempTitle: String) {
-        company = tempCompany
-        title = tempTitle
-        logoURL = ""
-    }
-    
-    public func isTitleOrCompanyEmpty() -> Bool {
-        return title.isEmpty || company.isEmpty
+    public func getLogoOptionsViewModel() -> LogoOptionsViewModel {
+        let viewModel = LogoOptionsViewModel(networkManager: networkManager)
+        
+        viewModel.subject
+            .sink { [weak self] job in
+                self?.company = job.company
+                self?.title = job.title
+                self?.logoURL = job.logoURL
+            }
+            .store(in: &subcriptions)
+        
+        return viewModel
     }
     
     @MainActor

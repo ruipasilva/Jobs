@@ -27,10 +27,7 @@ struct EditJobView: View {
                         titleView
                     }
                     .onTapGesture {
-                        Task {
-                            editJobViewModel.isShowingLogoDetails = true
-                            await editJobViewModel.getLogos(company: job.company)
-                        }
+                        editJobViewModel.isShowingLogoDetails = true
                     }
                     formView
                         .frame(height: geo.size.height)
@@ -40,7 +37,7 @@ struct EditJobView: View {
                 }
             }
             .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
-                LogoOptionsView(editJobViewModel: editJobViewModel, job: job)
+                LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel(), job: job)
             }
         }
         .background(Color(uiColor: .systemGroupedBackground))
@@ -50,7 +47,7 @@ struct EditJobView: View {
     }
     
     private var imageView: some View {
-        AsyncImage(url: URL(string: job.logoURL)) { phase in
+        AsyncImage(url: URL(string: editJobViewModel.logoURL)) { phase in
             switch phase {
             case .empty:
                 defaultImage

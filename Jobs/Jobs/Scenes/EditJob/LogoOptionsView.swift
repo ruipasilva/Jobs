@@ -8,35 +8,42 @@
 import SwiftUI
 
 struct LogoOptionsView: View {
-    @ObservedObject private var editJobViewModel: EditJobViewModel
+    @ObservedObject private var logoOptionsViewModel: LogoOptionsViewModel
     @Environment(\.dismiss) private var dismiss
     
     private let job: Job
     
-    @State private var tempCompany: String = ""
-    @State private var tempTitle: String = ""
-    @State private var tempLogoURL: String = ""
+    let collums: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     
-    public init(editJobViewModel: EditJobViewModel,
+    public init(logoOptionsViewModel: LogoOptionsViewModel,
                 job: Job) {
-        self.editJobViewModel = editJobViewModel
+        self.logoOptionsViewModel = logoOptionsViewModel
         self.job = job
+        
+        logoOptionsViewModel.setProperties(job: job)
+        
+        Task {
+            await logoOptionsViewModel.getLogos(company: logoOptionsViewModel.company)
+        }
+        
+        print("job: \(job.logoURL)")
+        print("view model: \(logoOptionsViewModel.logoURL)")
     }
     
     var body: some View {
         NavigationStack {
             VStack {
-                TextField("Company Name", text: $editJobViewModel.company)
+                TextField("Company Name", text: $logoOptionsViewModel.company)
                     .padding()
-                    .onChange(of: editJobViewModel.company) { oldValue, newValue in
+                    .onChange(of: logoOptionsViewModel.company) { oldValue, newValue in
                         Task {
-                            await editJobViewModel.getLogos(company: editJobViewModel.company)
+                            await logoOptionsViewModel.getLogos(company: logoOptionsViewModel.company)
                         }
                     }
-                TextField("Job Title", text: $editJobViewModel.title)
+                TextField("Job Title", text: $logoOptionsViewModel.title)
                     .padding()
                 
-                switch editJobViewModel.loadingLogoState {
+                switch logoOptionsViewModel.loadingLogoState {
                 case .na:
                     ProgressView()
                 case let .success(data):
@@ -44,47 +51,43 @@ struct LogoOptionsView: View {
                 case let .failed(error):
                     Text(error.title)
                 }
+                Spacer()
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Update") {
-                        editJobViewModel.updateInfoWithLogo(job: job)
+                        logoOptionsViewModel.updateJob(job: job)
                         dismiss()
                     }
-                    .disabled(editJobViewModel.isTitleOrCompanyEmpty())
+                    .disabled(logoOptionsViewModel.isTitleOrCompanyEmpty())
                 }
-                
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
-                        editJobViewModel.cancelInfoWithLogo(tempCompany: tempCompany, tempTitle: tempTitle)
                         dismiss()
                     }
                 }
             }
         }
-        .onAppear {
-            editJobViewModel.onEditInfoAppear(job: job,
-                                              logo: &tempLogoURL,
-                                              company: &tempCompany,
-                                              title: &tempTitle)
-        }
     }
     
     public func logoList(logoData: [CompanyInfo]) -> some View {
-        List(logoData, id: \.logo) { data in
-            Button(action: {
-                editJobViewModel.logoURL = data.logo
-            }, label: {
-                HStack {
-                    AsyncImage(url: URL(string: data.logo), scale: 2)
-                    Spacer()
-                    if editJobViewModel.logoURL == data.logo {
-                        Text("Selected")
+        LazyVGrid(columns: collums) {
+            ForEach(logoData, id: \.logo) { data in
+                Button(action: {
+                    logoOptionsViewModel.logoURL = data.logo
+                }, label: {
+                    VStack {
+                        AsyncImage(url: URL(string: data.logo), scale: 2)
+                        
+                        if logoOptionsViewModel.logoURL == data.logo {
+                            Text("Current")
+                        } else {
+                            Spacer(minLength: 50)
+                        }
                     }
-                }
-            })
-            .buttonStyle(PlainButtonStyle())
+                })
+            }
         }
-        .listStyle(.insetGrouped)
+        .padding()
     }
 }
