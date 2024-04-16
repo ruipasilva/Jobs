@@ -25,66 +25,86 @@ struct LogoOptionsView: View {
         Task {
             await logoOptionsViewModel.getLogos(company: logoOptionsViewModel.company)
         }
-        
-        print("job: \(job.logoURL)")
-        print("view model: \(logoOptionsViewModel.logoURL)")
     }
     
     var body: some View {
         NavigationStack {
-            
             Form {
                 Section {
-                    FloatingTextField(title: "Company Name", text: $logoOptionsViewModel.company, image: "building.2")
+                    AnimatedTextField(text: $logoOptionsViewModel.company, label: {
+                        Text("Company Name")
+                    })
+//                    FloatingTextField(title: "Company Name", text: $logoOptionsViewModel.company, image: "building.2")
                         .onChange(of: logoOptionsViewModel.company) { _, _ in
                             Task {
                                 await logoOptionsViewModel.getLogos(company: logoOptionsViewModel.company)
                             }
                         }
-                        
-                    FloatingTextField(title: "Job Title", text: $logoOptionsViewModel.title, image: "person")
+                        .submitLabel(.continue)
+                    AnimatedTextField(text: $logoOptionsViewModel.title, label: {
+                        Text("Job Title")
+                    })
+//                    FloatingTextField(title: "Job Title", text: $logoOptionsViewModel.title, image: "person")
                 } header: {
                     Text("Edit Main Info")
                 }
-                
-                Section {
-                    switch logoOptionsViewModel.loadingLogoState {
-                    case .na:
-                        ProgressView()
-                    case let .success(data):
-                        ForEach(data, id: \.logo) { data in
-                            Button(action: {
-                                logoOptionsViewModel.logoURL = data.logo
-                            }, label: {
-                                HStack {
-                                    AsyncImage(url: URL(string: data.logo), scale: 3)
-                                        .cornerRadius(4)
-                                        .shadow(radius: 2)
-                                    VStack(alignment: .leading) {
-                                        Text(data.name)
-                                            .font(.body)
-                                            .foregroundColor(Color.init(UIColor.label))
-                                        Text(data.domain)
-                                            .font(.subheadline)
-                                            .foregroundColor(Color.init(UIColor.secondaryLabel))
+                if !logoOptionsViewModel.company.isEmpty {
+                    Section {
+                        switch logoOptionsViewModel.loadingLogoState {
+                        case .na:
+                            ProgressView()
+                        case let .success(data):
+                            ForEach(data, id: \.logo) { data in
+                                Button(action: {
+                                    logoOptionsViewModel.logoURL = data.logo
+                                }, label: {
+                                    HStack {
+                                        AsyncImage(url: URL(string: data.logo), scale: 3) { phase in
+                                            switch phase {
+                                            case .empty:
+                                                ProgressView()
+                                            case .success(let image):
+                                                image
+                                                    .cornerRadius(8)
+                                                    .shadow(radius: 2)
+                                            case .failure(let error):
+                                                Image(systemName: "suitcase.fill")
+                                            @unknown default:
+                                                Image(systemName: "suitcase.fill")
+                                            }
+                                        }
+                                        
+                                        VStack(alignment: .leading) {
+                                            Text(data.name)
+                                                .font(.body)
+                                                .foregroundColor(Color.init(UIColor.label))
+                                            Text(data.domain)
+                                                .font(.subheadline)
+                                                .foregroundColor(Color.init(UIColor.secondaryLabel))
+                                        }
+                                        .foregroundStyle(Color(uiColor: .darkText))
+                                        .padding(.leading, 6)
+                                        Spacer()
+                                        if logoOptionsViewModel.logoURL == data.logo {
+                                            Text("Current")
+                                                .padding(4)
+                                                .foregroundColor(Color.init(UIColor.secondaryLabel))
+                                                .cornerRadius(6)
+                                        }
                                     }
-                                    .foregroundStyle(Color(uiColor: .darkText))
-                                    .padding(.leading, 6)
-                                    Spacer()
-                                    if logoOptionsViewModel.logoURL == data.logo {
-                                        Text("Current")
-                                            .padding(4)
-                                            .foregroundColor(Color.init(UIColor.secondaryLabel))
-                                            .cornerRadius(6)
-                                    }
-                                }
-                            })
+                                })
+                            }
+                        case let .failed(error):
+                            Text(error.title)
                         }
-                    case let .failed(error):
-                        Text(error.title)
+                    } header: {
+                        Text("Please pick a logo")
+                    } footer: {
+                        VStack(alignment: .leading) {
+                            Text("Some logos might not be available.")
+                            Text("Logos Provided by clearbit")
+                        }
                     }
-                } header: {
-                    Text("Please pick a logo")
                 }
             }
             

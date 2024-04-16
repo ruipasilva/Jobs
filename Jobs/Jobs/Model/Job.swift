@@ -8,6 +8,21 @@
 import SwiftUI
 import SwiftData
 
+//@Model
+//public final class InterviewQuestion {
+//    var wasAsked: Bool = false
+//    var question: String = ""
+//    
+//    @Relationship(inverse: \Job.interviewQuestion) var jobs: [Job]
+//    
+//    init(wasAsked: Bool, 
+//         question: String) {
+//        self.wasAsked = wasAsked
+//        self.question = question
+//        self.jobs = []
+//    }
+//}
+
 @Model
 public final class Job {
     // All properties need a default value as cloudKit needs it
@@ -50,26 +65,26 @@ public final class Job {
          isEventAllDay: Bool,
          jobURLPosting: String,
          logoURL: String) {
-             self.title = title
-             self.company = company
-             self.dateAdded = dateAdded
-             self.notes = notes
-             self.jobApplicationStatusPrivate = jobApplicationStatusPrivate
-             self.jobApplicationStatus = jobApplicationStatus
-             self.salary = salary
-             self.location = location
-             self.locationType = locationType
-             self.recruiterName = recruiterName
-             self.recruiterNumber = recruiterNumber
-             self.recruiterEmail = recruiterEmail
-             self.followUp = followUp
-             self.followUpDate = followUpDate
-             self.addToCalendar = addToCalendar
-             self.addToCalendarDate = addToCalendarDate
-             self.isEventAllDay = isEventAllDay
-             self.jobURLPosting = jobURLPosting
+        self.title = title
+        self.company = company
+        self.dateAdded = dateAdded
+        self.notes = notes
+        self.jobApplicationStatusPrivate = jobApplicationStatusPrivate
+        self.jobApplicationStatus = jobApplicationStatus
+        self.salary = salary
+        self.location = location
+        self.locationType = locationType
+        self.recruiterName = recruiterName
+        self.recruiterNumber = recruiterNumber
+        self.recruiterEmail = recruiterEmail
+        self.followUp = followUp
+        self.followUpDate = followUpDate
+        self.addToCalendar = addToCalendar
+        self.addToCalendarDate = addToCalendarDate
+        self.isEventAllDay = isEventAllDay
+        self.jobURLPosting = jobURLPosting
         self.logoURL = logoURL
-         }
+    }
     
     var icon: Image {
         switch jobApplicationStatus {

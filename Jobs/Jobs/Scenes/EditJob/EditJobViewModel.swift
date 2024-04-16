@@ -33,7 +33,6 @@ public final class EditJobViewModel: ObservableObject {
     @Published public var isShowingRecruiterDetails = false
     @Published public var isShowingLogoDetails = false
     
-    @Published public var tempLogo: String = ""
     @Published public var loadingLogoState: LoadingLogoState = .na
     
     public let networkManager: NetworkManaging

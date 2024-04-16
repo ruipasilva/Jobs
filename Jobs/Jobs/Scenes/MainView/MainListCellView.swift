@@ -34,11 +34,14 @@ struct MainListCellView: View {
     
     private var infoView: some View {
         HStack {
-            ZStack {
                 AsyncImage(url: URL(string: job.logoURL)) { phase in
                     switch phase {
                     case .empty:
-                        defaultImage
+                        if job.logoURL.isEmpty {
+                            defaultImage
+                        } else {
+                            ProgressView()
+                        }
                     case let .success(image):
                         image
                             .resizable()
@@ -50,7 +53,6 @@ struct MainListCellView: View {
                         defaultImage
                     }
                 }
-            }
             .frame(width: 55, height: 55)
             VStack(alignment: .leading) {
                 HStack {

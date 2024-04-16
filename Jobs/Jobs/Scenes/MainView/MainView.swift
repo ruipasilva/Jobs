@@ -33,6 +33,7 @@ struct MainView: View {
                 .sheet(isPresented: $appViewModel.isShowingNewJob) {
                     NewJobView(newJobViewModel: NewJobViewModel(networkManager: appViewModel.networkManager))
                 }
+                .navigationTitle("Your Jobs")
         }
         .tint(.mint)
         .onAppear(perform: {

@@ -14,6 +14,8 @@ struct EditJobView: View {
     
     private let job: Job
     
+    private let editTip = EditTip()
+    
     public init(job: Job) {
         self.job = job
     }
@@ -24,6 +26,7 @@ struct EditJobView: View {
                 VStack {
                     Group {
                         imageView
+                            .popoverTip(editTip, arrowEdge: .bottom)
                         titleView
                     }
                     .onTapGesture {
@@ -89,7 +92,6 @@ struct EditJobView: View {
             recruiterInfoView
             notesView
         }
-        
     }
     
     private var jobStatusView: some View {
@@ -164,14 +166,15 @@ struct EditJobView: View {
                     }
                     .disabled(editJobViewModel.recruiterNumber.isEmpty)
                 
-                
                 Image(systemName: "envelope.circle.fill")
                     .foregroundStyle(Color.accentColor)
                     .imageScale(.large)
                     .onTapGesture {
-                        EmailHelper.shared.askUserForTheirPreference(email: editJobViewModel.recruiterEmail,
-                                                                     subject: "Interview at \(editJobViewModel.company) follow up",
-                                                                     body: "Hi, \(editJobViewModel.recruiterName)")
+                        EmailHelper
+                            .shared
+                            .askUserForTheirPreference(email: editJobViewModel.recruiterEmail,
+                                                       subject: "Interview at \(editJobViewModel.company) follow up",
+                                                       body: "Hi, \(editJobViewModel.recruiterName)")
                     }
                     .disabled(editJobViewModel.recruiterEmail.isEmpty)
             }

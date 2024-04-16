@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import TipKit
 
 @main
 struct JobsApp: App {
@@ -17,15 +18,20 @@ struct JobsApp: App {
     var body: some Scene {
         WindowGroup {
             MainView(appViewModel: appViewModel)
+                .task {
+                                    try? Tips.configure([
+                                        .displayFrequency(.monthly),
+                                        .datastoreLocation(.applicationDefault)
+                                    ])
+                                }
         }
         .modelContainer(container)
     }
     
     init() {
-        let schema = Schema([Job.self])
-        let config = ModelConfiguration("MyJobs", schema: schema)
+        let config = ModelConfiguration(for: Job.self)
         do {
-            container = try ModelContainer(for: schema, configurations: config)
+            container = try ModelContainer(for: Job.self, configurations: config)
         } catch {
             fatalError("Could not configure container - try uninstalling the app if issues occur")
         }
