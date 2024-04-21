@@ -39,6 +39,7 @@ struct LogoOptionsView: View {
                             Task {
                                 await logoOptionsViewModel.getLogos(company: logoOptionsViewModel.company)
                             }
+                            logoOptionsViewModel.updateJob(job: job)
                         }
                         .submitLabel(.continue)
                     AnimatedTextField(text: $logoOptionsViewModel.title, label: {
@@ -57,6 +58,7 @@ struct LogoOptionsView: View {
                             ForEach(data, id: \.logo) { data in
                                 Button(action: {
                                     logoOptionsViewModel.logoURL = data.logo
+                                    logoOptionsViewModel.company = data.name
                                 }, label: {
                                     HStack {
                                         AsyncImage(url: URL(string: data.logo), scale: 3) { phase in
@@ -67,7 +69,7 @@ struct LogoOptionsView: View {
                                                 image
                                                     .cornerRadius(8)
                                                     .shadow(radius: 2)
-                                            case .failure(let error):
+                                            case .failure(_):
                                                 Image(systemName: "suitcase.fill")
                                             @unknown default:
                                                 Image(systemName: "suitcase.fill")

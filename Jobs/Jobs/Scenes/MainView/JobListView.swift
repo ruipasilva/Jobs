@@ -76,8 +76,8 @@ struct JobListView: View {
                 }
                 .onDelete { indexSet in
                     indexSet.forEach { index in
-                        let book = jobs[index]
-                        context.delete(book)
+                        let job = jobs[index]
+                        context.delete(job)
                     }
                 }
                 .listRowBackground(Color.clear)

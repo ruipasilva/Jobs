@@ -34,13 +34,13 @@ struct EditJobView: View {
                     }
                     formView
                         .frame(height: geo.size.height)
-                        .toolbar {
-                            toolbarTrailing
-                        }
                 }
             }
             .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
                 LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel(), job: job)
+            }
+            .toolbar {
+                toolbarTrailing
             }
         }
         .background(Color(uiColor: .systemGroupedBackground))

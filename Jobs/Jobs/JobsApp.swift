@@ -29,8 +29,8 @@ struct JobsApp: App {
     }
     
     init() {
-        let config = ModelConfiguration(for: Job.self)
         do {
+            let config = ModelConfiguration(for: Job.self)
             container = try ModelContainer(for: Job.self, configurations: config)
         } catch {
             fatalError("Could not configure container - try uninstalling the app if issues occur")

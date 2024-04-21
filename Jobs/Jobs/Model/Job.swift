@@ -8,21 +8,6 @@
 import SwiftUI
 import SwiftData
 
-//@Model
-//public final class InterviewQuestion {
-//    var wasAsked: Bool = false
-//    var question: String = ""
-//    
-//    @Relationship(inverse: \Job.interviewQuestion) var jobs: [Job]
-//    
-//    init(wasAsked: Bool, 
-//         question: String) {
-//        self.wasAsked = wasAsked
-//        self.question = question
-//        self.jobs = []
-//    }
-//}
-
 @Model
 public final class Job {
     // All properties need a default value as cloudKit needs it
