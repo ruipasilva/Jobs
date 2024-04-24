@@ -18,21 +18,16 @@ struct SingleRectangleView: View {
     var interviewStatus: String
     var SFSymbol: String
     var circleColor: Color
-    var action: () -> Void
     
     var body: some View {
-        Button(action: {
-            self.action()
-        }, label: {
-            ZStack {
-                roundedRectangle
-                infoView
-                    .padding(.vertical, 16)
-                    .padding(.horizontal, 16)
-            }
-            .frame(height: horizontalSizeClass == .compact ? UIScreen.main.bounds.width/3 : UIScreen.main.bounds.width/9)
-            .padding(.bottom, 36)
-        })
+        ZStack {
+            roundedRectangle
+            infoView
+                .padding(.vertical, 16)
+                .padding(.horizontal, 16)
+        }
+        .frame(height: horizontalSizeClass == .compact ? UIScreen.main.bounds.width/3 : UIScreen.main.bounds.width/9)
+        .padding(.bottom, 36)
     }
     
     private var roundedRectangle: some View {

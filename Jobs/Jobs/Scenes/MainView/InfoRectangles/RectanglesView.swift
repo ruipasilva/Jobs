@@ -15,7 +15,7 @@ struct RectanglesView: View {
     @Query private var interviewingJobs: [Job]
     
     var columns: [GridItem] {
-      Array(repeating: .init(.flexible()), count: 2)
+        Array(repeating: .init(.flexible()), count: 2)
     }
     
     public init(appViewModel: AppViewModel) {
@@ -28,15 +28,27 @@ struct RectanglesView: View {
         let interviewingFilter = #Predicate<Job> { job in
             job.jobApplicationStatusPrivate == "Interviewing"
         }
-
+        
         _appliedJobs = Query(filter: appliedFilter)
         _interviewingJobs = Query(filter: interviewingFilter)
     }
     
     var body: some View {
         LazyVGrid(columns: columns, spacing: 16) {
-            SingleRectangleView(appViewModel: appViewModel, totalJobs: appliedJobs.count, interviewStatus: JobApplicationStatus.applied.status, SFSymbol: "clock", circleColor: .orange) {}
-            SingleRectangleView(appViewModel: appViewModel, totalJobs: interviewingJobs.count, interviewStatus: JobApplicationStatus.interviewing.status, SFSymbol: "checkmark", circleColor: .mint) {}
+            SingleRectangleView(appViewModel: appViewModel, totalJobs: appliedJobs.count, interviewStatus: JobApplicationStatus.applied.status, SFSymbol: "clock", circleColor: .orange)
+                .onTapGesture {
+                    appViewModel.isShowingApplied = true
+                }
+            SingleRectangleView(appViewModel: appViewModel, totalJobs: interviewingJobs.count, interviewStatus: JobApplicationStatus.interviewing.status, SFSymbol: "checkmark", circleColor: .mint)
+                .onTapGesture {
+                    appViewModel.isShowingNotApplied = true
+                }
+        }
+        .sheet(isPresented: $appViewModel.isShowingApplied) {
+            Text("Applied")
+        }
+        .sheet(isPresented: $appViewModel.isShowingNotApplied) {
+            Text("Not Applied")
         }
     }
 }
