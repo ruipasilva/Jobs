@@ -17,7 +17,7 @@ public final class AppViewModel: ObservableObject {
     @Published public var filter = ""
     
     @Published public var isShowingApplied = false
-    @Published public var isShowingNotApplied = false
+    @Published public var isShowingInterviewing = false
     
     public let networkManager: NetworkManaging
     

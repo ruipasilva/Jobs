@@ -30,6 +30,7 @@
 		699750D72B5FF413000EBCD1 /* NewJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750D62B5FF413000EBCD1 /* NewJobView.swift */; };
 		699750D92B6007AD000EBCD1 /* EditJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750D82B6007AD000EBCD1 /* EditJobView.swift */; };
 		699750DB2B614E61000EBCD1 /* JobListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750DA2B614E61000EBCD1 /* JobListView.swift */; };
+		69984B7B2BD9BD3E002C23F2 /* RectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69984B7A2BD9BD3E002C23F2 /* RectDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		699750D62B5FF413000EBCD1 /* NewJobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewJobView.swift; sourceTree = "<group>"; };
 		699750D82B6007AD000EBCD1 /* EditJobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditJobView.swift; sourceTree = "<group>"; };
 		699750DA2B614E61000EBCD1 /* JobListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListView.swift; sourceTree = "<group>"; };
+		69984B7A2BD9BD3E002C23F2 /* RectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			children = (
 				69352EB52BBB2A3200B8A77B /* SingleRectangleView.swift */,
 				69352EB72BBB2B7A00B8A77B /* RectanglesView.swift */,
+				69984B7A2BD9BD3E002C23F2 /* RectDetailView.swift */,
 			);
 			path = InfoRectangles;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				69352EC42BBC249300B8A77B /* NewJobViewModel.swift in Sources */,
 				69352EC72BBD6DAC00B8A77B /* NetworkManager.swift in Sources */,
 				69352ECB2BBD71EC00B8A77B /* NetworkHelpers.swift in Sources */,
+				69984B7B2BD9BD3E002C23F2 /* RectDetailView.swift in Sources */,
 				69352EB62BBB2A3200B8A77B /* SingleRectangleView.swift in Sources */,
 				696208572B6A98730045DD39 /* AppViewModel.swift in Sources */,
 				69352ECD2BBDA36900B8A77B /* LogoOptionsView.swift in Sources */,

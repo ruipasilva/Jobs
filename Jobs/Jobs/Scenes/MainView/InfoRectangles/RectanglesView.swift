@@ -41,14 +41,14 @@ struct RectanglesView: View {
                 }
             SingleRectangleView(appViewModel: appViewModel, totalJobs: interviewingJobs.count, interviewStatus: JobApplicationStatus.interviewing.status, SFSymbol: "checkmark", circleColor: .mint)
                 .onTapGesture {
-                    appViewModel.isShowingNotApplied = true
+                    appViewModel.isShowingInterviewing = true
                 }
         }
         .sheet(isPresented: $appViewModel.isShowingApplied) {
-            Text("Applied")
+            RectDetailView(appViewModel: appViewModel, jobs: appliedJobs, title: "Applied")
         }
-        .sheet(isPresented: $appViewModel.isShowingNotApplied) {
-            Text("Not Applied")
+        .sheet(isPresented: $appViewModel.isShowingInterviewing) {
+            RectDetailView(appViewModel: appViewModel, jobs: interviewingJobs, title: "Interviewing")
         }
     }
 }
