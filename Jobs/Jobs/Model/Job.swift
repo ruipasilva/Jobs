@@ -9,6 +9,20 @@ import SwiftUI
 import SwiftData
 
 @Model
+public final class InterviewQuestion {
+    var completed: Bool = false
+    var question: String = ""
+    
+    @Relationship(deleteRule: .nullify, inverse: \Job.interviewQuestions) var jobs: [Job]?
+    
+    init(completed: Bool,
+         question: String) {
+        self.completed = completed
+        self.question = question
+    }
+}
+
+@Model
 public final class Job {
     // All properties need a default value as cloudKit needs it
     var title: String = ""
@@ -30,6 +44,7 @@ public final class Job {
     var isEventAllDay: Bool = false
     var jobURLPosting: String = ""
     var logoURL: String = ""
+    var interviewQuestions: [InterviewQuestion]?
     
     init(title: String,
          company: String,
@@ -49,7 +64,8 @@ public final class Job {
          addToCalendarDate: Date = Date.now,
          isEventAllDay: Bool,
          jobURLPosting: String,
-         logoURL: String) {
+         logoURL: String,
+         interviewQuestions: [InterviewQuestion]? = nil) {
         self.title = title
         self.company = company
         self.dateAdded = dateAdded
@@ -69,6 +85,7 @@ public final class Job {
         self.isEventAllDay = isEventAllDay
         self.jobURLPosting = jobURLPosting
         self.logoURL = logoURL
+        self.interviewQuestions = interviewQuestions
     }
     
     var icon: Image {

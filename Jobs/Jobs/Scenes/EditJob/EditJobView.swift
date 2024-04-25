@@ -91,6 +91,7 @@ struct EditJobView: View {
             extraInfoView
             recruiterInfoView
             notesView
+            interviewQuestionsView
         }
     }
     
@@ -195,6 +196,31 @@ struct EditJobView: View {
                 .lineLimit(5...10)
         } header: {
             Text("Your notes")
+        }
+    }
+    
+    private var interviewQuestionsView: some View {
+        Section {
+            List($editJobViewModel.interviewQuestion, id: \.self) { $question in
+                HStack {
+                    Image(systemName: question.completed ? "checkmark.square.fill" : "square")
+                        .onTapGesture {
+                            $question.completed.wrappedValue.toggle()
+                        }
+                    TextField("Question", text: $question.question)
+                }
+        
+                
+            }
+            Button {
+                withAnimation {
+                    editJobViewModel.interviewQuestion.append(InterviewQuestion(completed: false, question: ""))
+                }
+            } label: {
+                Label("Add New", systemImage: "plus")
+            }
+        } header: {
+            Text("Interview Questions")
         }
     }
     
