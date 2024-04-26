@@ -28,6 +28,7 @@ public final class EditJobViewModel: ObservableObject {
     @Published public var url = ""
     @Published public var notes = ""
     @Published public var logoURL = ""
+    @Published public var interviewQuestion: [InterviewQuestion] = []
     
     @Published public var isShowingPasteLink = false
     @Published public var isShowingRecruiterDetails = false
@@ -69,6 +70,7 @@ public final class EditJobViewModel: ObservableObject {
         job.recruiterNumber = recruiterNumber
         job.jobURLPosting = url
         job.notes = notes
+        job.interviewQuestions = interviewQuestion
     }
     
     public func setProperties(job: Job) {
@@ -89,6 +91,7 @@ public final class EditJobViewModel: ObservableObject {
         url = job.jobURLPosting
         notes = job.notes
         logoURL = job.logoURL
+        interviewQuestion = job.interviewQuestions ?? []
     }
     
     public func getLogoOptionsViewModel() -> LogoOptionsViewModel {

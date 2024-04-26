@@ -29,6 +29,7 @@ public final class NewJobViewModel: ObservableObject {
     @Published public var url = ""
     @Published public var notes = ""
     @Published public var logoURL = ""
+    @Published public var interviewQuestion: [InterviewQuestion] = []
     
     @Published public var showingCancelActionSheet = false
     
@@ -82,6 +83,7 @@ public final class NewJobViewModel: ObservableObject {
                          jobURLPosting: url,
                          logoURL: logoURL)
         context.insert(newJob)
+        newJob.interviewQuestions = interviewQuestion
     }
     
     public func saveJob(context: ModelContext) {
