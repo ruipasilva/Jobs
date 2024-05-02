@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftData
-import UIKit
 
 public final class AppViewModel: ObservableObject {
     @Published public var isShowingNewJob = false

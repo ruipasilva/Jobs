@@ -21,28 +21,24 @@ struct EditJobView: View {
     }
     
     var body: some View {
-        GeometryReader { geo in
-            ScrollView {
-                VStack {
-                    Group {
-                        imageView
-                            .popoverTip(editTip, arrowEdge: .bottom)
-                        titleView
-                    }
-                    .onTapGesture {
-                        editJobViewModel.isShowingLogoDetails = true
-                    }
-                    formView
-                        .frame(height: geo.size.height)
-                }
+        VStack {
+            Group {
+                imageView
+                    .popoverTip(editTip, arrowEdge: .bottom)
+                titleView
             }
-            .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
-                LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel(), job: job)
+            .onTapGesture {
+                editJobViewModel.isShowingLogoDetails = true
             }
-            .toolbar {
-                toolbarTrailing
-            }
+            formView
         }
+        .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
+            LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel(), job: job)
+        }
+        .toolbar {
+            toolbarTrailing
+        }
+        
         .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {
             editJobViewModel.setProperties(job: job)
@@ -65,7 +61,7 @@ struct EditJobView: View {
                 defaultImage
             }
         }
-            
+        
     }
     
     private var defaultImage: some View {
@@ -208,7 +204,7 @@ struct EditJobView: View {
                             .onTapGesture {
                                 $question.completed.wrappedValue.toggle()
                             }
-                        TextField("Question", text: $question.question)
+                        TextField("Type your question...", text: $question.question)
                     }
                 }
                 // OnDelete not working with logic below
