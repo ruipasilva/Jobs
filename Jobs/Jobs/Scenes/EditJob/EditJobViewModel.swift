@@ -37,6 +37,7 @@ public final class EditJobViewModel: ObservableObject {
     @Published public var loadingLogoState: LoadingLogoState = .na
     
     public let networkManager: NetworkManaging
+    public let editTip = EditTip()
     
     private var subcriptions = Set<AnyCancellable>()
     

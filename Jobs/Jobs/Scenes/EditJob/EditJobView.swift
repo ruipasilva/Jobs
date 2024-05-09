@@ -14,8 +14,6 @@ struct EditJobView: View {
     
     private let job: Job
     
-    private let editTip = EditTip()
-    
     public init(job: Job) {
         self.job = job
     }
@@ -24,7 +22,7 @@ struct EditJobView: View {
         VStack {
             Group {
                 imageView
-                    .popoverTip(editTip, arrowEdge: .bottom)
+                    .popoverTip(editJobViewModel.editTip, arrowEdge: .bottom)
                 titleView
             }
             .onTapGesture {

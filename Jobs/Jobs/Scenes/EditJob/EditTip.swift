@@ -8,12 +8,12 @@
 import Foundation
 import TipKit
 
-struct EditTip: Tip {
-    var title: Text {
+public struct EditTip: Tip {
+    public var title: Text {
         Text("Wrong info or logo?")
     }
     
-    var message: Text? {
+    public var message: Text? {
         Text("Tap here to edit.")
     }
 }

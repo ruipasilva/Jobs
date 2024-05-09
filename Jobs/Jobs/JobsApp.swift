@@ -17,7 +17,7 @@ struct JobsApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView(appViewModel: appViewModel)
+            TabViewRoot(appViewModel: appViewModel)
                 .task {
                     try? Tips.configure([
                         .displayFrequency(.monthly),

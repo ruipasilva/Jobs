@@ -31,6 +31,7 @@
 		699750D92B6007AD000EBCD1 /* EditJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750D82B6007AD000EBCD1 /* EditJobView.swift */; };
 		699750DB2B614E61000EBCD1 /* JobListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750DA2B614E61000EBCD1 /* JobListView.swift */; };
 		69984B7B2BD9BD3E002C23F2 /* RectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69984B7A2BD9BD3E002C23F2 /* RectDetailView.swift */; };
+		69984B7D2BED7445002C23F2 /* TabViewRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69984B7C2BED7445002C23F2 /* TabViewRoot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		699750D82B6007AD000EBCD1 /* EditJobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditJobView.swift; sourceTree = "<group>"; };
 		699750DA2B614E61000EBCD1 /* JobListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListView.swift; sourceTree = "<group>"; };
 		69984B7A2BD9BD3E002C23F2 /* RectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectDetailView.swift; sourceTree = "<group>"; };
+		69984B7C2BED7445002C23F2 /* TabViewRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewRoot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 				696208552B6A8FE70045DD39 /* Info.plist */,
 				696208542B6A8F620045DD39 /* JobsDebug.entitlements */,
 				699750C52B5ED2DC000EBCD1 /* JobsApp.swift */,
+				69984B7C2BED7445002C23F2 /* TabViewRoot.swift */,
 				69352EC52BBC695000B8A77B /* Model */,
 				69352EBB2BBC23C000B8A77B /* Scenes */,
 				69352EC02BBC245100B8A77B /* Utils */,
@@ -279,6 +282,7 @@
 				699750D52B5FD7E1000EBCD1 /* Job.swift in Sources */,
 				699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */,
 				69352ECF2BBEBB6C00B8A77B /* LogoOptionsViewModel.swift in Sources */,
+				69984B7D2BED7445002C23F2 /* TabViewRoot.swift in Sources */,
 				69352ED12BBF603100B8A77B /* EditTip.swift in Sources */,
 				699750D72B5FF413000EBCD1 /* NewJobView.swift in Sources */,
 			);
