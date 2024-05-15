@@ -208,15 +208,17 @@ struct EditJobView: View {
                 // OnDelete not working with logic below
                 .onDelete { indexSet in
                     indexSet.forEach { index in
-                        let interviewQuestion = editJobViewModel.interviewQuestion[index]
+                        let interviewQuestionID = editJobViewModel.interviewQuestion[index].persistentModelID
+                        let interviewQuestion = context.model(for: interviewQuestionID)
                         context.delete(interviewQuestion)
-                        
+                        editJobViewModel.interviewQuestion.remove(atOffsets: indexSet)
                     }
                 }
             }
             Button {
                 withAnimation {
-                    editJobViewModel.interviewQuestion.append(InterviewQuestion(completed: false, question: ""))
+                    let interviewQuestion = InterviewQuestion(completed: false, question: "")
+                    editJobViewModel.interviewQuestion.append(interviewQuestion)
                 }
             } label: {
                 Label("Add New", systemImage: "plus")

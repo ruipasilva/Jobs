@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @Model
-public final class InterviewQuestion {
+public final class InterviewQuestion: Hashable {
     var completed: Bool = false
     var question: String = ""
     
