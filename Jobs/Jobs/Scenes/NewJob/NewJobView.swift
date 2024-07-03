@@ -11,7 +11,7 @@ struct NewJobView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var newJobViewModel: NewJobViewModel
-    @FocusState private var focusState: Bool
+    @FocusState private var focusState: NewJobViewModel.FocusedField?
     
     public init(newJobViewModel: NewJobViewModel) {
         self.newJobViewModel = newJobViewModel
@@ -48,15 +48,21 @@ struct NewJobView: View {
     private var mainInfoView: some View {
         Section {
             FloatingTextField(title: "Company Name", text: $newJobViewModel.company, image: "building.2")
-                .submitLabel(.continue)
-                .focused($focusState)
+                .submitLabel(.next)
+                .focused($focusState, equals: .companyName)
                 .onChange(of: newJobViewModel.company) { _, _ in
                     Task {
                         await newJobViewModel.getLogo(company: newJobViewModel.company)
                     }
                 }
+                .onSubmit {
+                    focusState = .jobTitle
+                }
             FloatingTextField(title: "Job Title", text: $newJobViewModel.title, image: "person")
-                .focused($focusState)
+                .focused($focusState, equals: .jobTitle)
+                .onSubmit {
+                    focusState = .notes
+                }
         } header: {
             Text("Main Info")
         }
@@ -130,9 +136,20 @@ struct NewJobView: View {
         Section {
             FloatingTextField(title: "Name", text: $newJobViewModel.recruiterName, image: "person.circle")
                 .keyboardType(.namePhonePad)
+                .focused($focusState, equals: .recruiterName)
+                .submitLabel(.next)
+                .onSubmit {
+                    focusState = .recruiterEmail
+                }
             FloatingTextField(title: "Email", text: $newJobViewModel.recruiterEmail, image: "envelope")
+                .focused($focusState, equals: .recruiterEmail)
                 .keyboardType(.emailAddress)
+                .submitLabel(.next)
+                .onSubmit {
+                    focusState = .recruiterNumber
+                }
             FloatingTextField(title: "Number", text: $newJobViewModel.recruiterNumber, image: "phone")
+                .focused($focusState, equals: .recruiterNumber)
                 .keyboardType(.numberPad)
         } header: {
             Text("Contacts")
@@ -144,6 +161,10 @@ struct NewJobView: View {
             FloatingTextField(title: "Salary", text: $newJobViewModel.salary, image: "creditcard")
                 .keyboardType(.numberPad)
             FloatingTextField(title: "URL", text: $newJobViewModel.url, image: "link")
+                .submitLabel(.next)
+                .onSubmit {
+                    focusState = .notes
+                }
         } header: {
             Text("Extra Info")
         }
@@ -152,6 +173,7 @@ struct NewJobView: View {
     private var notesView: some View {
         Section {
             TextField("Notes", text: $newJobViewModel.notes, axis: .vertical)
+                .focused($focusState, equals: .notes)
                 .lineLimit(5...10)
         } header: {
             Text("Your notes")

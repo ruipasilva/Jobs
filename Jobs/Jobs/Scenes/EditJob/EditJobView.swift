@@ -205,7 +205,6 @@ struct EditJobView: View {
                         TextField("Type your question...", text: $question.question)
                     }
                 }
-                // OnDelete not working with logic below
                 .onDelete { indexSet in
                     indexSet.forEach { index in
                         let interviewQuestionID = editJobViewModel.interviewQuestion[index].persistentModelID

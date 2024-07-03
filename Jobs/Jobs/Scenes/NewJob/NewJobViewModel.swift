@@ -9,6 +9,7 @@ import Foundation
 import UserNotifications
 import EventKit
 import SwiftData
+import SwiftUI
 
 public final class NewJobViewModel: ObservableObject {
     @Published public var title = ""
@@ -174,5 +175,15 @@ extension NewJobViewModel {
 
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)
+    }
+    
+    enum FocusedField {
+        case companyName
+        case jobTitle
+        case recruiterName
+        case recruiterEmail
+        case recruiterNumber
+        case url
+        case notes
     }
 }

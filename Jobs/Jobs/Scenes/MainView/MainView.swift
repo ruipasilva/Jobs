@@ -82,9 +82,4 @@ struct MainView: View {
             })
         }
     }
-    
-    private func sortOrder(sorting: SortOrdering) {
-        appViewModel.sortListOrder(sorting: sorting)
-        sortOrdering = sorting
-    }
 }

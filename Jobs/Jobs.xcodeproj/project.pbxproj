@@ -101,7 +101,6 @@
 			children = (
 				699750D82B6007AD000EBCD1 /* EditJobView.swift */,
 				69352ECC2BBDA36900B8A77B /* LogoOptionsView.swift */,
-				69352ED02BBF603100B8A77B /* EditTip.swift */,
 				69352ECE2BBEBB6C00B8A77B /* LogoOptionsViewModel.swift */,
 				69352EC12BBC248A00B8A77B /* EditJobViewModel.swift */,
 			);
@@ -146,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				699750D42B5FD7E1000EBCD1 /* Job.swift */,
+				69352ED02BBF603100B8A77B /* EditTip.swift */,
 				69352EC82BBD6FC100B8A77B /* CompanyInfo.swift */,
 			);
 			path = Model;
