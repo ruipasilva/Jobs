@@ -12,6 +12,7 @@ public final class LogoOptionsViewModel: ObservableObject {
     @Published public var title: String = ""
     @Published public var company: String = ""
     @Published public var logoURL: String = ""
+    @Published public var companyWebsite: String = ""
     
     public var subject = PassthroughSubject<Job, Never>()
     
@@ -31,12 +32,14 @@ public final class LogoOptionsViewModel: ObservableObject {
         title = job.title
         company = job.company
         logoURL = job.logoURL
+        companyWebsite = job.companyWebsite
     }
     
     public func updateJob(job: Job) {
         job.title = title
         job.company = company
         job.logoURL = logoURL
+        job.companyWebsite = companyWebsite
         subject.send(job)
     }
     

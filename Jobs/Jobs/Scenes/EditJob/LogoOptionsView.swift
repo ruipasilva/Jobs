@@ -31,10 +31,10 @@ struct LogoOptionsView: View {
         NavigationStack {
             Form {
                 Section {
-                    AnimatedTextField(text: $logoOptionsViewModel.company, label: {
-                        Text("Company Name")
-                    })
-//                    FloatingTextField(title: "Company Name", text: $logoOptionsViewModel.company, image: "building.2")
+//                    AnimatedTextField(text: $logoOptionsViewModel.company, label: {
+//                        Text("Company Name")
+//                    })
+                    FloatingTextField(title: "Company Name", text: $logoOptionsViewModel.company, image: "building.2")
                         .onChange(of: logoOptionsViewModel.company) { _, _ in
                             Task {
                                 await logoOptionsViewModel.getLogos(company: logoOptionsViewModel.company)
@@ -42,10 +42,16 @@ struct LogoOptionsView: View {
                             logoOptionsViewModel.updateJob(job: job)
                         }
                         .submitLabel(.continue)
-                    AnimatedTextField(text: $logoOptionsViewModel.title, label: {
-                        Text("Job Title")
-                    })
-//                    FloatingTextField(title: "Job Title", text: $logoOptionsViewModel.title, image: "person")
+//                    AnimatedTextField(text: $logoOptionsViewModel.title, label: {
+//                        Text("Job Title")
+//                    })
+                    FloatingTextField(title: "Job Title", text: $logoOptionsViewModel.title, image: "person")
+                    
+//                    AnimatedTextField(text: $logoOptionsViewModel.companyWebsite, label: {
+//                        Text("Company Website")
+//                    })
+                    FloatingTextField(title: "Company Website", text: $logoOptionsViewModel.companyWebsite, image: "globe")
+                    
                 } header: {
                     Text("Edit Main Info")
                 }
@@ -58,7 +64,7 @@ struct LogoOptionsView: View {
                             ForEach(data, id: \.logo) { data in
                                 Button(action: {
                                     logoOptionsViewModel.logoURL = data.logo
-                                    logoOptionsViewModel.company = data.name
+                                    logoOptionsViewModel.companyWebsite = data.domain
                                 }, label: {
                                     HStack {
                                         AsyncImage(url: URL(string: data.logo), scale: 3) { phase in
@@ -126,26 +132,5 @@ struct LogoOptionsView: View {
             }
             
         }
-    }
-    
-    public func logoList(logoData: [CompanyInfo]) -> some View {
-        LazyVGrid(columns: collums) {
-            ForEach(logoData, id: \.logo) { data in
-                Button(action: {
-                    logoOptionsViewModel.logoURL = data.logo
-                }, label: {
-                    VStack {
-                        AsyncImage(url: URL(string: data.logo), scale: 2)
-                        
-                        if logoOptionsViewModel.logoURL == data.logo {
-                            Text("Current")
-                        } else {
-                            Spacer(minLength: 50)
-                        }
-                    }
-                })
-            }
-        }
-        .padding()
     }
 }

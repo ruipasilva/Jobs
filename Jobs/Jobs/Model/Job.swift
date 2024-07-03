@@ -44,6 +44,7 @@ public final class Job {
     var isEventAllDay: Bool = false
     var jobURLPosting: String = ""
     var logoURL: String = ""
+    var companyWebsite: String = ""
     var interviewQuestions: [InterviewQuestion]?
     
     init(title: String,
@@ -65,6 +66,7 @@ public final class Job {
          isEventAllDay: Bool,
          jobURLPosting: String,
          logoURL: String,
+         companyWebsite: String,
          interviewQuestions: [InterviewQuestion]? = nil) {
         self.title = title
         self.company = company
@@ -85,6 +87,7 @@ public final class Job {
         self.isEventAllDay = isEventAllDay
         self.jobURLPosting = jobURLPosting
         self.logoURL = logoURL
+        self.companyWebsite = companyWebsite
         self.interviewQuestions = interviewQuestions
     }
     

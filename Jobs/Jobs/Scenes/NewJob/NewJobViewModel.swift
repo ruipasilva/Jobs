@@ -30,6 +30,7 @@ public final class NewJobViewModel: ObservableObject {
     @Published public var url = ""
     @Published public var notes = ""
     @Published public var logoURL = ""
+    @Published public var companyWebsite = ""
     @Published public var interviewQuestion: [InterviewQuestion] = []
     
     @Published public var showingCancelActionSheet = false
@@ -58,6 +59,7 @@ public final class NewJobViewModel: ObservableObject {
             let logo = try await networkManager.fetchData(query: company)
             
             self.logoURL = logo.first?.logo ?? ""
+            self.companyWebsite = logo.first?.domain ?? ""
     
         } catch {
             print(error.localizedDescription)
@@ -82,7 +84,9 @@ public final class NewJobViewModel: ObservableObject {
                          addToCalendarDate: addInterviewToCalendarDate,
                          isEventAllDay: isEventAllDay,
                          jobURLPosting: url,
-                         logoURL: logoURL)
+                         logoURL: logoURL,
+                         companyWebsite: companyWebsite
+        )
         context.insert(newJob)
         newJob.interviewQuestions = interviewQuestion
     }

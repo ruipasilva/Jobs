@@ -36,6 +36,5 @@ struct JobsApp: App {
         } catch {
             fatalError("Could not configure container - try uninstalling the app if issues occur")
         }
-        print(URL.applicationSupportDirectory.path(percentEncoded: false))
     }
 }

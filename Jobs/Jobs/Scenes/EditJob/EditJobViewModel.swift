@@ -28,6 +28,7 @@ public final class EditJobViewModel: ObservableObject {
     @Published public var url = ""
     @Published public var notes = ""
     @Published public var logoURL = ""
+    @Published public var companyWebsite = ""
     @Published public var interviewQuestion: [InterviewQuestion] = []
     
     @Published public var isShowingPasteLink = false
@@ -71,6 +72,8 @@ public final class EditJobViewModel: ObservableObject {
         job.recruiterNumber = recruiterNumber
         job.jobURLPosting = url
         job.notes = notes
+        job.logoURL = logoURL
+        job.companyWebsite = companyWebsite
         job.interviewQuestions = interviewQuestion
     }
     
@@ -92,6 +95,7 @@ public final class EditJobViewModel: ObservableObject {
         url = job.jobURLPosting
         notes = job.notes
         logoURL = job.logoURL
+        companyWebsite = job.companyWebsite
         interviewQuestion = job.interviewQuestions ?? []
     }
     
@@ -103,28 +107,10 @@ public final class EditJobViewModel: ObservableObject {
                 self?.company = job.company
                 self?.title = job.title
                 self?.logoURL = job.logoURL
+                self?.companyWebsite = job.companyWebsite
             }
             .store(in: &subcriptions)
         
         return viewModel
-    }
-    
-    @MainActor
-    public func getLogos(company: String) async {
-        loadingLogoState = .na
-        
-        do {
-            let logoData = try await networkManager.fetchData(query: company)
-            
-            if logoData.isEmpty {
-                logoURL = ""
-            }
-            
-            self.logoURL = logoData.first?.logo ?? ""
-            
-            loadingLogoState = .success(data: logoData)
-        } catch {
-            loadingLogoState = .failed(error: .unableToComplete)
-        }
     }
 }

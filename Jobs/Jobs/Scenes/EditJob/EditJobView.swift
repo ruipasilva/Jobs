@@ -11,6 +11,7 @@ struct EditJobView: View {
     @StateObject private var editJobViewModel = EditJobViewModel()
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
     
     private let job: Job
     
@@ -70,12 +71,29 @@ struct EditJobView: View {
     }
     
     private var titleView: some View {
-        Group {
+        VStack {
             Text(editJobViewModel.company)
                 .font(.title)
             Text(editJobViewModel.title)
                 .font(.body)
                 .foregroundStyle(Color(UIColor.secondaryLabel))
+            
+            Button(action: {
+                openURL(URL(string: "https://www.\(editJobViewModel.companyWebsite)")!)
+            }, label: {
+                Label("website", systemImage: "link")
+                    .font(.subheadline)
+                    .foregroundColor(.accentColor)
+                    .underline(true, color: .accentColor)
+            })
+//            
+////            Link(destination: URL(string: "https://www.\(editJobViewModel.companyWebsite)")!) {
+////                Label("website", systemImage: "link")
+////                    .font(.subheadline)
+//                    .foregroundColor(.accentColor)
+//                    .underline(true, color: .accentColor)
+//            }
+            .padding(.top, 6)
         }
     }
     

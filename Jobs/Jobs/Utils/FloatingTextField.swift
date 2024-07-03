@@ -48,7 +48,7 @@ public struct AnimatedTextField<Label: View>: View {
             VStack(alignment: .leading) {
                 if shouldMinimiseLabel {
                     label
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color(.placeholderText))
                         .scaleEffect(0.9, anchor: .topLeading)
                         .matchedGeometryEffect(id: "label", in: titleAnimation)
                 }
@@ -60,7 +60,7 @@ public struct AnimatedTextField<Label: View>: View {
             
             if !shouldMinimiseLabel {
                 label
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color(.placeholderText))
                     .matchedGeometryEffect(id: "label", in: titleAnimation)
                     .onTapGesture {
                         focusOnTextField = true
