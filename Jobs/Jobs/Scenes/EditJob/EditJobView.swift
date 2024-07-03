@@ -199,8 +199,12 @@ struct EditJobView: View {
                 ForEach($editJobViewModel.interviewQuestion, id: \.self) { $question in
                     HStack {
                         Image(systemName: question.completed ? "checkmark.square.fill" : "square")
+                            .foregroundStyle(question.completed ? .accent : .primary)
                             .onTapGesture {
-                                $question.completed.wrappedValue.toggle()
+                                withAnimation {
+                                    $question.completed.wrappedValue.toggle()
+                                }
+                                
                             }
                         TextField("Type your question...", text: $question.question)
                     }
