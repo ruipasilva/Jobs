@@ -198,13 +198,11 @@ struct EditJobView: View {
             List {
                 ForEach($editJobViewModel.interviewQuestion, id: \.self) { $question in
                     HStack {
-                        Image(systemName: question.completed ? "checkmark.square.fill" : "square")
-                            .foregroundStyle(question.completed ? .accent : .primary)
+                        Image(systemName: question.completed ? "checkmark.circle.fill" : "circle")
+                            .symbolEffect(.bounce, value: question.completed ? question.completed : nil)
+                            .foregroundStyle(question.completed ? .accent : .secondary)
                             .onTapGesture {
-                                withAnimation {
                                     $question.completed.wrappedValue.toggle()
-                                }
-                                
                             }
                         TextField("Type your question...", text: $question.question)
                     }

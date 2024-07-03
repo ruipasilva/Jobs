@@ -26,7 +26,7 @@ struct RectanglesView: View {
         }
         
         let interviewingFilter = #Predicate<Job> { job in
-            job.jobApplicationStatusPrivate == "Interviewing"
+            job.jobApplicationStatusPrivate == "ongoing"
         }
         
         _appliedJobs = Query(filter: appliedFilter)
@@ -39,7 +39,7 @@ struct RectanglesView: View {
                 .onTapGesture {
                     appViewModel.isShowingApplied = true
                 }
-            SingleRectangleView(appViewModel: appViewModel, totalJobs: interviewingJobs.count, interviewStatus: JobApplicationStatus.interviewing.status, SFSymbol: "checkmark", circleColor: .mint)
+            SingleRectangleView(appViewModel: appViewModel, totalJobs: interviewingJobs.count, interviewStatus: JobApplicationStatus.ongoing.status, SFSymbol: "checkmark", circleColor: .mint)
                 .onTapGesture {
                     appViewModel.isShowingInterviewing = true
                 }
@@ -48,7 +48,7 @@ struct RectanglesView: View {
             RectDetailView(appViewModel: appViewModel, jobs: appliedJobs, title: "Applied")
         }
         .sheet(isPresented: $appViewModel.isShowingInterviewing) {
-            RectDetailView(appViewModel: appViewModel, jobs: interviewingJobs, title: "Interviewing")
+            RectDetailView(appViewModel: appViewModel, jobs: interviewingJobs, title: "ongoing")
         }
     }
 }

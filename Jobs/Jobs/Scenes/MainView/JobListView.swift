@@ -102,24 +102,24 @@ struct JobListView: View {
                 .tint(.orange)
             }
             Button(action: {
-                appViewModel.setApplicationStatus(job: job, status: .interviewing)
+                appViewModel.setApplicationStatus(job: job, status: .ongoing)
             }) {
                 Label {
-                    Text("Interview")
+                    Text("Ongoing")
                 } icon: {
                     Image(systemName: "person.3.fill")
                 }
             }
             
             Button(action: {
-                appViewModel.setApplicationStatus(job: job, status: .accepted)
+                appViewModel.setApplicationStatus(job: job, status: .rejected)
             }) {
                 Label {
-                    Text("Accepted")
+                    Text("Rejected")
                 } icon: {
-                    Image(systemName: "person.fill.checkmark")
+                    Image(systemName: "person.fill.xmark")
                 }
-                .tint(.indigo)
+                .tint(.red)
             }
         }
     }

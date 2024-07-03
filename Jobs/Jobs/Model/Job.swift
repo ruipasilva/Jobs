@@ -94,9 +94,9 @@ public final class Job {
             Image(systemName: "clock")
         case .applied:
             Image(systemName: "bookmark.circle")
-        case .interviewing:
+        case .ongoing:
             Image(systemName: "person.circle")
-        case .accepted:
+        case .hired:
             Image(systemName: "checkmark.circle")
         case .rejected:
             Image(systemName: "x.circle")
@@ -109,10 +109,10 @@ public final class Job {
             "Not Applied"
         case .applied:
             "Applied"
-        case .interviewing:
-            "Interviewing"
-        case .accepted:
-            "Accepted"
+        case .ongoing:
+            "Ongoing"
+        case .hired:
+            "Hired"
         case .rejected:
             "Rejected"
         }
