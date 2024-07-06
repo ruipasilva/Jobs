@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+// SwiftUI usage in View Model explained below in the @AppStorage declaration
+import SwiftUI
 
 public final class EditJobViewModel: ObservableObject {
     @Published public var title = ""
@@ -36,6 +38,10 @@ public final class EditJobViewModel: ObservableObject {
     @Published public var isShowingLogoDetails = false
     
     @Published public var loadingLogoState: LoadingLogoState = .na
+    
+    // Using @AppStorage in View Model as it freezes when initialised in the View (It only happens in this view - WHY?)
+    @AppStorage("warning") var isShowingWarnings: Bool = false
+    @AppStorage("count") var count: Int = 0
     
     public let networkManager: NetworkManaging
     public let editTip = EditTip()

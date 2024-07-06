@@ -34,6 +34,14 @@ struct EditJobView: View {
         .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
             LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel(), job: job)
         }
+        .alert("Important Notice", isPresented: $editJobViewModel.isShowingWarnings) {
+            Button("Go!", role: .none) {
+                openURL(URL(string: "https://www.\(editJobViewModel.companyWebsite)")!)
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Sometimes websites are not accurate!")
+        }
         .toolbar {
             toolbarTrailing
         }
@@ -79,20 +87,18 @@ struct EditJobView: View {
                 .foregroundStyle(Color(UIColor.secondaryLabel))
             
             Button(action: {
-                openURL(URL(string: "https://www.\(editJobViewModel.companyWebsite)")!)
+                if editJobViewModel.count < 1 {
+                    editJobViewModel.count += 1
+                    editJobViewModel.isShowingWarnings = true
+                } else {
+                    openURL(URL(string: "https://www.\(editJobViewModel.companyWebsite)")!)
+                }
             }, label: {
-                Label("website", systemImage: "link")
+                Label("Visit website", systemImage: "safari")
                     .font(.subheadline)
                     .foregroundColor(.accentColor)
-                    .underline(true, color: .accentColor)
+                    .disabled(editJobViewModel.companyWebsite.isEmpty)
             })
-//            
-////            Link(destination: URL(string: "https://www.\(editJobViewModel.companyWebsite)")!) {
-////                Label("website", systemImage: "link")
-////                    .font(.subheadline)
-//                    .foregroundColor(.accentColor)
-//                    .underline(true, color: .accentColor)
-//            }
             .padding(.top, 6)
         }
     }

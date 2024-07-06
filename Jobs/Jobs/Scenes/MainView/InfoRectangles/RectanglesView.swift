@@ -12,7 +12,7 @@ struct RectanglesView: View {
     @ObservedObject private var appViewModel: AppViewModel
     
     @Query private var appliedJobs: [Job]
-    @Query private var interviewingJobs: [Job]
+    @Query private var ongoingJobs: [Job]
     
     var columns: [GridItem] {
         Array(repeating: .init(.flexible()), count: 2)
@@ -25,12 +25,12 @@ struct RectanglesView: View {
             job.jobApplicationStatusPrivate == "Applied"
         }
         
-        let interviewingFilter = #Predicate<Job> { job in
-            job.jobApplicationStatusPrivate == "ongoing"
+        let ongoingFilter = #Predicate<Job> { job in
+            job.jobApplicationStatusPrivate == "Ongoing"
         }
         
         _appliedJobs = Query(filter: appliedFilter)
-        _interviewingJobs = Query(filter: interviewingFilter)
+        _ongoingJobs = Query(filter: ongoingFilter)
     }
     
     var body: some View {
@@ -39,7 +39,7 @@ struct RectanglesView: View {
                 .onTapGesture {
                     appViewModel.isShowingApplied = true
                 }
-            SingleRectangleView(appViewModel: appViewModel, totalJobs: interviewingJobs.count, interviewStatus: JobApplicationStatus.ongoing.status, SFSymbol: "checkmark", circleColor: .mint)
+            SingleRectangleView(appViewModel: appViewModel, totalJobs: ongoingJobs.count, interviewStatus: JobApplicationStatus.ongoing.status, SFSymbol: "checkmark", circleColor: .mint)
                 .onTapGesture {
                     appViewModel.isShowingInterviewing = true
                 }
@@ -48,7 +48,7 @@ struct RectanglesView: View {
             RectDetailView(appViewModel: appViewModel, jobs: appliedJobs, title: "Applied")
         }
         .sheet(isPresented: $appViewModel.isShowingInterviewing) {
-            RectDetailView(appViewModel: appViewModel, jobs: interviewingJobs, title: "ongoing")
+            RectDetailView(appViewModel: appViewModel, jobs: ongoingJobs, title: "ongoing")
         }
     }
 }

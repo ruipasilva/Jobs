@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct RectDetailView: View {
-    
     @ObservedObject private var appViewModel: AppViewModel
+    @Environment(\.dismiss) private var dismiss
     
     let jobs: [Job]
     let title: String
@@ -23,15 +23,43 @@ struct RectDetailView: View {
     }
     
     var body: some View {
-        NavigationView {
-            List(jobs, id: \.company) { job in
-                MainListCellView(appViewModel: appViewModel, job: job)
-                    .listRowSeparator(.hidden)
+        NavigationStack {
+            Group {
+                if jobs.isEmpty {
+                    emptyListView
+                } else {
+                    listView
+                }
             }
             .padding(.vertical)
             .listStyle(.plain)
-            .navigationTitle(title)
+            .navigationTitle(jobs.isEmpty ? "" : title)
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar() {
+                toolbarTrailing
+            }
+        }
+    }
+    
+    private var listView: some View {
+        List(jobs, id: \.company) { job in
+            MainListCellView(appViewModel: appViewModel, job: job)
+                .listRowInsets(.init(top: 0, leading: 16, bottom: 8, trailing: 16))
+                .listRowSeparator(.hidden)
+        }
+    }
+    
+    private var emptyListView: some View {
+        ContentUnavailableView("No \(title) jobs", systemImage: "folder.badge.questionmark")
+    }
+    
+    private var toolbarTrailing: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button(action: {
+                dismiss()
+            }, label: {
+                Text("Dismiss")
+            })
         }
     }
 }
