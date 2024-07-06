@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct MainListCellView: View {
-    @ObservedObject private var appViewModel: AppViewModel
+    @ObservedObject private var appViewModel: MainViewViewModel
     @Environment(\.colorScheme) var colorScheme
     
     var job: Job
 
-    public init(appViewModel: AppViewModel, job: Job) {
+    public init(appViewModel: MainViewViewModel, job: Job) {
         self.appViewModel = appViewModel
         self.job = job
     }

@@ -9,12 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct MainView: View {
-    @ObservedObject private var appViewModel: AppViewModel
+    @ObservedObject private var appViewModel: MainViewViewModel
     @Query(sort: \Job.company) private var jobs: [Job]
     @AppStorage("sortOrdering") var sortOrdering: SortOrdering = .title
     @State var ascendingDescending: SortOrder = .forward
     
-    public init(appViewModel: AppViewModel) {
+    public init(appViewModel: MainViewViewModel) {
         self.appViewModel = appViewModel
     }
     

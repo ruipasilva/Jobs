@@ -11,13 +11,14 @@ import TipKit
 
 @main
 struct JobsApp: App {
-    @StateObject private var appViewModel = AppViewModel()
+    @StateObject private var mainViewViewModel = MainViewViewModel()
+    @StateObject private var overviewViewModel = OverviewViewModel()
     
     let container: ModelContainer
     
     var body: some Scene {
         WindowGroup {
-            TabViewRoot(appViewModel: appViewModel)
+            TabViewRoot(appViewModel: mainViewViewModel, overViewViewModel: overviewViewModel)
                 .task {
                     try? Tips.configure([
                         .displayFrequency(.monthly),

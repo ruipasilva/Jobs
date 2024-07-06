@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct RectDetailView: View {
-    @ObservedObject private var appViewModel: AppViewModel
+    @ObservedObject private var appViewModel: MainViewViewModel
     @Environment(\.dismiss) private var dismiss
     
     let jobs: [Job]
     let title: String
     
-    public init(appViewModel: AppViewModel,
+    public init(appViewModel: MainViewViewModel,
                 jobs: [Job],
                 title: String) {
         self.appViewModel = appViewModel

@@ -14,6 +14,9 @@ public struct EditTip: Tip {
     }
     
     public var message: Text? {
-        Text("Tap here to edit.")
+        Text("""
+            Tap the logo to edit. Tap x to dismiss.
+            """
+        )
     }
 }

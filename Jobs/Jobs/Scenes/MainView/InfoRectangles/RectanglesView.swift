@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct RectanglesView: View {
-    @ObservedObject private var appViewModel: AppViewModel
+    @ObservedObject private var appViewModel: MainViewViewModel
     
     @Query private var appliedJobs: [Job]
     @Query private var ongoingJobs: [Job]
@@ -18,7 +18,7 @@ struct RectanglesView: View {
         Array(repeating: .init(.flexible()), count: 2)
     }
     
-    public init(appViewModel: AppViewModel) {
+    public init(appViewModel: MainViewViewModel) {
         self.appViewModel = appViewModel
         
         let appliedFilter = #Predicate<Job> { job in

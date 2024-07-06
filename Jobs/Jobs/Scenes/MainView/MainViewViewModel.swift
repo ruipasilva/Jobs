@@ -1,5 +1,5 @@
 //
-//  AppViewModel.swift
+//  MainViewViewModel.swift
 //  Jobs
 //
 //  Created by Rui Silva on 31/01/2024.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-public final class AppViewModel: ObservableObject {
+public final class MainViewViewModel: ObservableObject {
     @Published public var isShowingNewJob = false
     @Published public var isNewJobExpanded = false
     @Published public var sortOrdering = SortOrdering.title

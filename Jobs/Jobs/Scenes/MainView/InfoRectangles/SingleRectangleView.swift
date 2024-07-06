@@ -12,7 +12,7 @@ struct SingleRectangleView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
-    @ObservedObject var appViewModel: AppViewModel
+    @ObservedObject var appViewModel: MainViewViewModel
     
     var totalJobs: Int
     var interviewStatus: String

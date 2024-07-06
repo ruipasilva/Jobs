@@ -36,11 +36,11 @@ public final class EditJobViewModel: ObservableObject {
     @Published public var isShowingPasteLink = false
     @Published public var isShowingRecruiterDetails = false
     @Published public var isShowingLogoDetails = false
+    @Published var isShowingWarnings: Bool = false
     
     @Published public var loadingLogoState: LoadingLogoState = .na
     
     // Using @AppStorage in View Model as it freezes when initialised in the View (It only happens in this view - WHY?)
-    @AppStorage("warning") var isShowingWarnings: Bool = false
     @AppStorage("count") var count: Int = 0
     
     public let networkManager: NetworkManaging
@@ -118,5 +118,10 @@ public final class EditJobViewModel: ObservableObject {
             .store(in: &subcriptions)
         
         return viewModel
+    }
+    
+    public func setupWebsiteWarning() {
+        count += 1
+        isShowingWarnings = true
     }
 }

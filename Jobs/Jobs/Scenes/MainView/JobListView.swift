@@ -9,11 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct JobListView: View {
-    @ObservedObject private var appViewModel: AppViewModel
+    @ObservedObject private var appViewModel: MainViewViewModel
     @Environment(\.modelContext) private var context
     @Query private var jobs: [Job]
     
-    init(appViewModel: AppViewModel,
+    init(appViewModel: MainViewViewModel,
          sortOrder: SortOrdering,
          filterString: String) {
         self.appViewModel = appViewModel

@@ -88,8 +88,7 @@ struct EditJobView: View {
             
             Button(action: {
                 if editJobViewModel.count < 1 {
-                    editJobViewModel.count += 1
-                    editJobViewModel.isShowingWarnings = true
+                    editJobViewModel.setupWebsiteWarning()
                 } else {
                     openURL(URL(string: "https://www.\(editJobViewModel.companyWebsite)")!)
                 }
