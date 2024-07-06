@@ -7,6 +7,6 @@
 
 import Foundation
 
-public final class OverviewViewModel: ObservableObject {
+public final class OverViewViewModel: ObservableObject {
     
 }

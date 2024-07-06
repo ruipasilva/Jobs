@@ -9,10 +9,10 @@ import SwiftUI
 
 struct TabViewRoot: View {
     @ObservedObject private var appViewModel: MainViewViewModel
-    @ObservedObject private var overViewViewModel: OverviewViewModel
+    @ObservedObject private var overViewViewModel: OverViewViewModel
     
     public init(appViewModel: MainViewViewModel, 
-                overViewViewModel: OverviewViewModel) {
+                overViewViewModel: OverViewViewModel) {
         self.appViewModel = appViewModel
         self.overViewViewModel = overViewViewModel
     }
@@ -24,7 +24,7 @@ struct TabViewRoot: View {
                     Label("Home", systemImage: "list.clipboard")
                 }
             
-            Overview(overViewViewModel: overViewViewModel)
+            OverView(overViewViewModel: overViewViewModel)
                 .tabItem {
                     Label("Overview", systemImage: "gearshape")
                 }

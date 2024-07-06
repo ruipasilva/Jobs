@@ -140,20 +140,22 @@ struct EditJobView: View {
                     .keyboardType(.numberPad)
             }
             HStack {
-                Text("Job Posting")
-                    .onTapGesture {
-                        withAnimation {
-                            editJobViewModel.isShowingJobLink()
-                        }
+                Button(action: {
+                    withAnimation {
+                        editJobViewModel.isShowingJobLink()
                     }
+                }, label: {
+                    Text("Job Posting")
+                })
+                .buttonStyle(.plain)
                 Spacer()
-                Image(systemName: "arrow.up.forward.app.fill")
-                    .imageScale(.large)
-                    .foregroundStyle(Color.accentColor)
-                    .onTapGesture {
-                        // open job link
-                    }
-                    .disabled(editJobViewModel.url.isEmpty)
+                
+                Button(action: {}, label: {
+                    Image(systemName: "arrow.up.forward.app.fill")
+                        .imageScale(.large)
+                        .foregroundStyle(Color.accentColor)
+                })
+                .disabled(editJobViewModel.url.isEmpty)
             }
             
             if editJobViewModel.isShowingPasteLink {
@@ -165,36 +167,42 @@ struct EditJobView: View {
     private var recruiterInfoView: some View {
         Section {
             HStack {
-                Image(systemName: editJobViewModel.isShowingRecruiterDetails ? "menubar.arrow.up.rectangle" : "menubar.arrow.down.rectangle")
-                    .imageScale(.small)
-                    .foregroundStyle(Color.accentColor)
-                    .onTapGesture {
-                        withAnimation {
-                            editJobViewModel.isShowingRecruiterDetails.toggle()
-                        }
+                Button(action: {
+                    withAnimation {
+                        editJobViewModel.isShowingRecruiterDetails.toggle()
                     }
+                }, label: {
+                    Image(systemName: editJobViewModel.isShowingRecruiterDetails ? "menubar.arrow.up.rectangle" : "menubar.arrow.down.rectangle")
+                        .imageScale(.small)
+                        .foregroundStyle(Color.accentColor)
+                })
+                .buttonStyle(.plain)
+                
+                
                 
                 TextField("Recruiter's name", text: $editJobViewModel.recruiterName)
                 Spacer()
-                Image(systemName: "phone.circle.fill")
-                    .foregroundStyle(Color.accentColor)
-                    .imageScale(.large)
-                    .onTapGesture {
-                        // Call recruiter
-                    }
-                    .disabled(editJobViewModel.recruiterNumber.isEmpty)
+                Button(action: {}, label: {
+                    Image(systemName: "phone.circle.fill")
+                        .foregroundStyle(Color.accentColor)
+                        .imageScale(.large)
+                })
+                .disabled(editJobViewModel.recruiterNumber.isEmpty)
                 
-                Image(systemName: "envelope.circle.fill")
-                    .foregroundStyle(Color.accentColor)
-                    .imageScale(.large)
-                    .onTapGesture {
-                        EmailHelper
-                            .shared
-                            .askUserForTheirPreference(email: editJobViewModel.recruiterEmail,
-                                                       subject: "Interview at \(editJobViewModel.company) follow up",
-                                                       body: "Hi, \(editJobViewModel.recruiterName)")
-                    }
-                    .disabled(editJobViewModel.recruiterEmail.isEmpty)
+                Button(action: {
+                    EmailHelper
+                        .shared
+                        .askUserForTheirPreference(email: editJobViewModel.recruiterEmail,
+                                                   subject: "Interview at \(editJobViewModel.company) follow up",
+                                                   body: "Hi, \(editJobViewModel.recruiterName)")
+                }, label: {
+                    Image(systemName: "envelope.circle.fill")
+                        .foregroundStyle(Color.accentColor)
+                        .imageScale(.large)
+                })
+                .buttonStyle(.plain)
+                
+                .disabled(editJobViewModel.recruiterEmail.isEmpty)
             }
             if editJobViewModel.isShowingRecruiterDetails {
                 TextField("Phone number", text: $editJobViewModel.recruiterNumber)
@@ -225,7 +233,7 @@ struct EditJobView: View {
                             .symbolEffect(.bounce, value: question.completed ? question.completed : nil)
                             .foregroundStyle(question.completed ? .accent : .secondary)
                             .onTapGesture {
-                                    $question.completed.wrappedValue.toggle()
+                                $question.completed.wrappedValue.toggle()
                             }
                         TextField("Type your question...", text: $question.question)
                     }

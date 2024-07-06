@@ -1,5 +1,5 @@
 //
-//  Overview.swift
+//  OverView.swift
 //  Jobs
 //
 //  Created by Rui Silva on 06/07/2024.
@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct Overview: View {
-    @ObservedObject private var overViewViewModel: OverviewViewModel
+struct OverView: View {
+    @ObservedObject private var overViewViewModel: OverViewViewModel
     
-    public init(overViewViewModel: OverviewViewModel) {
+    public init(overViewViewModel: OverViewViewModel) {
         self.overViewViewModel = overViewViewModel
     }
     

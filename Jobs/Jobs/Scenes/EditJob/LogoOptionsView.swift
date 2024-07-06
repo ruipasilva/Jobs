@@ -31,10 +31,10 @@ struct LogoOptionsView: View {
         NavigationStack {
             Form {
                 Section {
-//                    AnimatedTextField(text: $logoOptionsViewModel.company, label: {
-//                        Text("Company Name")
-//                    })
-                    FloatingTextField(title: "Company Name", text: $logoOptionsViewModel.company, image: "building.2")
+                    AnimatedTextField(text: $logoOptionsViewModel.company, label: {
+                        Text("Company Name")
+                    })
+//                    FloatingTextField(title: "Company Name", text: $logoOptionsViewModel.company, image: "building.2")
                         .onChange(of: logoOptionsViewModel.company) { _, _ in
                             Task {
                                 await logoOptionsViewModel.getLogos(company: logoOptionsViewModel.company)
@@ -42,15 +42,15 @@ struct LogoOptionsView: View {
                             logoOptionsViewModel.updateJob(job: job)
                         }
                         .submitLabel(.continue)
-//                    AnimatedTextField(text: $logoOptionsViewModel.title, label: {
-//                        Text("Job Title")
-//                    })
-                    FloatingTextField(title: "Job Title", text: $logoOptionsViewModel.title, image: "person")
+                    AnimatedTextField(text: $logoOptionsViewModel.title, label: {
+                        Text("Job Title")
+                    })
+//                    FloatingTextField(title: "Job Title", text: $logoOptionsViewModel.title, image: "person")
                     
-//                    AnimatedTextField(text: $logoOptionsViewModel.companyWebsite, label: {
-//                        Text("Company Website")
-//                    })
-                    FloatingTextField(title: "Company Website", text: $logoOptionsViewModel.companyWebsite, image: "globe")
+                    AnimatedTextField(text: $logoOptionsViewModel.companyWebsite, label: {
+                        Text("Company Website")
+                    })
+//                    FloatingTextField(title: "Company Website", text: $logoOptionsViewModel.companyWebsite, image: "globe")
                     
                 } header: {
                     Text("Edit Main Info")

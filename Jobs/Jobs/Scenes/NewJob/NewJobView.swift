@@ -89,6 +89,12 @@ struct NewJobView: View {
             }
             .pickerStyle(.segmented)
             
+            HStack(alignment: .center) {
+            ForEach(0..<5) { _ in
+                    Text("Hey")
+                }
+            }
+            
             if !newJobViewModel.isLocationRemote() {
                 FloatingTextField(title: "Location", text: $newJobViewModel.location, image: "mappin")
             }

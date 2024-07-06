@@ -32,8 +32,8 @@
 		699750DB2B614E61000EBCD1 /* JobListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750DA2B614E61000EBCD1 /* JobListView.swift */; };
 		69984B7B2BD9BD3E002C23F2 /* RectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69984B7A2BD9BD3E002C23F2 /* RectDetailView.swift */; };
 		69984B7D2BED7445002C23F2 /* TabViewRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69984B7C2BED7445002C23F2 /* TabViewRoot.swift */; };
-		69D583742C39A46900084C5E /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583732C39A46900084C5E /* Overview.swift */; };
-		69D583762C39A4F100084C5E /* OverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583752C39A4F100084C5E /* OverviewViewModel.swift */; };
+		69D583742C39A46900084C5E /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583732C39A46900084C5E /* OverView.swift */; };
+		69D583762C39A4F100084C5E /* OverViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583752C39A4F100084C5E /* OverViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,8 +66,8 @@
 		699750DA2B614E61000EBCD1 /* JobListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListView.swift; sourceTree = "<group>"; };
 		69984B7A2BD9BD3E002C23F2 /* RectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectDetailView.swift; sourceTree = "<group>"; };
 		69984B7C2BED7445002C23F2 /* TabViewRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewRoot.swift; sourceTree = "<group>"; };
-		69D583732C39A46900084C5E /* Overview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overview.swift; sourceTree = "<group>"; };
-		69D583752C39A4F100084C5E /* OverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewModel.swift; sourceTree = "<group>"; };
+		69D583732C39A46900084C5E /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
+		69D583752C39A4F100084C5E /* OverViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,8 +200,8 @@
 		69D583722C39A45900084C5E /* Overview */ = {
 			isa = PBXGroup;
 			children = (
-				69D583732C39A46900084C5E /* Overview.swift */,
-				69D583752C39A4F100084C5E /* OverviewViewModel.swift */,
+				69D583732C39A46900084C5E /* OverView.swift */,
+				69D583752C39A4F100084C5E /* OverViewViewModel.swift */,
 			);
 			path = Overview;
 			sourceTree = "<group>";
@@ -234,7 +234,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1510;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					699750C12B5ED2DC000EBCD1 = {
 						CreatedOnToolsVersion = 15.1;
@@ -276,7 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69D583742C39A46900084C5E /* Overview.swift in Sources */,
+				69D583742C39A46900084C5E /* OverView.swift in Sources */,
 				699750D92B6007AD000EBCD1 /* EditJobView.swift in Sources */,
 				69352EC92BBD6FC100B8A77B /* CompanyInfo.swift in Sources */,
 				696208532B6A891B0045DD39 /* JobHelpers.swift in Sources */,
@@ -299,7 +299,7 @@
 				69352ECF2BBEBB6C00B8A77B /* LogoOptionsViewModel.swift in Sources */,
 				69984B7D2BED7445002C23F2 /* TabViewRoot.swift in Sources */,
 				69352ED12BBF603100B8A77B /* EditTip.swift in Sources */,
-				69D583762C39A4F100084C5E /* OverviewViewModel.swift in Sources */,
+				69D583762C39A4F100084C5E /* OverViewViewModel.swift in Sources */,
 				699750D72B5FF413000EBCD1 /* NewJobView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,6 +341,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -402,6 +403,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -429,6 +431,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jobs/JobsDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jobs/Preview Content\"";
 				DEVELOPMENT_TEAM = 9FVDFCLP22;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -469,6 +472,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jobs/Jobs.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jobs/Preview Content\"";
 				DEVELOPMENT_TEAM = 9FVDFCLP22;
 				ENABLE_HARDENED_RUNTIME = YES;
