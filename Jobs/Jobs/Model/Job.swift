@@ -46,6 +46,7 @@ public final class Job {
     var logoURL: String = ""
     var companyWebsite: String = ""
     var interviewQuestions: [InterviewQuestion]?
+    var workingDays: [String] = []
     
     init(title: String,
          company: String,
@@ -67,7 +68,8 @@ public final class Job {
          jobURLPosting: String,
          logoURL: String,
          companyWebsite: String,
-         interviewQuestions: [InterviewQuestion]? = nil) {
+         interviewQuestions: [InterviewQuestion]? = nil,
+         workingDays: [String]) {
         self.title = title
         self.company = company
         self.dateAdded = dateAdded
@@ -89,6 +91,7 @@ public final class Job {
         self.logoURL = logoURL
         self.companyWebsite = companyWebsite
         self.interviewQuestions = interviewQuestions
+            self.workingDays = workingDays
     }
     
     var icon: Image {

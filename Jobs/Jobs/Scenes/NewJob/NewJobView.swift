@@ -28,6 +28,10 @@ struct NewJobView: View {
                 otherInfoView
                 notesView
             }
+            .toolbar {
+                toolbarLeading
+                toolbarTrailing
+            }
             .navigationTitle("New Job")
             .navigationBarTitleDisplayMode(.inline)
             .onChange(of: newJobViewModel.followUp) { _, _ in
@@ -38,10 +42,7 @@ struct NewJobView: View {
                     await newJobViewModel.requestAuthCalendar(addInterviewToCalendar: newJobViewModel.addInterviewToCalendar)
                 }
             })
-            .toolbar {
-                toolbarLeading
-                toolbarTrailing
-            }
+            
         }
     }
     
@@ -87,16 +88,12 @@ struct NewJobView: View {
                     Text(location.type).tag(location)
                 }
             }
+            .padding(.vertical, 4)
             .pickerStyle(.segmented)
-            
-            HStack(alignment: .center) {
-            ForEach(0..<5) { _ in
-                    Text("Hey")
-                }
-            }
             
             if !newJobViewModel.isLocationRemote() {
                 FloatingTextField(title: "Location", text: $newJobViewModel.location, image: "mappin")
+                WorkingDaysView(workingDaysToSave: $newJobViewModel.workingDaysToSave, workingDays: newJobViewModel.workingDays)
             }
         } header: {
             Text("Location")

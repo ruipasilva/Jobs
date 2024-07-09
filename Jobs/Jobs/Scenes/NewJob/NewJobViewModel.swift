@@ -32,8 +32,11 @@ public final class NewJobViewModel: ObservableObject {
     @Published public var logoURL = ""
     @Published public var companyWebsite = ""
     @Published public var interviewQuestion: [InterviewQuestion] = []
+    @Published public var workingDaysToSave: [String] = []
     
     @Published public var showingCancelActionSheet = false
+    
+    public let workingDays: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri",]
     
     private let networkManager: NetworkManaging
     
@@ -85,7 +88,8 @@ public final class NewJobViewModel: ObservableObject {
                          isEventAllDay: isEventAllDay,
                          jobURLPosting: url,
                          logoURL: logoURL,
-                         companyWebsite: companyWebsite
+                         companyWebsite: companyWebsite,
+                         workingDays: workingDaysToSave
         )
         context.insert(newJob)
         newJob.interviewQuestions = interviewQuestion

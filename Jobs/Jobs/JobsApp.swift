@@ -21,7 +21,7 @@ struct JobsApp: App {
             TabViewRoot(appViewModel: mainViewViewModel, overViewViewModel: overViewViewModel)
                 .task {
                     try? Tips.configure([
-                        .displayFrequency(.monthly),
+                        .displayFrequency(.immediate),
                         .datastoreLocation(.applicationDefault)
                     ])
                 }

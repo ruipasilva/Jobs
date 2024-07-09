@@ -32,6 +32,7 @@ public final class EditJobViewModel: ObservableObject {
     @Published public var logoURL = ""
     @Published public var companyWebsite = ""
     @Published public var interviewQuestion: [InterviewQuestion] = []
+    @Published public var workingDaysToSave: [String] = []
     
     @Published public var isShowingPasteLink = false
     @Published public var isShowingRecruiterDetails = false
@@ -43,6 +44,7 @@ public final class EditJobViewModel: ObservableObject {
     // Using @AppStorage in View Model as it freezes when initialised in the View (It only happens in this view - WHY?)
     @AppStorage("count") var count: Int = 0
     
+    public let workingDays: [String] = ["Mon","Tue","Wed","Thu","Fri"]
     public let networkManager: NetworkManaging
     public let editTip = EditTip()
     
@@ -81,6 +83,7 @@ public final class EditJobViewModel: ObservableObject {
         job.logoURL = logoURL
         job.companyWebsite = companyWebsite
         job.interviewQuestions = interviewQuestion
+        job.workingDays = workingDaysToSave
     }
     
     public func setProperties(job: Job) {
@@ -103,6 +106,7 @@ public final class EditJobViewModel: ObservableObject {
         logoURL = job.logoURL
         companyWebsite = job.companyWebsite
         interviewQuestion = job.interviewQuestions ?? []
+        workingDaysToSave = job.workingDays
     }
     
     public func getLogoOptionsViewModel() -> LogoOptionsViewModel {

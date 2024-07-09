@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct EditJobView: View {
     @StateObject private var editJobViewModel = EditJobViewModel()
@@ -23,7 +24,7 @@ struct EditJobView: View {
         VStack {
             Group {
                 imageView
-                    .popoverTip(editJobViewModel.editTip, arrowEdge: .bottom)
+                tipView
                 titleView
             }
             .onTapGesture {
@@ -42,14 +43,19 @@ struct EditJobView: View {
         } message: {
             Text("Sometimes websites are not accurate!")
         }
-        .toolbar {
-            toolbarTrailing
-        }
-        
         .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {
             editJobViewModel.setProperties(job: job)
         }
+        .toolbar {
+            toolbarTrailing
+        }
+    }
+    
+    private var tipView: some View {
+        TipView(editJobViewModel.editTip, arrowEdge: .top)
+            .tipBackground(Color(uiColor: .secondarySystemGroupedBackground))
+            .padding(.horizontal)
     }
     
     private var imageView: some View {
@@ -68,7 +74,6 @@ struct EditJobView: View {
                 defaultImage
             }
         }
-        
     }
     
     private var defaultImage: some View {
@@ -105,6 +110,7 @@ struct EditJobView: View {
     private var formView: some View {
         Form {
             jobStatusView
+            locationView
             extraInfoView
             recruiterInfoView
             notesView
@@ -124,14 +130,6 @@ struct EditJobView: View {
     
     private var extraInfoView: some View {
         Section {
-            Picker("Location", selection: $editJobViewModel.locationType.animation()) {
-                ForEach(LocationType.allCases, id: \.self) { type in
-                    Text(type.type).tag(type)
-                }
-            }
-            if !editJobViewModel.isLocationRemote() {
-                TextField("Add Location", text: $editJobViewModel.location)
-            }
             HStack {
                 Text("Salary")
                 Spacer()
@@ -160,6 +158,21 @@ struct EditJobView: View {
             
             if editJobViewModel.isShowingPasteLink {
                 TextField("Paste link", text: $editJobViewModel.url)
+            }
+        }
+    }
+    
+    private var locationView: some View {
+        Section {
+            Picker("Location", selection: $editJobViewModel.locationType.animation()) {
+                ForEach(LocationType.allCases, id: \.self) { type in
+                    Text(type.type).tag(type)
+                }
+            }
+            if !editJobViewModel.isLocationRemote() {
+                TextField("Add Location", text: $editJobViewModel.location)
+                
+                WorkingDaysView(workingDaysToSave: $editJobViewModel.workingDaysToSave, workingDays: editJobViewModel.workingDays)
             }
         }
     }
@@ -232,6 +245,7 @@ struct EditJobView: View {
                         Image(systemName: question.completed ? "checkmark.circle.fill" : "circle")
                             .symbolEffect(.bounce, value: question.completed ? question.completed : nil)
                             .foregroundStyle(question.completed ? .accent : .secondary)
+                            .sensoryFeedback(.impact(weight: .heavy, intensity: 1), trigger: question.completed)
                             .onTapGesture {
                                 $question.completed.wrappedValue.toggle()
                             }
