@@ -107,9 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				699750D82B6007AD000EBCD1 /* EditJobView.swift */,
-				69352ECC2BBDA36900B8A77B /* LogoOptionsView.swift */,
-				69352ECE2BBEBB6C00B8A77B /* LogoOptionsViewModel.swift */,
 				69352EC12BBC248A00B8A77B /* EditJobViewModel.swift */,
+				6975514F2C47E34700279021 /* Logo */,
 			);
 			path = EditJob;
 			sourceTree = "<group>";
@@ -128,9 +127,9 @@
 			isa = PBXGroup;
 			children = (
 				699750C72B5ED2DC000EBCD1 /* MainView.swift */,
-				69352EB92BBB2C4B00B8A77B /* MainListCellView.swift */,
 				699750DA2B614E61000EBCD1 /* JobListView.swift */,
 				696208562B6A98730045DD39 /* MainViewViewModel.swift */,
+				69352EB92BBB2C4B00B8A77B /* MainListCellView.swift */,
 				69352EBE2BBC23F400B8A77B /* InfoRectangles */,
 			);
 			path = MainView;
@@ -141,8 +140,8 @@
 			children = (
 				698006742BB37DF9007C725E /* FloatingTextField.swift */,
 				69352EC62BBD6DAC00B8A77B /* NetworkManager.swift */,
-				6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */,
 				69352ECA2BBD71EC00B8A77B /* NetworkHelpers.swift */,
+				6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */,
 				696208522B6A891B0045DD39 /* JobHelpers.swift */,
 				69D583792C3DD84700084C5E /* WorkingDaysView.swift */,
 			);
@@ -157,6 +156,15 @@
 				69352EC82BBD6FC100B8A77B /* CompanyInfo.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		6975514F2C47E34700279021 /* Logo */ = {
+			isa = PBXGroup;
+			children = (
+				69352ECC2BBDA36900B8A77B /* LogoOptionsView.swift */,
+				69352ECE2BBEBB6C00B8A77B /* LogoOptionsViewModel.swift */,
+			);
+			path = Logo;
 			sourceTree = "<group>";
 		};
 		699750B92B5ED2DC000EBCD1 = {

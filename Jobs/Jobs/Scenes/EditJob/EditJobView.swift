@@ -14,6 +14,8 @@ struct EditJobView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
     
+    @State private var showingSheet = false
+    
     private let job: Job
     
     public init(job: Job) {
@@ -50,6 +52,41 @@ struct EditJobView: View {
         .toolbar {
             toolbarTrailing
         }
+        
+        /// Code to uncomment when work on maps functionality
+        
+//        .actionSheet(isPresented: $showingSheet) {
+//                    let latitude = 45.5088
+//                    let longitude = -73.554
+//
+//                    let appleURL = "http://maps.apple.com/?daddr=\(latitude),\(longitude)"
+//                    let googleURL = "comgooglemaps://?daddr=\(latitude),\(longitude)&directionsmode=driving"
+//                    let wazeURL = "waze://?ll=\(latitude),\(longitude)&navigate=false"
+//
+//                    let googleItem = ("Google Map", URL(string:googleURL)!)
+//                    let wazeItem = ("Waze", URL(string:wazeURL)!)
+//                    var installedNavigationApps = [("Apple Maps", URL(string:appleURL)!)]
+//
+//                    if UIApplication.shared.canOpenURL(googleItem.1) {
+//                        installedNavigationApps.append(googleItem)
+//                    }
+//
+//                    if UIApplication.shared.canOpenURL(wazeItem.1) {
+//                        installedNavigationApps.append(wazeItem)
+//                    }
+//                    
+//                    var buttons: [ActionSheet.Button] = []
+//                    for app in installedNavigationApps {
+//                        let button: ActionSheet.Button = .default(Text(app.0)) {
+//                            UIApplication.shared.open(app.1, options: [:], completionHandler: nil)
+//                        }
+//                        buttons.append(button)
+//                    }
+//                    let cancel: ActionSheet.Button = .cancel()
+//                    buttons.append(cancel)
+//                    
+//                    return ActionSheet(title: Text("Navigate"), message: Text("Select an app..."), buttons: buttons)
+//                }
     }
     
     private var tipView: some View {
@@ -164,10 +201,21 @@ struct EditJobView: View {
     
     private var locationView: some View {
         Section {
-            Picker("Location", selection: $editJobViewModel.locationType.animation()) {
-                ForEach(LocationType.allCases, id: \.self) { type in
-                    Text(type.type).tag(type)
+            HStack {
+                Picker("Location", selection: $editJobViewModel.locationType.animation()) {
+                    ForEach(LocationType.allCases, id: \.self) { type in
+                        Text(type.type).tag(type)
+                    }
                 }
+                
+                /// Button to test maps - To implement reach location by post code
+                
+//                Button(action: {
+//                    showingSheet = true
+//                }) {
+//                    Text("Test")
+//                }
+//                .buttonStyle(.plain)
             }
             if !editJobViewModel.isLocationRemote() {
                 TextField("Add Location", text: $editJobViewModel.location)
@@ -185,8 +233,8 @@ struct EditJobView: View {
                         editJobViewModel.isShowingRecruiterDetails.toggle()
                     }
                 }, label: {
-                    Image(systemName: editJobViewModel.isShowingRecruiterDetails ? "menubar.arrow.up.rectangle" : "menubar.arrow.down.rectangle")
-                        .imageScale(.small)
+                    Image(systemName: "info.circle")
+                        .imageScale(.medium)
                         .foregroundStyle(Color.accentColor)
                 })
                 .buttonStyle(.plain)

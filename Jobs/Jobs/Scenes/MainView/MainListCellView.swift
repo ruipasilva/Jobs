@@ -54,6 +54,7 @@ struct MainListCellView: View {
                     }
                 }
             .frame(width: 55, height: 55)
+            
             VStack(alignment: .leading) {
                 HStack {
                     Text(job.company)

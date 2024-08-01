@@ -25,7 +25,7 @@ struct FloatingTextField: View {
         }
         .padding(.top, text.isEmpty ? 10 : 15)
         .padding(.bottom, 5)
-        .animation(.spring(response: 0.2, dampingFraction: 0.5))
+//        .animation(.spring(response: 0.2, dampingFraction: 0.5))
     }
 }
 
@@ -63,7 +63,9 @@ public struct AnimatedTextField<Label: View>: View {
                     .foregroundStyle(Color(.placeholderText))
                     .matchedGeometryEffect(id: "label", in: titleAnimation)
                     .onTapGesture {
-                        focusOnTextField = true
+                        DispatchQueue.main.async {
+                            focusOnTextField = true
+                        }
                     }
             }
         }
