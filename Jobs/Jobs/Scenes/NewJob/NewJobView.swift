@@ -155,7 +155,7 @@ struct NewJobView: View {
                 .focused($focusState, equals: .recruiterNumber)
                 .keyboardType(.numberPad)
         } header: {
-            Text("Contacts")
+            Text("Recruiter's info")
         }
     }
     

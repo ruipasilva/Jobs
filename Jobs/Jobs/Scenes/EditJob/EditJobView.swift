@@ -23,17 +23,26 @@ struct EditJobView: View {
     }
     
     var body: some View {
-        VStack {
-            Group {
-                imageView
-                tipView
-                titleView
+            ScrollView {
+                LazyVStack {
+                    Group {
+                        imageView
+                        tipView
+                        titleView
+                    }
+                    .onTapGesture {
+                        editJobViewModel.isShowingLogoDetails = true
+                    }
+                    statusView()
+                    locationView()
+                    extraInfoView()
+                    recruiterInfoView()
+                    notesViewFinal()
+                    interviewQuestionsView()
+                }
+                .padding(.bottom)
             }
-            .onTapGesture {
-                editJobViewModel.isShowingLogoDetails = true
-            }
-            formView
-        }
+            
         .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
             LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel(), job: job)
         }
@@ -43,7 +52,7 @@ struct EditJobView: View {
             }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("Sometimes websites are not accurate!")
+            Text("Sometimes websites are not accurate. You can edit them by tapping the logo above")
         }
         .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {
@@ -61,18 +70,12 @@ struct EditJobView: View {
 //
 //                    let appleURL = "http://maps.apple.com/?daddr=\(latitude),\(longitude)"
 //                    let googleURL = "comgooglemaps://?daddr=\(latitude),\(longitude)&directionsmode=driving"
-//                    let wazeURL = "waze://?ll=\(latitude),\(longitude)&navigate=false"
 //
 //                    let googleItem = ("Google Map", URL(string:googleURL)!)
-//                    let wazeItem = ("Waze", URL(string:wazeURL)!)
 //                    var installedNavigationApps = [("Apple Maps", URL(string:appleURL)!)]
 //
 //                    if UIApplication.shared.canOpenURL(googleItem.1) {
 //                        installedNavigationApps.append(googleItem)
-//                    }
-//
-//                    if UIApplication.shared.canOpenURL(wazeItem.1) {
-//                        installedNavigationApps.append(wazeItem)
 //                    }
 //                    
 //                    var buttons: [ActionSheet.Button] = []
@@ -141,32 +144,61 @@ struct EditJobView: View {
                     .disabled(editJobViewModel.companyWebsite.isEmpty)
             })
             .padding(.top, 6)
+            .padding(.bottom, 32)
         }
     }
     
-    private var formView: some View {
-        Form {
-            jobStatusView
-            locationView
-            extraInfoView
-            recruiterInfoView
-            notesView
-            interviewQuestionsView
-        }
-    }
-    
-    private var jobStatusView: some View {
-        Section {
+    private func statusView() -> some View {
+        HStack {
+            Text("Status")
+                .padding(.leading)
+            Spacer()
             Picker("Status", selection: $editJobViewModel.jobApplicationStatus) {
                 ForEach(JobApplicationStatus.allCases, id: \.id) { status in
                     Text(status.status).tag(status)
                 }
             }
         }
+        .padding(.vertical, 6)
+        .background {
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundStyle(.white)
+        }
+        .padding(.horizontal)
     }
     
-    private var extraInfoView: some View {
-        Section {
+    private func locationView() -> some View {
+        VStack {
+            HStack {
+                Text("Location")
+                    .padding(.leading)
+                Spacer()
+                Picker("Location", selection: $editJobViewModel.locationType.animation()) {
+                    ForEach(LocationType.allCases, id: \.self) { type in
+                        Text(type.type).tag(type)
+                    }
+                }
+            }
+            if !editJobViewModel.isLocationRemote() {
+                Divider()
+                TextField("Add Location", text: $editJobViewModel.location)
+                    .padding(.vertical, 6)
+                    .padding(.horizontal)
+                Divider()
+                WorkingDaysView(workingDaysToSave: $editJobViewModel.workingDaysToSave, workingDays: editJobViewModel.workingDays)
+                    .padding(.vertical, 6)
+            }
+        }
+        .padding(.vertical, 6)
+        .background {
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundStyle(.white)
+        }
+        .padding(.horizontal)
+    }
+    
+    private func extraInfoView() -> some View {
+        VStack {
             HStack {
                 Text("Salary")
                 Spacer()
@@ -174,59 +206,33 @@ struct EditJobView: View {
                     .multilineTextAlignment(.trailing)
                     .keyboardType(.numberPad)
             }
+            .padding(.horizontal)
+            .padding(.vertical, 6)
+            Divider()
             HStack {
-                Button(action: {
-                    withAnimation {
-                        editJobViewModel.isShowingJobLink()
-                    }
-                }, label: {
-                    Text("Job Posting")
-                })
-                .buttonStyle(.plain)
+                TextField("Link to job posting", text: $editJobViewModel.url)
                 Spacer()
-                
                 Button(action: {}, label: {
                     Image(systemName: "arrow.up.forward.app.fill")
                         .imageScale(.large)
                         .foregroundStyle(Color.accentColor)
                 })
                 .disabled(editJobViewModel.url.isEmpty)
+                .buttonStyle(.plain)
             }
-            
-            if editJobViewModel.isShowingPasteLink {
-                TextField("Paste link", text: $editJobViewModel.url)
-            }
+            .padding(.horizontal)
+            .padding(.vertical, 6)
         }
+        .padding(.vertical, 6)
+        .background {
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundStyle(.white)
+        }
+        .padding(.horizontal)
     }
     
-    private var locationView: some View {
-        Section {
-            HStack {
-                Picker("Location", selection: $editJobViewModel.locationType.animation()) {
-                    ForEach(LocationType.allCases, id: \.self) { type in
-                        Text(type.type).tag(type)
-                    }
-                }
-                
-                /// Button to test maps - To implement reach location by post code
-                
-//                Button(action: {
-//                    showingSheet = true
-//                }) {
-//                    Text("Test")
-//                }
-//                .buttonStyle(.plain)
-            }
-            if !editJobViewModel.isLocationRemote() {
-                TextField("Add Location", text: $editJobViewModel.location)
-                
-                WorkingDaysView(workingDaysToSave: $editJobViewModel.workingDaysToSave, workingDays: editJobViewModel.workingDays)
-            }
-        }
-    }
-    
-    private var recruiterInfoView: some View {
-        Section {
+    private func recruiterInfoView() -> some View {
+        VStack {
             HStack {
                 Button(action: {
                     withAnimation {
@@ -238,8 +244,6 @@ struct EditJobView: View {
                         .foregroundStyle(Color.accentColor)
                 })
                 .buttonStyle(.plain)
-                
-                
                 
                 TextField("Recruiter's name", text: $editJobViewModel.recruiterName)
                 Spacer()
@@ -262,64 +266,88 @@ struct EditJobView: View {
                         .imageScale(.large)
                 })
                 .buttonStyle(.plain)
-                
                 .disabled(editJobViewModel.recruiterEmail.isEmpty)
             }
+            .padding(.horizontal)
+            .padding(.vertical, 6)
+            
             if editJobViewModel.isShowingRecruiterDetails {
+                Divider()
                 TextField("Phone number", text: $editJobViewModel.recruiterNumber)
                     .keyboardType(.numberPad)
+                    .padding(.horizontal)
+                    .padding(.vertical, 6)
+                Divider()
                 TextField("Email", text: $editJobViewModel.recruiterEmail)
                     .keyboardType(.emailAddress)
+                    .padding(.horizontal)
+                    .padding(.vertical, 6)
             }
-        } header: {
-            Text("Recruiter Info")
         }
+        .padding(.vertical, 6)
+        .background {
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundStyle(.white)
+        }
+        .padding(.horizontal)
     }
     
-    private var notesView: some View {
-        Section {
-            TextField("Notes", text: $editJobViewModel.notes, axis: .vertical)
-                .lineLimit(5...10)
-        } header: {
-            Text("Your notes")
-        }
+    private func notesViewFinal() -> some View {
+        TextField("Notes", text: $editJobViewModel.notes, axis: .vertical)
+            .lineLimit(5...10)
+            .padding(.horizontal)
+            .padding(.vertical, 6)
+            .background {
+                RoundedRectangle(cornerRadius: 8)
+                    .foregroundStyle(.white)
+            }
+            .padding(.horizontal)
     }
     
-    private var interviewQuestionsView: some View {
-        Section {
-            List {
-                ForEach($editJobViewModel.interviewQuestion, id: \.self) { $question in
-                    HStack {
-                        Image(systemName: question.completed ? "checkmark.circle.fill" : "circle")
-                            .symbolEffect(.bounce, value: question.completed ? question.completed : nil)
-                            .foregroundStyle(question.completed ? .accent : .secondary)
-                            .sensoryFeedback(.impact(weight: .heavy, intensity: 1), trigger: question.completed)
-                            .onTapGesture {
-                                $question.completed.wrappedValue.toggle()
-                            }
-                        TextField("Type your question...", text: $question.question)
-                    }
+    private func interviewQuestionsView() -> some View {
+        VStack(alignment: .leading) {
+            ForEach($editJobViewModel.interviewQuestion, id: \.id) { $question in
+                HStack {
+                    Image(systemName: question.completed ? "checkmark.circle.fill" : "circle")
+                        .symbolEffect(.bounce, value: question.completed ? question.completed : nil)
+                        .foregroundStyle(question.completed ? .accent : .secondary)
+                        .sensoryFeedback(.impact(weight: .heavy, intensity: 1), trigger: question.completed)
+                        .onTapGesture {
+                            $question.completed.wrappedValue.toggle()
+                        }
+                    TextField("Type your question...", text: $question.question)
+                    Spacer()
+                    Button(action: {
+                        editJobViewModel.interviewQuestion.removeAll { q in
+                            q == question
+                        }
+                    }, label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundStyle(.red)
+                    })
                 }
-                .onDelete { indexSet in
-                    indexSet.forEach { index in
-                        let interviewQuestionID = editJobViewModel.interviewQuestion[index].persistentModelID
-                        let interviewQuestion = context.model(for: interviewQuestionID)
-                        context.delete(interviewQuestion)
-                        editJobViewModel.interviewQuestion.remove(atOffsets: indexSet)
-                    }
-                }
+                .padding(.horizontal)
+                .padding(.vertical, 6)
+                Divider()
             }
+            
             Button {
                 withAnimation {
                     let interviewQuestion = InterviewQuestion(completed: false, question: "")
                     editJobViewModel.interviewQuestion.append(interviewQuestion)
+                    
                 }
             } label: {
                 Label("Add New", systemImage: "plus")
             }
-        } header: {
-            Text("Interview Questions")
+            .padding(.horizontal)
+            .padding(.vertical, 6)
         }
+        .background {
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundStyle(.white)
+        }
+        .padding(.horizontal)
     }
     
     private var toolbarTrailing: some ToolbarContent {
