@@ -37,12 +37,11 @@ struct EditJobView: View {
                     locationView()
                     extraInfoView()
                     recruiterInfoView()
-                    notesViewFinal()
+                    notesView()
                     interviewQuestionsView()
                 }
                 .padding(.bottom)
             }
-            
         .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
             LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel(), job: job)
         }
@@ -52,7 +51,7 @@ struct EditJobView: View {
             }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("Sometimes websites are not accurate. You can edit them by tapping the logo above")
+            Text("Websites might not be accurate. You can edit them by tapping the logo above")
         }
         .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {
@@ -159,12 +158,7 @@ struct EditJobView: View {
                 }
             }
         }
-        .padding(.vertical, 6)
-        .background {
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(.white)
-        }
-        .padding(.horizontal)
+        .cellBackground()
     }
     
     private func locationView() -> some View {
@@ -182,19 +176,13 @@ struct EditJobView: View {
             if !editJobViewModel.isLocationRemote() {
                 Divider()
                 TextField("Add Location", text: $editJobViewModel.location)
-                    .padding(.vertical, 6)
-                    .padding(.horizontal)
+                    .cellPadding()
                 Divider()
                 WorkingDaysView(workingDaysToSave: $editJobViewModel.workingDaysToSave, workingDays: editJobViewModel.workingDays)
-                    .padding(.vertical, 6)
+                        .cellPadding()
             }
         }
-        .padding(.vertical, 6)
-        .background {
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(.white)
-        }
-        .padding(.horizontal)
+        .cellBackground()
     }
     
     private func extraInfoView() -> some View {
@@ -206,8 +194,7 @@ struct EditJobView: View {
                     .multilineTextAlignment(.trailing)
                     .keyboardType(.numberPad)
             }
-            .padding(.horizontal)
-            .padding(.vertical, 6)
+            .cellPadding()
             Divider()
             HStack {
                 TextField("Link to job posting", text: $editJobViewModel.url)
@@ -220,15 +207,9 @@ struct EditJobView: View {
                 .disabled(editJobViewModel.url.isEmpty)
                 .buttonStyle(.plain)
             }
-            .padding(.horizontal)
-            .padding(.vertical, 6)
+            .cellPadding()
         }
-        .padding(.vertical, 6)
-        .background {
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(.white)
-        }
-        .padding(.horizontal)
+        .cellBackground()
     }
     
     private func recruiterInfoView() -> some View {
@@ -268,40 +249,27 @@ struct EditJobView: View {
                 .buttonStyle(.plain)
                 .disabled(editJobViewModel.recruiterEmail.isEmpty)
             }
-            .padding(.horizontal)
-            .padding(.vertical, 6)
+            .cellPadding()
             
             if editJobViewModel.isShowingRecruiterDetails {
                 Divider()
                 TextField("Phone number", text: $editJobViewModel.recruiterNumber)
                     .keyboardType(.numberPad)
-                    .padding(.horizontal)
-                    .padding(.vertical, 6)
+                    .cellPadding()
                 Divider()
                 TextField("Email", text: $editJobViewModel.recruiterEmail)
                     .keyboardType(.emailAddress)
-                    .padding(.horizontal)
-                    .padding(.vertical, 6)
+                    .cellPadding()
             }
         }
-        .padding(.vertical, 6)
-        .background {
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(.white)
-        }
-        .padding(.horizontal)
+        .cellBackground()
     }
     
-    private func notesViewFinal() -> some View {
+    private func notesView() -> some View {
         TextField("Notes", text: $editJobViewModel.notes, axis: .vertical)
             .lineLimit(5...10)
-            .padding(.horizontal)
-            .padding(.vertical, 6)
-            .background {
-                RoundedRectangle(cornerRadius: 8)
-                    .foregroundStyle(.white)
-            }
-            .padding(.horizontal)
+            .cellPadding()
+            .cellBackground()
     }
     
     private func interviewQuestionsView() -> some View {
@@ -326,8 +294,7 @@ struct EditJobView: View {
                             .foregroundStyle(.red)
                     })
                 }
-                .padding(.horizontal)
-                .padding(.vertical, 6)
+                .cellPadding()
                 Divider()
             }
             
@@ -340,14 +307,10 @@ struct EditJobView: View {
             } label: {
                 Label("Add New", systemImage: "plus")
             }
-            .padding(.horizontal)
-            .padding(.vertical, 6)
+            .frame(maxWidth: .infinity)
+            .cellPadding()
         }
-        .background {
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(.white)
-        }
-        .padding(.horizontal)
+        .cellBackground()
     }
     
     private var toolbarTrailing: some ToolbarContent {
