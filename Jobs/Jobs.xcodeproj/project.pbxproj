@@ -21,7 +21,7 @@
 		696208532B6A891B0045DD39 /* JobHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696208522B6A891B0045DD39 /* JobHelpers.swift */; };
 		696208572B6A98730045DD39 /* MainViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696208562B6A98730045DD39 /* MainViewViewModel.swift */; };
 		6966B0DD2BB8DF7200BD3424 /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */; };
-		6974A1102C8E495900570472 /* CellBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974A10F2C8E495900570472 /* CellBackground.swift */; };
+		6974A1102C8E495900570472 /* CellBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974A10F2C8E495900570472 /* CellBackgroundModifier.swift */; };
 		698006752BB37DF9007C725E /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698006742BB37DF9007C725E /* FloatingTextField.swift */; };
 		699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C52B5ED2DC000EBCD1 /* JobsApp.swift */; };
 		699750C82B5ED2DC000EBCD1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C72B5ED2DC000EBCD1 /* MainView.swift */; };
@@ -55,7 +55,7 @@
 		696208552B6A8FE70045DD39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		696208562B6A98730045DD39 /* MainViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewViewModel.swift; sourceTree = "<group>"; };
 		6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailHelper.swift; sourceTree = "<group>"; };
-		6974A10F2C8E495900570472 /* CellBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellBackground.swift; sourceTree = "<group>"; };
+		6974A10F2C8E495900570472 /* CellBackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellBackgroundModifier.swift; sourceTree = "<group>"; };
 		698006742BB37DF9007C725E /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		699750C22B5ED2DC000EBCD1 /* Jobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		699750C52B5ED2DC000EBCD1 /* JobsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsApp.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 				6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */,
 				696208522B6A891B0045DD39 /* JobHelpers.swift */,
 				69D583792C3DD84700084C5E /* WorkingDaysView.swift */,
-				6974A10F2C8E495900570472 /* CellBackground.swift */,
+				6974A10F2C8E495900570472 /* CellBackgroundModifier.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -309,7 +309,7 @@
 				69352EB82BBB2B7A00B8A77B /* RectanglesView.swift in Sources */,
 				698006752BB37DF9007C725E /* FloatingTextField.swift in Sources */,
 				699750DB2B614E61000EBCD1 /* JobListView.swift in Sources */,
-				6974A1102C8E495900570472 /* CellBackground.swift in Sources */,
+				6974A1102C8E495900570472 /* CellBackgroundModifier.swift in Sources */,
 				699750D52B5FD7E1000EBCD1 /* Job.swift in Sources */,
 				699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */,
 				69352ECF2BBEBB6C00B8A77B /* LogoOptionsViewModel.swift in Sources */,

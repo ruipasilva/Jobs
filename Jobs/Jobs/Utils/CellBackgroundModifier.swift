@@ -30,6 +30,7 @@ struct CellPadding: ViewModifier {
 extension View {
     func cellBackground() -> some View {
         modifier(CellBackground())
+            .padding(.bottom, 28)
     }
     
     func cellPadding() -> some View {

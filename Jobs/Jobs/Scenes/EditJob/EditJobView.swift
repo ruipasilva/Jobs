@@ -213,104 +213,121 @@ struct EditJobView: View {
     }
     
     private func recruiterInfoView() -> some View {
-        VStack {
-            HStack {
-                Button(action: {
-                    withAnimation {
-                        editJobViewModel.isShowingRecruiterDetails.toggle()
-                    }
-                }, label: {
-                    Image(systemName: "info.circle")
-                        .imageScale(.medium)
-                        .foregroundStyle(Color.accentColor)
-                })
-                .buttonStyle(.plain)
+        VStack(alignment: .leading) {
+            customSectionHeader(title: "Recruiter's info")
+            VStack {
+                HStack {
+                    Button(action: {
+                        withAnimation {
+                            editJobViewModel.isShowingRecruiterDetails.toggle()
+                        }
+                    }, label: {
+                        Image(systemName: "info.circle")
+                            .imageScale(.medium)
+                            .foregroundStyle(Color.accentColor)
+                    })
+                    .buttonStyle(.plain)
+                    
+                    TextField("Recruiter's name", text: $editJobViewModel.recruiterName)
+                    Spacer()
+                    Button(action: {}, label: {
+                        Image(systemName: "phone.circle.fill")
+                            .foregroundStyle(Color.accentColor)
+                            .imageScale(.large)
+                    })
+                    .disabled(editJobViewModel.recruiterNumber.isEmpty)
+                    
+                    Button(action: {
+                        EmailHelper
+                            .shared
+                            .askUserForTheirPreference(email: editJobViewModel.recruiterEmail,
+                                                       subject: "Interview at \(editJobViewModel.company) follow up",
+                                                       body: "Hi, \(editJobViewModel.recruiterName)")
+                    }, label: {
+                        Image(systemName: "envelope.circle.fill")
+                            .foregroundStyle(Color.accentColor)
+                            .imageScale(.large)
+                    })
+                    .buttonStyle(.plain)
+                    .disabled(editJobViewModel.recruiterEmail.isEmpty)
+                }
+                .cellPadding()
                 
-                TextField("Recruiter's name", text: $editJobViewModel.recruiterName)
-                Spacer()
-                Button(action: {}, label: {
-                    Image(systemName: "phone.circle.fill")
-                        .foregroundStyle(Color.accentColor)
-                        .imageScale(.large)
-                })
-                .disabled(editJobViewModel.recruiterNumber.isEmpty)
-                
-                Button(action: {
-                    EmailHelper
-                        .shared
-                        .askUserForTheirPreference(email: editJobViewModel.recruiterEmail,
-                                                   subject: "Interview at \(editJobViewModel.company) follow up",
-                                                   body: "Hi, \(editJobViewModel.recruiterName)")
-                }, label: {
-                    Image(systemName: "envelope.circle.fill")
-                        .foregroundStyle(Color.accentColor)
-                        .imageScale(.large)
-                })
-                .buttonStyle(.plain)
-                .disabled(editJobViewModel.recruiterEmail.isEmpty)
+                if editJobViewModel.isShowingRecruiterDetails {
+                    Divider()
+                    TextField("Phone number", text: $editJobViewModel.recruiterNumber)
+                        .keyboardType(.numberPad)
+                        .cellPadding()
+                    Divider()
+                    TextField("Email", text: $editJobViewModel.recruiterEmail)
+                        .keyboardType(.emailAddress)
+                        .cellPadding()
+                }
             }
-            .cellPadding()
-            
-            if editJobViewModel.isShowingRecruiterDetails {
-                Divider()
-                TextField("Phone number", text: $editJobViewModel.recruiterNumber)
-                    .keyboardType(.numberPad)
-                    .cellPadding()
-                Divider()
-                TextField("Email", text: $editJobViewModel.recruiterEmail)
-                    .keyboardType(.emailAddress)
-                    .cellPadding()
-            }
+            .cellBackground()
         }
-        .cellBackground()
     }
     
     private func notesView() -> some View {
-        TextField("Notes", text: $editJobViewModel.notes, axis: .vertical)
-            .lineLimit(5...10)
-            .cellPadding()
-            .cellBackground()
+        VStack(alignment: .leading) {
+            customSectionHeader(title: "Your notes")
+
+            TextField("Notes", text: $editJobViewModel.notes, axis: .vertical)
+                .lineLimit(5...10)
+                .cellPadding()
+                .cellBackground()
+                    }
     }
     
     private func interviewQuestionsView() -> some View {
         VStack(alignment: .leading) {
-            ForEach($editJobViewModel.interviewQuestion, id: \.id) { $question in
-                HStack {
-                    Image(systemName: question.completed ? "checkmark.circle.fill" : "circle")
-                        .symbolEffect(.bounce, value: question.completed ? question.completed : nil)
-                        .foregroundStyle(question.completed ? .accent : .secondary)
-                        .sensoryFeedback(.impact(weight: .heavy, intensity: 1), trigger: question.completed)
-                        .onTapGesture {
-                            $question.completed.wrappedValue.toggle()
-                        }
-                    TextField("Type your question...", text: $question.question)
-                    Spacer()
-                    Button(action: {
-                        editJobViewModel.interviewQuestion.removeAll { q in
-                            q == question
-                        }
-                    }, label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundStyle(.red)
-                    })
+            customSectionHeader(title: "InterviewQuestions")
+            VStack(alignment: .leading) {
+                ForEach($editJobViewModel.interviewQuestion, id: \.id) { $question in
+                    HStack {
+                        Image(systemName: question.completed ? "checkmark.circle.fill" : "circle")
+                            .symbolEffect(.bounce, value: question.completed ? question.completed : nil)
+                            .foregroundStyle(question.completed ? .accent : .secondary)
+                            .sensoryFeedback(.impact(weight: .heavy, intensity: 1), trigger: question.completed)
+                            .onTapGesture {
+                                $question.completed.wrappedValue.toggle()
+                            }
+                        TextField("Type your question...", text: $question.question)
+                        Spacer()
+                        Button(action: {
+                            editJobViewModel.interviewQuestion.removeAll { q in
+                                q == question
+                            }
+                        }, label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundStyle(.red)
+                        })
+                    }
+                    .cellPadding()
+                    Divider()
                 }
+                
+                Button {
+                    withAnimation {
+                        let interviewQuestion = InterviewQuestion(completed: false, question: "")
+                        editJobViewModel.interviewQuestion.append(interviewQuestion)
+                        
+                    }
+                } label: {
+                    Label("Add New", systemImage: "plus")
+                }
+                .frame(maxWidth: .infinity)
                 .cellPadding()
-                Divider()
             }
-            
-            Button {
-                withAnimation {
-                    let interviewQuestion = InterviewQuestion(completed: false, question: "")
-                    editJobViewModel.interviewQuestion.append(interviewQuestion)
-                    
-                }
-            } label: {
-                Label("Add New", systemImage: "plus")
-            }
-            .frame(maxWidth: .infinity)
-            .cellPadding()
+            .cellBackground()
         }
-        .cellBackground()
+    }
+    
+    private func customSectionHeader(title: String) -> some View {
+        Text(title)
+            .font(.caption2)
+            .padding(.leading, 24)
+            .foregroundStyle(.secondary)
     }
     
     private var toolbarTrailing: some ToolbarContent {
