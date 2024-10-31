@@ -214,7 +214,7 @@ struct EditJobView: View {
     
     private func recruiterInfoView() -> some View {
         VStack(alignment: .leading) {
-            customSectionHeader(title: "Recruiter's info")
+            customSectionHeader(title: "RECRUITER'S INFO")
             VStack {
                 HStack {
                     Button(action: {
@@ -270,7 +270,7 @@ struct EditJobView: View {
     
     private func notesView() -> some View {
         VStack(alignment: .leading) {
-            customSectionHeader(title: "Your notes")
+            customSectionHeader(title: "YOUR NOTES")
 
             TextField("Notes", text: $editJobViewModel.notes, axis: .vertical)
                 .lineLimit(5...10)
@@ -281,7 +281,7 @@ struct EditJobView: View {
     
     private func interviewQuestionsView() -> some View {
         VStack(alignment: .leading) {
-            customSectionHeader(title: "InterviewQuestions")
+            customSectionHeader(title: "INTERVIEW QUESTIONS")
             VStack(alignment: .leading) {
                 ForEach($editJobViewModel.interviewQuestion, id: \.id) { $question in
                     HStack {
@@ -325,8 +325,8 @@ struct EditJobView: View {
     
     private func customSectionHeader(title: String) -> some View {
         Text(title)
-            .font(.caption2)
-            .padding(.leading, 24)
+            .font(.caption)
+            .padding(.leading, 36)
             .foregroundStyle(.secondary)
     }
     

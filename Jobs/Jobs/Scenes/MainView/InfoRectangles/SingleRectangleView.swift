@@ -27,7 +27,7 @@ struct SingleRectangleView: View {
                 .padding(.horizontal, 16)
         }
         .frame(height: horizontalSizeClass == .compact ? UIScreen.main.bounds.width/3 : UIScreen.main.bounds.width/9)
-        .padding(.bottom, 36)
+        .padding(.bottom)
     }
     
     private var roundedRectangle: some View {
@@ -58,6 +58,17 @@ struct SingleRectangleView: View {
                 .font(.body)
                 .bold()
                 .foregroundColor(Color(UIColor.label))
+        }
+    }
+    
+    private func setBackgroundColor(status: String) -> Color {
+        switch status {
+        case "Applied":
+            return Color.orange.opacity(0.1)
+        case "Started":
+            return Color.mint.opacity(0.1)
+        default:
+           return Color.init(UIColor.secondarySystemBackground)
         }
     }
 }

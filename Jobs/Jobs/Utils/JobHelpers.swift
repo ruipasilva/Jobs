@@ -8,7 +8,7 @@
 import Foundation
 
 public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable, RawRepresentable {
-    case notApplied, applied, ongoing, hired, rejected
+    case notApplied, applied, started, hired, rejected
     
     public var id: Self { self }
     
@@ -18,8 +18,8 @@ public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable, R
             "Not Applied"
         case .applied:
             "Applied"
-        case .ongoing:
-            "Ongoing"
+        case .started:
+            "Started"
         case .hired:
             "Hired"
         case .rejected:

@@ -26,7 +26,7 @@ struct TabViewRoot: View {
             
             OverView(overViewViewModel: overViewViewModel)
                 .tabItem {
-                    Label("Overview", systemImage: "gearshape")
+                    Label("Dashboard", systemImage: "rectangle.3.group.fill")
                 }
         }
     }

@@ -24,12 +24,12 @@ struct MainListCellView: View {
             infoView
                 .padding(.horizontal, 16)
         }
-        .frame(height: 83)
     }
     
     private var roundedRectangle: some View {
         RoundedRectangle(cornerRadius: 8)
-            .fill(colorScheme == .dark ? Color.init(UIColor.secondarySystemBackground) : Color.init(UIColor.systemGroupedBackground))
+//            .fill(colorScheme == .dark ? Color.init(UIColor.secondarySystemBackground) : Color.init(UIColor.systemGroupedBackground))
+            .fill(applyBackgroungColor(for: job))
     }
     
     private var infoView: some View {
@@ -53,7 +53,7 @@ struct MainListCellView: View {
                         defaultImage
                     }
                 }
-            .frame(width: 55, height: 55)
+            .frame(width: 56, height: 56)
             
             VStack(alignment: .leading) {
                 HStack {
@@ -71,13 +71,29 @@ struct MainListCellView: View {
                     .foregroundColor(Color.init(UIColor.secondaryLabel))
             }
         }
+        .padding(.vertical, 10)
     }
     
     private var defaultImage: some View {
         Image(systemName: "suitcase.fill")
             .resizable()
             .foregroundColor(.mint)
-            .frame(width: 36, height: 36)
+            .frame(width: 42, height: 42)
+    }
+    
+    private func applyBackgroungColor(for job: Job) -> LinearGradient {
+        switch job.jobApplicationStatus.status {
+        case "Applied":
+            return LinearGradient(gradient: Gradient(colors: [.clear, .clear, Color.init(UIColor.secondarySystemBackground), .orange.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
+        case "Started":
+            return LinearGradient(gradient: Gradient(colors: [.clear, .clear, Color.init(UIColor.secondarySystemBackground), .mint.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
+        case "Rejected":
+            return LinearGradient(gradient: Gradient(colors: [.clear, .clear,Color.init(UIColor.secondarySystemBackground), .red.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
+        case "Hired":
+            return LinearGradient(gradient: Gradient(colors: [.clear, .clear,Color.init(UIColor.secondarySystemBackground), .green.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
+        default:
+            return LinearGradient(gradient: Gradient(colors: [.clear, .clear,Color.init(UIColor.secondarySystemBackground)]), startPoint: .leading, endPoint: .trailing)
+        }
     }
 }
 

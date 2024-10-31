@@ -41,7 +41,7 @@ struct JobListView: View {
             if jobs.isEmpty {
                 emptyList
             } else {
-                list
+                jobList
             }
         }
     }
@@ -50,14 +50,14 @@ struct JobListView: View {
         ContentUnavailableView("No jobs yet", systemImage: "folder")
     }
     
-    private var list: some View {
+    private var jobList: some View {
         List {
             Section {
                 RectanglesView(appViewModel: appViewModel)
-                    .listRowBackground(Color.clear)
             }
-            .listRowInsets(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
+            .padding(.bottom, -16)
             .listRowSeparator(.hidden)
+            
             Section {
                 ForEach(jobs) { job in
                     ZStack {
@@ -75,15 +75,13 @@ struct JobListView: View {
                     }
                 }
                 .onDelete { indexSet in
-                    indexSet.forEach { index in
-                        let job = jobs[index]
-                        context.delete(job)
-                    }
+                        indexSet.forEach { index in
+                            let job = jobs[index]
+                            context.delete(job)
+                        }
                 }
                 .listRowBackground(Color.clear)
-                .listRowSpacing(6)
             }
-            .listRowInsets(.init(top: 4, leading: 16, bottom: 4, trailing: 16))
             .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
@@ -102,10 +100,10 @@ struct JobListView: View {
                 .tint(.orange)
             }
             Button(action: {
-                appViewModel.setApplicationStatus(job: job, status: .ongoing)
+                appViewModel.setApplicationStatus(job: job, status: .started)
             }) {
                 Label {
-                    Text("Ongoing")
+                    Text("Started")
                 } icon: {
                     Image(systemName: "person.3.fill")
                 }

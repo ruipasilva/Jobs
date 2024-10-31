@@ -84,14 +84,11 @@ struct LogoOptionsView: View {
                     case .na:
                         ProgressView()
                     case let .success(result):
-                        ForEach(result, id: \.logo) { data in
-                            Button(action: {
-                                logoOptionsViewModel.logoURL = data.logo
-                                logoOptionsViewModel.companyWebsite = data.domain
-                            }, label: {
-                                if result.isEmpty {
-                                    Text("No logos available")
-                                } else {
+                            ForEach(result, id: \.logo) { data in
+                                Button(action: {
+                                    logoOptionsViewModel.logoURL = data.logo
+                                    logoOptionsViewModel.companyWebsite = data.domain
+                                }, label: {
                                     HStack {
                                         AsyncImage(url: URL(string: data.logo), scale: 3) { phase in
                                             switch phase {
@@ -129,14 +126,13 @@ struct LogoOptionsView: View {
                                                 .cornerRadius(6)
                                         }
                                     }
-                                }
-                            })
-                        }
-                    case let .failed(error):
-                        Text(error.title)
+                                })
+                            }
+                    case .failed(_):
+                        Text("No Logos available")
                     }
                 } header: {
-                    Text("Please pick a logo")
+                    Text( "Please pick a logo")
                 } footer: {
                     VStack(alignment: .leading) {
                         Text("Some logos might not be available.")

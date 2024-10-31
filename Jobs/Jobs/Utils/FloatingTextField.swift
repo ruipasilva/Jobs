@@ -25,7 +25,7 @@ struct FloatingTextField: View {
         }
         .padding(.top, text.isEmpty ? 10 : 15)
         .padding(.bottom, 5)
-//        .animation(.spring(response: 0.2, dampingFraction: 0.5))
+        .animation(.spring(response: 0.2, dampingFraction: 0.5))
     }
 }
 
