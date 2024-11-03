@@ -27,6 +27,8 @@ struct JobListView: View {
             [SortDescriptor(\Job.company, order: appViewModel.ascendingDescending)]
         case .salary:
             [SortDescriptor(\Job.salary, order: appViewModel.ascendingDescending)]
+        case .dateAdded:
+            [SortDescriptor(\Job.dateAdded, order: appViewModel.ascendingDescending)]
         }
         let predicate = #Predicate<Job> { job in
             job.company.localizedStandardContains(filterString) ||

@@ -84,15 +84,15 @@ struct MainListCellView: View {
     private func applyBackgroungColor(for job: Job) -> LinearGradient {
         switch job.jobApplicationStatus.status {
         case "Applied":
-            return LinearGradient(gradient: Gradient(colors: [.clear, .clear, Color.init(UIColor.secondarySystemBackground), .orange.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
+            return LinearGradient(gradient: Gradient(colors: [.clear, Color.init(UIColor.secondarySystemBackground), Color.init(UIColor.secondarySystemBackground), .orange.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
         case "Started":
-            return LinearGradient(gradient: Gradient(colors: [.clear, .clear, Color.init(UIColor.secondarySystemBackground), .mint.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
+            return LinearGradient(gradient: Gradient(colors: [.clear, Color.init(UIColor.secondarySystemBackground), Color.init(UIColor.secondarySystemBackground), .mint.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
         case "Rejected":
-            return LinearGradient(gradient: Gradient(colors: [.clear, .clear,Color.init(UIColor.secondarySystemBackground), .red.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
+            return LinearGradient(gradient: Gradient(colors: [.clear, Color.init(UIColor.secondarySystemBackground), Color.init(UIColor.secondarySystemBackground), .red.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
         case "Hired":
-            return LinearGradient(gradient: Gradient(colors: [.clear, .clear,Color.init(UIColor.secondarySystemBackground), .green.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
+            return LinearGradient(gradient: Gradient(colors: [.clear, Color.init(UIColor.secondarySystemBackground), Color.init(UIColor.secondarySystemBackground), .green.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
         default:
-            return LinearGradient(gradient: Gradient(colors: [.clear, .clear,Color.init(UIColor.secondarySystemBackground)]), startPoint: .leading, endPoint: .trailing)
+            return LinearGradient(gradient: Gradient(colors: [.clear, Color.init(UIColor.secondarySystemBackground), Color.init(UIColor.secondarySystemBackground)]), startPoint: .leading, endPoint: .trailing)
         }
     }
 }
