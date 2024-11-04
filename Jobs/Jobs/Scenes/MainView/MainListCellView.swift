@@ -57,7 +57,7 @@ struct MainListCellView: View {
             
             VStack(alignment: .leading) {
                 HStack {
-                    Text(job.company)
+                    Text(job.company.isEmpty ? "Company Name" : job.company)
                         .font(.body)
                         .foregroundColor(Color.init(UIColor.label))
                         .padding(.bottom, 2)
@@ -66,7 +66,7 @@ struct MainListCellView: View {
                         .font(.subheadline)
                         .foregroundColor(Color.init(UIColor.secondaryLabel))
                 }
-                Text(job.title)
+                Text(job.title.isEmpty ? "Job Title" : job.title)
                     .font(.subheadline)
                     .foregroundColor(Color.init(UIColor.secondaryLabel))
             }
@@ -75,10 +75,10 @@ struct MainListCellView: View {
     }
     
     private var defaultImage: some View {
-        Image(systemName: "suitcase.fill")
+        Image(systemName: "suitcase")
             .resizable()
             .foregroundColor(.mint)
-            .frame(width: 42, height: 42)
+            .frame(width: 42, height: 38)
     }
     
     private func applyBackgroungColor(for job: Job) -> LinearGradient {

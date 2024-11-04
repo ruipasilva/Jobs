@@ -33,6 +33,7 @@ public final class EditJobViewModel: ObservableObject {
     @Published public var companyWebsite = ""
     @Published public var interviewQuestion: [InterviewQuestion] = []
     @Published public var workingDaysToSave: [String] = []
+    @Published public var currencyType: CurrencyType = .dolar
     
     @Published public var isShowingPasteLink = false
     @Published public var isShowingRecruiterDetails = false
@@ -84,6 +85,7 @@ public final class EditJobViewModel: ObservableObject {
         job.companyWebsite = companyWebsite
         job.interviewQuestions = interviewQuestion
         job.workingDays = workingDaysToSave
+        job.currencyType = currencyType
     }
     
     public func setProperties(job: Job) {
@@ -107,6 +109,7 @@ public final class EditJobViewModel: ObservableObject {
         companyWebsite = job.companyWebsite
         interviewQuestion = job.interviewQuestions ?? []
         workingDaysToSave = job.workingDays
+        currencyType = job.currencyType
     }
     
     public func getLogoOptionsViewModel() -> LogoOptionsViewModel {

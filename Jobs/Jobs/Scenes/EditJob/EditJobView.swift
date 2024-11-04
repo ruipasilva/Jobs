@@ -189,6 +189,15 @@ struct EditJobView: View {
         VStack {
             HStack {
                 Text("Salary")
+                Menu {
+                    Picker("currency", selection: $editJobViewModel.currencyType) {
+                        ForEach(CurrencyType.allCases) {
+                            Text($0.symbol)
+                        }
+                    }
+                } label: {
+                    Text(editJobViewModel.currencyType.symbol)
+                }
                 Spacer()
                 TextField("Amount", text: $editJobViewModel.salary)
                     .multilineTextAlignment(.trailing)
@@ -198,8 +207,12 @@ struct EditJobView: View {
             Divider()
             HStack {
                 TextField("Link to job posting", text: $editJobViewModel.url)
+                    .textCase(.lowercase)
+                    .autocapitalization(.none)
                 Spacer()
-                Button(action: {}, label: {
+                Button(action: {
+                    openURL(URL(string: "https://\(editJobViewModel.url)")!)
+                }, label: {
                     Image(systemName: "arrow.up.forward.app.fill")
                         .imageScale(.large)
                         .foregroundStyle(Color.accentColor)

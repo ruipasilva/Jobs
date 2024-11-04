@@ -69,3 +69,23 @@ public enum SortOrdering: Int, Identifiable, CaseIterable {
         }
     }
 }
+
+public enum CurrencyType: String, Codable, Identifiable, CaseIterable, RawRepresentable {
+    
+    case libra, dolar, Euro, yen
+    
+    public var id: Self { self }
+    
+    var symbol: String {
+        switch self {
+        case .libra:
+            "£"
+        case .dolar:
+            "$"
+        case .Euro:
+            "€"
+        case .yen:
+            "¥"
+        }
+    }
+}

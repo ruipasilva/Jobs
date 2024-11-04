@@ -47,6 +47,7 @@ public final class Job {
     var companyWebsite: String = ""
     var interviewQuestions: [InterviewQuestion]?
     var workingDays: [String] = []
+    var currencyType: CurrencyType = CurrencyType.dolar
     
     init(title: String,
          company: String,
@@ -69,7 +70,8 @@ public final class Job {
          logoURL: String,
          companyWebsite: String,
          interviewQuestions: [InterviewQuestion]? = nil,
-         workingDays: [String]) {
+         workingDays: [String],
+         currencyType: CurrencyType) {
         self.title = title
         self.company = company
         self.dateAdded = dateAdded
@@ -91,7 +93,8 @@ public final class Job {
         self.logoURL = logoURL
         self.companyWebsite = companyWebsite
         self.interviewQuestions = interviewQuestions
-            self.workingDays = workingDays
+        self.workingDays = workingDays
+        self.currencyType = currencyType
     }
     
     var icon: Image {

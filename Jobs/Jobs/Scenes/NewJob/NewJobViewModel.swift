@@ -33,6 +33,7 @@ public final class NewJobViewModel: ObservableObject {
     @Published public var companyWebsite = ""
     @Published public var interviewQuestion: [InterviewQuestion] = []
     @Published public var workingDaysToSave: [String] = []
+    @Published public var currentyType: CurrencyType = CurrencyType.dolar
     
     @Published public var showingCancelActionSheet = false
     
@@ -89,7 +90,8 @@ public final class NewJobViewModel: ObservableObject {
                          jobURLPosting: url,
                          logoURL: logoURL,
                          companyWebsite: companyWebsite,
-                         workingDays: workingDaysToSave
+                         workingDays: workingDaysToSave,
+                         currencyType: currentyType
         )
         context.insert(newJob)
         newJob.interviewQuestions = interviewQuestion
