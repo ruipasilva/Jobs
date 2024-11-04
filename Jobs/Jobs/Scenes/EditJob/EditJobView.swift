@@ -296,7 +296,9 @@ struct EditJobView: View {
         VStack(alignment: .leading) {
             customSectionHeader(title: "INTERVIEW QUESTIONS")
             VStack(alignment: .leading) {
-                ForEach($editJobViewModel.interviewQuestion, id: \.id) { $question in
+                ForEach($editJobViewModel.interviewQuestion.sorted(by: {
+                    $0.dateAdded.wrappedValue < $1.dateAdded.wrappedValue
+                }), id: \.id) { $question in
                     HStack {
                         Image(systemName: question.completed ? "checkmark.circle.fill" : "circle")
                             .symbolEffect(.bounce, value: question.completed ? question.completed : nil)
@@ -322,7 +324,7 @@ struct EditJobView: View {
                 
                 Button {
                     withAnimation {
-                        let interviewQuestion = InterviewQuestion(completed: false, question: "")
+                        let interviewQuestion = InterviewQuestion(completed: false, question: "", dateAdded: .now)
                         editJobViewModel.interviewQuestion.append(interviewQuestion)
                         
                     }

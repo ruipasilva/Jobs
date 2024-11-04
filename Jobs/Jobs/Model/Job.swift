@@ -12,13 +12,16 @@ import SwiftData
 public final class InterviewQuestion: Hashable {
     var completed: Bool = false
     var question: String = ""
+    var dateAdded: Date = Date.now
     
     @Relationship(deleteRule: .nullify, inverse: \Job.interviewQuestions) var jobs: [Job]?
     
     init(completed: Bool,
-         question: String) {
+         question: String,
+         dateAdded: Date) {
         self.completed = completed
         self.question = question
+        self.dateAdded = dateAdded
     }
 }
 
