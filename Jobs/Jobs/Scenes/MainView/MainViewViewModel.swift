@@ -18,9 +18,15 @@ public final class MainViewViewModel: ObservableObject {
     @Published public var isShowingInterviewing = false
     
     public let networkManager: NetworkManaging
+    public let calendarManager: CalendarManaging
+    public let notificationManager: NotificationManaging
     
-    init(networkManager: NetworkManaging = NetworkManager()) {
+    init(networkManager: NetworkManaging = NetworkManager(),
+         calendarManager: CalendarManaging = CalendarManager(),
+         notificationManager: NotificationManaging = NotificationManager()) {
         self.networkManager = networkManager
+        self.calendarManager = calendarManager
+        self.notificationManager = notificationManager
     }
     
     public func sortListOrder(sorting: SortOrdering) {

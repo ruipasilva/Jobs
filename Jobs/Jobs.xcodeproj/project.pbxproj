@@ -37,6 +37,8 @@
 		69D583762C39A4F100084C5E /* OverViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583752C39A4F100084C5E /* OverViewViewModel.swift */; };
 		69D5837A2C3DD84700084C5E /* WorkingDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583792C3DD84700084C5E /* WorkingDaysView.swift */; };
 		69F725B12CD8E8A50064C999 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B02CD8E8A50064C999 /* SettingsView.swift */; };
+		69F725B42CDBFD710064C999 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B32CDBFD710064C999 /* CalendarManager.swift */; };
+		69F725B62CDBFFA30064C999 /* LocalNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B52CDBFFA30064C999 /* LocalNotificationsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +76,8 @@
 		69D583752C39A4F100084C5E /* OverViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverViewViewModel.swift; sourceTree = "<group>"; };
 		69D583792C3DD84700084C5E /* WorkingDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingDaysView.swift; sourceTree = "<group>"; };
 		69F725B02CD8E8A50064C999 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		69F725B32CDBFD710064C999 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
+		69F725B52CDBFFA30064C999 /* LocalNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,8 @@
 			children = (
 				698006742BB37DF9007C725E /* FloatingTextField.swift */,
 				69352EC62BBD6DAC00B8A77B /* NetworkManager.swift */,
+				69F725B32CDBFD710064C999 /* CalendarManager.swift */,
+				69F725B52CDBFFA30064C999 /* LocalNotificationsManager.swift */,
 				69352ECA2BBD71EC00B8A77B /* NetworkHelpers.swift */,
 				6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */,
 				696208522B6A891B0045DD39 /* JobHelpers.swift */,
@@ -313,6 +319,7 @@
 				69352EB62BBB2A3200B8A77B /* SingleRectangleView.swift in Sources */,
 				696208572B6A98730045DD39 /* MainViewViewModel.swift in Sources */,
 				69352ECD2BBDA36900B8A77B /* LogoOptionsView.swift in Sources */,
+				69F725B62CDBFFA30064C999 /* LocalNotificationsManager.swift in Sources */,
 				69352EBA2BBB2C4B00B8A77B /* MainListCellView.swift in Sources */,
 				69D5837A2C3DD84700084C5E /* WorkingDaysView.swift in Sources */,
 				699750C82B5ED2DC000EBCD1 /* MainView.swift in Sources */,
@@ -320,6 +327,7 @@
 				69352EB82BBB2B7A00B8A77B /* RectanglesView.swift in Sources */,
 				698006752BB37DF9007C725E /* FloatingTextField.swift in Sources */,
 				699750DB2B614E61000EBCD1 /* JobListView.swift in Sources */,
+				69F725B42CDBFD710064C999 /* CalendarManager.swift in Sources */,
 				6974A1102C8E495900570472 /* CellBackgroundModifier.swift in Sources */,
 				699750D52B5FD7E1000EBCD1 /* Job.swift in Sources */,
 				69F725B12CD8E8A50064C999 /* SettingsView.swift in Sources */,

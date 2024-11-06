@@ -27,7 +27,9 @@ struct MainView: View {
                     toolBarLeading
                 }
                 .sheet(isPresented: $mainViewModel.isShowingNewJob) {
-                    NewJobView(newJobViewModel: NewJobViewModel(networkManager: mainViewModel.networkManager))
+                    NewJobView(newJobViewModel: NewJobViewModel(networkManager: mainViewModel.networkManager,
+                                                                calendarManager: mainViewModel.calendarManager,
+                                                                notificationManager: mainViewModel.notificationManager))
                 }
                 .navigationTitle("Your Jobs")
         }
