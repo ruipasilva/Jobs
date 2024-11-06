@@ -47,12 +47,15 @@ public final class EditJobViewModel: ObservableObject {
     
     public let workingDays: [String] = ["Mon","Tue","Wed","Thu","Fri"]
     public let networkManager: NetworkManaging
+    public let notificationManager: NotificationManaging
     public let editTip = EditTip()
     
     private var subcriptions = Set<AnyCancellable>()
     
-    init(networkManager: NetworkManaging = NetworkManager()) {
+    init(networkManager: NetworkManaging = NetworkManager(),
+         notificationManager: NotificationManaging = NotificationManager()) {
         self.networkManager = networkManager
+        self.notificationManager = notificationManager
     }
     
     public func isLocationRemote() -> Bool {

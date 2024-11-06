@@ -11,6 +11,7 @@ import UserNotifications
 public protocol NotificationManaging {
     func scheduleNotification(followUp: Bool, company: String, title: String, followUpDate: Date, id: String)
     func requestAuthNotifications(followUp: Bool)
+    func deleteNotification(identifier: String)
 }
 
 
@@ -42,4 +43,17 @@ public struct NotificationManager: NotificationManaging {
             }
         }
     }
+    
+    public func deleteNotification(identifier: String) {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
+           var identifiers: [String] = []
+           for notification:UNNotificationRequest in notificationRequests {
+               if notification.identifier == identifier {
+                  identifiers.append(notification.identifier)
+               }
+           }
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+        }
+    }
+
 }
