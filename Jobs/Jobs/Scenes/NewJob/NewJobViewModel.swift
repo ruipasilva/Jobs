@@ -12,6 +12,7 @@ import SwiftData
 import SwiftUI
 
 public final class NewJobViewModel: ObservableObject {
+    @Published public var localID = ""
     @Published public var title = ""
     @Published public var company = ""
     @Published public var jobApplicationStatus = JobApplicationStatus.notApplied
@@ -77,7 +78,10 @@ public final class NewJobViewModel: ObservableObject {
     }
  
     private func addNewJob(context: ModelContext) {
-        let newJob = Job(title: title,
+        let id = UUID()
+        localID = id.uuidString
+        let newJob = Job(localID: localID,
+                         title: title,
                          company: company,
                          notes: notes,
                          jobApplicationStatus: jobApplicationStatus,
@@ -105,11 +109,11 @@ public final class NewJobViewModel: ObservableObject {
     
     public func saveJob(context: ModelContext) {
         addNewJob(context: context)
-        
         notificationManager.scheduleNotification(followUp: followUp,
-                             company: company,
-                             title: title,
-                             followUpDate: followUpDate)
+                                                 company: company,
+                                                 title: title,
+                                                 followUpDate: followUpDate,
+                                                 id: localID)
         
         calendarManager.scheduleCalendarEvent(addEventToCalendar: addInterviewToCalendar,
                               eventAllDay: isEventAllDay,

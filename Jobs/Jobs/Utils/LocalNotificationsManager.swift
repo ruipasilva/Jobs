@@ -9,16 +9,25 @@ import Foundation
 import UserNotifications
 
 public protocol NotificationManaging {
-    func scheduleNotification(followUp: Bool, company: String, title: String, followUpDate: Date)
+    func scheduleNotification(followUp: Bool, company: String, title: String, followUpDate: Date, id: String)
     func requestAuthNotifications(followUp: Bool)
-    func scheduleNotification(company: String, title: String, followUpDate: Date)
 }
 
 
 public struct NotificationManager: NotificationManaging {
-    public func scheduleNotification(followUp: Bool, company: String, title: String, followUpDate: Date) {
+    public func scheduleNotification(followUp: Bool, company: String, title: String, followUpDate: Date, id: String) {
         if followUp {
-            scheduleNotification(company: company, title: title, followUpDate: followUpDate)
+            let content = UNMutableNotificationContent()
+
+            content.title = "Jobs: \(title) at \(company)"
+            content.body = "Have you followed up on your job application?"
+            content.sound = UNNotificationSound.default
+            
+            let triggerDate = Calendar.current.dateComponents([.month, .day, .hour, .minute], from: followUpDate)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+
+            let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request)
         }
     }
     
@@ -32,19 +41,5 @@ public struct NotificationManager: NotificationManaging {
                 }
             }
         }
-    }
-
-    public func scheduleNotification(company: String, title: String, followUpDate: Date) {
-        let content = UNMutableNotificationContent()
-
-        content.title = "Jobs: \(title) at \(company)"
-        content.body = "Have you followed up on your job application?"
-        content.sound = UNNotificationSound.default
-        
-        let triggerDate = Calendar.current.dateComponents([.month, .day, .hour, .minute], from: followUpDate)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request)
     }
 }
