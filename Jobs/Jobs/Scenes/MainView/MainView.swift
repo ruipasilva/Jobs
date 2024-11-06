@@ -9,45 +9,41 @@ import SwiftUI
 import SwiftData
 
 struct MainView: View {
-    @ObservedObject private var appViewModel: MainViewViewModel
+    @StateObject private var mainViewModel = MainViewViewModel()
     @Query(sort: \Job.company) private var jobs: [Job]
     @AppStorage("sortOrdering") var sortOrdering: SortOrdering = .title
     @State var ascendingDescending: SortOrder = .forward
     
-    public init(appViewModel: MainViewViewModel) {
-        self.appViewModel = appViewModel
-    }
-    
     var body: some View {
         NavigationStack {
-            JobListView(appViewModel: appViewModel,
-                        sortOrder: appViewModel.sortOrdering,
-                        filterString: appViewModel.filter)
+            JobListView(mainViewModel: mainViewModel,
+                        sortOrder: mainViewModel.sortOrdering,
+                        filterString: mainViewModel.filter)
                 .padding(.bottom, 10)
                 .background(Color(UIColor.systemBackground))
-                .searchable(text: $appViewModel.filter, prompt: "Search for companies or job titles")
+                .searchable(text: $mainViewModel.filter, prompt: "Search for companies or job titles")
                 .toolbar {
                     toolbarTrailing
                     toolBarLeading
                 }
-                .sheet(isPresented: $appViewModel.isShowingNewJob) {
-                    NewJobView(newJobViewModel: NewJobViewModel(networkManager: appViewModel.networkManager))
+                .sheet(isPresented: $mainViewModel.isShowingNewJob) {
+                    NewJobView(newJobViewModel: NewJobViewModel(networkManager: mainViewModel.networkManager))
                 }
                 .navigationTitle("Your Jobs")
         }
         .tint(.mint)
         .onAppear(perform: {
-            appViewModel.sortOrdering = sortOrdering
+            mainViewModel.sortOrdering = sortOrdering
         })
-        .onChange(of: appViewModel.sortOrdering) { oldValue, newValue in
-            sortOrdering = appViewModel.sortOrdering
+        .onChange(of: mainViewModel.sortOrdering) { oldValue, newValue in
+            sortOrdering = mainViewModel.sortOrdering
         }
     }
     
     private var toolBarLeading: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             Menu {
-                Picker("Sort", selection: $appViewModel.sortOrdering) {
+                Picker("Sort", selection: $mainViewModel.sortOrdering) {
                     ForEach(SortOrdering.allCases) {
                         Text($0.status)
                     }
@@ -55,13 +51,13 @@ struct MainView: View {
                 
                 Section("Order") {
                     Button(action: {
-                        appViewModel.sortAscendingOrDescending(order: .forward)
+                        mainViewModel.sortAscendingOrDescending(order: .forward)
                     }, label: {
                         Label("Ascending", systemImage: "arrow.down")
                     })
                     
                     Button(action: {
-                        appViewModel.sortAscendingOrDescending(order: .reverse)
+                        mainViewModel.sortAscendingOrDescending(order: .reverse)
                     }, label: {
                         Label("Descending", systemImage: "arrow.up")
                     })
@@ -76,7 +72,7 @@ struct MainView: View {
     private var toolbarTrailing: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button(action: {
-                appViewModel.showNewJobSheet()
+                mainViewModel.showNewJobSheet()
             }, label: {
                 Image(systemName: "plus")
             })

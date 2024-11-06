@@ -36,6 +36,7 @@
 		69D583742C39A46900084C5E /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583732C39A46900084C5E /* OverView.swift */; };
 		69D583762C39A4F100084C5E /* OverViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583752C39A4F100084C5E /* OverViewViewModel.swift */; };
 		69D5837A2C3DD84700084C5E /* WorkingDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583792C3DD84700084C5E /* WorkingDaysView.swift */; };
+		69F725B12CD8E8A50064C999 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B02CD8E8A50064C999 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		69D583732C39A46900084C5E /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
 		69D583752C39A4F100084C5E /* OverViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverViewViewModel.swift; sourceTree = "<group>"; };
 		69D583792C3DD84700084C5E /* WorkingDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingDaysView.swift; sourceTree = "<group>"; };
+		69F725B02CD8E8A50064C999 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			children = (
 				69352EBF2BBC242100B8A77B /* MainView */,
 				69D583722C39A45900084C5E /* Overview */,
+				69F725B22CD8E8B10064C999 /* Settings */,
 				69352EBD2BBC23E500B8A77B /* EditJob */,
 				69352EBC2BBC23D900B8A77B /* NewJob */,
 			);
@@ -220,6 +223,14 @@
 			path = Overview;
 			sourceTree = "<group>";
 		};
+		69F725B22CD8E8B10064C999 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				69F725B02CD8E8A50064C999 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -311,6 +322,7 @@
 				699750DB2B614E61000EBCD1 /* JobListView.swift in Sources */,
 				6974A1102C8E495900570472 /* CellBackgroundModifier.swift in Sources */,
 				699750D52B5FD7E1000EBCD1 /* Job.swift in Sources */,
+				69F725B12CD8E8A50064C999 /* SettingsView.swift in Sources */,
 				699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */,
 				69352ECF2BBEBB6C00B8A77B /* LogoOptionsViewModel.swift in Sources */,
 				69984B7D2BED7445002C23F2 /* TabViewRoot.swift in Sources */,

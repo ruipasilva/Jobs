@@ -13,22 +13,22 @@ struct JobListView: View {
     @Environment(\.modelContext) private var context
     @Query private var jobs: [Job]
     
-    init(appViewModel: MainViewViewModel,
+    init(mainViewModel: MainViewViewModel,
          sortOrder: SortOrdering,
          filterString: String) {
-        self.appViewModel = appViewModel
+        self.appViewModel = mainViewModel
         
         let sortDescriptors: [SortDescriptor<Job>] = switch sortOrder {
         case .status:
-            [SortDescriptor(\Job.jobApplicationStatusPrivate, order: appViewModel.ascendingDescending), SortDescriptor(\Job.dateAdded)]
+            [SortDescriptor(\Job.jobApplicationStatusPrivate, order: mainViewModel.ascendingDescending), SortDescriptor(\Job.dateAdded)]
         case .title:
-            [SortDescriptor(\Job.title, order: appViewModel.ascendingDescending)]
+            [SortDescriptor(\Job.title, order: mainViewModel.ascendingDescending)]
         case .company:
-            [SortDescriptor(\Job.company, order: appViewModel.ascendingDescending)]
+            [SortDescriptor(\Job.company, order: mainViewModel.ascendingDescending)]
         case .salary:
-            [SortDescriptor(\Job.salary, order: appViewModel.ascendingDescending)]
+            [SortDescriptor(\Job.salary, order: mainViewModel.ascendingDescending)]
         case .dateAdded:
-            [SortDescriptor(\Job.dateAdded, order: appViewModel.ascendingDescending)]
+            [SortDescriptor(\Job.dateAdded, order: mainViewModel.ascendingDescending)]
         }
         let predicate = #Predicate<Job> { job in
             job.company.localizedStandardContains(filterString) ||

@@ -8,5 +8,5 @@
 import Foundation
 
 public final class OverViewViewModel: ObservableObject {
-    
+    @Published public var isShowingSettings = false
 }
