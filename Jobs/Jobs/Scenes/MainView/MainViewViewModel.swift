@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import Factory
 
 public final class MainViewViewModel: ObservableObject {
     @Published public var isShowingNewJob = false
@@ -17,17 +18,9 @@ public final class MainViewViewModel: ObservableObject {
     @Published public var isShowingApplied = false
     @Published public var isShowingInterviewing = false
     
-    public let networkManager: NetworkManaging
-    public let calendarManager: CalendarManaging
-    public let notificationManager: NotificationManaging
-    
-    init(networkManager: NetworkManaging = NetworkManager(),
-         calendarManager: CalendarManaging = CalendarManager(),
-         notificationManager: NotificationManaging = NotificationManager()) {
-        self.networkManager = networkManager
-        self.calendarManager = calendarManager
-        self.notificationManager = notificationManager
-    }
+    @Injected(\.networkManager) private var networkManager
+    @Injected(\.notificationManager) private var notificationManager
+    @Injected(\.calendarManager) private var calendarManager
     
     public func sortListOrder(sorting: SortOrdering) {
         self.sortOrdering = sorting

@@ -9,7 +9,7 @@ import Foundation
 import UserNotifications
 import EventKit
 import SwiftData
-import SwiftUI
+import Factory
 
 public final class NewJobViewModel: ObservableObject {
     @Published public var localID = ""
@@ -40,17 +40,9 @@ public final class NewJobViewModel: ObservableObject {
     
     public let workingDays: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri",]
     
-    private let networkManager: NetworkManaging
-    public let calendarManager: CalendarManaging
-    public let notificationManager: NotificationManaging
-    
-    public init(networkManager: NetworkManaging,
-                calendarManager: CalendarManaging,
-                notificationManager: NotificationManaging) {
-        self.networkManager = networkManager
-        self.calendarManager = calendarManager
-        self.notificationManager = notificationManager
-    }
+    @Injected(\.networkManager) private var networkManager
+    @Injected(\.calendarManager) public var calendarManager
+    @Injected(\.notificationManager) public var notificationManager
 
     public func isTitleOrCompanyEmpty() -> Bool {
         return title.isEmpty || company.isEmpty

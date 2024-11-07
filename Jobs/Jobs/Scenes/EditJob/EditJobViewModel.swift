@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import Factory
 // SwiftUI usage in View Model explained below in the @AppStorage declaration
 import SwiftUI
 
@@ -46,17 +47,12 @@ public final class EditJobViewModel: ObservableObject {
     @AppStorage("count") var count: Int = 0
     
     public let workingDays: [String] = ["Mon","Tue","Wed","Thu","Fri"]
-    public let networkManager: NetworkManaging
-    public let notificationManager: NotificationManaging
     public let editTip = EditTip()
     
-    private var subcriptions = Set<AnyCancellable>()
+    @Injected(\.networkManager) private var networkManager
+    @Injected(\.notificationManager) private var notificationManager
     
-    init(networkManager: NetworkManaging = NetworkManager(),
-         notificationManager: NotificationManaging = NotificationManager()) {
-        self.networkManager = networkManager
-        self.notificationManager = notificationManager
-    }
+    private var subcriptions = Set<AnyCancellable>()
     
     public func isLocationRemote() -> Bool {
         return locationType == .remote
@@ -116,7 +112,7 @@ public final class EditJobViewModel: ObservableObject {
     }
     
     public func getLogoOptionsViewModel() -> LogoOptionsViewModel {
-        let viewModel = LogoOptionsViewModel(networkManager: networkManager)
+        let viewModel = LogoOptionsViewModel()
         
         viewModel.subject
             .sink { [weak self] job in

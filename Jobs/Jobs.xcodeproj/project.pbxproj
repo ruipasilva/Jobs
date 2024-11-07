@@ -39,6 +39,8 @@
 		69F725B12CD8E8A50064C999 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B02CD8E8A50064C999 /* SettingsView.swift */; };
 		69F725B42CDBFD710064C999 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B32CDBFD710064C999 /* CalendarManager.swift */; };
 		69F725B62CDBFFA30064C999 /* LocalNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B52CDBFFA30064C999 /* LocalNotificationsManager.swift */; };
+		69F725B92CDCFE510064C999 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 69F725B82CDCFE510064C999 /* Factory */; };
+		69F725BB2CDCFEB10064C999 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725BA2CDCFEB10064C999 /* DependencyContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,7 @@
 		69F725B02CD8E8A50064C999 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		69F725B32CDBFD710064C999 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		69F725B52CDBFFA30064C999 /* LocalNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsManager.swift; sourceTree = "<group>"; };
+		69F725BA2CDCFEB10064C999 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69F725B92CDCFE510064C999 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +98,7 @@
 		69352EBB2BBC23C000B8A77B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				69F725BF2CDD02C30064C999 /* Shared */,
 				69352EBF2BBC242100B8A77B /* MainView */,
 				69D583722C39A45900084C5E /* Overview */,
 				69F725B22CD8E8B10064C999 /* Settings */,
@@ -147,15 +152,8 @@
 		69352EC02BBC245100B8A77B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				698006742BB37DF9007C725E /* FloatingTextField.swift */,
-				69352EC62BBD6DAC00B8A77B /* NetworkManager.swift */,
-				69F725B32CDBFD710064C999 /* CalendarManager.swift */,
-				69F725B52CDBFFA30064C999 /* LocalNotificationsManager.swift */,
-				69352ECA2BBD71EC00B8A77B /* NetworkHelpers.swift */,
-				6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */,
-				696208522B6A891B0045DD39 /* JobHelpers.swift */,
-				69D583792C3DD84700084C5E /* WorkingDaysView.swift */,
-				6974A10F2C8E495900570472 /* CellBackgroundModifier.swift */,
+				69F725BD2CDD01610064C999 /* Containers */,
+				69F725C02CDD02F10064C999 /* Helpers */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -237,6 +235,53 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		69F725BC2CDD015B0064C999 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				69352EC62BBD6DAC00B8A77B /* NetworkManager.swift */,
+				69F725B32CDBFD710064C999 /* CalendarManager.swift */,
+				69F725B52CDBFFA30064C999 /* LocalNotificationsManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		69F725BD2CDD01610064C999 /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				69F725BE2CDD02980064C999 /* DependancyContainer */,
+				69F725BC2CDD015B0064C999 /* Managers */,
+			);
+			path = Containers;
+			sourceTree = "<group>";
+		};
+		69F725BE2CDD02980064C999 /* DependancyContainer */ = {
+			isa = PBXGroup;
+			children = (
+				69F725BA2CDCFEB10064C999 /* DependencyContainer.swift */,
+			);
+			path = DependancyContainer;
+			sourceTree = "<group>";
+		};
+		69F725BF2CDD02C30064C999 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				69D583792C3DD84700084C5E /* WorkingDaysView.swift */,
+				6974A10F2C8E495900570472 /* CellBackgroundModifier.swift */,
+				698006742BB37DF9007C725E /* FloatingTextField.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		69F725C02CDD02F10064C999 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				69352ECA2BBD71EC00B8A77B /* NetworkHelpers.swift */,
+				6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */,
+				696208522B6A891B0045DD39 /* JobHelpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -281,6 +326,9 @@
 				Base,
 			);
 			mainGroup = 699750B92B5ED2DC000EBCD1;
+			packageReferences = (
+				69F725B72CDCFE510064C999 /* XCRemoteSwiftPackageReference "Factory" */,
+			);
 			productRefGroup = 699750C32B5ED2DC000EBCD1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -308,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69D583742C39A46900084C5E /* OverView.swift in Sources */,
+				69F725BB2CDCFEB10064C999 /* DependencyContainer.swift in Sources */,
 				699750D92B6007AD000EBCD1 /* EditJobView.swift in Sources */,
 				69352EC92BBD6FC100B8A77B /* CompanyInfo.swift in Sources */,
 				696208532B6A891B0045DD39 /* JobHelpers.swift in Sources */,
@@ -563,6 +612,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		69F725B72CDCFE510064C999 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		69F725B82CDCFE510064C999 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69F725B72CDCFE510064C999 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 699750BA2B5ED2DC000EBCD1 /* Project object */;
 }

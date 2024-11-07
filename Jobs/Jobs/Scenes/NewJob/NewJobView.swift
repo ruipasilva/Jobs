@@ -10,12 +10,8 @@ import SwiftUI
 struct NewJobView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject private var newJobViewModel: NewJobViewModel
+    @StateObject private var newJobViewModel = NewJobViewModel()
     @FocusState private var focusState: NewJobViewModel.FocusedField?
-    
-    public init(newJobViewModel: NewJobViewModel) {
-        self.newJobViewModel = newJobViewModel
-    }
     
     var body: some View {
         NavigationStack {

@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import Factory
 
 public final class LogoOptionsViewModel: ObservableObject {
     @Published public var title: String = ""
@@ -18,11 +19,7 @@ public final class LogoOptionsViewModel: ObservableObject {
     
     @Published public var loadingLogoState: LoadingLogoState = .na
     
-    private let networkManager: NetworkManaging
-    
-    public init(networkManager: NetworkManaging) {
-        self.networkManager = networkManager
-    }
+    @Injected(\.networkManager) private var networkManager
     
     public func isTitleOrCompanyEmpty() -> Bool {
         return title.isEmpty || company.isEmpty
