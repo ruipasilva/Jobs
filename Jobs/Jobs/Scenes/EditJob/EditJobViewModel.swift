@@ -12,6 +12,8 @@ import Factory
 import SwiftUI
 
 public final class EditJobViewModel: ObservableObject {
+    @Published public var localID = ""
+    @Published public var calendarID = ""
     @Published public var title = ""
     @Published public var company = ""
     @Published public var applicationStatusPrivate = ""
@@ -85,6 +87,8 @@ public final class EditJobViewModel: ObservableObject {
         job.interviewQuestions = interviewQuestion
         job.workingDays = workingDaysToSave
         job.currencyType = currencyType
+        job.localID = localID
+        job.calendarID = calendarID
     }
     
     public func setProperties(job: Job) {
@@ -109,6 +113,8 @@ public final class EditJobViewModel: ObservableObject {
         interviewQuestion = job.interviewQuestions ?? []
         workingDaysToSave = job.workingDays
         currencyType = job.currencyType
+        localID = job.localID
+        calendarID = job.calendarID
     }
     
     public func getLogoOptionsViewModel() -> LogoOptionsViewModel {

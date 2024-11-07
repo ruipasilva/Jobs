@@ -13,6 +13,7 @@ import Factory
 
 public final class NewJobViewModel: ObservableObject {
     @Published public var localID = ""
+    @Published public var calendarID = ""
     @Published public var title = ""
     @Published public var company = ""
     @Published public var jobApplicationStatus = JobApplicationStatus.notApplied
@@ -70,9 +71,10 @@ public final class NewJobViewModel: ObservableObject {
     }
  
     private func addNewJob(context: ModelContext) {
-        let id = UUID()
-        localID = id.uuidString
-        let newJob = Job(localID: localID,
+        let localNotificationID = UUID()
+        self.localID = localNotificationID.uuidString
+        let newJob = Job(localID: self.localID,
+                         calendarID: self.calendarID,
                          title: title,
                          company: company,
                          notes: notes,
@@ -100,27 +102,18 @@ public final class NewJobViewModel: ObservableObject {
     }
     
     public func saveJob(context: ModelContext) {
-        addNewJob(context: context)
         notificationManager.scheduleNotification(followUp: followUp,
                                                  company: company,
                                                  title: title,
                                                  followUpDate: followUpDate,
                                                  id: localID)
         
-        calendarManager.scheduleCalendarEvent(addEventToCalendar: addInterviewToCalendar,
-                              eventAllDay: isEventAllDay,
-                              company: company,
-                              title: title,
-                              addToCalendarDate: addInterviewToCalendarDate)
-    }
-    
-    enum FocusedField {
-        case companyName
-        case jobTitle
-        case recruiterName
-        case recruiterEmail
-        case recruiterNumber
-        case url
-        case notes
+       calendarManager.scheduleCalendarEvent(addEventToCalendar: addInterviewToCalendar,
+                                              eventAllDay: isEventAllDay,
+                                              company: company,
+                                              title: title,
+                                              addToCalendarDate: addInterviewToCalendarDate,
+                                              localIdentifier: &calendarID)
+        addNewJob(context: context)
     }
 }
