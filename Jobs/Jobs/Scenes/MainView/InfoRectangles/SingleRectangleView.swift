@@ -52,7 +52,6 @@ struct SingleRectangleView: View {
                     .bold()
                     .foregroundColor(Color(UIColor.label))
             }
-            
             Spacer()
             Text(interviewStatus)
                 .font(.body)

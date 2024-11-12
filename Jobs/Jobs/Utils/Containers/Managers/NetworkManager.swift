@@ -11,7 +11,7 @@ public protocol NetworkManaging {
     func fetchData(query: String) async throws -> [CompanyInfo]
 }
 
-public struct NetworkManager: NetworkManaging {
+public class NetworkManager: NetworkManaging {
     
     public func fetchData(query: String) async throws -> [CompanyInfo] {
         let imageURL = "https://autocomplete.clearbit.com/v1/companies/suggest?query=:\(query)"

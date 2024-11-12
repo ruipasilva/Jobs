@@ -12,8 +12,7 @@ import Factory
 import SwiftUI
 
 public final class EditJobViewModel: ObservableObject {
-    @Published public var localID = ""
-    @Published public var calendarID = ""
+    @Published public var localNotificationID = ""
     @Published public var title = ""
     @Published public var company = ""
     @Published public var applicationStatusPrivate = ""
@@ -52,7 +51,8 @@ public final class EditJobViewModel: ObservableObject {
     public let editTip = EditTip()
     
     @Injected(\.networkManager) private var networkManager
-    @Injected(\.notificationManager) private var notificationManager
+    @Injected(\.notificationManager) public var notificationManager
+    @Injected(\.calendarManager) public var calendarManager
     
     private var subcriptions = Set<AnyCancellable>()
     
@@ -87,8 +87,7 @@ public final class EditJobViewModel: ObservableObject {
         job.interviewQuestions = interviewQuestion
         job.workingDays = workingDaysToSave
         job.currencyType = currencyType
-        job.localID = localID
-        job.calendarID = calendarID
+        job.localNotificationID = localNotificationID
     }
     
     public func setProperties(job: Job) {
@@ -113,8 +112,7 @@ public final class EditJobViewModel: ObservableObject {
         interviewQuestion = job.interviewQuestions ?? []
         workingDaysToSave = job.workingDays
         currencyType = job.currencyType
-        localID = job.localID
-        calendarID = job.calendarID
+        localNotificationID = job.localNotificationID ?? ""
     }
     
     public func getLogoOptionsViewModel() -> LogoOptionsViewModel {

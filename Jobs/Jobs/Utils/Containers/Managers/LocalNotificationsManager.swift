@@ -9,15 +9,14 @@ import Foundation
 import UserNotifications
 
 public protocol NotificationManaging {
-    func scheduleNotification(followUp: Bool, company: String, title: String, followUpDate: Date, id: String)
-    func requestAuthNotifications(followUp: Bool)
-    func deleteNotification(identifier: String)
+    func scheduleNotification(company: String, title: String, followUpDate: Date, id: inout String)
+    func requestNotificationAccess(followUp: Bool)
+    func deleteNotification(identifier: inout String)
 }
 
 
-public struct NotificationManager: NotificationManaging {
-    public func scheduleNotification(followUp: Bool, company: String, title: String, followUpDate: Date, id: String) {
-        if followUp {
+public class NotificationManager: NotificationManaging {
+    public func scheduleNotification(company: String, title: String, followUpDate: Date, id: inout String) {
             let content = UNMutableNotificationContent()
 
             content.title = "Jobs: \(title) at \(company)"
@@ -27,12 +26,12 @@ public struct NotificationManager: NotificationManaging {
             let triggerDate = Calendar.current.dateComponents([.month, .day, .hour, .minute], from: followUpDate)
             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
 
+            id = UUID().uuidString
             let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request)
-        }
     }
     
-    public func requestAuthNotifications(followUp: Bool) {
+    public func requestNotificationAccess(followUp: Bool) {
         if followUp {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
                 if success {
@@ -44,16 +43,10 @@ public struct NotificationManager: NotificationManaging {
         }
     }
     
-    public func deleteNotification(identifier: String) {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
-           var identifiers: [String] = []
-           for notification:UNNotificationRequest in notificationRequests {
-               if notification.identifier == identifier {
-                  identifiers.append(notification.identifier)
-               }
-           }
-            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
-        }
+    public func deleteNotification(identifier: inout String) {
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        identifier = ""
     }
 
 }

@@ -39,6 +39,7 @@ struct EditJobView: View {
                     recruiterInfoView()
                     notesView()
                     interviewQuestionsView()
+                    notificationAndReminders()
                 }
                 .padding(.bottom)
             }
@@ -336,6 +337,32 @@ struct EditJobView: View {
             }
             .cellBackground()
         }
+    }
+    
+    
+    // TODO: FINISH UI
+    private func notificationAndReminders() -> some View {
+                VStack(alignment: .leading) {
+                    customSectionHeader(title: "NOTIFICATIONS AND CALENDAR EVENTS")
+                    HStack(alignment: .center, spacing: 10) {
+                        Button(action: {
+                            editJobViewModel.notificationManager.deleteNotification(identifier: &job.localNotificationID!)
+                        }, label: {
+                            Text(!job.localNotificationID!.isEmpty ? "Delete Reminder" :"Add Reminder")
+                                .frame(maxWidth: .infinity)
+                        })
+                        .buttonStyle(.borderedProminent)
+                        Button(action: {
+                        }, label: {
+                            Text("Add To Calendar")
+                                .frame(maxWidth: .infinity)
+                        })
+                        .buttonStyle(.bordered)
+                    }
+                    .frame(alignment: .center)
+                    .cellPadding()
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     private func customSectionHeader(title: String) -> some View {

@@ -18,10 +18,6 @@ public final class MainViewViewModel: ObservableObject {
     @Published public var isShowingApplied = false
     @Published public var isShowingInterviewing = false
     
-    @Injected(\.networkManager) private var networkManager
-    @Injected(\.notificationManager) private var notificationManager
-    @Injected(\.calendarManager) private var calendarManager
-    
     public func sortListOrder(sorting: SortOrdering) {
         self.sortOrdering = sorting
     }
@@ -34,6 +30,7 @@ public final class MainViewViewModel: ObservableObject {
         isShowingNewJob = true
     }
     
+    @MainActor
     public func setApplicationStatus(job: Job, status: JobApplicationStatus) {
         job.jobApplicationStatus = status
         job.jobApplicationStatusPrivate = status.status

@@ -31,7 +31,7 @@ struct NewJobView: View {
             .navigationTitle("New Job")
             .navigationBarTitleDisplayMode(.inline)
             .onChange(of: newJobViewModel.followUp) { _, _ in
-                newJobViewModel.notificationManager.requestAuthNotifications(followUp: newJobViewModel.followUp)
+                newJobViewModel.notificationManager.requestNotificationAccess(followUp: newJobViewModel.followUp)
             }
             .onChange(of: newJobViewModel.addInterviewToCalendar, { _, _ in
                 Task {

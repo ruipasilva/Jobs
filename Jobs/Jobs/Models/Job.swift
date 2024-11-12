@@ -28,8 +28,7 @@ public final class InterviewQuestion: Hashable {
 @Model
 public final class Job {
     // All properties need a default value as cloudKit needs it
-    var localID: String = ""
-    var calendarID: String = ""
+    var localNotificationID: String?
     var title: String = ""
     var company: String = ""
     var dateAdded: Date = Date.now
@@ -54,8 +53,7 @@ public final class Job {
     var workingDays: [String] = []
     var currencyType: CurrencyType = CurrencyType.dolar
     
-    init(localID: String,
-         calendarID: String,
+    init(localNotificationID: String? = nil,
          title: String,
          company: String,
          dateAdded: Date = Date.now,
@@ -79,8 +77,7 @@ public final class Job {
          interviewQuestions: [InterviewQuestion]? = nil,
          workingDays: [String],
          currencyType: CurrencyType) {
-        self.localID = localID
-        self.calendarID = calendarID
+        self.localNotificationID = localNotificationID
         self.title = title
         self.company = company
         self.dateAdded = dateAdded

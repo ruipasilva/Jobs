@@ -12,8 +12,7 @@ import SwiftData
 import Factory
 
 public final class NewJobViewModel: ObservableObject {
-    @Published public var localID = ""
-    @Published public var calendarID = ""
+    @Published public var localNotificationID = ""
     @Published public var title = ""
     @Published public var company = ""
     @Published public var jobApplicationStatus = JobApplicationStatus.notApplied
@@ -71,10 +70,7 @@ public final class NewJobViewModel: ObservableObject {
     }
  
     private func addNewJob(context: ModelContext) {
-        let localNotificationID = UUID()
-        self.localID = localNotificationID.uuidString
-        let newJob = Job(localID: self.localID,
-                         calendarID: self.calendarID,
+        let newJob = Job(localNotificationID: self.localNotificationID,
                          title: title,
                          company: company,
                          notes: notes,
@@ -102,18 +98,20 @@ public final class NewJobViewModel: ObservableObject {
     }
     
     public func saveJob(context: ModelContext) {
-        notificationManager.scheduleNotification(followUp: followUp,
-                                                 company: company,
-                                                 title: title,
-                                                 followUpDate: followUpDate,
-                                                 id: localID)
+        if followUp {
+            notificationManager.scheduleNotification(company: company,
+                                                     title: title,
+                                                     followUpDate: followUpDate,
+                                                     id: &localNotificationID)
+        }
         
-       calendarManager.scheduleCalendarEvent(addEventToCalendar: addInterviewToCalendar,
-                                              eventAllDay: isEventAllDay,
-                                              company: company,
-                                              title: title,
-                                              addToCalendarDate: addInterviewToCalendarDate,
-                                              localIdentifier: &calendarID)
+        if addInterviewToCalendar {
+            calendarManager.scheduleCalendarEvent(eventAllDay: isEventAllDay,
+                                                  company: company,
+                                                  title: title,
+                                                  addToCalendarDate: addInterviewToCalendarDate)
+        }
+        
         addNewJob(context: context)
     }
 }

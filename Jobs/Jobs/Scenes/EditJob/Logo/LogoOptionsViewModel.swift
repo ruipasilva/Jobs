@@ -25,6 +25,7 @@ public final class LogoOptionsViewModel: ObservableObject {
         return title.isEmpty || company.isEmpty
     }
     
+    @MainActor
     public func setProperties(job: Job) {
         title = job.title
         company = job.company
@@ -32,6 +33,7 @@ public final class LogoOptionsViewModel: ObservableObject {
         companyWebsite = job.companyWebsite
     }
     
+    @MainActor
     public func updateJob(job: Job) {
         job.title = title
         job.company = company

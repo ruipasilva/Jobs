@@ -144,8 +144,8 @@
 			children = (
 				699750C72B5ED2DC000EBCD1 /* MainView.swift */,
 				699750DA2B614E61000EBCD1 /* JobListView.swift */,
-				696208562B6A98730045DD39 /* MainViewViewModel.swift */,
 				69352EB92BBB2C4B00B8A77B /* MainListCellView.swift */,
+				696208562B6A98730045DD39 /* MainViewViewModel.swift */,
 				69352EBE2BBC23F400B8A77B /* InfoRectangles */,
 			);
 			path = MainView;
@@ -160,14 +160,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		69352EC52BBC695000B8A77B /* Model */ = {
+		69352EC52BBC695000B8A77B /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				699750D42B5FD7E1000EBCD1 /* Job.swift */,
 				69352ED02BBF603100B8A77B /* EditTip.swift */,
 				69352EC82BBD6FC100B8A77B /* CompanyInfo.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		6975514F2C47E34700279021 /* Logo */ = {
@@ -202,7 +202,7 @@
 				696208542B6A8F620045DD39 /* JobsDebug.entitlements */,
 				699750C52B5ED2DC000EBCD1 /* JobsApp.swift */,
 				69984B7C2BED7445002C23F2 /* TabViewRoot.swift */,
-				69352EC52BBC695000B8A77B /* Model */,
+				69352EC52BBC695000B8A77B /* Models */,
 				69352EBB2BBC23C000B8A77B /* Scenes */,
 				69352EC02BBC245100B8A77B /* Utils */,
 				699750C92B5ED2DD000EBCD1 /* Assets.xcassets */,

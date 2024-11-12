@@ -13,17 +13,16 @@ public protocol CalendarManaging {
     func addReminderToCalendar(eventAllDay: Bool,
                                company: String,
                                title: String,
-                               addToCalendarDate: Date,
-                               localIdentifier: inout String)
-    func scheduleCalendarEvent(addEventToCalendar: Bool,
-                               eventAllDay: Bool,
+                               addToCalendarDate: Date)
+    
+    func scheduleCalendarEvent(eventAllDay: Bool,
                                company: String,
                                title: String,
-                               addToCalendarDate: Date,
-                               localIdentifier: inout String)
+                               addToCalendarDate: Date)
+    
 }
 
-public struct CalendarManager: CalendarManaging {
+public class CalendarManager: CalendarManaging {
     public func requestAuthCalendar(addInterviewToCalendar: Bool) async {
         if addInterviewToCalendar {
             let eventStore = EKEventStore()
@@ -35,7 +34,7 @@ public struct CalendarManager: CalendarManaging {
         }
     }
     
-    public func addReminderToCalendar(eventAllDay: Bool, company: String, title: String, addToCalendarDate: Date, localIdentifier: inout String) {
+    public func addReminderToCalendar(eventAllDay: Bool, company: String, title: String, addToCalendarDate: Date) {
         let eventStore = EKEventStore()
         let event = EKEvent(eventStore: eventStore)
         event.title = "Interview with \(company)"
@@ -46,27 +45,14 @@ public struct CalendarManager: CalendarManaging {
         event.isAllDay = eventAllDay
         
         do {
+            
             try eventStore.save(event, span: .thisEvent)
-            localIdentifier = event.eventIdentifier
         } catch let error as NSError {
             print("failed to save event with error : \(error)")
         }
     }
     
-    public func scheduleCalendarEvent(addEventToCalendar: Bool, eventAllDay: Bool, company: String, title: String, addToCalendarDate: Date, localIdentifier: inout String) {
-        if addEventToCalendar {
-            addReminderToCalendar(eventAllDay: eventAllDay, company: company, title: title, addToCalendarDate: addToCalendarDate, localIdentifier: &localIdentifier)
-        }
-    }
-    
-    public func deleteEventById(eventID: String) async {
-        let eventStore = EKEventStore()
-        if let eventToDelete = eventStore.event(withIdentifier: eventID) {
-            do {
-                try eventStore.remove(eventToDelete, span: .thisEvent)
-            } catch {
-                print("Error deleting event: \(error.localizedDescription)")
-            }
-        }
+    public func scheduleCalendarEvent(eventAllDay: Bool, company: String, title: String, addToCalendarDate: Date) {
+        addReminderToCalendar(eventAllDay: eventAllDay, company: company, title: title, addToCalendarDate: addToCalendarDate)
     }
 }
