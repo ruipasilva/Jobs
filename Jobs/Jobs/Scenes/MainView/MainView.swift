@@ -12,7 +12,6 @@ struct MainView: View {
     @StateObject private var mainViewModel = MainViewViewModel()
     @Query(sort: \Job.company) private var jobs: [Job]
     @AppStorage("sortOrdering") var sortOrdering: SortOrdering = .dateAdded
-    @State var ascendingDescending: SortOrder = .reverse
     
     var body: some View {
         NavigationStack {

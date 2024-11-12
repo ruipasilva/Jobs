@@ -18,10 +18,6 @@ public final class MainViewViewModel: ObservableObject {
     @Published public var isShowingApplied = false
     @Published public var isShowingInterviewing = false
     
-    public func sortListOrder(sorting: SortOrdering) {
-        self.sortOrdering = sorting
-    }
-    
     public func sortAscendingOrDescending(order: SortOrder){
         ascendingDescending = order
     }
@@ -30,7 +26,6 @@ public final class MainViewViewModel: ObservableObject {
         isShowingNewJob = true
     }
     
-    @MainActor
     public func setApplicationStatus(job: Job, status: JobApplicationStatus) {
         job.jobApplicationStatus = status
         job.jobApplicationStatusPrivate = status.status

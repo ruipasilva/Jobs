@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -44,6 +44,16 @@
 		69F725C22CDD06110064C999 /* FocusField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725C12CDD06110064C999 /* FocusField.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		69D00D3F2CE3CF330072DB4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 699750BA2B5ED2DC000EBCD1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 699750C12B5ED2DC000EBCD1;
+			remoteInfo = Jobs;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		69352EB52BBB2A3200B8A77B /* SingleRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRectangleView.swift; sourceTree = "<group>"; };
 		69352EB72BBB2B7A00B8A77B /* RectanglesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectanglesView.swift; sourceTree = "<group>"; };
@@ -75,6 +85,7 @@
 		699750DA2B614E61000EBCD1 /* JobListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListView.swift; sourceTree = "<group>"; };
 		69984B7A2BD9BD3E002C23F2 /* RectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectDetailView.swift; sourceTree = "<group>"; };
 		69984B7C2BED7445002C23F2 /* TabViewRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewRoot.swift; sourceTree = "<group>"; };
+		69D00D3B2CE3CF330072DB4A /* JobsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JobsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69D583732C39A46900084C5E /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
 		69D583752C39A4F100084C5E /* OverViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverViewViewModel.swift; sourceTree = "<group>"; };
 		69D583792C3DD84700084C5E /* WorkingDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingDaysView.swift; sourceTree = "<group>"; };
@@ -85,12 +96,23 @@
 		69F725C12CDD06110064C999 /* FocusField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		69D00D3C2CE3CF330072DB4A /* JobsTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = JobsTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		699750BF2B5ED2DC000EBCD1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				69F725B92CDCFE510064C999 /* Factory in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69D00D382CE3CF330072DB4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				699750C42B5ED2DC000EBCD1 /* Jobs */,
+				69D00D3C2CE3CF330072DB4A /* JobsTests */,
 				699750C32B5ED2DC000EBCD1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -191,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				699750C22B5ED2DC000EBCD1 /* Jobs.app */,
+				69D00D3B2CE3CF330072DB4A /* JobsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -305,6 +329,29 @@
 			productReference = 699750C22B5ED2DC000EBCD1 /* Jobs.app */;
 			productType = "com.apple.product-type.application";
 		};
+		69D00D3A2CE3CF330072DB4A /* JobsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69D00D412CE3CF330072DB4A /* Build configuration list for PBXNativeTarget "JobsTests" */;
+			buildPhases = (
+				69D00D372CE3CF330072DB4A /* Sources */,
+				69D00D382CE3CF330072DB4A /* Frameworks */,
+				69D00D392CE3CF330072DB4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				69D00D402CE3CF330072DB4A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				69D00D3C2CE3CF330072DB4A /* JobsTests */,
+			);
+			name = JobsTests;
+			packageProductDependencies = (
+			);
+			productName = JobsTests;
+			productReference = 69D00D3B2CE3CF330072DB4A /* JobsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -312,11 +359,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1510;
+				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					699750C12B5ED2DC000EBCD1 = {
 						CreatedOnToolsVersion = 15.1;
+					};
+					69D00D3A2CE3CF330072DB4A = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 699750C12B5ED2DC000EBCD1;
 					};
 				};
 			};
@@ -337,6 +388,7 @@
 			projectRoot = "";
 			targets = (
 				699750C12B5ED2DC000EBCD1 /* Jobs */,
+				69D00D3A2CE3CF330072DB4A /* JobsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -348,6 +400,13 @@
 			files = (
 				699750CE2B5ED2DD000EBCD1 /* Preview Assets.xcassets in Resources */,
 				699750CA2B5ED2DD000EBCD1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69D00D392CE3CF330072DB4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,7 +452,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		69D00D372CE3CF330072DB4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		69D00D402CE3CF330072DB4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 699750C12B5ED2DC000EBCD1 /* Jobs */;
+			targetProxy = 69D00D3F2CE3CF330072DB4A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		699750CF2B5ED2DD000EBCD1 /* Debug */ = {
@@ -594,6 +668,47 @@
 			};
 			name = Release;
 		};
+		69D00D422CE3CF330072DB4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9FVDFCLP22;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = RuiSilva.JobsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Jobs.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Jobs";
+			};
+			name = Debug;
+		};
+		69D00D432CE3CF330072DB4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9FVDFCLP22;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = RuiSilva.JobsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Jobs.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Jobs";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -611,6 +726,15 @@
 			buildConfigurations = (
 				699750D22B5ED2DD000EBCD1 /* Debug */,
 				699750D32B5ED2DD000EBCD1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69D00D412CE3CF330072DB4A /* Build configuration list for PBXNativeTarget "JobsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69D00D422CE3CF330072DB4A /* Debug */,
+				69D00D432CE3CF330072DB4A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

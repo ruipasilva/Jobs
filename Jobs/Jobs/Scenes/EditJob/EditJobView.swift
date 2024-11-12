@@ -62,8 +62,7 @@ struct EditJobView: View {
             toolbarTrailing
         }
         
-        /// Code to uncomment when work on maps functionality
-        
+        // TODO: uncomment when work on maps functionality
 //        .actionSheet(isPresented: $showingSheet) {
 //                    let latitude = 45.5088
 //                    let longitude = -73.554
