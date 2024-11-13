@@ -11,28 +11,9 @@ import SwiftData
 @testable import Jobs
 
 final class NewJobViewModelTests: XCTestCase {
+    typealias Mocks = JobMock
     
     private let sut = NewJobViewModel()
-    
-    private let testJob = Job(title: "Title",
-                              company: "Company",
-                              notes: "Notes",
-                              jobApplicationStatus: .notApplied,
-                              jobApplicationStatusPrivate: "Status",
-                              salary: "Salary",
-                              location: "Location",
-                              recruiterName: "RecruiterName",
-                              recruiterNumber: "RecruiterNumber",
-                              recruiterEmail: "RecruiterEmail",
-                              followUp: false,
-                              addToCalendar: false,
-                              isEventAllDay: false,
-                              jobURLPosting: "URL",
-                              logoURL: "LogoURL",
-                              companyWebsite: "CompanyURL",
-                              workingDays: [],
-                              currencyType: .Euro)
-    
     
     override func setUp() {
         super.setUp()
