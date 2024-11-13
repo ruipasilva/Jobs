@@ -6,30 +6,53 @@
 //
 
 import XCTest
+import Factory
+import SwiftData
+@testable import Jobs
 
 final class NewJobViewModelTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    private let sut = NewJobViewModel()
+    
+    private let testJob = Job(title: "Title",
+                          company: "Company",
+                          notes: "Notes",
+                          jobApplicationStatus: .notApplied,
+                          jobApplicationStatusPrivate: "Status",
+                          salary: "Salary",
+                          location: "Location",
+                          recruiterName: "RecruiterName",
+                          recruiterNumber: "RecruiterNumber",
+                          recruiterEmail: "RecruiterEmail",
+                          followUp: false,
+                          addToCalendar: false,
+                          isEventAllDay: false,
+                          jobURLPosting: "URL",
+                          logoURL: "LogoURL",
+                          companyWebsite: "CompanyURL",
+                          workingDays: [],
+                          currencyType: .Euro)
+    
+    
+    override func setUp() {
+        super.setUp()
+        Container.shared.reset()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    @MainActor func test_WhenSaveJob_ThenSaveJob() throws {
+        let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Job.self, configurations: configuration)
+        let context = container.mainContext
+    
+        sut.saveJob(context: context)
+        
+        XCTAssertEqual(context.insertedModelsArray.count, 1)
+        
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+    
+    override func setUpWithError() throws {}
+    
+    override func tearDownWithError() throws {}
+    
+    
 }

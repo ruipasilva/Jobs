@@ -61,8 +61,9 @@ public final class NewJobViewModel: ObservableObject {
         do {
             let logo = try await networkManager.fetchData(query: company)
             
-            self.logoURL = logo.first?.logo ?? ""
-            self.companyWebsite = logo.first?.domain ?? ""
+            guard let logoPrivate = logo.first?.logo, let domainPrivate = logo.first?.domain else { return }
+            self.logoURL = logoPrivate
+            self.companyWebsite = domainPrivate
     
         } catch {
             print(error.localizedDescription)
