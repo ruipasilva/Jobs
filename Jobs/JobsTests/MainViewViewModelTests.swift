@@ -14,15 +14,11 @@ final class MainViewViewModelTests: XCTestCase {
     
     private let sut = MainViewViewModel()
     
-    override func setUpWithError() throws {}
-    
-    override func tearDownWithError() throws { }
     
     // Since we are using @Query to fetch results, we will initialize a new ModelContainer
     @MainActor func test_JobsArrayIsEmpty_WhenAppStarts() throws {
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Job.self, configurations: configuration)
-        
         let context = container.mainContext
 
         XCTAssertEqual(context.insertedModelsArray.count, 0)

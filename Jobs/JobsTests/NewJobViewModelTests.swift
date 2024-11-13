@@ -5,35 +5,48 @@
 //  Created by Rui Silva on 13/11/2024.
 //
 
-import XCTest
 import Factory
 import SwiftData
+import XCTest
+
 @testable import Jobs
 
 final class NewJobViewModelTests: XCTestCase {
-    typealias Mocks = JobMock
-    
-    private let sut = NewJobViewModel()
-    
+
+    private var networkManagerMock: NetworkManagerMock!
+    private var sut: NewJobViewModel!
+
     override func setUp() {
         super.setUp()
-        Container.shared.reset()
+
+        TestDependencyContainer.setup()
+        
+        networkManagerMock = Container.shared.networkManager() as? NetworkManagerMock
+        sut = NewJobViewModel()
     }
-    
-    @MainActor func test_WhenSaveJob_ThenSaveJob() throws {
+
+    @MainActor func test_WhenSaveJob_ThenSaveJobToContext() throws {
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Job.self, configurations: configuration)
+        let container = try ModelContainer(
+            for: Job.self, configurations: configuration)
         let context = container.mainContext
-    
+
         sut.saveJob(context: context)
-        
+
         XCTAssertEqual(context.insertedModelsArray.count, 1)
-        
     }
-    
-    override func setUpWithError() throws {}
-    
-    override func tearDownWithError() throws {}
-    
-    
+
+    override func tearDown() {
+        sut = nil
+        networkManagerMock = nil
+        super.tearDown()
+    }
+
+}
+
+class TestDependencyContainer {
+    static func setup() {
+        let container = Container.shared.networkManager
+        container.register { NetworkManagerMock() }
+    }
 }

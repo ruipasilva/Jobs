@@ -57,17 +57,18 @@ public final class NewJobViewModel: ObservableObject {
     }
 
     @MainActor
-    public func getLogo(company: String) async {
+    public func getLogo(company: String) async  {
         do {
             let logo = try await networkManager.fetchData(query: company)
 
             guard let logoPrivate = logo.first?.logo,
-                let domainPrivate = logo.first?.domain
-            else { return }
+                  let domainPrivate = logo.first?.domain else { return }
+            
             self.logoURL = logoPrivate
             self.companyWebsite = domainPrivate
 
         } catch {
+            // Not actually handling error because if fails, it will show default SFSymbol
             print(error.localizedDescription)
         }
     }
