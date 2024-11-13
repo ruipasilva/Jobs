@@ -34,7 +34,7 @@ public final class Job {
     var dateAdded: Date = Date.now
     var notes: String = ""
     var jobApplicationStatus: JobApplicationStatus = JobApplicationStatus.notApplied
-    var jobApplicationStatusPrivate: String = ""
+    var jobApplicationStatusPrivate: String = "" // Used to sort order
     var salary: String = ""
     var location: String = ""
     var locationType: LocationType = LocationType.onSite

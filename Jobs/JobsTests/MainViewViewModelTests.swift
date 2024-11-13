@@ -13,11 +13,13 @@ final class MainViewViewModelTests: XCTestCase {
     
     private let sut = MainViewViewModel()
     
+    private let job = Job(title: "Title", company: "Company", notes: "Notes", jobApplicationStatus: .notApplied, jobApplicationStatusPrivate: "Status", salary: "Salary", location: "Location", recruiterName: "RecruiterName", recruiterNumber: "RecruiterNumber", recruiterEmail: "RecruiterEmail", followUp: false, addToCalendar: false, isEventAllDay: false, jobURLPosting: "URL", logoURL: "LogoURL", companyWebsite: "CompanyURL", workingDays: [], currencyType: .Euro)
+    
     override func setUpWithError() throws {}
     
     override func tearDownWithError() throws { }
     
-    @MainActor func test_JobsArrayIsEmpty_WhenContainerisInitialized() throws {
+    @MainActor func test_JobsArrayIsEmpty_WhenContainerIsInitialized() throws {
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Job.self, configurations: configuration)
         
@@ -48,4 +50,12 @@ final class MainViewViewModelTests: XCTestCase {
         
         XCTAssertTrue(sut.isShowingNewJob)
     }
+    
+    func test_ApplicationStatus_WhenTapped() throws {
+        
+        sut.setApplicationStatus(job: job, status: .applied)
+        
+        XCTAssertEqual(job.jobApplicationStatus, .applied)
+    }
+    
 }
