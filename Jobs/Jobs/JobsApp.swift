@@ -5,28 +5,27 @@
 //  Created by Rui Silva on 22/01/2024.
 //
 
-import SwiftUI
 import SwiftData
 import TipKit
 
 @main
 struct JobsApp: App {
-    
+
     let container: ModelContainer
-    
+
     var body: some Scene {
         WindowGroup {
             TabViewRoot()
                 .task {
                     try? Tips.configure([
                         .displayFrequency(.immediate),
-                        .datastoreLocation(.applicationDefault)
+                        .datastoreLocation(.applicationDefault),
                     ])
                 }
         }
         .modelContainer(container)
     }
-    
+
     init() {
         do {
             let config = ModelConfiguration(for: Job.self, InterviewQuestion.self)

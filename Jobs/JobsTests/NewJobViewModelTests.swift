@@ -15,23 +15,23 @@ final class NewJobViewModelTests: XCTestCase {
     private let sut = NewJobViewModel()
     
     private let testJob = Job(title: "Title",
-                          company: "Company",
-                          notes: "Notes",
-                          jobApplicationStatus: .notApplied,
-                          jobApplicationStatusPrivate: "Status",
-                          salary: "Salary",
-                          location: "Location",
-                          recruiterName: "RecruiterName",
-                          recruiterNumber: "RecruiterNumber",
-                          recruiterEmail: "RecruiterEmail",
-                          followUp: false,
-                          addToCalendar: false,
-                          isEventAllDay: false,
-                          jobURLPosting: "URL",
-                          logoURL: "LogoURL",
-                          companyWebsite: "CompanyURL",
-                          workingDays: [],
-                          currencyType: .Euro)
+                              company: "Company",
+                              notes: "Notes",
+                              jobApplicationStatus: .notApplied,
+                              jobApplicationStatusPrivate: "Status",
+                              salary: "Salary",
+                              location: "Location",
+                              recruiterName: "RecruiterName",
+                              recruiterNumber: "RecruiterNumber",
+                              recruiterEmail: "RecruiterEmail",
+                              followUp: false,
+                              addToCalendar: false,
+                              isEventAllDay: false,
+                              jobURLPosting: "URL",
+                              logoURL: "LogoURL",
+                              companyWebsite: "CompanyURL",
+                              workingDays: [],
+                              currencyType: .Euro)
     
     
     override func setUp() {

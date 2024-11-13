@@ -7,11 +7,13 @@
 
 import Foundation
 
-public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable, RawRepresentable {
+public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable,
+    RawRepresentable
+{
     case notApplied, applied, started, hired, rejected
-    
+
     public var id: Self { self }
-    
+
     var status: String {
         switch self {
         case .notApplied:
@@ -30,9 +32,9 @@ public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable, R
 
 public enum LocationType: Codable, Identifiable, CaseIterable {
     case remote, onSite, hybrid
-    
+
     public var id: Self { self }
-    
+
     var type: String {
         switch self {
         case .remote:
@@ -46,14 +48,14 @@ public enum LocationType: Codable, Identifiable, CaseIterable {
 }
 
 public enum SortOrdering: Int, Identifiable, CaseIterable {
-    
+
     /// Add case status when SwiftData allows sort by enums
     case title, company, salary, status, dateAdded
-    
+
     public var id: Self {
         self
     }
-    
+
     var status: String {
         switch self {
         case .title:
@@ -70,12 +72,14 @@ public enum SortOrdering: Int, Identifiable, CaseIterable {
     }
 }
 
-public enum CurrencyType: String, Codable, Identifiable, CaseIterable, RawRepresentable {
-    
+public enum CurrencyType: String, Codable, Identifiable, CaseIterable,
+    RawRepresentable
+{
+
     case libra, dolar, Euro, yen
-    
+
     public var id: Self { self }
-    
+
     var symbol: String {
         switch self {
         case .libra:

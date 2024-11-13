@@ -10,14 +10,15 @@ import SwiftUI
 struct MainListCellView: View {
     @ObservedObject private var appViewModel: MainViewViewModel
     @Environment(\.colorScheme) var colorScheme
-    
+
     var job: Job
 
-    public init(appViewModel: MainViewViewModel, job: Job) {
+    public init(appViewModel: MainViewViewModel,
+                job: Job) {
         self.appViewModel = appViewModel
         self.job = job
     }
-    
+
     var body: some View {
         ZStack {
             roundedRectangle
@@ -25,36 +26,36 @@ struct MainListCellView: View {
                 .padding(.horizontal, 16)
         }
     }
-    
+
     private var roundedRectangle: some View {
         RoundedRectangle(cornerRadius: 8)
-//            .fill(colorScheme == .dark ? Color.init(UIColor.secondarySystemBackground) : Color.init(UIColor.systemGroupedBackground))
+            //            .fill(colorScheme == .dark ? Color.init(UIColor.secondarySystemBackground) : Color.init(UIColor.systemGroupedBackground))
             .fill(applyBackgroungColor(for: job))
     }
-    
+
     private var infoView: some View {
         HStack {
-                AsyncImage(url: URL(string: job.logoURL)) { phase in
-                    switch phase {
-                    case .empty:
-                        if job.logoURL.isEmpty {
-                            defaultImage
-                        } else {
-                            ProgressView()
-                        }
-                    case let .success(image):
-                        image
-                            .resizable()
-                            .scaledToFit()
-                            .cornerRadius(8)
-                    case .failure(_):
+            AsyncImage(url: URL(string: job.logoURL)) { phase in
+                switch phase {
+                case .empty:
+                    if job.logoURL.isEmpty {
                         defaultImage
-                    @unknown default:
-                        defaultImage
+                    } else {
+                        ProgressView()
                     }
+                case let .success(image):
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(8)
+                case .failure(_):
+                    defaultImage
+                @unknown default:
+                    defaultImage
                 }
+            }
             .frame(width: 56, height: 56)
-            
+
             VStack(alignment: .leading) {
                 HStack {
                     Text(job.company.isEmpty ? "Company Name" : job.company)
@@ -73,27 +74,50 @@ struct MainListCellView: View {
         }
         .padding(.vertical, 10)
     }
-    
+
     private var defaultImage: some View {
         Image(systemName: "suitcase")
             .resizable()
             .foregroundColor(.mint)
             .frame(width: 42, height: 38)
     }
-    
+
     private func applyBackgroungColor(for job: Job) -> LinearGradient {
         switch job.jobApplicationStatus.status {
         case "Applied":
-            return LinearGradient(gradient: Gradient(colors: [.clear, Color.init(UIColor.secondarySystemBackground), Color.init(UIColor.secondarySystemBackground), .orange.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    .clear, Color.init(UIColor.secondarySystemBackground),
+                    Color.init(UIColor.secondarySystemBackground),
+                    .orange.opacity(0.2),
+                ]), startPoint: .leading, endPoint: .trailing)
         case "Started":
-            return LinearGradient(gradient: Gradient(colors: [.clear, Color.init(UIColor.secondarySystemBackground), Color.init(UIColor.secondarySystemBackground), .mint.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    .clear, Color.init(UIColor.secondarySystemBackground),
+                    Color.init(UIColor.secondarySystemBackground),
+                    .mint.opacity(0.2),
+                ]), startPoint: .leading, endPoint: .trailing)
         case "Rejected":
-            return LinearGradient(gradient: Gradient(colors: [.clear, Color.init(UIColor.secondarySystemBackground), Color.init(UIColor.secondarySystemBackground), .red.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    .clear, Color.init(UIColor.secondarySystemBackground),
+                    Color.init(UIColor.secondarySystemBackground),
+                    .red.opacity(0.2),
+                ]), startPoint: .leading, endPoint: .trailing)
         case "Hired":
-            return LinearGradient(gradient: Gradient(colors: [.clear, Color.init(UIColor.secondarySystemBackground), Color.init(UIColor.secondarySystemBackground), .green.opacity(0.2)]), startPoint: .leading, endPoint: .trailing)
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    .clear, Color.init(UIColor.secondarySystemBackground),
+                    Color.init(UIColor.secondarySystemBackground),
+                    .green.opacity(0.2),
+                ]), startPoint: .leading, endPoint: .trailing)
         default:
-            return LinearGradient(gradient: Gradient(colors: [.clear, Color.init(UIColor.secondarySystemBackground), Color.init(UIColor.secondarySystemBackground)]), startPoint: .leading, endPoint: .trailing)
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    .clear, Color.init(UIColor.secondarySystemBackground),
+                    Color.init(UIColor.secondarySystemBackground),
+                ]), startPoint: .leading, endPoint: .trailing)
         }
     }
 }
-

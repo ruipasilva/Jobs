@@ -10,12 +10,13 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage("CurrencyType") var currencyType: CurrencyType = .dolar
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    Picker("Your preferred currency:", selection: $currencyType) {
+                    Picker("Your preferred currency:", selection: $currencyType)
+                    {
                         ForEach(CurrencyType.allCases) { currencyType in
                             Text(currencyType.rawValue)
                         }
@@ -30,7 +31,7 @@ struct SettingsView: View {
             }
         }
     }
-    
+
     private var toolbarTrailing: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button("Dismiss") {

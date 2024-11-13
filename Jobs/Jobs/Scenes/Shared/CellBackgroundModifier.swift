@@ -32,7 +32,7 @@ extension View {
         modifier(CellBackground())
             .padding(.bottom, 28)
     }
-    
+
     func cellPadding() -> some View {
         modifier(CellPadding())
     }

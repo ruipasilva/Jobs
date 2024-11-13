@@ -10,23 +10,24 @@ import SwiftUI
 struct LogoOptionsView: View {
     @ObservedObject private var logoOptionsViewModel: LogoOptionsViewModel
     @Environment(\.dismiss) private var dismiss
-    
+
     private let job: Job
-    
+
     let collums: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
-    
+
     public init(logoOptionsViewModel: LogoOptionsViewModel,
                 job: Job) {
         self.logoOptionsViewModel = logoOptionsViewModel
         self.job = job
-        
+
         logoOptionsViewModel.setProperties(job: job)
-        
+
         Task {
-            await logoOptionsViewModel.getLogos(company: logoOptionsViewModel.company)
+            await logoOptionsViewModel.getLogos(
+                company: logoOptionsViewModel.company)
         }
     }
-    
+
     var body: some View {
         NavigationStack {
             Form {
@@ -47,35 +48,42 @@ struct LogoOptionsView: View {
                     }
                 }
             }
-            
         }
     }
-    
+
     private var mainInfoView: some View {
         Section {
-            AnimatedTextField(text: $logoOptionsViewModel.company, label: {
-                Text("Company Name")
-            })
+            AnimatedTextField(
+                text: $logoOptionsViewModel.company,
+                label: {
+                    Text("Company Name")
+                }
+            )
             .onChange(of: logoOptionsViewModel.company) { _, _ in
                 Task {
-                    await logoOptionsViewModel.getLogos(company: logoOptionsViewModel.company)
+                    await logoOptionsViewModel.getLogos(
+                        company: logoOptionsViewModel.company)
                 }
                 logoOptionsViewModel.updateJob(job: job)
             }
             .submitLabel(.continue)
-            
-            AnimatedTextField(text: $logoOptionsViewModel.title, label: {
-                Text("Job Title")
-            })
-        
-            AnimatedTextField(text: $logoOptionsViewModel.companyWebsite, label: {
-                Text("Company Website")
-            })
+
+            AnimatedTextField(
+                text: $logoOptionsViewModel.title,
+                label: {
+                    Text("Job Title")
+                })
+
+            AnimatedTextField(
+                text: $logoOptionsViewModel.companyWebsite,
+                label: {
+                    Text("Company Website")
+                })
         } header: {
             Text("Main Info")
         }
     }
-    
+
     private var pickLogoView: some View {
         Group {
             if !logoOptionsViewModel.company.isEmpty {
@@ -84,13 +92,19 @@ struct LogoOptionsView: View {
                     case .na:
                         ProgressView()
                     case let .success(result):
-                            ForEach(result, id: \.logo) { data in
-                                Button(action: {
+                        ForEach(result, id: \.logo) { data in
+                            Button(
+                                action: {
                                     logoOptionsViewModel.logoURL = data.logo
-                                    logoOptionsViewModel.companyWebsite = data.domain
-                                }, label: {
+                                    logoOptionsViewModel.companyWebsite =
+                                        data.domain
+                                },
+                                label: {
                                     HStack {
-                                        AsyncImage(url: URL(string: data.logo), scale: 3) { phase in
+                                        AsyncImage(
+                                            url: URL(string: data.logo),
+                                            scale: 3
+                                        ) { phase in
                                             switch phase {
                                             case .empty:
                                                 ProgressView()
@@ -99,40 +113,54 @@ struct LogoOptionsView: View {
                                                     .cornerRadius(8)
                                                     .shadow(radius: 2)
                                             case .failure(_):
-                                                Image(systemName: "suitcase.fill")
-                                                    .controlSize(.large)
+                                                Image(
+                                                    systemName: "suitcase.fill"
+                                                )
+                                                .controlSize(.large)
                                             @unknown default:
-                                                Image(systemName: "suitcase.fill")
+                                                Image(
+                                                    systemName: "suitcase.fill")
                                             }
                                         }
-                                        
+
                                         VStack(alignment: .leading) {
                                             Text(data.name)
                                                 .font(.body)
-                                                .foregroundColor(Color.init(UIColor.label))
+                                                .foregroundColor(
+                                                    Color.init(UIColor.label)
+                                                )
                                                 .truncationMode(.tail)
                                                 .lineLimit(1)
                                             Text(data.domain)
                                                 .font(.subheadline)
-                                                .foregroundColor(Color.init(UIColor.secondaryLabel))
+                                                .foregroundColor(
+                                                    Color.init(
+                                                        UIColor.secondaryLabel))
                                         }
-                                        .foregroundStyle(Color(uiColor: .darkText))
+                                        .foregroundStyle(
+                                            Color(uiColor: .darkText)
+                                        )
                                         .padding(.leading, 6)
                                         Spacer()
-                                        if logoOptionsViewModel.logoURL == data.logo {
+                                        if logoOptionsViewModel.logoURL
+                                            == data.logo
+                                        {
                                             Text("Current")
                                                 .padding(4)
-                                                .foregroundColor(Color.init(UIColor.secondaryLabel))
+                                                .foregroundColor(
+                                                    Color.init(
+                                                        UIColor.secondaryLabel)
+                                                )
                                                 .cornerRadius(6)
                                         }
                                     }
                                 })
-                            }
+                        }
                     case .failed(_):
                         Text("No Logos available")
                     }
                 } header: {
-                    Text( "Please pick a logo")
+                    Text("Please pick a logo")
                 } footer: {
                     VStack(alignment: .leading) {
                         Text("Some logos might not be available.")

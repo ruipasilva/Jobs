@@ -11,7 +11,7 @@ struct FloatingTextField: View {
     let title: String
     @Binding public var text: String
     let image: String
-    
+
     var body: some View {
         HStack {
             Image(systemName: image)
@@ -19,7 +19,8 @@ struct FloatingTextField: View {
                 Text(title)
                     .foregroundColor(Color(.placeholderText))
                     .offset(y: $text.wrappedValue.isEmpty ? 0 : -25)
-                    .scaleEffect($text.wrappedValue.isEmpty ? 1 : 0.8, anchor: .leading)
+                    .scaleEffect(
+                        $text.wrappedValue.isEmpty ? 1 : 0.8, anchor: .leading)
                 TextField("", text: $text)
             }
         }
@@ -30,19 +31,19 @@ struct FloatingTextField: View {
 }
 
 public struct AnimatedTextField<Label: View>: View {
-    
+
     @Binding var text: String
     @FocusState var focusOnTextField
     public var label: Label
-    
+
     @Namespace private var titleAnimation
     @State var shouldMinimiseLabel = false
-    
+
     public init(text: Binding<String>, @ViewBuilder label: () -> Label) {
         self._text = text
         self.label = label()
     }
-    
+
     public var body: some View {
         ZStack(alignment: .leading) {
             VStack(alignment: .leading) {
@@ -57,7 +58,7 @@ public struct AnimatedTextField<Label: View>: View {
                 }
                 .focused($focusOnTextField)
             }
-            
+
             if !shouldMinimiseLabel {
                 label
                     .foregroundStyle(Color(.placeholderText))
@@ -88,4 +89,3 @@ public struct AnimatedTextField<Label: View>: View {
         Text("Name")
     }
 }
-

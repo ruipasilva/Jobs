@@ -12,11 +12,11 @@ extension Container {
     var notificationManager: Factory<NotificationManaging> {
         Factory(self) { NotificationManager() }
     }
-    
+
     var calendarManager: Factory<CalendarManaging> {
         Factory(self) { CalendarManager() }
     }
-    
+
     var networkManager: Factory<NetworkManaging> {
         Factory(self) { NetworkManager() }
     }

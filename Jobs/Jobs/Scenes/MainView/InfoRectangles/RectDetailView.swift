@@ -10,10 +10,10 @@ import SwiftUI
 struct RectDetailView: View {
     @ObservedObject private var appViewModel: MainViewViewModel
     @Environment(\.dismiss) private var dismiss
-    
+
     let jobs: [Job]
     let title: String
-    
+
     public init(appViewModel: MainViewViewModel,
                 jobs: [Job],
                 title: String) {
@@ -21,7 +21,7 @@ struct RectDetailView: View {
         self.jobs = jobs
         self.title = title
     }
-    
+
     var body: some View {
         NavigationStack {
             Group {
@@ -35,31 +35,36 @@ struct RectDetailView: View {
             .listStyle(.plain)
             .navigationTitle(jobs.isEmpty ? "" : title)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar() {
+            .toolbar {
                 toolbarTrailing
             }
         }
     }
-    
+
     private var listView: some View {
         List(jobs, id: \.company) { job in
             MainListCellView(appViewModel: appViewModel, job: job)
-                .listRowInsets(.init(top: 0, leading: 16, bottom: 8, trailing: 16))
+                .listRowInsets(
+                    .init(top: 0, leading: 16, bottom: 8, trailing: 16)
+                )
                 .listRowSeparator(.hidden)
         }
     }
-    
+
     private var emptyListView: some View {
-        ContentUnavailableView("No \(title) jobs", systemImage: "folder.badge.questionmark")
+        ContentUnavailableView(
+            "No \(title) jobs", systemImage: "folder.badge.questionmark")
     }
-    
+
     private var toolbarTrailing: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            Button(action: {
-                dismiss()
-            }, label: {
-                Text("Dismiss")
-            })
+            Button(
+                action: {
+                    dismiss()
+                },
+                label: {
+                    Text("Dismiss")
+                })
         }
     }
 }

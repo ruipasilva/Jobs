@@ -12,9 +12,10 @@ public struct EditTip: Tip {
     public var title: Text {
         Text("Wrong info or logo?")
     }
-    
+
     public var message: Text? {
-        Text("""
+        Text(
+            """
             Tap the logo to edit. Tap x to dismiss.
             """
         )

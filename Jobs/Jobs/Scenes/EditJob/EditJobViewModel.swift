@@ -5,9 +5,9 @@
 //  Created by Rui Silva on 02/04/2024.
 //
 
-import Foundation
 import Combine
 import Factory
+import Foundation
 // SwiftUI usage in View Model explained below in the @AppStorage declaration
 import SwiftUI
 
@@ -36,34 +36,34 @@ public final class EditJobViewModel: ObservableObject {
     @Published public var interviewQuestion: [InterviewQuestion] = []
     @Published public var workingDaysToSave: [String] = []
     @Published public var currencyType: CurrencyType = .dolar
-    
+
     @Published public var isShowingPasteLink = false
     @Published public var isShowingRecruiterDetails = false
     @Published public var isShowingLogoDetails = false
     @Published var isShowingWarnings: Bool = false
-    
+
     @Published public var loadingLogoState: LoadingLogoState = .na
-    
+
     // Using @AppStorage in View Model as it freezes when initialised in the View (It only happens in this view - WHY?)
     @AppStorage("count") var count: Int = 0
-    
-    public let workingDays: [String] = ["Mon","Tue","Wed","Thu","Fri"]
+
+    public let workingDays: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri"]
     public let editTip = EditTip()
-    
+
     @Injected(\.networkManager) private var networkManager
     @Injected(\.notificationManager) public var notificationManager
     @Injected(\.calendarManager) public var calendarManager
-    
+
     private var subcriptions = Set<AnyCancellable>()
-    
+
     public func isLocationRemote() -> Bool {
         return locationType == .remote
     }
-    
+
     public func isShowingJobLink() {
         isShowingPasteLink.toggle()
     }
-    
+
     public func updateJob(job: Job) {
         job.title = title
         job.company = company
@@ -89,7 +89,7 @@ public final class EditJobViewModel: ObservableObject {
         job.currencyType = currencyType
         job.localNotificationID = localNotificationID
     }
-    
+
     public func setProperties(job: Job) {
         title = job.title
         company = job.company
@@ -114,10 +114,10 @@ public final class EditJobViewModel: ObservableObject {
         currencyType = job.currencyType
         localNotificationID = job.localNotificationID ?? ""
     }
-    
+
     public func getLogoOptionsViewModel() -> LogoOptionsViewModel {
         let viewModel = LogoOptionsViewModel()
-        
+
         viewModel.subject
             .sink { [weak self] job in
                 self?.company = job.company
@@ -126,10 +126,10 @@ public final class EditJobViewModel: ObservableObject {
                 self?.companyWebsite = job.companyWebsite
             }
             .store(in: &subcriptions)
-        
+
         return viewModel
     }
-    
+
     public func setupWebsiteWarning() {
         count += 1
         isShowingWarnings = true

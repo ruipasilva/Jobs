@@ -12,8 +12,8 @@ public enum NetworkError: Error {
     case invalidData
     case invalidResponse
     case unableToComplete
-    
-    public var title: String{
+
+    public var title: String {
         switch self {
         case .invalidURL:
             "Invalid URL"
