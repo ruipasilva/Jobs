@@ -80,7 +80,6 @@ struct JobListView: View {
             }
             .padding(.bottom, -16)
             .listRowSeparator(.hidden)
-
             Section {
                 ForEach(jobs) { job in
                     ZStack {

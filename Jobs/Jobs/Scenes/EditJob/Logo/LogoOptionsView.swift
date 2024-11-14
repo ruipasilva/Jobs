@@ -11,16 +11,10 @@ struct LogoOptionsView: View {
     @ObservedObject private var logoOptionsViewModel: LogoOptionsViewModel
     @Environment(\.dismiss) private var dismiss
 
-    private let job: Job
-
-    let collums: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
-
-    public init(logoOptionsViewModel: LogoOptionsViewModel,
-                job: Job) {
+    public init(logoOptionsViewModel: LogoOptionsViewModel) {
         self.logoOptionsViewModel = logoOptionsViewModel
-        self.job = job
 
-        logoOptionsViewModel.setProperties(job: job)
+        logoOptionsViewModel.setProperties()
 
         Task {
             await logoOptionsViewModel.getLogos(
@@ -37,7 +31,7 @@ struct LogoOptionsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Update") {
-                        logoOptionsViewModel.updateJob(job: job)
+                        logoOptionsViewModel.updateJob()
                         dismiss()
                     }
                     .disabled(logoOptionsViewModel.isTitleOrCompanyEmpty())
@@ -64,7 +58,7 @@ struct LogoOptionsView: View {
                     await logoOptionsViewModel.getLogos(
                         company: logoOptionsViewModel.company)
                 }
-                logoOptionsViewModel.updateJob(job: job)
+                logoOptionsViewModel.updateJob()
             }
             .submitLabel(.continue)
 
@@ -108,6 +102,7 @@ struct LogoOptionsView: View {
                                             switch phase {
                                             case .empty:
                                                 ProgressView()
+                                                    .frame(alignment: .center)
                                             case .success(let image):
                                                 image
                                                     .cornerRadius(8)
@@ -142,9 +137,7 @@ struct LogoOptionsView: View {
                                         )
                                         .padding(.leading, 6)
                                         Spacer()
-                                        if logoOptionsViewModel.logoURL
-                                            == data.logo
-                                        {
+                                        if logoOptionsViewModel.logoURL == data.logo {
                                             Text("Current")
                                                 .padding(4)
                                                 .foregroundColor(

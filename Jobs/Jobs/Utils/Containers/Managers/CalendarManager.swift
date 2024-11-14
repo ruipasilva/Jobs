@@ -22,7 +22,7 @@ public protocol CalendarManaging {
     
 }
 
-public class CalendarManager: CalendarManaging {
+public struct CalendarManager: CalendarManaging {
     public func requestAuthCalendar(addInterviewToCalendar: Bool) async {
         if addInterviewToCalendar {
             let eventStore = EKEventStore()

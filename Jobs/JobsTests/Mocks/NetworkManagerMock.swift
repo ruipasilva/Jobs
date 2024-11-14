@@ -21,7 +21,5 @@ class NetworkManagerMock: NetworkManaging {
             throw NetworkError.invalidData
         }
     }
-    
-    
 }
 

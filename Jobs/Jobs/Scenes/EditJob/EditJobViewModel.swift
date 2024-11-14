@@ -8,8 +8,6 @@
 import Combine
 import Factory
 import Foundation
-// SwiftUI usage in View Model explained below in the @AppStorage declaration
-import SwiftUI
 
 public final class EditJobViewModel: ObservableObject {
     @Published public var localNotificationID = ""
@@ -40,21 +38,25 @@ public final class EditJobViewModel: ObservableObject {
     @Published public var isShowingPasteLink = false
     @Published public var isShowingRecruiterDetails = false
     @Published public var isShowingLogoDetails = false
-    @Published var isShowingWarnings: Bool = false
+    @Published public var isShowingWarnings: Bool = false
 
     @Published public var loadingLogoState: LoadingLogoState = .na
 
-    // Using @AppStorage in View Model as it freezes when initialised in the View (It only happens in this view - WHY?)
-    @AppStorage("count") var count: Int = 0
-
     public let workingDays: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri"]
     public let editTip = EditTip()
+    public let job: Job
 
     @Injected(\.networkManager) private var networkManager
     @Injected(\.notificationManager) public var notificationManager
     @Injected(\.calendarManager) public var calendarManager
 
     private var subcriptions = Set<AnyCancellable>()
+    
+    
+    public init(job: Job) {
+        self.job = job
+        setProperties()
+    }
 
     public func isLocationRemote() -> Bool {
         return locationType == .remote
@@ -64,7 +66,7 @@ public final class EditJobViewModel: ObservableObject {
         isShowingPasteLink.toggle()
     }
 
-    public func updateJob(job: Job) {
+    public func updateJob() {
         job.title = title
         job.company = company
         job.jobApplicationStatus = jobApplicationStatus
@@ -90,7 +92,7 @@ public final class EditJobViewModel: ObservableObject {
         job.localNotificationID = localNotificationID
     }
 
-    public func setProperties(job: Job) {
+    public func setProperties() {
         title = job.title
         company = job.company
         jobApplicationStatus = job.jobApplicationStatus
@@ -116,22 +118,17 @@ public final class EditJobViewModel: ObservableObject {
     }
 
     public func getLogoOptionsViewModel() -> LogoOptionsViewModel {
-        let viewModel = LogoOptionsViewModel()
-
+        let viewModel = LogoOptionsViewModel(job: job)
+        
         viewModel.subject
-            .sink { [weak self] job in
-                self?.company = job.company
-                self?.title = job.title
-                self?.logoURL = job.logoURL
-                self?.companyWebsite = job.companyWebsite
+            .sink { [weak self] _ in
+                // We can use unowned here instead of weak
+                // 'self' owns this combine subscription
+                // If 'self' is deallocated, the subscription is removed
+                self?.setProperties()
             }
             .store(in: &subcriptions)
 
         return viewModel
-    }
-
-    public func setupWebsiteWarning() {
-        count += 1
-        isShowingWarnings = true
     }
 }

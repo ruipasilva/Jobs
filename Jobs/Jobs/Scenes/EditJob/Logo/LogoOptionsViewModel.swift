@@ -14,6 +14,12 @@ public final class LogoOptionsViewModel: ObservableObject {
     @Published public var company: String = ""
     @Published public var logoURL: String = ""
     @Published public var companyWebsite: String = ""
+    
+    private let job: Job
+    
+    public init(job: Job) {
+        self.job = job
+    }
 
     public var subject = PassthroughSubject<Job, Never>()
 
@@ -25,14 +31,14 @@ public final class LogoOptionsViewModel: ObservableObject {
         return title.isEmpty || company.isEmpty
     }
 
-    public func setProperties(job: Job) {
+    public func setProperties() {
         title = job.title
         company = job.company
         logoURL = job.logoURL
         companyWebsite = job.companyWebsite
     }
 
-    public func updateJob(job: Job) {
+    public func updateJob() {
         job.title = title
         job.company = company
         job.logoURL = logoURL

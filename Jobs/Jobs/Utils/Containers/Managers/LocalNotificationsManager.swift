@@ -15,7 +15,7 @@ public protocol NotificationManaging {
 }
 
 
-public class NotificationManager: NotificationManaging {
+public struct NotificationManager: NotificationManaging {
     public func scheduleNotification(company: String, title: String, followUpDate: Date, id: inout String) {
             let content = UNMutableNotificationContent()
 

@@ -9,17 +9,14 @@ import SwiftUI
 import TipKit
 
 struct EditJobView: View {
-    @StateObject private var editJobViewModel = EditJobViewModel()
+    @StateObject private var editJobViewModel: EditJobViewModel
+    @AppStorage("count") var count: Int = 0
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
 
-    @State private var showingSheet = false
-
-    private let job: Job
-
     public init(job: Job) {
-        self.job = job
+        self._editJobViewModel = .init(wrappedValue: .init(job: job))
     }
 
     var body: some View {
@@ -46,7 +43,7 @@ struct EditJobView: View {
         .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
             LogoOptionsView(
                 logoOptionsViewModel:
-                    editJobViewModel.getLogoOptionsViewModel(), job: job)
+                    editJobViewModel.getLogoOptionsViewModel())
         }
         .alert(
             "Important Notice", isPresented: $editJobViewModel.isShowingWarnings
@@ -64,9 +61,6 @@ struct EditJobView: View {
             )
         }
         .background(Color(uiColor: .systemGroupedBackground))
-        .onAppear {
-            editJobViewModel.setProperties(job: job)
-        }
         .toolbar {
             toolbarTrailing
         }
@@ -141,8 +135,8 @@ struct EditJobView: View {
 
             Button(
                 action: {
-                    if editJobViewModel.count < 1 {
-                        editJobViewModel.setupWebsiteWarning()
+                    if count < 1 {
+                       setupWebsiteWarning()
                     } else {
                         openURL(
                             URL(
@@ -410,11 +404,11 @@ struct EditJobView: View {
                 Button(
                     action: {
                         editJobViewModel.notificationManager.deleteNotification(
-                            identifier: &job.localNotificationID!)
+                            identifier: &editJobViewModel.job.localNotificationID!)
                     },
                     label: {
                         Text(
-                            !job.localNotificationID!.isEmpty
+                            !editJobViewModel.job.localNotificationID!.isEmpty
                                 ? "Delete Reminder" : "Add Reminder"
                         )
                         .frame(maxWidth: .infinity)
@@ -447,9 +441,14 @@ struct EditJobView: View {
     private var toolbarTrailing: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button("Update") {
-                editJobViewModel.updateJob(job: job)
+                editJobViewModel.updateJob()
                 dismiss()
             }
         }
+    }
+    
+    private func setupWebsiteWarning() {
+        count += 1
+        editJobViewModel.isShowingWarnings = true
     }
 }
