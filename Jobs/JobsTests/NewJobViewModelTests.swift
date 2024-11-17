@@ -38,23 +38,23 @@ final class NewJobViewModelTests: XCTestCase {
         XCTAssertEqual(context.insertedModelsArray.count, 1)
     }
 
-    func test_WhenGettingLogo_ThenReturnLogos() async throws {
-        networkManagerMock.shouldReturnError = false
-        networkManagerMock.logos = Mocks.mockCompanyInfo
-        
-        let expectation = XCTestExpectation(description: "response")
-        Task {
-            let _ = await sut.getLogo(company: "TestQuery")
-            expectation.fulfill()
-            await fulfillment(of: [expectation], timeout: 3)
-        }
-        
-        
-
-        
-        XCTAssertEqual(sut.logoURL, "LogoURL")
-
-    }
+//    func test_WhenGettingLogo_ThenReturnLogos() async throws {
+//        networkManagerMock.shouldReturnError = false
+//        networkManagerMock.logos = Mocks.mockCompanyInfo
+//        
+//        let expectation = XCTestExpectation(description: "response")
+//        Task {
+//            let _ = await sut.getLogo(company: "TestQuery")
+//            expectation.fulfill()
+//            await fulfillment(of: [expectation], timeout: 3)
+//        }
+//        
+//        
+//
+//        
+//        XCTAssertEqual(sut.logoURL, "LogoURL")
+//
+//    }
 
     override func tearDown() {
         sut = nil

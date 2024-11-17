@@ -7,9 +7,7 @@
 
 import Foundation
 
-public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable,
-    RawRepresentable
-{
+public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable {
     case notApplied, applied, started, hired, rejected
 
     public var id: Self { self }

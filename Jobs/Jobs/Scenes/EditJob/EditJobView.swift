@@ -31,19 +31,18 @@ struct EditJobView: View {
                 .onTapGesture {
                     editJobViewModel.isShowingLogoDetails = true
                 }
-                statusView()
-                locationView()
-                extraInfoView()
-                recruiterInfoView()
-                notesView()
-                interviewQuestionsView()
-                notificationAndReminders()
+                statusView
+                locationView
+                extraInfoView
+                recruiterInfoView
+                notesView
+                interviewQuestionsView
+                notificationAndReminders
             }
             .padding(.bottom)
         }
         .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
-            LogoOptionsView(
-                logoOptionsViewModel:
+            LogoOptionsView(logoOptionsViewModel:
                     editJobViewModel.getLogoOptionsViewModel())
         }
         .alert(
@@ -145,8 +144,7 @@ struct EditJobView: View {
                                     "https://www.\(editJobViewModel.companyWebsite)"
                             )!)
                     }
-                },
-                label: {
+                },label: {
                     Label("Visit website", systemImage: "safari")
                         .font(.subheadline)
                         .foregroundColor(.accentColor)
@@ -158,7 +156,7 @@ struct EditJobView: View {
         }
     }
 
-    private func statusView() -> some View {
+    private var statusView: some View {
         HStack {
             Text("Status")
                 .padding(.leading)
@@ -173,7 +171,7 @@ struct EditJobView: View {
         .cellBackground()
     }
 
-    private func locationView() -> some View {
+    private var locationView: some View {
         VStack {
             HStack {
                 Text("Location")
@@ -203,7 +201,7 @@ struct EditJobView: View {
         .cellBackground()
     }
 
-    private func extraInfoView() -> some View {
+    private var extraInfoView: some View {
         VStack {
             HStack {
                 Text("Salary")
@@ -248,7 +246,7 @@ struct EditJobView: View {
         .cellBackground()
     }
 
-    private func recruiterInfoView() -> some View {
+    private var recruiterInfoView: some View {
         VStack(alignment: .leading) {
             customSectionHeader(title: "RECRUITER'S INFO")
             VStack {
@@ -321,7 +319,7 @@ struct EditJobView: View {
         }
     }
 
-    private func notesView() -> some View {
+    private var notesView: some View {
         VStack(alignment: .leading) {
             customSectionHeader(title: "YOUR NOTES")
 
@@ -332,7 +330,7 @@ struct EditJobView: View {
         }
     }
 
-    private func interviewQuestionsView() -> some View {
+    private var interviewQuestionsView: some View {
         VStack(alignment: .leading) {
             customSectionHeader(title: "INTERVIEW QUESTIONS")
             VStack(alignment: .leading) {
@@ -398,7 +396,7 @@ struct EditJobView: View {
     }
 
     // TODO: FINISH UI
-    private func notificationAndReminders() -> some View {
+    private var notificationAndReminders: some View {
         VStack(alignment: .leading) {
             customSectionHeader(title: "NOTIFICATIONS AND CALENDAR EVENTS")
             HStack(alignment: .center, spacing: 10) {
@@ -418,6 +416,7 @@ struct EditJobView: View {
                 .buttonStyle(.borderedProminent)
                 Button(
                     action: {
+                        // TODO: Button to add calendar event
                     },
                     label: {
                         Text("Add To Calendar")

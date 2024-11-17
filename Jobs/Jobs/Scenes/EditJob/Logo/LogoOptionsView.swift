@@ -95,10 +95,8 @@ struct LogoOptionsView: View {
                                 },
                                 label: {
                                     HStack {
-                                        AsyncImage(
-                                            url: URL(string: data.logo),
-                                            scale: 3
-                                        ) { phase in
+                                        AsyncImage(url: URL(string: data.logo),
+                                                   scale: 3) { phase in
                                             switch phase {
                                             case .empty:
                                                 ProgressView()

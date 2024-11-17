@@ -9,21 +9,19 @@ import SwiftData
 import SwiftUI
 
 struct JobListView: View {
-    @ObservedObject private var appViewModel: MainViewViewModel
+    @ObservedObject private var mainViewModel: MainViewViewModel
     @Environment(\.modelContext) private var context
     @Query private var jobs: [Job]
 
-    init(
-        mainViewModel: MainViewViewModel,
+    init(mainViewModel: MainViewViewModel,
         sortOrder: SortOrdering,
-        filterString: String
-    ) {
-        self.appViewModel = mainViewModel
+        filterString: String) {
+        self.mainViewModel = mainViewModel
 
         let sortDescriptors: [SortDescriptor<Job>] =
             switch sortOrder {
             case .status:
-                [SortDescriptor(\Job.jobApplicationStatusPrivate,order: mainViewModel.ascendingDescending),SortDescriptor(\Job.dateAdded)]
+                [SortDescriptor(\Job.jobApplicationStatusPrivate,order: mainViewModel.ascendingDescending), SortDescriptor(\Job.dateAdded)]
             case .title:
                 [SortDescriptor(\Job.title, order: mainViewModel.ascendingDescending)]
             case .company:
@@ -35,9 +33,7 @@ struct JobListView: View {
             }
         
         let predicate = #Predicate<Job> { job in
-            job.company.localizedStandardContains(filterString)
-                || job.title.localizedStandardContains(filterString)
-                || filterString.isEmpty
+            job.company.localizedStandardContains(filterString) || job.title.localizedStandardContains(filterString) || filterString.isEmpty
         }
         _jobs = Query(filter: predicate, sort: sortDescriptors)
     }
@@ -59,7 +55,7 @@ struct JobListView: View {
     private var jobList: some View {
         List {
             Section {
-                RectanglesView(appViewModel: appViewModel)
+                RectanglesView(mainViewModel: mainViewModel)
             }
             .padding(.bottom, -16)
             .listRowSeparator(.hidden)
@@ -67,7 +63,7 @@ struct JobListView: View {
                 ForEach(jobs) { job in
                     ZStack {
                         MainListCellView(
-                            appViewModel: appViewModel,
+                            mainViewModel: mainViewModel,
                             job: job)
                         NavigationLink {
                             EditJobView(job: job)
@@ -97,7 +93,7 @@ struct JobListView: View {
     private func makeSwipeView(job: Job) -> some View {
         Group {
             Button(action: {
-                appViewModel.setApplicationStatus(job: job, status: .applied)
+                mainViewModel.setApplicationStatus(job: job, status: .applied)
             }) {
                 Label {
                     Text("Applied")
@@ -108,7 +104,7 @@ struct JobListView: View {
             }
             
             Button(action: {
-                appViewModel.setApplicationStatus(job: job, status: .started)
+                mainViewModel.setApplicationStatus(job: job, status: .started)
             }) {
                 Label {
                     Text("Started")
@@ -118,7 +114,7 @@ struct JobListView: View {
             }
 
             Button(action: {
-                appViewModel.setApplicationStatus(job: job, status: .rejected)
+                mainViewModel.setApplicationStatus(job: job, status: .rejected)
             }) {
                 Label {
                     Text("Rejected")

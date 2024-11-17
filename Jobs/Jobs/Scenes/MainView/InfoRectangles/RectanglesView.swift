@@ -9,56 +9,56 @@ import SwiftData
 import SwiftUI
 
 struct RectanglesView: View {
-    @ObservedObject private var appViewModel: MainViewViewModel
+    @ObservedObject private var mainViewModel: MainViewViewModel
 
     @Query private var appliedJobs: [Job]
-    @Query private var ongoingJobs: [Job]
+    @Query private var startedJobs: [Job]
 
     var columns: [GridItem] {
         Array(repeating: .init(.flexible()), count: 2)
     }
 
-    public init(appViewModel: MainViewViewModel) {
-        self.appViewModel = appViewModel
+    public init(mainViewModel: MainViewViewModel) {
+        self.mainViewModel = mainViewModel
 
         let appliedFilter = #Predicate<Job> { job in
             job.jobApplicationStatusPrivate == "Applied"
         }
 
-        let ongoingFilter = #Predicate<Job> { job in
+        let startedFilter = #Predicate<Job> { job in
             job.jobApplicationStatusPrivate == "Started"
         }
 
         _appliedJobs = Query(filter: appliedFilter)
-        _ongoingJobs = Query(filter: ongoingFilter)
+        _startedJobs = Query(filter: startedFilter)
     }
 
     var body: some View {
         LazyVGrid(columns: columns, spacing: 16) {
             SingleRectangleView(
-                appViewModel: appViewModel, totalJobs: appliedJobs.count,
+                mainViewModel: mainViewModel, totalJobs: appliedJobs.count,
                 interviewStatus: JobApplicationStatus.applied.status,
                 SFSymbol: "clock", circleColor: .orange
             )
             .onTapGesture {
-                appViewModel.isShowingApplied = true
+                mainViewModel.isShowingApplied = true
             }
             SingleRectangleView(
-                appViewModel: appViewModel, totalJobs: ongoingJobs.count,
+                mainViewModel: mainViewModel, totalJobs: startedJobs.count,
                 interviewStatus: JobApplicationStatus.started.status,
                 SFSymbol: "checkmark", circleColor: .mint
             )
             .onTapGesture {
-                appViewModel.isShowingInterviewing = true
+                mainViewModel.isShowingInterviewing = true
             }
         }
-        .sheet(isPresented: $appViewModel.isShowingApplied) {
+        .sheet(isPresented: $mainViewModel.isShowingApplied) {
             RectDetailView(
-                appViewModel: appViewModel, jobs: appliedJobs, title: "Applied")
+                mainViewModel: mainViewModel, jobs: appliedJobs, title: "Applied")
         }
-        .sheet(isPresented: $appViewModel.isShowingInterviewing) {
+        .sheet(isPresented: $mainViewModel.isShowingInterviewing) {
             RectDetailView(
-                appViewModel: appViewModel, jobs: ongoingJobs, title: "started")
+                mainViewModel: mainViewModel, jobs: startedJobs, title: "started")
         }
     }
 }

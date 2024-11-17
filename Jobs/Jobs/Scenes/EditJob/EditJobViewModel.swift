@@ -56,7 +56,6 @@ public final class EditJobViewModel: ObservableObject {
 
     private var subcriptions = Set<AnyCancellable>()
     
-    
     public init(job: Job) {
         self.job = job
         setProperties()
@@ -64,10 +63,6 @@ public final class EditJobViewModel: ObservableObject {
 
     public func isLocationRemote() -> Bool {
         return locationType == .remote
-    }
-
-    public func isShowingJobLink() {
-        isShowingPasteLink.toggle()
     }
 
     public func updateJob() {

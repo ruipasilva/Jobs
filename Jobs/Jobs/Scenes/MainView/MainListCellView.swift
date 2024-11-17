@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct MainListCellView: View {
-    @ObservedObject private var appViewModel: MainViewViewModel
+    @ObservedObject private var mainViewModel: MainViewViewModel
 
-    var job: Job
+    private var job: Job
 
-    public init(appViewModel: MainViewViewModel,
+    public init(mainViewModel: MainViewViewModel,
                 job: Job) {
-        self.appViewModel = appViewModel
+        self.mainViewModel = mainViewModel
         self.job = job
     }
 

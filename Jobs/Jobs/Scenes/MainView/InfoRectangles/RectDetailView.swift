@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct RectDetailView: View {
-    @ObservedObject private var appViewModel: MainViewViewModel
+    @ObservedObject private var mainViewModel: MainViewViewModel
     @Environment(\.dismiss) private var dismiss
 
     let jobs: [Job]
     let title: String
 
-    public init(appViewModel: MainViewViewModel,
+    public init(mainViewModel: MainViewViewModel,
                 jobs: [Job],
                 title: String) {
-        self.appViewModel = appViewModel
+        self.mainViewModel = mainViewModel
         self.jobs = jobs
         self.title = title
     }
@@ -43,7 +43,7 @@ struct RectDetailView: View {
 
     private var listView: some View {
         List(jobs, id: \.company) { job in
-            MainListCellView(appViewModel: appViewModel, job: job)
+            MainListCellView(mainViewModel: mainViewModel, job: job)
                 .listRowInsets(
                     .init(top: 0, leading: 16, bottom: 8, trailing: 16)
                 )

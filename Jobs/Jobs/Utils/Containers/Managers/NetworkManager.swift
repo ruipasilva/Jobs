@@ -14,9 +14,10 @@ public protocol NetworkManaging {
 public struct NetworkManager: NetworkManaging {
 
     public func fetchData(query: String) async throws -> [CompanyInfo] {
-        let imageURL = "https://autocomplete.clearbit.com/v1/companies/suggest?query=:\(query)"
+        let baseURL = "https://autocomplete.clearbit.com/v1/companies/suggest?query=:"
+        let url = baseURL+query
 
-        guard let url = URL(string: imageURL) else {
+        guard let url = URL(string: url) else {
             throw NetworkError.invalidURL
         }
 
