@@ -61,8 +61,7 @@ public final class NewJobViewModel: ObservableObject {
         do {
             let logo = try await networkManager.fetchData(query: company)
 
-            guard let logoPrivate = logo.first?.logo,
-                  let domainPrivate = logo.first?.domain else { return }
+            guard let logoPrivate = logo.first?.logo, let domainPrivate = logo.first?.domain else { return }
             
             self.logoURL = logoPrivate
             self.companyWebsite = domainPrivate
@@ -103,6 +102,7 @@ public final class NewJobViewModel: ObservableObject {
     }
 
     public func saveJob(context: ModelContext) {
+        
         if followUp {
             notificationManager.scheduleNotification(
                 company: company,

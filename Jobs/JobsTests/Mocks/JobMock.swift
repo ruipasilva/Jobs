@@ -9,7 +9,7 @@ import Foundation
 @testable import Jobs
 
 struct JobMock {
-    static let testJob = Job(title: "Title",
+    static let mockJob = Job(title: "Title",
                                      company: "Company",
                                      notes: "Notes",
                                      jobApplicationStatus: .notApplied,
@@ -27,4 +27,6 @@ struct JobMock {
                                      companyWebsite: "CompanyURL",
                                      workingDays: [],
                                      currencyType: .Euro)
+    
+    static let mockCompany = CompanyInfo(name: "Name", domain: "Domain", logo: "LogoURL")
 }

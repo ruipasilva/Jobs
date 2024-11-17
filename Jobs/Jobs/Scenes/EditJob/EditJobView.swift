@@ -10,10 +10,11 @@ import TipKit
 
 struct EditJobView: View {
     @StateObject private var editJobViewModel: EditJobViewModel
-    @AppStorage("count") var count: Int = 0
+    
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
+    @Environment(\.colorScheme) var colorScheme // Still to implement in custom cells
 
     public init(job: Job) {
         self._editJobViewModel = .init(wrappedValue: .init(job: job))
@@ -135,7 +136,7 @@ struct EditJobView: View {
 
             Button(
                 action: {
-                    if count < 1 {
+                    if editJobViewModel.count < 1 {
                        setupWebsiteWarning()
                     } else {
                         openURL(
@@ -448,7 +449,7 @@ struct EditJobView: View {
     }
     
     private func setupWebsiteWarning() {
-        count += 1
+        editJobViewModel.count += 1
         editJobViewModel.isShowingWarnings = true
     }
 }

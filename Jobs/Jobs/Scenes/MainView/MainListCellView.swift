@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MainListCellView: View {
     @ObservedObject private var appViewModel: MainViewViewModel
-    @Environment(\.colorScheme) var colorScheme
 
     var job: Job
 

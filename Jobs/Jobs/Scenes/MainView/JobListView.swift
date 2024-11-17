@@ -23,34 +23,17 @@ struct JobListView: View {
         let sortDescriptors: [SortDescriptor<Job>] =
             switch sortOrder {
             case .status:
-                [
-                    SortDescriptor(
-                        \Job.jobApplicationStatusPrivate,
-                        order: mainViewModel.ascendingDescending),
-                    SortDescriptor(\Job.dateAdded),
-                ]
+                [SortDescriptor(\Job.jobApplicationStatusPrivate,order: mainViewModel.ascendingDescending),SortDescriptor(\Job.dateAdded)]
             case .title:
-                [
-                    SortDescriptor(
-                        \Job.title, order: mainViewModel.ascendingDescending)
-                ]
+                [SortDescriptor(\Job.title, order: mainViewModel.ascendingDescending)]
             case .company:
-                [
-                    SortDescriptor(
-                        \Job.company, order: mainViewModel.ascendingDescending)
-                ]
+                [SortDescriptor(\Job.company, order: mainViewModel.ascendingDescending)]
             case .salary:
-                [
-                    SortDescriptor(
-                        \Job.salary, order: mainViewModel.ascendingDescending)
-                ]
+                [SortDescriptor(\Job.salary, order: mainViewModel.ascendingDescending)]
             case .dateAdded:
-                [
-                    SortDescriptor(
-                        \Job.dateAdded, order: mainViewModel.ascendingDescending
-                    )
-                ]
+                [SortDescriptor(\Job.dateAdded, order: mainViewModel.ascendingDescending)]
             }
+        
         let predicate = #Predicate<Job> { job in
             job.company.localizedStandardContains(filterString)
                 || job.title.localizedStandardContains(filterString)
@@ -109,7 +92,8 @@ struct JobListView: View {
         }
         .listStyle(.plain)
     }
-
+    
+    // Possibly change this to an Enum and iterate over cases to reduce code
     private func makeSwipeView(job: Job) -> some View {
         Group {
             Button(action: {
@@ -122,6 +106,7 @@ struct JobListView: View {
                 }
                 .tint(.orange)
             }
+            
             Button(action: {
                 appViewModel.setApplicationStatus(job: job, status: .started)
             }) {
