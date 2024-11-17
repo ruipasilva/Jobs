@@ -49,9 +49,9 @@ final class MainViewViewModelTests: XCTestCase {
     
     func test_ApplicationStatus_WhenTapped() throws {
         
-        sut.setApplicationStatus(job: Mocks.testJob, status: .applied)
+        sut.setApplicationStatus(job: Mocks.mockJob, status: .applied)
         
-        XCTAssertEqual(Mocks.testJob.jobApplicationStatus, .applied)
+        XCTAssertEqual(Mocks.mockJob.jobApplicationStatus, .applied)
     }
     
 }
