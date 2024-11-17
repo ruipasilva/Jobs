@@ -12,6 +12,7 @@ import XCTest
 @testable import Jobs
 
 final class NewJobViewModelTests: XCTestCase {
+    typealias Mocks = JobMock
 
     private var networkManagerMock: NetworkManagerMock!
     private var sut: NewJobViewModel!
@@ -23,6 +24,7 @@ final class NewJobViewModelTests: XCTestCase {
         
         networkManagerMock = Container.shared.networkManager() as? NetworkManagerMock
         sut = NewJobViewModel()
+
     }
 
     @MainActor func test_WhenSaveJob_ThenSaveJobToContext() throws {
@@ -36,11 +38,33 @@ final class NewJobViewModelTests: XCTestCase {
         XCTAssertEqual(context.insertedModelsArray.count, 1)
     }
 
+    func test_WhenGettingLogo_ThenReturnLogos() async throws {
+        networkManagerMock.shouldReturnError = false
+        networkManagerMock.logos = Mocks.mockCompanyInfo
+        
+        let expectation = XCTestExpectation(description: "response")
+        Task {
+            let _ = await sut.getLogo(company: "TestQuery")
+            expectation.fulfill()
+            await fulfillment(of: [expectation], timeout: 3)
+        }
+        
+        
+
+        
+        XCTAssertEqual(sut.logoURL, "LogoURL")
+
+    }
+
     override func tearDown() {
         sut = nil
         networkManagerMock = nil
         super.tearDown()
     }
+
+    override func setUpWithError() throws {}
+
+    override func tearDownWithError() throws {}
 
 }
 
