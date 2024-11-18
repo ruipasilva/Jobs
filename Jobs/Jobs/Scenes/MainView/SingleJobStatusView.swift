@@ -42,7 +42,7 @@ struct SingleJobStatusView: View {
     }
 
     private var listView: some View {
-        List(jobs, id: \.company) { job in
+        List(jobs, id: \.id) { job in
             MainListCellView(mainViewModel: mainViewModel, job: job)
                 .listRowInsets(
                     .init(top: 0, leading: 16, bottom: 8, trailing: 16)

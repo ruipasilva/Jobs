@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct SingleRectangleView: View {
-
+    
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-
+    
     @ObservedObject var mainViewModel: MainViewViewModel
-
+    
     var totalJobs: Int
     var interviewStatus: String
     var SFSymbol: String
     var circleColor: Color
-
+    
     var body: some View {
         ZStack {
             roundedRectangle
@@ -28,20 +28,20 @@ struct SingleRectangleView: View {
         }
         .frame(
             height: horizontalSizeClass == .compact
-                ? UIScreen.main.bounds.width / 3
-                : UIScreen.main.bounds.width / 9
+            ? UIScreen.main.bounds.width / 3
+            : UIScreen.main.bounds.width / 9
         )
         .padding(.bottom)
     }
-
+    
     private var roundedRectangle: some View {
         RoundedRectangle(cornerRadius: 8)
             .fill(
                 colorScheme == .dark
-                    ? Color.init(UIColor.secondarySystemBackground)
-                    : Color.init(UIColor.systemGroupedBackground))
+                ? Color.init(UIColor.secondarySystemBackground)
+                : Color.init(UIColor.systemGroupedBackground))
     }
-
+    
     private var infoView: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -64,17 +64,6 @@ struct SingleRectangleView: View {
                 .font(.body)
                 .bold()
                 .foregroundColor(Color(UIColor.label))
-        }
-    }
-
-    private func setBackgroundColor(status: String) -> Color {
-        switch status {
-        case "Applied":
-            return Color.orange.opacity(0.1)
-        case "Started":
-            return Color.mint.opacity(0.1)
-        default:
-            return Color.init(UIColor.secondarySystemBackground)
         }
     }
 }
