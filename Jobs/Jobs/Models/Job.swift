@@ -14,7 +14,7 @@ public final class InterviewQuestion: Hashable {
     var question: String = ""
     var dateAdded: Date = Date.now
     // .cascade deletes all the related models
-    @Relationship(deleteRule: .nullify, inverse: \Job.interviewQuestions) var job: Job?
+    @Relationship(deleteRule: .cascade, inverse: \Job.interviewQuestions) var job: Job?
     
     init(completed: Bool,
          question: String,

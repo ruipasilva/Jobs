@@ -41,7 +41,7 @@ struct RectanglesView: View {
                 SFSymbol: "clock", circleColor: .orange
             )
             .onTapGesture {
-                mainViewModel.isShowingApplied = true
+                mainViewModel.isShowingAppliedJobs = true
             }
             SingleRectangleView(
                 mainViewModel: mainViewModel, totalJobs: startedJobs.count,
@@ -49,13 +49,13 @@ struct RectanglesView: View {
                 SFSymbol: "checkmark", circleColor: .mint
             )
             .onTapGesture {
-                mainViewModel.isShowingInterviewing = true
+                mainViewModel.isShowingStartedJobs = true
             }
         }
-        .sheet(isPresented: $mainViewModel.isShowingApplied) {
+        .sheet(isPresented: $mainViewModel.isShowingAppliedJobs) {
             SingleJobStatusView(mainViewModel: mainViewModel, jobs: appliedJobs, title: "Applied")
         }
-        .sheet(isPresented: $mainViewModel.isShowingInterviewing) {
+        .sheet(isPresented: $mainViewModel.isShowingStartedJobs) {
             SingleJobStatusView(mainViewModel: mainViewModel, jobs: startedJobs, title: "started")
         }
     }

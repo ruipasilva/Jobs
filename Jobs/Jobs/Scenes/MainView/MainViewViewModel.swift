@@ -10,20 +10,19 @@ import Foundation
 import SwiftData
 
 public final class MainViewViewModel: ObservableObject {
-    @Published public var isShowingNewJob = false
     @Published public var sortingOrder = SortingOrder.dateAdded
     @Published public var ascendingDescending: SortOrder = .forward
     @Published public var filter = ""
-
-    @Published public var isShowingApplied = false
-    @Published public var isShowingInterviewing = false
+    @Published public var isShowingNewJobView = false
+    @Published public var isShowingAppliedJobs = false
+    @Published public var isShowingStartedJobs = false
 
     public func sortAscendingOrDescending(order: SortOrder) {
         ascendingDescending = order
     }
 
     public func showNewJobSheet() {
-        isShowingNewJob = true
+        isShowingNewJobView = true
     }
 
     public func setApplicationStatus(job: Job, status: JobApplicationStatus) {
