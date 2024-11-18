@@ -11,7 +11,7 @@ import SwiftData
 
 public final class MainViewViewModel: ObservableObject {
     @Published public var isShowingNewJob = false
-    @Published public var sortOrdering = SortOrdering.dateAdded
+    @Published public var sortingOrder = SortingOrder.dateAdded
     @Published public var ascendingDescending: SortOrder = .forward
     @Published public var filter = ""
 

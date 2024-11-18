@@ -14,7 +14,7 @@ struct JobListView: View {
     @Query private var jobs: [Job]
 
     init(mainViewModel: MainViewViewModel,
-        sortOrder: SortOrdering,
+        sortOrder: SortingOrder,
         filterString: String) {
         self.mainViewModel = mainViewModel
 

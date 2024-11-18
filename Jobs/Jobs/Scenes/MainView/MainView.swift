@@ -11,12 +11,12 @@ import SwiftUI
 struct MainView: View {
     @StateObject private var mainViewModel = MainViewViewModel()
     @Query private var jobs: [Job]
-    @AppStorage("sortOrdering") var sortOrdering: SortOrdering = .dateAdded
+    @AppStorage("sortingOrder") var sortingOrder: SortingOrder = .dateAdded
 
     var body: some View {
         NavigationStack {
             JobListView(mainViewModel: mainViewModel,
-                        sortOrder: sortOrdering,
+                        sortOrder: sortingOrder,
                         filterString: mainViewModel.filter
             )
             .padding(.bottom, 10)
@@ -36,10 +36,10 @@ struct MainView: View {
         }
         .tint(.mint)
         .onAppear(perform: {
-            mainViewModel.sortOrdering = sortOrdering
+            mainViewModel.sortingOrder = sortingOrder
         })
-        .onChange(of: mainViewModel.sortOrdering) { oldValue, newValue in
-            sortOrdering = mainViewModel.sortOrdering
+        .onChange(of: mainViewModel.sortingOrder) { oldValue, newValue in
+            sortingOrder = mainViewModel.sortingOrder
         }
     }
 
@@ -57,8 +57,8 @@ struct MainView: View {
     
     private var sortMenu: some View {
         Menu {
-            Picker("Sort", selection: $mainViewModel.sortOrdering) {
-                ForEach(SortOrdering.allCases) {
+            Picker("Sort", selection: $mainViewModel.sortingOrder) {
+                ForEach(SortingOrder.allCases) {
                     Text($0.status)
                 }
             }

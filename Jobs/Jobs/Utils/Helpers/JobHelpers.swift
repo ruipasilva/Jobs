@@ -46,7 +46,7 @@ public enum LocationType: Codable, Identifiable, CaseIterable {
     }
 }
 
-public enum SortOrdering: Int, Identifiable, CaseIterable {
+public enum SortingOrder: Int, Identifiable, CaseIterable {
 
     /// Add case status when SwiftData allows sort by enums
     case title, company, salary, status, dateAdded
