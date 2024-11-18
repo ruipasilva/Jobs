@@ -10,10 +10,6 @@ import EventKit
 
 public protocol CalendarManaging {
     func requestAuthCalendar(addInterviewToCalendar: Bool) async
-    func addReminderToCalendar(eventAllDay: Bool,
-                               company: String,
-                               title: String,
-                               addToCalendarDate: Date)
     
     func scheduleCalendarEvent(eventAllDay: Bool,
                                company: String,
@@ -34,7 +30,7 @@ public struct CalendarManager: CalendarManaging {
         }
     }
     
-    public func addReminderToCalendar(eventAllDay: Bool, company: String, title: String, addToCalendarDate: Date) {
+    public func scheduleCalendarEvent(eventAllDay: Bool, company: String, title: String, addToCalendarDate: Date) {
         let eventStore = EKEventStore()
         let event = EKEvent(eventStore: eventStore)
         event.title = "Interview with \(company)"
@@ -50,9 +46,5 @@ public struct CalendarManager: CalendarManaging {
         } catch let error as NSError {
             print("failed to save event with error : \(error)")
         }
-    }
-    
-    public func scheduleCalendarEvent(eventAllDay: Bool, company: String, title: String, addToCalendarDate: Date) {
-        addReminderToCalendar(eventAllDay: eventAllDay, company: company, title: title, addToCalendarDate: addToCalendarDate)
     }
 }
