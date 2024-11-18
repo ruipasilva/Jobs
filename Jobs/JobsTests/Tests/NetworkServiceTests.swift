@@ -11,26 +11,26 @@ import XCTest
 @testable import Jobs
 
 final class NetworkServiceTests: XCTestCase {
+    typealias Mocks = JobMock
 
     private var networkManagerMock: NetworkManagerMock!
 
     override func setUp() {
         super.setUp()
 
-        TestDependencyContainer.setup()
+        MockDependencyContainer.setup()
 
-        networkManagerMock =
-            Container.shared.networkManager() as? NetworkManagerMock
+        networkManagerMock = Container.shared.networkManager() as? NetworkManagerMock
     }
 
     func test_whenRequestIsMade_ThenReturnLogos() async throws {
         networkManagerMock.shouldReturnError = false
-        networkManagerMock.logos = [CompanyInfo(name: "Name", domain: "Domain", logo: "logoURL")]
+        networkManagerMock.logos = Mocks.mockCompanyInfo
 
         let logos = try await networkManagerMock.fetchData(query: "TestQuery")
 
         XCTAssertNotNil(logos)
-        XCTAssertEqual(logos.first?.name, "Name")
+        XCTAssertEqual(logos.first?.domain, "Domain")
     }
 
     func test_whenRequestIsMade_ThenReturnsInvalidResponse() async throws {

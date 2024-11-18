@@ -57,7 +57,7 @@ struct NewJobView: View {
             .focused($focusState, equals: .companyName)
             .onChange(of: newJobViewModel.company) { _, _ in
                 Task {
-                    await newJobViewModel.getLogo(company: newJobViewModel.company)
+                    try await newJobViewModel.getLogo(company: newJobViewModel.company)
                 }
             }
             .onSubmit {
