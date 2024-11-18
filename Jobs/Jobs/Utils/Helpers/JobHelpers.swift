@@ -8,6 +8,16 @@
 import Foundation
 import SwiftUI
 
+public enum FocusedField {
+    case companyName
+    case jobTitle
+    case recruiterName
+    case recruiterEmail
+    case recruiterNumber
+    case url
+    case notes
+}
+
 public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable {
     case notApplied, applied, started, hired, rejected
 

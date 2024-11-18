@@ -13,8 +13,8 @@ public final class InterviewQuestion: Hashable {
     var completed: Bool = false
     var question: String = ""
     var dateAdded: Date = Date.now
-    
-    var job: Job?
+    // .cascade deletes all the related models
+    @Relationship(deleteRule: .nullify, inverse: \Job.interviewQuestions) var job: Job?
     
     init(completed: Bool,
          question: String,
@@ -49,8 +49,7 @@ public final class Job {
     var jobURLPosting: String = ""
     var logoURL: String = ""
     var companyWebsite: String = ""
-    // .cascade deletes all the related models
-    @Relationship(deleteRule: .cascade, inverse: \InterviewQuestion.job) var interviewQuestions: [InterviewQuestion]?
+    var interviewQuestions: [InterviewQuestion]?
     var workingDays: [String] = []
     var currencyType: CurrencyType = CurrencyType.dolar
     
