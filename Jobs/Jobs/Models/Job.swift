@@ -49,6 +49,7 @@ public final class Job {
     var jobURLPosting: String = ""
     var logoURL: String = ""
     var companyWebsite: String = ""
+    // .cascade deletes all the related models
     @Relationship(deleteRule: .cascade, inverse: \InterviewQuestion.job) var interviewQuestions: [InterviewQuestion]?
     var workingDays: [String] = []
     var currencyType: CurrencyType = CurrencyType.dolar
@@ -102,36 +103,5 @@ public final class Job {
         self.workingDays = workingDays
         self.currencyType = currencyType
     }
-    
-    var icon: Image {
-        switch jobApplicationStatus {
-        case .notApplied:
-            Image(systemName: "clock")
-        case .applied:
-            Image(systemName: "bookmark.circle")
-        case .started:
-            Image(systemName: "person.circle")
-        case .hired:
-            Image(systemName: "checkmark.circle")
-        case .rejected:
-            Image(systemName: "x.circle")
-        }
-    }
-    
-    var status: String {
-        switch jobApplicationStatus {
-        case .notApplied:
-            "Not Applied"
-        case .applied:
-            "Applied"
-        case .started:
-            "Started"
-        case .hired:
-            "Hired"
-        case .rejected:
-            "Rejected"
-        }
-    }
-    
 }
 

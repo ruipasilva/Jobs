@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RectDetailView: View {
+struct SingleJobStatusView: View {
     @ObservedObject private var mainViewModel: MainViewViewModel
     @Environment(\.dismiss) private var dismiss
 

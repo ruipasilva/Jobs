@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable {
     case notApplied, applied, started, hired, rejected
@@ -70,9 +71,7 @@ public enum SortOrdering: Int, Identifiable, CaseIterable {
     }
 }
 
-public enum CurrencyType: String, Codable, Identifiable, CaseIterable,
-    RawRepresentable
-{
+public enum CurrencyType: String, Codable, Identifiable, CaseIterable {
 
     case libra, dolar, Euro, yen
 

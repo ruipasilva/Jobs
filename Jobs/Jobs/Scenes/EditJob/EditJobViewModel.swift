@@ -130,4 +130,9 @@ public final class EditJobViewModel: ObservableObject {
 
         return viewModel
     }
+    
+    public func setupWebsiteWarning() {
+        count += 1
+        isShowingWarnings = true
+    }
 }

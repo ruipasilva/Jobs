@@ -16,7 +16,7 @@ struct MainView: View {
     var body: some View {
         NavigationStack {
             JobListView(mainViewModel: mainViewModel,
-                        sortOrder: mainViewModel.sortOrdering,
+                        sortOrder: sortOrdering,
                         filterString: mainViewModel.filter
             )
             .padding(.bottom, 10)
@@ -45,48 +45,56 @@ struct MainView: View {
 
     private var toolBarLeading: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
-            Menu {
-                Picker("Sort", selection: $mainViewModel.sortOrdering) {
-                    ForEach(SortOrdering.allCases) {
-                        Text($0.status)
-                    }
-                }
-
-                Section("Order") {
-                    Button(
-                        action: {
-                            mainViewModel.sortAscendingOrDescending(
-                                order: .forward)
-                        },
-                        label: {
-                            Label("Ascending", systemImage: "arrow.down")
-                        })
-
-                    Button(
-                        action: {
-                            mainViewModel.sortAscendingOrDescending(
-                                order: .reverse)
-                        },
-                        label: {
-                            Label("Descending", systemImage: "arrow.up")
-                        })
-                }
-            } label: {
-                Text("Sort")
-            }
-            .disabled(jobs.isEmpty)
+            sortMenu
         }
     }
 
     private var toolbarTrailing: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            Button(
-                action: {
-                    mainViewModel.showNewJobSheet()
-                },
-                label: {
-                    Image(systemName: "plus")
-                })
+            addNewJobButton
         }
+    }
+    
+    private var sortMenu: some View {
+        Menu {
+            Picker("Sort", selection: $mainViewModel.sortOrdering) {
+                ForEach(SortOrdering.allCases) {
+                    Text($0.status)
+                }
+            }
+
+            Section("Order") {
+                Button(
+                    action: {
+                        mainViewModel.sortAscendingOrDescending(
+                            order: .forward)
+                    },
+                    label: {
+                        Label("Ascending", systemImage: "arrow.down")
+                    })
+
+                Button(
+                    action: {
+                        mainViewModel.sortAscendingOrDescending(
+                            order: .reverse)
+                    },
+                    label: {
+                        Label("Descending", systemImage: "arrow.up")
+                    })
+            }
+        } label: {
+            Text("Sort")
+        }
+        .disabled(jobs.isEmpty)
+    }
+        
+    private var addNewJobButton: some View {
+        Button(
+            action: {
+                mainViewModel.showNewJobSheet()
+            },
+            label: {
+                Image(systemName: "plus")
+            })
     }
 }

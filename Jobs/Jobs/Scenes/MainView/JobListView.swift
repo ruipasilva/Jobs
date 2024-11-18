@@ -21,7 +21,7 @@ struct JobListView: View {
         let sortDescriptors: [SortDescriptor<Job>] =
             switch sortOrder {
             case .status:
-                [SortDescriptor(\Job.jobApplicationStatusPrivate,order: mainViewModel.ascendingDescending), SortDescriptor(\Job.dateAdded)]
+                [SortDescriptor(\Job.jobApplicationStatusPrivate, order: mainViewModel.ascendingDescending), SortDescriptor(\Job.dateAdded)]
             case .title:
                 [SortDescriptor(\Job.title, order: mainViewModel.ascendingDescending)]
             case .company:
@@ -49,6 +49,7 @@ struct JobListView: View {
     }
 
     private var emptyList: some View {
+        // SwiftUI standard library view
         ContentUnavailableView("No jobs yet", systemImage: "folder")
     }
 
@@ -62,9 +63,8 @@ struct JobListView: View {
             Section {
                 ForEach(jobs) { job in
                     ZStack {
-                        MainListCellView(
-                            mainViewModel: mainViewModel,
-                            job: job)
+                        MainListCellView(mainViewModel: mainViewModel,
+                                         job: job)
                         NavigationLink {
                             EditJobView(job: job)
                         } label: {
@@ -76,6 +76,7 @@ struct JobListView: View {
                         makeSwipeView(job: job)
                     }
                 }
+                //need to use List() for onDelete
                 .onDelete { indexSet in
                     indexSet.forEach { index in
                         let job = jobs[index]

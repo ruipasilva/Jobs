@@ -30,6 +30,7 @@ struct FloatingTextField: View {
     }
 }
 
+// Not being used right now, alternative for 'FloatingTextField'
 public struct AnimatedTextField<Label: View>: View {
 
     @Binding var text: String

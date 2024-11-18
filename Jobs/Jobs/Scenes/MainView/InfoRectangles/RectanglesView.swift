@@ -53,12 +53,10 @@ struct RectanglesView: View {
             }
         }
         .sheet(isPresented: $mainViewModel.isShowingApplied) {
-            RectDetailView(
-                mainViewModel: mainViewModel, jobs: appliedJobs, title: "Applied")
+            SingleJobStatusView(mainViewModel: mainViewModel, jobs: appliedJobs, title: "Applied")
         }
         .sheet(isPresented: $mainViewModel.isShowingInterviewing) {
-            RectDetailView(
-                mainViewModel: mainViewModel, jobs: startedJobs, title: "started")
+            SingleJobStatusView(mainViewModel: mainViewModel, jobs: startedJobs, title: "started")
         }
     }
 }
