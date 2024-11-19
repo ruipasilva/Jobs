@@ -43,7 +43,8 @@ public final class EditJobViewModel: ObservableObject {
 
     @Published public var loadingLogoState: LoadingLogoState = .na
     
-//    Using @AppStorage in viewModel because it crashes the app on iOS 17.5. why? Does not happen on iOS 18.
+//    Using @AppStorage in viewModel because it crashes the app on iOS 17.5.
+//    only this view why? Does not happen on iOS 18.
     @AppStorage("count") var count: Int = 0
 
     public let workingDays: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri"]

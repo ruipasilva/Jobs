@@ -51,9 +51,7 @@ struct EditJobView: View {
             }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text(
-                "Websites might not be accurate. You can edit them by tapping the logo above"
-            )
+            Text("Websites might not be accurate. You can edit them by tapping the logo above")
         }
         .background(Color(uiColor: .systemGroupedBackground))
         .toolbar {

@@ -152,8 +152,8 @@
 		69352EBE2BBC23F400B8A77B /* InfoRectangles */ = {
 			isa = PBXGroup;
 			children = (
-				69352EB52BBB2A3200B8A77B /* SingleRectangleView.swift */,
 				69352EB72BBB2B7A00B8A77B /* RectanglesView.swift */,
+				69352EB52BBB2A3200B8A77B /* SingleRectangleView.swift */,
 			);
 			path = InfoRectangles;
 			sourceTree = "<group>";
@@ -164,8 +164,8 @@
 				699750C72B5ED2DC000EBCD1 /* MainView.swift */,
 				699750DA2B614E61000EBCD1 /* JobListView.swift */,
 				69352EB92BBB2C4B00B8A77B /* MainListCellView.swift */,
-				696208562B6A98730045DD39 /* MainViewViewModel.swift */,
 				69984B7A2BD9BD3E002C23F2 /* SingleJobStatusView.swift */,
+				696208562B6A98730045DD39 /* MainViewViewModel.swift */,
 				69352EBE2BBC23F400B8A77B /* InfoRectangles */,
 			);
 			path = MainView;

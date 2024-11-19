@@ -44,7 +44,7 @@ final class MainViewViewModelTests: XCTestCase {
         
         sut.showNewJobSheet()
         
-        XCTAssertTrue(sut.isShowingNewJob)
+        XCTAssertTrue(sut.isShowingNewJobView)
     }
     
     func test_ApplicationStatus_WhenTapped() throws {

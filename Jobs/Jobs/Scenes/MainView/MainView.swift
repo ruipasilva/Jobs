@@ -12,19 +12,16 @@ struct MainView: View {
     @StateObject private var mainViewModel = MainViewViewModel()
     @Query private var jobs: [Job]
     @AppStorage("sortingOrder") var sortingOrder: SortingOrder = .dateAdded
-
+    
     var body: some View {
         NavigationStack {
             JobListView(mainViewModel: mainViewModel,
                         sortOrder: sortingOrder,
-                        filterString: mainViewModel.filter
-            )
+                        filterString: mainViewModel.filter)
             .padding(.bottom, 10)
             .background(Color(UIColor.systemBackground))
-            .searchable(
-                text: $mainViewModel.filter,
-                prompt: "Search for companies or job titles"
-            )
+            .searchable(text: $mainViewModel.filter,
+                        prompt: "Search for companies or job titles")
             .toolbar {
                 toolbarTrailing
                 toolBarLeading
@@ -42,13 +39,13 @@ struct MainView: View {
             sortingOrder = mainViewModel.sortingOrder
         }
     }
-
+    
     private var toolBarLeading: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             sortMenu
         }
     }
-
+    
     private var toolbarTrailing: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             addNewJobButton
@@ -62,7 +59,7 @@ struct MainView: View {
                     Text($0.status)
                 }
             }
-
+            
             Section("Order") {
                 Button(
                     action: {
@@ -72,7 +69,7 @@ struct MainView: View {
                     label: {
                         Label("Ascending", systemImage: "arrow.down")
                     })
-
+                
                 Button(
                     action: {
                         mainViewModel.sortAscendingOrDescending(
@@ -87,7 +84,7 @@ struct MainView: View {
         }
         .disabled(jobs.isEmpty)
     }
-        
+    
     private var addNewJobButton: some View {
         Button(
             action: {

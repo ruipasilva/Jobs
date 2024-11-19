@@ -25,22 +25,19 @@ struct WorkingDaysView: View {
                 VStack(alignment: .center) {
                     Text(item)
                         .padding(.bottom, 2)
-                    Button(
-                        action: {
-                            let index = workingDaysToSave.firstIndex(of: item)
-                            if workingDaysToSave.contains(item) {
-                                workingDaysToSave.remove(at: index!)
-                            } else {
-                                workingDaysToSave.append(item)
-                            }
-                        },
-                        label: {
-                            Image(systemName: workingDaysToSave.contains(item) ? "checkmark.circle.fill" : "circle")
-                                .imageScale(.large)
-                                .foregroundStyle(
-                                    workingDaysToSave.contains(item) ? Color.accentColor : Color(uiColor: .tertiaryLabel))
+                    Button(action: {
+                        let index = workingDaysToSave.firstIndex(of: item)
+                        if workingDaysToSave.contains(item) {
+                            workingDaysToSave.remove(at: index!)
+                        } else {
+                            workingDaysToSave.append(item)
                         }
-                    )
+                    }, label: {
+                        Image(systemName: workingDaysToSave.contains(item) ? "checkmark.circle.fill" : "circle")
+                            .imageScale(.large)
+                            .foregroundStyle(
+                                workingDaysToSave.contains(item) ? Color.accentColor : Color(uiColor: .tertiaryLabel))
+                    })
                     .buttonStyle(.plain)
                     .tint(.accentColor)
                 }

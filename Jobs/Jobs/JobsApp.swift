@@ -11,7 +11,7 @@ import TipKit
 @main
 struct JobsApp: App {
 
-    let container: ModelContainer
+    private let container: ModelContainer
 
     var body: some Scene {
         WindowGroup {

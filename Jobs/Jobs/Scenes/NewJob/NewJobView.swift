@@ -31,15 +31,12 @@ struct NewJobView: View {
             .navigationTitle("New Job")
             .navigationBarTitleDisplayMode(.inline)
             .onChange(of: newJobViewModel.followUp) { _, _ in
-                newJobViewModel.notificationManager.requestNotificationAccess(
-                    followUp: newJobViewModel.followUp)
+                newJobViewModel.notificationManager.requestNotificationAccess(followUp: newJobViewModel.followUp)
             }
             .onChange(of: newJobViewModel.addInterviewToCalendar) { _, _ in
                 Task {
                     await newJobViewModel.calendarManager
-                        .requestAuthCalendar(
-                            addInterviewToCalendar: newJobViewModel
-                                .addInterviewToCalendar)
+                        .requestAuthCalendar(addInterviewToCalendar: newJobViewModel.addInterviewToCalendar)
                 }
             }
         }
@@ -108,10 +105,8 @@ struct NewJobView: View {
             Toggle("Follow up", isOn: $newJobViewModel.followUp.animation())
             
             if newJobViewModel.followUp {
-                DatePicker(
-                    selection: $newJobViewModel.followUpDate,
-                    displayedComponents: [.date, .hourAndMinute]
-                ) {
+                DatePicker(selection: $newJobViewModel.followUpDate,
+                           displayedComponents: [.date, .hourAndMinute]) {
                     Text("Reminder:")
                 }
             }

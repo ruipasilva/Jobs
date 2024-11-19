@@ -32,10 +32,10 @@ struct JobListView: View {
                 [SortDescriptor(\Job.dateAdded, order: mainViewModel.ascendingDescending)]
             }
         
-        let predicate = #Predicate<Job> { job in
+        let filter = #Predicate<Job> { job in
             job.company.localizedStandardContains(filterString) || job.title.localizedStandardContains(filterString) || filterString.isEmpty
         }
-        _jobs = Query(filter: predicate, sort: sortDescriptors)
+        _jobs = Query(filter: filter, sort: sortDescriptors)
     }
 
     var body: some View {
@@ -76,7 +76,6 @@ struct JobListView: View {
                         makeSwipeView(job: job)
                     }
                 }
-                //need to use List() for onDelete
                 .onDelete { indexSet in
                     indexSet.forEach { index in
                         let job = jobs[index]
