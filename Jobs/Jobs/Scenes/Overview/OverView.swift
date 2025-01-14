@@ -20,7 +20,6 @@ struct OverView: View {
                 .sheet(isPresented: $overViewViewModel.isShowingSettings) {
                     SettingsView()
                 }
-
         }
     }
 

@@ -35,7 +35,7 @@ struct MainView: View {
         .onAppear(perform: {
             mainViewModel.sortingOrder = sortingOrder
         })
-        .onChange(of: mainViewModel.sortingOrder) { oldValue, newValue in
+        .onChange(of: mainViewModel.sortingOrder) { _, _ in
             sortingOrder = mainViewModel.sortingOrder
         }
     }

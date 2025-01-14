@@ -27,7 +27,7 @@ public final class InterviewQuestion: Hashable {
 
 @Model
 public final class Job {
-    // All properties need a default value as cloudKit needs it
+    // All properties need a default value as cloudKit requires it
     var localNotificationID: String?
     var title: String = ""
     var company: String = ""

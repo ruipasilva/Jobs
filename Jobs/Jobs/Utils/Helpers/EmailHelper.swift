@@ -28,7 +28,7 @@ extension EmailHelper {
             self.open(presentingViewController, .googlemail, email: email, subject: subject, body: body)
         })
         
-        /// Code to uncomment if decide to app more email apps
+        /// Code to uncomment if decide to use more email apps
         
 //        alertController.addAction(UIAlertAction(title: "Microsoft Outlook", style: .default) { action in
 //            self.open(presentingViewController, .outlook, email: email, subject: subject, body: body)

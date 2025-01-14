@@ -41,9 +41,8 @@ public struct CalendarManager: CalendarManaging {
         event.isAllDay = eventAllDay
         
         do {
-            
             try eventStore.save(event, span: .thisEvent)
-        } catch let error as NSError {
+        } catch {
             print("failed to save event with error : \(error)")
         }
     }

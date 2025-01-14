@@ -11,35 +11,7 @@ import Foundation
 import SwiftData
 import UserNotifications
 
-public final class NewJobViewModel: ObservableObject {
-    @Published public var localNotificationID = ""
-    @Published public var title = ""
-    @Published public var company = ""
-    @Published public var jobApplicationStatus = JobApplicationStatus.notApplied
-    @Published public var jobApplicationStatusPrivate = ""
-    @Published public var location: String = ""
-    @Published public var locationType = LocationType.remote
-    @Published public var salary = ""
-    @Published public var followUp = false
-    @Published public var followUpDate = Date.now
-    @Published public var addInterviewToCalendar = false
-    @Published public var addInterviewToCalendarDate = Date.now
-    @Published public var isEventAllDay = false
-    @Published public var recruiterName = ""
-    @Published public var recruiterEmail = ""
-    @Published public var recruiterNumber = ""
-    @Published public var url = ""
-    @Published public var notes = ""
-    @Published public var logoURL = ""
-    @Published public var companyWebsite = ""
-    @Published public var interviewQuestion: [InterviewQuestion] = []
-    @Published public var workingDaysToSave: [String] = []
-    @Published public var currentyType: CurrencyType = CurrencyType.dolar
-    
-    @Published public var showingCancelActionSheet = false
-    
-    public let workingDays: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri"]
-    
+public final class NewJobViewModel: BaseViewModel {
     @Injected(\.networkManager) private var networkManager
     @Injected(\.calendarManager) public var calendarManager
     @Injected(\.notificationManager) public var notificationManager
@@ -95,9 +67,9 @@ public final class NewJobViewModel: ObservableObject {
                          logoURL: logoURL,
                          companyWebsite: companyWebsite,
                          workingDays: workingDaysToSave,
-                         currencyType: currentyType)
+                         currencyType: currencyType)
         context.insert(newJob)
-        newJob.interviewQuestions = interviewQuestion
+        newJob.interviewQuestions = interviewQuestions
     }
     
     public func saveJob(context: ModelContext) {

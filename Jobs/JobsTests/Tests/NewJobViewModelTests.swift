@@ -25,7 +25,7 @@ final class NewJobViewModelTests: XCTestCase {
     }
 
     @MainActor func test_WhenSaveJob_ThenSaveJobToContext() throws {
-        let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+        let configuration = ModelConfiguration()
         let container = try ModelContainer(
             for: Job.self, configurations: configuration)
         let context = container.mainContext

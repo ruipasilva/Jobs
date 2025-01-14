@@ -15,7 +15,7 @@ public struct NetworkManager: NetworkManaging {
     
     public func fetchData(query: String) async throws -> [CompanyInfo] {
         let baseURL = "https://autocomplete.clearbit.com/v1/companies/suggest?query=:"
-        let url = baseURL+query
+        let url = baseURL.appending(query)
         
         guard let url = URL(string: url) else {
             throw NetworkError.invalidURL
@@ -27,8 +27,11 @@ public struct NetworkManager: NetworkManaging {
             throw NetworkError.invalidResponse
         }
         
-        let decodedData = try JSONDecoder().decode([CompanyInfo].self, from: data)
-        
-        return decodedData
+        do {
+            let decodedData = try JSONDecoder().decode([CompanyInfo].self, from: data)
+            return decodedData
+        } catch {
+            throw NetworkError.invalidData
+        }
     }
 }

@@ -10,36 +10,12 @@ import Factory
 import Foundation
 import SwiftUI
 
-public final class EditJobViewModel: ObservableObject {
-    @Published public var localNotificationID = ""
-    @Published public var title = ""
-    @Published public var company = ""
-    @Published public var applicationStatusPrivate = ""
-    @Published public var jobApplicationStatus = JobApplicationStatus.notApplied
-    @Published public var jobApplicationStatusPrivate = ""
-    @Published public var location = ""
-    @Published public var locationType = LocationType.remote
-    @Published public var salary = ""
-    @Published public var followUp = false
-    @Published public var followUpDate = Date.distantPast
-    @Published public var addInterviewToCalendar = false
-    @Published public var addInterviewToCalendarDate = Date.distantPast
-    @Published public var isEventAllDay = false
-    @Published public var recruiterName = ""
-    @Published public var recruiterEmail = ""
-    @Published public var recruiterNumber = ""
-    @Published public var url = ""
-    @Published public var notes = ""
-    @Published public var logoURL = ""
-    @Published public var companyWebsite = ""
-    @Published public var interviewQuestion: [InterviewQuestion] = []
-    @Published public var workingDaysToSave: [String] = []
-    @Published public var currencyType: CurrencyType = .dolar
 
+public class EditJobViewModel: BaseViewModel {
     @Published public var isShowingPasteLink = false
     @Published public var isShowingRecruiterDetails = false
     @Published public var isShowingLogoDetails = false
-    @Published public var isShowingWarnings: Bool = false
+    @Published public var isShowingWarnings = false
 
     @Published public var loadingLogoState: LoadingLogoState = .na
     
@@ -47,7 +23,6 @@ public final class EditJobViewModel: ObservableObject {
 //    only this view why? Does not happen on iOS 18.
     @AppStorage("count") var count: Int = 0
 
-    public let workingDays: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri"]
     public let editTip = EditTip()
     public let job: Job
 
@@ -59,6 +34,7 @@ public final class EditJobViewModel: ObservableObject {
     
     public init(job: Job) {
         self.job = job
+        super.init()
         setProperties()
     }
 
@@ -86,7 +62,7 @@ public final class EditJobViewModel: ObservableObject {
         job.notes = notes
         job.logoURL = logoURL
         job.companyWebsite = companyWebsite
-        job.interviewQuestions = interviewQuestion
+        job.interviewQuestions = interviewQuestions
         job.workingDays = workingDaysToSave
         job.currencyType = currencyType
         job.localNotificationID = localNotificationID
@@ -111,7 +87,7 @@ public final class EditJobViewModel: ObservableObject {
         notes = job.notes
         logoURL = job.logoURL
         companyWebsite = job.companyWebsite
-        interviewQuestion = job.interviewQuestions ?? []
+        interviewQuestions = job.interviewQuestions ?? []
         workingDaysToSave = job.workingDays
         currencyType = job.currencyType
         localNotificationID = job.localNotificationID ?? ""

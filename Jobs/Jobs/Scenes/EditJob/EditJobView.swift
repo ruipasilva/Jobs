@@ -14,7 +14,7 @@ struct EditJobView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
-    @Environment(\.colorScheme) var colorScheme // Still to implement in custom cells
+    @Environment(\.colorScheme) var colorScheme // TODO: implement in custom cells
     
     public init(job: Job) {
         self._editJobViewModel = .init(wrappedValue: .init(job: job))
@@ -22,7 +22,7 @@ struct EditJobView: View {
     
     var body: some View {
         ScrollView {
-            LazyVStack {
+            VStack {
                 Group {
                     imageView
                     tipView
@@ -42,8 +42,7 @@ struct EditJobView: View {
             .padding(.bottom)
         }
         .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
-            LogoOptionsView(logoOptionsViewModel:
-                                editJobViewModel.getLogoOptionsViewModel())
+            LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel())
         }
         .alert("Important Notice", isPresented: $editJobViewModel.isShowingWarnings) {
             Button("Go!", role: .none) {
@@ -297,7 +296,7 @@ struct EditJobView: View {
         VStack(alignment: .leading) {
             customSectionHeader(title: "INTERVIEW QUESTIONS")
             VStack(alignment: .leading) {
-                ForEach($editJobViewModel.interviewQuestion.sorted(by: {
+                ForEach($editJobViewModel.interviewQuestions.sorted(by: {
                     $0.dateAdded.wrappedValue < $1.dateAdded.wrappedValue
                 }), id: \.id) { $question in
                     HStack {
@@ -312,7 +311,7 @@ struct EditJobView: View {
                         TextField("Type your question...", text: $question.question)
                         Spacer()
                         Button(action: {
-                            editJobViewModel.interviewQuestion.removeAll { q in
+                            editJobViewModel.interviewQuestions.removeAll { q in
                                 q == question
                             }
                         },label: {
@@ -329,7 +328,7 @@ struct EditJobView: View {
                         let interviewQuestion = InterviewQuestion(completed: false,
                                                                   question: "",
                                                                   dateAdded: .now)
-                        editJobViewModel.interviewQuestion.append(interviewQuestion)
+                        editJobViewModel.interviewQuestions.append(interviewQuestion)
                     }
                 } label: {
                     Label("Add New", systemImage: "plus")
