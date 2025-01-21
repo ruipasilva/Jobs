@@ -36,6 +36,9 @@
 		69D583742C39A46900084C5E /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583732C39A46900084C5E /* OverView.swift */; };
 		69D583762C39A4F100084C5E /* OverViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583752C39A4F100084C5E /* OverViewViewModel.swift */; };
 		69D5837A2C3DD84700084C5E /* WorkingDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583792C3DD84700084C5E /* WorkingDaysView.swift */; };
+		69F167FF2D3ECC5C001F06CC /* OnlineJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */; };
+		69F168012D3EF3EF001F06CC /* OnlineJobsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F168002D3EF3EF001F06CC /* OnlineJobsViewModel.swift */; };
+		69F168032D3EF3FB001F06CC /* OnlineJobsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F168022D3EF3FB001F06CC /* OnlineJobsView.swift */; };
 		69F2F7832D35645B008B20D5 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F2F7822D35645B008B20D5 /* BaseViewModel.swift */; };
 		69F725B12CD8E8A50064C999 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B02CD8E8A50064C999 /* SettingsView.swift */; };
 		69F725B42CDBFD710064C999 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B32CDBFD710064C999 /* CalendarManager.swift */; };
@@ -89,6 +92,9 @@
 		69D583732C39A46900084C5E /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
 		69D583752C39A4F100084C5E /* OverViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverViewViewModel.swift; sourceTree = "<group>"; };
 		69D583792C3DD84700084C5E /* WorkingDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingDaysView.swift; sourceTree = "<group>"; };
+		69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineJob.swift; sourceTree = "<group>"; };
+		69F168002D3EF3EF001F06CC /* OnlineJobsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineJobsViewModel.swift; sourceTree = "<group>"; };
+		69F168022D3EF3FB001F06CC /* OnlineJobsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineJobsView.swift; sourceTree = "<group>"; };
 		69F2F7822D35645B008B20D5 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		69F725B02CD8E8A50064C999 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		69F725B32CDBFD710064C999 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
@@ -128,6 +134,7 @@
 				69F725B22CD8E8B10064C999 /* Settings */,
 				69352EBD2BBC23E500B8A77B /* EditJob */,
 				69352EBC2BBC23D900B8A77B /* NewJob */,
+				69F168042D3EF62E001F06CC /* OnlineJob */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -189,6 +196,7 @@
 				699750D42B5FD7E1000EBCD1 /* Job.swift */,
 				69352ED02BBF603100B8A77B /* EditTip.swift */,
 				69352EC82BBD6FC100B8A77B /* CompanyInfo.swift */,
+				69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -252,6 +260,15 @@
 				69D583752C39A4F100084C5E /* OverViewViewModel.swift */,
 			);
 			path = Overview;
+			sourceTree = "<group>";
+		};
+		69F168042D3EF62E001F06CC /* OnlineJob */ = {
+			isa = PBXGroup;
+			children = (
+				69F168002D3EF3EF001F06CC /* OnlineJobsViewModel.swift */,
+				69F168022D3EF3FB001F06CC /* OnlineJobsView.swift */,
+			);
+			path = OnlineJob;
 			sourceTree = "<group>";
 		};
 		69F725B22CD8E8B10064C999 /* Settings */ = {
@@ -422,6 +439,7 @@
 				699750D92B6007AD000EBCD1 /* EditJobView.swift in Sources */,
 				69352EC92BBD6FC100B8A77B /* CompanyInfo.swift in Sources */,
 				696208532B6A891B0045DD39 /* JobHelpers.swift in Sources */,
+				69F167FF2D3ECC5C001F06CC /* OnlineJob.swift in Sources */,
 				69352EC22BBC248A00B8A77B /* EditJobViewModel.swift in Sources */,
 				69352EC42BBC249300B8A77B /* NewJobViewModel.swift in Sources */,
 				69352EC72BBD6DAC00B8A77B /* NetworkManager.swift in Sources */,
@@ -443,11 +461,13 @@
 				6974A1102C8E495900570472 /* CellBackgroundModifiers.swift in Sources */,
 				699750D52B5FD7E1000EBCD1 /* Job.swift in Sources */,
 				69F725B12CD8E8A50064C999 /* SettingsView.swift in Sources */,
+				69F168012D3EF3EF001F06CC /* OnlineJobsViewModel.swift in Sources */,
 				699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */,
 				69352ECF2BBEBB6C00B8A77B /* LogoOptionsViewModel.swift in Sources */,
 				69984B7D2BED7445002C23F2 /* TabViewRoot.swift in Sources */,
 				69352ED12BBF603100B8A77B /* EditTip.swift in Sources */,
 				69D583762C39A4F100084C5E /* OverViewViewModel.swift in Sources */,
+				69F168032D3EF3FB001F06CC /* OnlineJobsView.swift in Sources */,
 				699750D72B5FF413000EBCD1 /* NewJobView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

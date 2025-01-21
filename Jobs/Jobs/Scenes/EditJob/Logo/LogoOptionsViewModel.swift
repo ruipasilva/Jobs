@@ -15,6 +15,8 @@ public final class LogoOptionsViewModel: ObservableObject {
     @Published public var logoURL: String = ""
     @Published public var companyWebsite: String = ""
     
+    private var cancellables = Set<AnyCancellable>()
+    
     private let job: Job
     
     public init(job: Job) {
@@ -51,7 +53,7 @@ public final class LogoOptionsViewModel: ObservableObject {
         loadingLogoState = .na
 
         do {
-            let logoData = try await networkManager.fetchData(query: company)
+            let logoData = try await networkManager.fetchLogos(query: company)
 
             if logoData.isEmpty {
                 logoURL = ""

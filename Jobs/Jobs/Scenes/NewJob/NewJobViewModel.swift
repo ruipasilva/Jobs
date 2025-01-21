@@ -31,7 +31,7 @@ public final class NewJobViewModel: BaseViewModel {
     @MainActor
     public func getLogo(company: String) async throws {
         do {
-            let logo = try await networkManager.fetchData(query: company)
+            let logo = try await networkManager.fetchLogos(query: company)
             
             guard let logoPrivate = logo.first?.logo, let domainPrivate = logo.first?.domain else { return }
             

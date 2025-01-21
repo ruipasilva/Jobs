@@ -8,6 +8,7 @@
 import Factory
 import Foundation
 import SwiftData
+import Combine
 
 public final class MainViewViewModel: ObservableObject {
     @Published public var sortingOrder = SortingOrder.dateAdded

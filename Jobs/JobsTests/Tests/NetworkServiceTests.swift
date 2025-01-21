@@ -27,7 +27,7 @@ final class NetworkServiceTests: XCTestCase {
         networkManagerMock.shouldReturnError = false
         networkManagerMock.logos = Mocks.mockCompanyInfo
 
-        let logos = try await networkManagerMock.fetchData(query: "TestQuery")
+        let logos = try await networkManagerMock.fetchLogos(query: "TestQuery")
 
         XCTAssertNotNil(logos)
         XCTAssertEqual(logos.first?.domain, "Domain")
@@ -37,7 +37,7 @@ final class NetworkServiceTests: XCTestCase {
         networkManagerMock.shouldReturnError = true
 
         do {
-            let _ = try await networkManagerMock.fetchData(query: "TestQuery")
+            let _ = try await networkManagerMock.fetchLogos(query: "TestQuery")
         } catch {
             XCTAssertEqual(error as! NetworkError, NetworkError.invalidResponse)
         }
@@ -48,7 +48,7 @@ final class NetworkServiceTests: XCTestCase {
         networkManagerMock.logos = []
 
         do {
-            let _ = try await networkManagerMock.fetchData(query: "TestQuery")
+            let _ = try await networkManagerMock.fetchLogos(query: "TestQuery")
         } catch {
             XCTAssertEqual(error as! NetworkError, NetworkError.invalidData)
         }

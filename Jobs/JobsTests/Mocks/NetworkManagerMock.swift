@@ -12,7 +12,7 @@ class NetworkManagerMock: NetworkManaging {
     var shouldReturnError = false
     var logos: [CompanyInfo]?
     
-    func fetchData(query: String) async throws -> [CompanyInfo] {
+    func fetchLogos(query: String) async throws -> [CompanyInfo] {
         if shouldReturnError {
             throw NetworkError.invalidResponse
         } else if let logos = logos {

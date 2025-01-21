@@ -12,6 +12,7 @@ public enum NetworkError: Error {
     case invalidData
     case invalidResponse
     case unableToComplete
+    case invalidRequest
 
     public var title: String {
         switch self {
@@ -23,6 +24,8 @@ public enum NetworkError: Error {
             "Invalid Response"
         case .unableToComplete:
             "Unable to complete"
+        case .invalidRequest:
+            "Invalid Request"
         }
     }
 }

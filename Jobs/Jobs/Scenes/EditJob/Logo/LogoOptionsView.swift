@@ -49,8 +49,7 @@ struct LogoOptionsView: View {
         Section {
             AnimatedTextField(text: $logoOptionsViewModel.company, label: {
                 Text("Company Name")
-            }
-            )
+            })
             .onChange(of: logoOptionsViewModel.company) { _, _ in
                 Task {
                     await logoOptionsViewModel.getLogos(
