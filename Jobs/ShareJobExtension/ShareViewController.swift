@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import Social
+import UniformTypeIdentifiers
 
 class ShareViewController: UIViewController {
     let appGroupID = "group.com.RuiSilva.Jobs"
@@ -15,11 +16,27 @@ class ShareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let contentView = ShareView()
-                let hostingController = UIHostingController(rootView: contentView)
-                addChild(hostingController)
-                hostingController.view.frame = view.bounds
-                view.addSubview(hostingController.view)
-                hostingController.didMove(toParent: self)
+        let hostingController = UIHostingController(rootView: contentView)
+        addChild(hostingController)
+        hostingController.view.frame = view.bounds
+        view.addSubview(hostingController.view)
+        hostingController.didMove(toParent: self)
+        
+        guard let extensionItem = extensionContext?.inputItems.first as? NSExtensionItem,
+              let itemProvider = extensionItem.attachments?.first else {
+            completeRequest()
+            return
+        }
+        
+        
+        // Check type identifier
+        let textDataType = UTType.plainText.identifier
+        if itemProvider.hasItemConformingToTypeIdentifier(textDataType) {
+            
+        } else {
+            completeRequest()
+            return
+        }
     }
     
     private func saveSharedURL(_ url: URL) {
