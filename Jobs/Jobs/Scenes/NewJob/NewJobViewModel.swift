@@ -12,6 +12,10 @@ import SwiftData
 import UserNotifications
 
 public final class NewJobViewModel: BaseViewModel {
+    
+    @Published private var isTyping: Bool = false
+    @Published private var timer: Timer? = nil
+    
     @Injected(\.networkManager) private var networkManager
     @Injected(\.calendarManager) public var calendarManager
     @Injected(\.notificationManager) public var notificationManager
@@ -32,6 +36,8 @@ public final class NewJobViewModel: BaseViewModel {
     public func getLogo(company: String) async throws {
         do {
             let logo = try await networkManager.fetchLogos(query: company)
+            
+            print(logo.first?.logo)
             
             guard let logoPrivate = logo.first?.logo, let domainPrivate = logo.first?.domain else { return }
             
@@ -92,4 +98,18 @@ public final class NewJobViewModel: BaseViewModel {
         
         addNewJob(context: context)
     }
+    
+    public func handleTyping() {
+            isTyping = true
+
+            timer?.invalidate()
+
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
+                guard let self else { return }
+                self.isTyping = false
+                Task {
+                    try await self.getLogo(company: self.company)
+                }
+            }
+        }
 }

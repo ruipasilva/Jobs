@@ -48,9 +48,7 @@ public struct NewJobView: View {
                 .submitLabel(.next)
                 .focused($focusState, equals: .companyName)
                 .onChange(of: newJobViewModel.company) { _, _ in
-                    Task {
-                        try await newJobViewModel.getLogo(company: newJobViewModel.company)
-                    }
+                    newJobViewModel.handleTyping()
                 }
                 .onSubmit {
                     focusState = .jobTitle
@@ -208,4 +206,6 @@ public struct NewJobView: View {
             .disabled(newJobViewModel.isTitleOrCompanyEmpty())
         }
     }
+    
+   
 }
