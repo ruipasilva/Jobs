@@ -22,6 +22,11 @@
 		696208572B6A98730045DD39 /* MainViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696208562B6A98730045DD39 /* MainViewViewModel.swift */; };
 		6966B0DD2BB8DF7200BD3424 /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */; };
 		6974A1102C8E495900570472 /* CellBackgroundModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */; };
+		697759212D3FDD8000773B8A /* ShareJobExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 697759172D3FDD8000773B8A /* ShareJobExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6977594D2D40174500773B8A /* SharedFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 697759452D40174500773B8A /* SharedFramework.framework */; };
+		6977594E2D40174500773B8A /* SharedFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 697759452D40174500773B8A /* SharedFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		697759542D4017B300773B8A /* SharedFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 697759452D40174500773B8A /* SharedFramework.framework */; };
+		697759552D4017B300773B8A /* SharedFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 697759452D40174500773B8A /* SharedFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		698006752BB37DF9007C725E /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698006742BB37DF9007C725E /* FloatingTextField.swift */; };
 		699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C52B5ED2DC000EBCD1 /* JobsApp.swift */; };
 		699750C82B5ED2DC000EBCD1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C72B5ED2DC000EBCD1 /* MainView.swift */; };
@@ -48,6 +53,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6977591F2D3FDD8000773B8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 699750BA2B5ED2DC000EBCD1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 697759162D3FDD8000773B8A;
+			remoteInfo = ShareJobExtension;
+		};
+		6977594B2D40174500773B8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 699750BA2B5ED2DC000EBCD1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 697759442D40174500773B8A;
+			remoteInfo = SharedFramework;
+		};
+		697759562D4017B300773B8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 699750BA2B5ED2DC000EBCD1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 697759442D40174500773B8A;
+			remoteInfo = SharedFramework;
+		};
 		69D00D3F2CE3CF330072DB4A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 699750BA2B5ED2DC000EBCD1 /* Project object */;
@@ -56,6 +82,42 @@
 			remoteInfo = Jobs;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		697759262D3FDD8000773B8A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				697759212D3FDD8000773B8A /* ShareJobExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6977593E2D40168000773B8A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6977594E2D40174500773B8A /* SharedFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		697759582D4017B300773B8A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				697759552D4017B300773B8A /* SharedFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		69352EB52BBB2A3200B8A77B /* SingleRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRectangleView.swift; sourceTree = "<group>"; };
@@ -75,6 +137,8 @@
 		696208562B6A98730045DD39 /* MainViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewViewModel.swift; sourceTree = "<group>"; };
 		6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailHelper.swift; sourceTree = "<group>"; };
 		6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellBackgroundModifiers.swift; sourceTree = "<group>"; };
+		697759172D3FDD8000773B8A /* ShareJobExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareJobExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		697759452D40174500773B8A /* SharedFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SharedFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		698006742BB37DF9007C725E /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		699750C22B5ED2DC000EBCD1 /* Jobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		699750C52B5ED2DC000EBCD1 /* JobsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsApp.swift; sourceTree = "<group>"; };
@@ -102,16 +166,51 @@
 		69F725BA2CDCFEB10064C999 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		697759222D3FDD8000773B8A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 697759162D3FDD8000773B8A /* ShareJobExtension */;
+		};
+		6977594F2D40174500773B8A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			publicHeaders = (
+				SharedFramework.h,
+			);
+			target = 697759442D40174500773B8A /* SharedFramework */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		697759182D3FDD8000773B8A /* ShareJobExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (697759222D3FDD8000773B8A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ShareJobExtension; sourceTree = "<group>"; };
+		697759462D40174500773B8A /* SharedFramework */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6977594F2D40174500773B8A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = SharedFramework; sourceTree = "<group>"; };
 		69D00D3C2CE3CF330072DB4A /* JobsTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = JobsTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		697759142D3FDD8000773B8A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				697759542D4017B300773B8A /* SharedFramework.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		697759422D40174500773B8A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		699750BF2B5ED2DC000EBCD1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				69F725B92CDCFE510064C999 /* Factory in Frameworks */,
+				6977594D2D40174500773B8A /* SharedFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,8 +241,8 @@
 		69352EBC2BBC23D900B8A77B /* NewJob */ = {
 			isa = PBXGroup;
 			children = (
-				699750D62B5FF413000EBCD1 /* NewJobView.swift */,
 				69352EC32BBC249300B8A77B /* NewJobViewModel.swift */,
+				699750D62B5FF413000EBCD1 /* NewJobView.swift */,
 			);
 			path = NewJob;
 			sourceTree = "<group>";
@@ -210,11 +309,21 @@
 			path = Logo;
 			sourceTree = "<group>";
 		};
+		697759532D4017B300773B8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		699750B92B5ED2DC000EBCD1 = {
 			isa = PBXGroup;
 			children = (
 				699750C42B5ED2DC000EBCD1 /* Jobs */,
 				69D00D3C2CE3CF330072DB4A /* JobsTests */,
+				697759182D3FDD8000773B8A /* ShareJobExtension */,
+				697759462D40174500773B8A /* SharedFramework */,
+				697759532D4017B300773B8A /* Frameworks */,
 				699750C32B5ED2DC000EBCD1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -224,6 +333,8 @@
 			children = (
 				699750C22B5ED2DC000EBCD1 /* Jobs.app */,
 				69D00D3B2CE3CF330072DB4A /* JobsTests.xctest */,
+				697759172D3FDD8000773B8A /* ShareJobExtension.appex */,
+				697759452D40174500773B8A /* SharedFramework.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -328,7 +439,64 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		697759402D40174500773B8A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		697759162D3FDD8000773B8A /* ShareJobExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 697759232D3FDD8000773B8A /* Build configuration list for PBXNativeTarget "ShareJobExtension" */;
+			buildPhases = (
+				697759132D3FDD8000773B8A /* Sources */,
+				697759142D3FDD8000773B8A /* Frameworks */,
+				697759152D3FDD8000773B8A /* Resources */,
+				697759582D4017B300773B8A /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				697759572D4017B300773B8A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				697759182D3FDD8000773B8A /* ShareJobExtension */,
+			);
+			name = ShareJobExtension;
+			packageProductDependencies = (
+			);
+			productName = ShareJobExtension;
+			productReference = 697759172D3FDD8000773B8A /* ShareJobExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		697759442D40174500773B8A /* SharedFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 697759502D40174500773B8A /* Build configuration list for PBXNativeTarget "SharedFramework" */;
+			buildPhases = (
+				697759402D40174500773B8A /* Headers */,
+				697759412D40174500773B8A /* Sources */,
+				697759422D40174500773B8A /* Frameworks */,
+				697759432D40174500773B8A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				697759462D40174500773B8A /* SharedFramework */,
+			);
+			name = SharedFramework;
+			packageProductDependencies = (
+			);
+			productName = SharedFramework;
+			productReference = 697759452D40174500773B8A /* SharedFramework.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		699750C12B5ED2DC000EBCD1 /* Jobs */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 699750D12B5ED2DD000EBCD1 /* Build configuration list for PBXNativeTarget "Jobs" */;
@@ -336,10 +504,14 @@
 				699750BE2B5ED2DC000EBCD1 /* Sources */,
 				699750BF2B5ED2DC000EBCD1 /* Frameworks */,
 				699750C02B5ED2DC000EBCD1 /* Resources */,
+				697759262D3FDD8000773B8A /* Embed Foundation Extensions */,
+				6977593E2D40168000773B8A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				697759202D3FDD8000773B8A /* PBXTargetDependency */,
+				6977594C2D40174500773B8A /* PBXTargetDependency */,
 			);
 			name = Jobs;
 			productName = Jobs;
@@ -379,6 +551,12 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
+					697759162D3FDD8000773B8A = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					697759442D40174500773B8A = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					699750C12B5ED2DC000EBCD1 = {
 						CreatedOnToolsVersion = 15.1;
 					};
@@ -406,11 +584,27 @@
 			targets = (
 				699750C12B5ED2DC000EBCD1 /* Jobs */,
 				69D00D3A2CE3CF330072DB4A /* JobsTests */,
+				697759162D3FDD8000773B8A /* ShareJobExtension */,
+				697759442D40174500773B8A /* SharedFramework */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		697759152D3FDD8000773B8A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		697759432D40174500773B8A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		699750C02B5ED2DC000EBCD1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -430,6 +624,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		697759132D3FDD8000773B8A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		697759412D40174500773B8A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		699750BE2B5ED2DC000EBCD1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -482,6 +690,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		697759202D3FDD8000773B8A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 697759162D3FDD8000773B8A /* ShareJobExtension */;
+			targetProxy = 6977591F2D3FDD8000773B8A /* PBXContainerItemProxy */;
+		};
+		6977594C2D40174500773B8A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 697759442D40174500773B8A /* SharedFramework */;
+			targetProxy = 6977594B2D40174500773B8A /* PBXContainerItemProxy */;
+		};
+		697759572D4017B300773B8A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 697759442D40174500773B8A /* SharedFramework */;
+			targetProxy = 697759562D4017B300773B8A /* PBXContainerItemProxy */;
+		};
 		69D00D402CE3CF330072DB4A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 699750C12B5ED2DC000EBCD1 /* Jobs */;
@@ -490,6 +713,138 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		697759242D3FDD8000773B8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShareJobExtension/ShareJobExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9FVDFCLP22;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShareJobExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShareJobExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RuiSilva.Jobs.ShareJobExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		697759252D3FDD8000773B8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShareJobExtension/ShareJobExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9FVDFCLP22;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShareJobExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShareJobExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RuiSilva.Jobs.ShareJobExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		697759512D40174500773B8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 9FVDFCLP22;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.RuiSilva.Jobs.SharedFramework;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		697759522D40174500773B8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 9FVDFCLP22;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.RuiSilva.Jobs.SharedFramework;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		699750CF2B5ED2DD000EBCD1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -732,6 +1087,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		697759232D3FDD8000773B8A /* Build configuration list for PBXNativeTarget "ShareJobExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				697759242D3FDD8000773B8A /* Debug */,
+				697759252D3FDD8000773B8A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		697759502D40174500773B8A /* Build configuration list for PBXNativeTarget "SharedFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				697759512D40174500773B8A /* Debug */,
+				697759522D40174500773B8A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		699750BD2B5ED2DC000EBCD1 /* Build configuration list for PBXProject "Jobs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

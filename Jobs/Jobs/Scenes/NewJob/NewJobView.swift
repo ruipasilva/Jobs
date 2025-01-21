@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct NewJobView: View {
+public struct NewJobView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @StateObject private var newJobViewModel = NewJobViewModel()
     @FocusState private var focusState: FocusedField?
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             Form {
                 mainInfoView

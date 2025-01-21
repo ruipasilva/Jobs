@@ -12,6 +12,8 @@ import TipKit
 struct JobsApp: App {
 
     private let container: ModelContainer
+    
+    let appGroupID = "group.com.RuiSilva.Jobs"
 
     var body: some Scene {
         WindowGroup {
@@ -21,6 +23,11 @@ struct JobsApp: App {
                         .displayFrequency(.immediate),
                         .datastoreLocation(.applicationDefault),
                     ])
+                }
+                .onOpenURL { url in
+                    if url.scheme == "myapp" {
+                        print("Test")
+                    }
                 }
         }
         .modelContainer(container)
@@ -33,5 +40,13 @@ struct JobsApp: App {
         } catch {
             fatalError("Could not configure container - try uninstalling the app if issues occur")
         }
+    }
+    
+    func retrieveSharedURL() -> URL? {
+        if let sharedDefaults = UserDefaults(suiteName: appGroupID),
+           let urlString = sharedDefaults.string(forKey: "sharedURL") {
+            return URL(string: urlString)
+        }
+        return nil
     }
 }
