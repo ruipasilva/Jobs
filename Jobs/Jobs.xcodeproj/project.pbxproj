@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 73;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -183,8 +183,18 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		692ABA572D4061EF00C54CF7 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 692ABA3D2D405A5E00C54CF7 /* Resources */;
+			membershipExceptions = (
+				ShareViewController.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		692ABA402D405A5E00C54CF7 /* ShareJobExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (692ABA4A2D405A5E00C54CF7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ShareJobExtension; sourceTree = "<group>"; };
+		692ABA402D405A5E00C54CF7 /* ShareJobExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (692ABA4A2D405A5E00C54CF7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 692ABA572D4061EF00C54CF7 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ShareJobExtension; sourceTree = "<group>"; };
 		697759462D40174500773B8A /* SharedFramework */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6977594F2D40174500773B8A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = SharedFramework; sourceTree = "<group>"; };
 		69D00D3C2CE3CF330072DB4A /* JobsTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = JobsTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -549,7 +559,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					692ABA3E2D405A5E00C54CF7 = {
 						CreatedOnToolsVersion = 16.0;
@@ -567,7 +577,6 @@
 				};
 			};
 			buildConfigurationList = 699750BD2B5ED2DC000EBCD1 /* Build configuration list for PBXProject "Jobs" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -578,6 +587,7 @@
 			packageReferences = (
 				69F725B72CDCFE510064C999 /* XCRemoteSwiftPackageReference "Factory" */,
 			);
+			preferredProjectObjectVersion = 56;
 			productRefGroup = 699750C32B5ED2DC000EBCD1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -774,6 +784,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -811,6 +822,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
