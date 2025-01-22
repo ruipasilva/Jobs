@@ -7,7 +7,7 @@
 
 import SwiftData
 import SwiftUI
-import SharedFramework
+import ShareJobFramework
 
 struct MainView: View {
     @StateObject private var mainViewModel = MainViewViewModel()

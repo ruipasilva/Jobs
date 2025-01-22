@@ -7,6 +7,7 @@
 
 import SwiftData
 import SwiftUI
+import ShareJobFramework
 
 struct JobListView: View {
     @ObservedObject private var mainViewModel: MainViewViewModel
@@ -30,6 +31,8 @@ struct JobListView: View {
                 [SortDescriptor(\Job.salary, order: mainViewModel.ascendingDescending)]
             case .dateAdded:
                 [SortDescriptor(\Job.dateAdded, order: mainViewModel.ascendingDescending)]
+            @unknown default:
+                [SortDescriptor(\Job.company, order: mainViewModel.ascendingDescending)]
             }
         
         let filter = #Predicate<Job> { job in

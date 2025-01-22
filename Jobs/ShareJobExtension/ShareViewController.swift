@@ -7,8 +7,11 @@
 
 import UIKit
 import SwiftUI
+import SwiftData
 
 class ShareViewController: UIViewController {
+    
+    private var modelContext: ModelContext?
     let appGroupID = "group.com.RuiSilva.Jobs"
     
     override func viewDidLoad() {
@@ -20,6 +23,7 @@ class ShareViewController: UIViewController {
     
     func setupView() {
         let contentView = ShareExtensionView(action: { self.dismissShareExtension() })
+            .environment(\.modelContext, modelContext!)
         let hostingController = UIHostingController(rootView: contentView)
         self.addChild(hostingController)
         hostingController.view.frame = view.bounds
@@ -28,6 +32,8 @@ class ShareViewController: UIViewController {
     }
     
     private func extractURLFromContext() {
+        modelContext = ShareExtensionModelContainer.shared.mainContext
+        
         guard let extensionItems = extensionContext?.inputItems as? [NSExtensionItem] else {
             print("No extension items found")
             return

@@ -10,13 +10,13 @@ import SwiftData
 
 @Model
 public final class InterviewQuestion: Hashable {
-    var completed: Bool = false
-    var question: String = ""
-    var dateAdded: Date = Date.now
+    public var completed: Bool = false
+    public var question: String = ""
+    public var dateAdded: Date = Date.now
     // .cascade deletes all the related models
     @Relationship(deleteRule: .cascade, inverse: \Job.interviewQuestions) var job: Job?
     
-    init(completed: Bool,
+    public init(completed: Bool,
          question: String,
          dateAdded: Date) {
         self.completed = completed
@@ -28,32 +28,32 @@ public final class InterviewQuestion: Hashable {
 @Model
 public final class Job {
     // All properties need a default value as cloudKit requires it
-    var localNotificationID: String?
-    var title: String = ""
-    var company: String = ""
-    var dateAdded: Date = Date.now
-    var notes: String = ""
-    var jobApplicationStatus: JobApplicationStatus = JobApplicationStatus.notApplied
-    var jobApplicationStatusPrivate: String = "" // Used to sort order
-    var salary: String = ""
-    var location: String = ""
-    var locationType: LocationType = LocationType.onSite
-    var recruiterName: String = ""
-    var recruiterNumber: String = ""
-    var recruiterEmail: String = ""
-    var followUp: Bool = false
-    var followUpDate: Date = Date.now
-    var addToCalendar: Bool = false
-    var addToCalendarDate: Date = Date.now
-    var isEventAllDay: Bool = false
-    var jobURLPosting: String = ""
-    var logoURL: String = ""
-    var companyWebsite: String = ""
-    var interviewQuestions: [InterviewQuestion]?
-    var workingDays: [String] = []
-    var currencyType: CurrencyType = CurrencyType.dolar
-    
-    init(localNotificationID: String? = nil,
+    public var localNotificationID: String?
+    public var title: String = ""
+    public var company: String = ""
+    public var dateAdded: Date = Date.now
+    public var notes: String = ""
+    public var jobApplicationStatus: JobApplicationStatus = JobApplicationStatus.notApplied
+    public var jobApplicationStatusPrivate: String = "" // Used to sort order
+    public var salary: String = ""
+    public var location: String = ""
+    public var locationType: LocationType = LocationType.onSite
+    public var recruiterName: String = ""
+    public var recruiterNumber: String = ""
+    public var recruiterEmail: String = ""
+    public var followUp: Bool = false
+    public var followUpDate: Date = Date.now
+    public var addToCalendar: Bool = false
+    public var addToCalendarDate: Date = Date.now
+    public var isEventAllDay: Bool = false
+    public var jobURLPosting: String = ""
+    public var logoURL: String = ""
+    public var companyWebsite: String = ""
+    public var interviewQuestions: [InterviewQuestion]?
+    public var workingDays: [String] = []
+    public var currencyType: CurrencyType = CurrencyType.dolar
+
+    public init(localNotificationID: String? = nil,
          title: String,
          company: String,
          dateAdded: Date = Date.now,

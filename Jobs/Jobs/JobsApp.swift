@@ -7,15 +7,16 @@
 
 import SwiftData
 import TipKit
+import ShareJobFramework
 
 @main
 struct JobsApp: App {
 
-    private let container: ModelContainer
+    public let container: ModelContainer
     
     let appGroupID = "group.com.RuiSilva.Jobs"
 
-    var body: some Scene {
+    public var body: some Scene {
         WindowGroup {
             TabViewRoot()
                 .task {
@@ -24,19 +25,23 @@ struct JobsApp: App {
                         .datastoreLocation(.applicationDefault),
                     ])
                 }
-                .onOpenURL { url in
-                    if url.scheme == "myapp" {
-                        print("Test")
-                    }
-                }
         }
         .modelContainer(container)
     }
 
-    init() {
+    public init() {
+        
+        guard let sharedURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.RuiSilva.Jobs") else {
+                    fatalError("Failed to get the App Group container URL.")
+                }
+
+                let storeURL = sharedURL.appendingPathComponent("Jobs.sqlite")
+        
         do {
-            let config = ModelConfiguration(for: Job.self, InterviewQuestion.self)
+            let config = ModelConfiguration(url: storeURL)
+            
             container = try ModelContainer(for: Job.self, InterviewQuestion.self, configurations: config)
+
         } catch {
             fatalError("Could not configure container - try uninstalling the app if issues occur")
         }

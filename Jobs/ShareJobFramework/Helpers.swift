@@ -1,12 +1,11 @@
 //
-//  JobHelpers.swift
-//  Jobs
+//  Helpers.swift
+//  
 //
-//  Created by Rui Silva on 31/01/2024.
+//  Created by Rui Silva on 22/01/2025.
 //
 
 import Foundation
-import SwiftUI
 
 public enum FocusedField {
     case companyName
@@ -20,10 +19,11 @@ public enum FocusedField {
 
 public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable {
     case notApplied, applied, started, hired, rejected
+    
 
     public var id: Self { self }
 
-    var status: String {
+    public var status: String {
         switch self {
         case .notApplied:
             "Not Applied"
@@ -44,7 +44,7 @@ public enum LocationType: Codable, Identifiable, CaseIterable {
 
     public var id: Self { self }
 
-    var type: String {
+    public var type: String {
         switch self {
         case .remote:
             "Remote"
@@ -65,7 +65,7 @@ public enum SortingOrder: Int, Identifiable, CaseIterable {
         self
     }
 
-    var status: String {
+    public var status: String {
         switch self {
         case .title:
             "Title"
@@ -87,7 +87,7 @@ public enum CurrencyType: String, Codable, Identifiable, CaseIterable {
 
     public var id: Self { self }
 
-    var symbol: String {
+    public var symbol: String {
         switch self {
         case .libra:
             "£"

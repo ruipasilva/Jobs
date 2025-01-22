@@ -7,6 +7,7 @@
 
 import SwiftData
 import SwiftUI
+import ShareJobFramework
 
 struct RectanglesView: View {
     @ObservedObject private var mainViewModel: MainViewViewModel

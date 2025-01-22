@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ShareJobFramework
 
 public class BaseViewModel: ObservableObject {
     @Published public var localNotificationID = ""
@@ -36,4 +37,6 @@ public class BaseViewModel: ObservableObject {
     public let workingDays: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri"]
     
     @Published public var showingCancelActionSheet = false
+    
+    public init() {}
 }

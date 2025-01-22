@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
+import ShareJobFramework
 
 struct ShareExtensionView: View {
-    
+    @Environment(\.modelContext) var container
     @StateObject var shareExtensionViewModel = ShareExtensionViewModel()
     
     var action: () -> Void
-
     
     var body: some View {
         VStack {
@@ -21,12 +22,19 @@ struct ShareExtensionView: View {
                 .padding()
             Text(shareExtensionViewModel.sharedText.isEmpty ? shareExtensionViewModel.sharedURL?.absoluteString ?? "No URL shared" : shareExtensionViewModel.sharedText)
             
+            TextField("Company", text: $shareExtensionViewModel.company)
+                .padding()
+            
+            TextField("Job Title", text: $shareExtensionViewModel.title)
+                .padding()
+            
             Button("Dismiss", action: {
                 action()
             })
             Spacer()
         }
         .onAppear {
+            shareExtensionViewModel.saveJob(context: container)
             loadSharedContent()
         }
     }

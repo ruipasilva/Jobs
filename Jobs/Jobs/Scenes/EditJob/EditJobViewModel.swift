@@ -9,6 +9,7 @@ import Combine
 import Factory
 import Foundation
 import SwiftUI
+import ShareJobFramework
 
 
 public class EditJobViewModel: BaseViewModel {

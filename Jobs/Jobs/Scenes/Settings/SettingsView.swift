@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ShareJobFramework
 
 struct SettingsView: View {
     @AppStorage("CurrencyType") var currencyType: CurrencyType = .dolar

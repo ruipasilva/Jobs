@@ -8,6 +8,7 @@
 import Combine
 import Factory
 import Foundation
+import ShareJobFramework
 
 public final class LogoOptionsViewModel: ObservableObject {
     @Published public var title: String = ""
@@ -17,7 +18,7 @@ public final class LogoOptionsViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
-    private let job: Job
+    public let job: Job
     
     public init(job: Job) {
         self.job = job
