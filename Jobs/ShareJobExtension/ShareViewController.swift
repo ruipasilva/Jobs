@@ -19,7 +19,7 @@ class ShareViewController: UIViewController {
     }
     
     func setupView() {
-        let contentView = ShareView(action: { self.dismissShareExtension() })
+        let contentView = ShareExtensionView(action: { self.dismissShareExtension() })
         let hostingController = UIHostingController(rootView: contentView)
         self.addChild(hostingController)
         hostingController.view.frame = view.bounds
@@ -65,42 +65,5 @@ class ShareViewController: UIViewController {
     
     private func dismissShareExtension() {
         extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
-    }
-}
-
-struct ShareView: View {
-    
-    let appGroupID = "group.com.RuiSilva.Jobs"
-    
-    var action: () -> Void
-    
-    @State private var sharedURL: URL?
-    @State private var sharedText: String = ""
-    
-    
-    var body: some View {
-        VStack {
-            Text("Share Extension")
-                .font(.headline)
-                .padding()
-            Text(sharedText.isEmpty ? sharedURL?.absoluteString ?? "No URL shared" : sharedText)
-            
-            Button("Dismiss", action: {
-                action()
-            })
-            Spacer()
-        }
-        .onAppear {
-            loadSharedContent()
-        }
-    }
-    
-    private func loadSharedContent() {
-        if let sharedDefaults = UserDefaults(suiteName: appGroupID) {
-            if let urlString = sharedDefaults.string(forKey: "url"), let url = URL(string: urlString) {
-                sharedURL = url
-                sharedDefaults.removeObject(forKey: "url") // Clear after reading
-            }
-        }
     }
 }
