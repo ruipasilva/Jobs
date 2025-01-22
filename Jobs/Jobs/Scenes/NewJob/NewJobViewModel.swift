@@ -37,8 +37,6 @@ public final class NewJobViewModel: BaseViewModel {
         do {
             let logo = try await networkManager.fetchLogos(query: company)
             
-            print(logo.first?.logo)
-            
             guard let logoPrivate = logo.first?.logo, let domainPrivate = logo.first?.domain else { return }
             
             self.logoURL = logoPrivate
