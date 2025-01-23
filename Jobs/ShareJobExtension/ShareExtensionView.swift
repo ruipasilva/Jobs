@@ -29,12 +29,13 @@ struct ShareExtensionView: View {
                 .padding()
             
             Button("Dismiss", action: {
+                shareExtensionViewModel.saveJob(context: container)
                 action()
             })
             Spacer()
         }
         .onAppear {
-            shareExtensionViewModel.saveJob(context: container)
+            
             loadSharedContent()
         }
     }

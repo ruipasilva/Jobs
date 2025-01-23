@@ -118,6 +118,12 @@ struct MainListCellView: View {
                     .clear, Color.init(UIColor.secondarySystemBackground),
                     Color.init(UIColor.secondarySystemBackground),
                 ]), startPoint: .leading, endPoint: .trailing)
+        @unknown default:
+            return LinearGradient(
+                gradient: Gradient(colors: [
+                    .clear, Color.init(UIColor.secondarySystemBackground),
+                    Color.init(UIColor.secondarySystemBackground),
+                ]), startPoint: .leading, endPoint: .trailing)
         }
     }
 }

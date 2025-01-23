@@ -61,7 +61,7 @@ public class ShareExtensionViewModel: ObservableObject {
                          addToCalendar: addInterviewToCalendar,
                          addToCalendarDate: addInterviewToCalendarDate,
                          isEventAllDay: isEventAllDay,
-                         jobURLPosting: url,
+                         jobURLPosting: sharedText.isEmpty ? sharedURL?.absoluteString ?? "No URL shared" : sharedText,
                          logoURL: logoURL,
                          companyWebsite: companyWebsite,
                          workingDays: workingDaysToSave,
