@@ -98,16 +98,16 @@ public final class NewJobViewModel: BaseViewModel {
     }
     
     public func handleTyping() {
-            isTyping = true
-
-            timer?.invalidate()
-
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
-                guard let self else { return }
-                self.isTyping = false
-                Task {
-                    try await self.getLogo(company: self.company)
-                }
+        isTyping = true
+        
+        timer?.invalidate()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
+            guard let self else { return }
+            self.isTyping = false
+            Task {
+                try await self.getLogo(company: self.company)
             }
         }
+    }
 }

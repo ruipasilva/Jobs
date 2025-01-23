@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import Factory
 
 public class ShareExtensionViewModel: ObservableObject {
     
@@ -41,6 +42,8 @@ public class ShareExtensionViewModel: ObservableObject {
     
     @Published public var sharedURL: URL?
     @Published public var sharedText: String = ""
+    
+    @Injected(\.networkManager) var networkManager
     
     private func addNewJob(context: ModelContext) {
         let newJob = Job(localNotificationID: self.localNotificationID,
