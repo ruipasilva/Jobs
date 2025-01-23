@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftData
-import ShareJobFramework
 
 public class ShareExtensionViewModel: ObservableObject {
     

@@ -9,7 +9,6 @@ import Factory
 import Foundation
 import SwiftData
 import Combine
-import ShareJobFramework
 
 public final class MainViewViewModel: ObservableObject {
     @Published public var sortingOrder = SortingOrder.dateAdded

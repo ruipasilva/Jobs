@@ -7,7 +7,6 @@
 
 import SwiftData
 import UIKit
-import ShareJobFramework
 
 class ShareExtensionModelContainer {
     static let shared: ModelContainer = {

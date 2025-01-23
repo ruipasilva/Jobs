@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import ShareJobFramework
 
 public struct NewJobView: View {
     @Environment(\.modelContext) private var context

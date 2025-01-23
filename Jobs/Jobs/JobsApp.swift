@@ -7,7 +7,6 @@
 
 import SwiftData
 import TipKit
-import ShareJobFramework
 
 @main
 struct JobsApp: App {

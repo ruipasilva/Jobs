@@ -10,7 +10,6 @@ import Factory
 import Foundation
 import SwiftData
 import UserNotifications
-import ShareJobFramework
 
 public final class NewJobViewModel: BaseViewModel {
     

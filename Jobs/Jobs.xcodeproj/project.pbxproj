@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		692ABA492D405A5E00C54CF7 /* ShareJobExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 692ABA3F2D405A5E00C54CF7 /* ShareJobExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		692ABA652D41276D00C54CF7 /* ShareJobFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692ABA5D2D41276C00C54CF7 /* ShareJobFramework.framework */; };
-		692ABA662D41276D00C54CF7 /* ShareJobFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 692ABA5D2D41276C00C54CF7 /* ShareJobFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		692ABA722D41352C00C54CF7 /* ShareJobFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692ABA5D2D41276C00C54CF7 /* ShareJobFramework.framework */; };
-		692ABA732D41352C00C54CF7 /* ShareJobFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 692ABA5D2D41276C00C54CF7 /* ShareJobFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		692ABA772D41353B00C54CF7 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 692ABA762D41353B00C54CF7 /* Factory */; };
-		692ABA7D2D414EF300C54CF7 /* ShareJobFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 692ABA5D2D41276C00C54CF7 /* ShareJobFramework.framework */; };
 		69352EB62BBB2A3200B8A77B /* SingleRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352EB52BBB2A3200B8A77B /* SingleRectangleView.swift */; };
 		69352EB82BBB2B7A00B8A77B /* RectanglesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352EB72BBB2B7A00B8A77B /* RectanglesView.swift */; };
 		69352EBA2BBB2C4B00B8A77B /* MainListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352EB92BBB2C4B00B8A77B /* MainListCellView.swift */; };
@@ -25,6 +19,10 @@
 		69352ECD2BBDA36900B8A77B /* LogoOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352ECC2BBDA36900B8A77B /* LogoOptionsView.swift */; };
 		69352ECF2BBEBB6C00B8A77B /* LogoOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352ECE2BBEBB6C00B8A77B /* LogoOptionsViewModel.swift */; };
 		69352ED12BBF603100B8A77B /* EditTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352ED02BBF603100B8A77B /* EditTip.swift */; };
+		693AD1962D42C1B20059686E /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693AD18F2D41800F0059686E /* Job.swift */; };
+		693AD1972D42C1B90059686E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693AD18E2D41800F0059686E /* Helpers.swift */; };
+		693AD1982D42C25F0059686E /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693AD18F2D41800F0059686E /* Job.swift */; };
+		693AD1992D42C25F0059686E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693AD18E2D41800F0059686E /* Helpers.swift */; };
 		696208572B6A98730045DD39 /* MainViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696208562B6A98730045DD39 /* MainViewViewModel.swift */; };
 		6966B0DD2BB8DF7200BD3424 /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */; };
 		6974A1102C8E495900570472 /* CellBackgroundModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */; };
@@ -60,20 +58,6 @@
 			remoteGlobalIDString = 692ABA3E2D405A5E00C54CF7;
 			remoteInfo = ShareJobExtension;
 		};
-		692ABA632D41276D00C54CF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 699750BA2B5ED2DC000EBCD1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 692ABA5C2D41276C00C54CF7;
-			remoteInfo = ShareJobFramework;
-		};
-		692ABA742D41352C00C54CF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 699750BA2B5ED2DC000EBCD1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 692ABA5C2D41276C00C54CF7;
-			remoteInfo = ShareJobFramework;
-		};
 		692ABA7E2D414EF300C54CF7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 699750BA2B5ED2DC000EBCD1 /* Project object */;
@@ -97,7 +81,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				692ABA732D41352C00C54CF7 /* ShareJobFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,7 +102,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				692ABA662D41276D00C54CF7 /* ShareJobFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -128,7 +110,6 @@
 
 /* Begin PBXFileReference section */
 		692ABA3F2D405A5E00C54CF7 /* ShareJobExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareJobExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		692ABA5D2D41276C00C54CF7 /* ShareJobFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ShareJobFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		692ABA782D41354800C54CF7 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/SwiftUI.framework; sourceTree = DEVELOPER_DIR; };
 		69352EB52BBB2A3200B8A77B /* SingleRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRectangleView.swift; sourceTree = "<group>"; };
 		69352EB72BBB2B7A00B8A77B /* RectanglesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectanglesView.swift; sourceTree = "<group>"; };
@@ -141,6 +122,8 @@
 		69352ECC2BBDA36900B8A77B /* LogoOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoOptionsView.swift; sourceTree = "<group>"; };
 		69352ECE2BBEBB6C00B8A77B /* LogoOptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoOptionsViewModel.swift; sourceTree = "<group>"; };
 		69352ED02BBF603100B8A77B /* EditTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTip.swift; sourceTree = "<group>"; };
+		693AD18E2D41800F0059686E /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		693AD18F2D41800F0059686E /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
 		696208542B6A8F620045DD39 /* JobsDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobsDebug.entitlements; sourceTree = "<group>"; };
 		696208552B6A8FE70045DD39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		696208562B6A98730045DD39 /* MainViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewViewModel.swift; sourceTree = "<group>"; };
@@ -180,13 +163,6 @@
 			);
 			target = 692ABA3E2D405A5E00C54CF7 /* ShareJobExtension */;
 		};
-		692ABA672D41276D00C54CF7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			publicHeaders = (
-				ShareJobFramework.h,
-			);
-			target = 692ABA5C2D41276C00C54CF7 /* ShareJobFramework */;
-		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -201,7 +177,6 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		692ABA402D405A5E00C54CF7 /* ShareJobExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (692ABA4A2D405A5E00C54CF7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 692ABA572D4061EF00C54CF7 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ShareJobExtension; sourceTree = "<group>"; };
-		692ABA5E2D41276D00C54CF7 /* ShareJobFramework */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (692ABA672D41276D00C54CF7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ShareJobFramework; sourceTree = "<group>"; };
 		69D00D3C2CE3CF330072DB4A /* JobsTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = JobsTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -210,16 +185,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				692ABA722D41352C00C54CF7 /* ShareJobFramework.framework in Frameworks */,
-				692ABA7D2D414EF300C54CF7 /* ShareJobFramework.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		692ABA5A2D41276C00C54CF7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				692ABA772D41353B00C54CF7 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,7 +193,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				69F725B92CDCFE510064C999 /* Factory in Frameworks */,
-				692ABA652D41276D00C54CF7 /* ShareJobFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +277,7 @@
 				69352ED02BBF603100B8A77B /* EditTip.swift */,
 				69352EC82BBD6FC100B8A77B /* CompanyInfo.swift */,
 				69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */,
+				693AD18F2D41800F0059686E /* Job.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -340,7 +305,6 @@
 				699750C42B5ED2DC000EBCD1 /* Jobs */,
 				69D00D3C2CE3CF330072DB4A /* JobsTests */,
 				692ABA402D405A5E00C54CF7 /* ShareJobExtension */,
-				692ABA5E2D41276D00C54CF7 /* ShareJobFramework */,
 				697759532D4017B300773B8A /* Frameworks */,
 				699750C32B5ED2DC000EBCD1 /* Products */,
 			);
@@ -352,7 +316,6 @@
 				699750C22B5ED2DC000EBCD1 /* Jobs.app */,
 				69D00D3B2CE3CF330072DB4A /* JobsTests.xctest */,
 				692ABA3F2D405A5E00C54CF7 /* ShareJobExtension.appex */,
-				692ABA5D2D41276C00C54CF7 /* ShareJobFramework.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -450,21 +413,12 @@
 			children = (
 				69352ECA2BBD71EC00B8A77B /* NetworkHelpers.swift */,
 				6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */,
+				693AD18E2D41800F0059686E /* Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		692ABA582D41276C00C54CF7 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		692ABA3E2D405A5E00C54CF7 /* ShareJobExtension */ = {
@@ -479,7 +433,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				692ABA752D41352C00C54CF7 /* PBXTargetDependency */,
 				692ABA7F2D414EF300C54CF7 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
@@ -491,30 +444,6 @@
 			productName = ShareJobExtension;
 			productReference = 692ABA3F2D405A5E00C54CF7 /* ShareJobExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
-		};
-		692ABA5C2D41276C00C54CF7 /* ShareJobFramework */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 692ABA682D41276D00C54CF7 /* Build configuration list for PBXNativeTarget "ShareJobFramework" */;
-			buildPhases = (
-				692ABA582D41276C00C54CF7 /* Headers */,
-				692ABA592D41276C00C54CF7 /* Sources */,
-				692ABA5A2D41276C00C54CF7 /* Frameworks */,
-				692ABA5B2D41276C00C54CF7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				692ABA5E2D41276D00C54CF7 /* ShareJobFramework */,
-			);
-			name = ShareJobFramework;
-			packageProductDependencies = (
-				692ABA762D41353B00C54CF7 /* Factory */,
-			);
-			productName = ShareJobFramework;
-			productReference = 692ABA5D2D41276C00C54CF7 /* ShareJobFramework.framework */;
-			productType = "com.apple.product-type.framework";
 		};
 		699750C12B5ED2DC000EBCD1 /* Jobs */ = {
 			isa = PBXNativeTarget;
@@ -530,7 +459,6 @@
 			);
 			dependencies = (
 				692ABA482D405A5E00C54CF7 /* PBXTargetDependency */,
-				692ABA642D41276D00C54CF7 /* PBXTargetDependency */,
 			);
 			name = Jobs;
 			productName = Jobs;
@@ -573,9 +501,6 @@
 					692ABA3E2D405A5E00C54CF7 = {
 						CreatedOnToolsVersion = 16.0;
 					};
-					692ABA5C2D41276C00C54CF7 = {
-						CreatedOnToolsVersion = 16.0;
-					};
 					699750C12B5ED2DC000EBCD1 = {
 						CreatedOnToolsVersion = 15.1;
 					};
@@ -604,20 +529,12 @@
 				699750C12B5ED2DC000EBCD1 /* Jobs */,
 				69D00D3A2CE3CF330072DB4A /* JobsTests */,
 				692ABA3E2D405A5E00C54CF7 /* ShareJobExtension */,
-				692ABA5C2D41276C00C54CF7 /* ShareJobFramework */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		692ABA3D2D405A5E00C54CF7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		692ABA5B2D41276C00C54CF7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -647,13 +564,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		692ABA592D41276C00C54CF7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				693AD1972D42C1B90059686E /* Helpers.swift in Sources */,
+				693AD1962D42C1B20059686E /* Job.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,6 +573,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				693AD1982D42C25F0059686E /* Job.swift in Sources */,
+				693AD1992D42C25F0059686E /* Helpers.swift in Sources */,
 				69D583742C39A46900084C5E /* OverView.swift in Sources */,
 				69F725BB2CDCFEB10064C999 /* DependencyContainer.swift in Sources */,
 				699750D92B6007AD000EBCD1 /* EditJobView.swift in Sources */,
@@ -712,19 +626,8 @@
 			target = 692ABA3E2D405A5E00C54CF7 /* ShareJobExtension */;
 			targetProxy = 692ABA472D405A5E00C54CF7 /* PBXContainerItemProxy */;
 		};
-		692ABA642D41276D00C54CF7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 692ABA5C2D41276C00C54CF7 /* ShareJobFramework */;
-			targetProxy = 692ABA632D41276D00C54CF7 /* PBXContainerItemProxy */;
-		};
-		692ABA752D41352C00C54CF7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 692ABA5C2D41276C00C54CF7 /* ShareJobFramework */;
-			targetProxy = 692ABA742D41352C00C54CF7 /* PBXContainerItemProxy */;
-		};
 		692ABA7F2D414EF300C54CF7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 692ABA5C2D41276C00C54CF7 /* ShareJobFramework */;
 			targetProxy = 692ABA7E2D414EF300C54CF7 /* PBXContainerItemProxy */;
 		};
 		69D00D402CE3CF330072DB4A /* PBXTargetDependency */ = {
@@ -797,89 +700,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		692ABA692D41276D00C54CF7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 9FVDFCLP22;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.RuiSilva.Jobs.ShareJobFramework;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_INSTALL_OBJC_HEADER = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		692ABA6A2D41276D00C54CF7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 9FVDFCLP22;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.RuiSilva.Jobs.ShareJobFramework;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_INSTALL_OBJC_HEADER = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1136,15 +956,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		692ABA682D41276D00C54CF7 /* Build configuration list for PBXNativeTarget "ShareJobFramework" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				692ABA692D41276D00C54CF7 /* Debug */,
-				692ABA6A2D41276D00C54CF7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		699750BD2B5ED2DC000EBCD1 /* Build configuration list for PBXProject "Jobs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1186,11 +997,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		692ABA762D41353B00C54CF7 /* Factory */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 69F725B72CDCFE510064C999 /* XCRemoteSwiftPackageReference "Factory" */;
-			productName = Factory;
-		};
 		69F725B82CDCFE510064C999 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 69F725B72CDCFE510064C999 /* XCRemoteSwiftPackageReference "Factory" */;

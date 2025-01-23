@@ -7,7 +7,6 @@
 
 import SwiftUI
 import TipKit
-import ShareJobFramework
 
 struct EditJobView: View {
     @StateObject private var editJobViewModel: EditJobViewModel

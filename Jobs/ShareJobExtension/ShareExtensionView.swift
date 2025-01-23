@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import ShareJobFramework
 
 struct ShareExtensionView: View {
     @Environment(\.modelContext) var container

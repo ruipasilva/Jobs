@@ -7,7 +7,6 @@
 
 import SwiftData
 import SwiftUI
-import ShareJobFramework
 
 struct JobListView: View {
     @ObservedObject private var mainViewModel: MainViewViewModel

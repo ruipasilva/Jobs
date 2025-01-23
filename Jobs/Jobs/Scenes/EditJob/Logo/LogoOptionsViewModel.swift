@@ -8,7 +8,6 @@
 import Combine
 import Factory
 import Foundation
-import ShareJobFramework
 
 public final class LogoOptionsViewModel: ObservableObject {
     @Published public var title: String = ""

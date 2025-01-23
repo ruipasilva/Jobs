@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import ShareJobFramework
 
 public class BaseViewModel: ObservableObject {
     @Published public var localNotificationID = ""

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import ShareJobFramework
 
 struct MainListCellView: View {
     @ObservedObject private var mainViewModel: MainViewViewModel
