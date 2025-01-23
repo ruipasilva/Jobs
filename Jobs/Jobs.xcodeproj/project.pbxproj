@@ -31,6 +31,7 @@
 		693AD19F2D42C4920059686E /* OnlineJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */; };
 		693AD1A02D42C49D0059686E /* NetworkHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352ECA2BBD71EC00B8A77B /* NetworkHelpers.swift */; };
 		693AD1A22D42C4C20059686E /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 693AD1A12D42C4C20059686E /* Factory */; };
+		693AD1A32D42C5AE0059686E /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F2F7822D35645B008B20D5 /* BaseViewModel.swift */; };
 		696208572B6A98730045DD39 /* MainViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696208562B6A98730045DD39 /* MainViewViewModel.swift */; };
 		6966B0DD2BB8DF7200BD3424 /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */; };
 		6974A1102C8E495900570472 /* CellBackgroundModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */; };
@@ -574,6 +575,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				693AD1A32D42C5AE0059686E /* BaseViewModel.swift in Sources */,
 				693AD1A02D42C49D0059686E /* NetworkHelpers.swift in Sources */,
 				693AD19E2D42C4920059686E /* CompanyInfo.swift in Sources */,
 				693AD19F2D42C4920059686E /* OnlineJob.swift in Sources */,

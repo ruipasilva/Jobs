@@ -26,7 +26,6 @@ public class EditJobViewModel: BaseViewModel {
     public let editTip = EditTip()
     public let job: Job
 
-    @Injected(\.networkManager) private var networkManager
     @Injected(\.notificationManager) public var notificationManager
     @Injected(\.calendarManager) public var calendarManager
 

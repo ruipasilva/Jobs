@@ -13,10 +13,6 @@ import UserNotifications
 
 public final class NewJobViewModel: BaseViewModel {
     
-    @Published private var isTyping: Bool = false
-    @Published private var timer: Timer? = nil
-    
-    @Injected(\.networkManager) private var networkManager
     @Injected(\.calendarManager) public var calendarManager
     @Injected(\.notificationManager) public var notificationManager
     
@@ -30,23 +26,6 @@ public final class NewJobViewModel: BaseViewModel {
     
     public func showDiscardDialog() {
         showingCancelActionSheet = true
-    }
-    
-    @MainActor
-    public func getLogo(company: String) async throws {
-        do {
-            let logo = try await networkManager.fetchLogos(query: company)
-            
-            guard let logoPrivate = logo.first?.logo, let domainPrivate = logo.first?.domain else { return }
-            
-            self.logoURL = logoPrivate
-            self.companyWebsite = domainPrivate
-            
-        } catch {
-            /// Not actually handling error because if fails,
-            /// it will show a default SFSymbol if logoURL is empty
-            print(error.localizedDescription)
-        }
     }
     
     private func addNewJob(context: ModelContext) {
@@ -97,17 +76,4 @@ public final class NewJobViewModel: BaseViewModel {
         addNewJob(context: context)
     }
     
-    public func handleTyping() {
-        isTyping = true
-        
-        timer?.invalidate()
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
-            guard let self else { return }
-            self.isTyping = false
-            Task {
-                try await self.getLogo(company: self.company)
-            }
-        }
-    }
 }

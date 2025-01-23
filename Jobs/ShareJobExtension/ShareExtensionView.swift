@@ -23,6 +23,9 @@ struct ShareExtensionView: View {
             
             TextField("Company", text: $shareExtensionViewModel.company)
                 .padding()
+                .onChange(of: shareExtensionViewModel.company) { _, _ in
+                    shareExtensionViewModel.handleTyping()
+                }
             
             TextField("Job Title", text: $shareExtensionViewModel.title)
                 .padding()
@@ -34,7 +37,6 @@ struct ShareExtensionView: View {
             Spacer()
         }
         .onAppear {
-            
             loadSharedContent()
         }
     }
@@ -43,7 +45,7 @@ struct ShareExtensionView: View {
         if let sharedDefaults = UserDefaults(suiteName: shareExtensionViewModel.appGroupID) {
             if let urlString = sharedDefaults.string(forKey: "url"), let url = URL(string: urlString) {
                 shareExtensionViewModel.sharedURL = url
-                sharedDefaults.removeObject(forKey: "url") // Clear after reading
+                sharedDefaults.removeObject(forKey: "url")
             }
         }
     }
