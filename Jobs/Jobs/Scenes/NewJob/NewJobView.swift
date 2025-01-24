@@ -201,7 +201,7 @@ public struct NewJobView: View {
     
     private var toolbarTrailing: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            Button("Save") {
+            Button("Add") {
                 newJobViewModel.saveJob(context: context)
                 dismiss()
             }

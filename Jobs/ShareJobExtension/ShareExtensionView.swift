@@ -26,7 +26,7 @@ struct ShareExtensionView: View {
             .toolbar {
                 toolbarTrailing
             }
-            .navigationTitle("NewJob")
+            .navigationTitle("Save Job For Later")
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
@@ -99,7 +99,7 @@ struct ShareExtensionView: View {
     
     private var toolbarTrailing: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            Button("Save") {
+            Button("Done") {
                 shareExtensionViewModel.saveJob(context: container)
                 action()
             }

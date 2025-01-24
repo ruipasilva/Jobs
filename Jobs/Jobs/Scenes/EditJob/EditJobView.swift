@@ -14,7 +14,6 @@ struct EditJobView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
-    @Environment(\.colorScheme) var colorScheme // TODO: implement in custom cells
     
     public init(job: Job) {
         self._editJobViewModel = .init(wrappedValue: .init(job: job))
@@ -41,6 +40,7 @@ struct EditJobView: View {
             }
             .padding(.bottom)
         }
+        .background(Color(UIColor.systemGroupedBackground))
         .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
             LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel())
         }
@@ -52,7 +52,7 @@ struct EditJobView: View {
         } message: {
             Text("Websites might not be accurate. You can edit them by tapping the logo above")
         }
-        .background(Color(uiColor: .systemGroupedBackground))
+        
         .toolbar {
             toolbarTrailing
         }

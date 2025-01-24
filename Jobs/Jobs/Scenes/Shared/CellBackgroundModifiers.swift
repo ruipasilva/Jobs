@@ -13,7 +13,7 @@ struct CellBackground: ViewModifier {
             .padding(.vertical, 6)
             .background {
                 RoundedRectangle(cornerRadius: 8)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Color(uiColor: .secondarySystemGroupedBackground))
             }
             .padding(.horizontal)
     }
