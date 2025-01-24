@@ -205,7 +205,7 @@ struct EditJobView: View {
                     .autocapitalization(.none)
                 Spacer()
                 Button(action: {
-                    openURL(URL(string: "https://\(editJobViewModel.url)")!)
+                    openURL(URL(string: editJobViewModel.url)!)
                 }, label: {
                     Image(systemName: "arrow.up.forward.app.fill")
                         .imageScale(.large)

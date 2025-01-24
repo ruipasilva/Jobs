@@ -37,9 +37,6 @@ public class EditJobViewModel: BaseViewModel {
         setProperties()
     }
 
-    public func isLocationRemote() -> Bool {
-        return locationType == .remote
-    }
 
     public func updateJob() {
         job.title = title

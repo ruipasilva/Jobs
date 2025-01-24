@@ -42,6 +42,14 @@ public class BaseViewModel: ObservableObject {
     
     @Injected(\.networkManager) var networkManager
     
+    public func isLocationRemote() -> Bool {
+        return locationType == .remote
+    }
+    
+    public func isTitleOrCompanyEmpty() -> Bool {
+        return title.isEmpty || company.isEmpty
+    }
+    
     @MainActor
     public func getLogo(company: String) async throws {
         do {

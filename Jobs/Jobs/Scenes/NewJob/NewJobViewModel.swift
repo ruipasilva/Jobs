@@ -16,14 +16,6 @@ public final class NewJobViewModel: BaseViewModel {
     @Injected(\.calendarManager) public var calendarManager
     @Injected(\.notificationManager) public var notificationManager
     
-    public func isTitleOrCompanyEmpty() -> Bool {
-        return title.isEmpty || company.isEmpty
-    }
-    
-    public func isLocationRemote() -> Bool {
-        return locationType == .remote
-    }
-    
     public func showDiscardDialog() {
         showingCancelActionSheet = true
     }
@@ -47,7 +39,7 @@ public final class NewJobViewModel: BaseViewModel {
                          addToCalendarDate: addInterviewToCalendarDate,
                          isEventAllDay: isEventAllDay,
                          jobURLPosting: url,
-                         logoURL: logoURL,
+                         logoURL:  logoURL,
                          companyWebsite: companyWebsite,
                          workingDays: workingDaysToSave,
                          currencyType: currencyType)
@@ -74,6 +66,11 @@ public final class NewJobViewModel: BaseViewModel {
         }
         
         addNewJob(context: context)
+        do {
+            try context.save()
+        } catch {
+            print("Failed to save changes: \(error)")
+        }
     }
     
 }

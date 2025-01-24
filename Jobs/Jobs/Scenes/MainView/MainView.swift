@@ -27,7 +27,7 @@ struct MainView: View {
                 toolBarLeading
             }
             .sheet(isPresented: $mainViewModel.isShowingNewJobView) {
-                NewJobView()
+                NewJobView(action: {})
             }
             .navigationTitle("Your Jobs")
         }

@@ -32,6 +32,10 @@
 		693AD1A02D42C49D0059686E /* NetworkHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352ECA2BBD71EC00B8A77B /* NetworkHelpers.swift */; };
 		693AD1A22D42C4C20059686E /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 693AD1A12D42C4C20059686E /* Factory */; };
 		693AD1A32D42C5AE0059686E /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F2F7822D35645B008B20D5 /* BaseViewModel.swift */; };
+		693AD1A42D42E3F60059686E /* NewJobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750D62B5FF413000EBCD1 /* NewJobView.swift */; };
+		693AD1A52D42E4180059686E /* NewJobViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352EC32BBC249300B8A77B /* NewJobViewModel.swift */; };
+		693AD1A62D42E42F0059686E /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698006742BB37DF9007C725E /* FloatingTextField.swift */; };
+		693AD1A72D42E4430059686E /* WorkingDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583792C3DD84700084C5E /* WorkingDaysView.swift */; };
 		696208572B6A98730045DD39 /* MainViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696208562B6A98730045DD39 /* MainViewViewModel.swift */; };
 		6966B0DD2BB8DF7200BD3424 /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */; };
 		6974A1102C8E495900570472 /* CellBackgroundModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */; };
@@ -172,6 +176,13 @@
 			);
 			target = 692ABA3E2D405A5E00C54CF7 /* ShareJobExtension */;
 		};
+		693AD1A92D42F7230059686E /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				ShareExtensionViewModel.swift,
+			);
+			target = 699750C12B5ED2DC000EBCD1 /* Jobs */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -185,7 +196,7 @@
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		692ABA402D405A5E00C54CF7 /* ShareJobExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (692ABA4A2D405A5E00C54CF7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 692ABA572D4061EF00C54CF7 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ShareJobExtension; sourceTree = "<group>"; };
+		692ABA402D405A5E00C54CF7 /* ShareJobExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (693AD1A92D42F7230059686E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 692ABA4A2D405A5E00C54CF7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 692ABA572D4061EF00C54CF7 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ShareJobExtension; sourceTree = "<group>"; };
 		69D00D3C2CE3CF330072DB4A /* JobsTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = JobsTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -575,6 +586,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				693AD1A72D42E4430059686E /* WorkingDaysView.swift in Sources */,
+				693AD1A62D42E42F0059686E /* FloatingTextField.swift in Sources */,
+				693AD1A52D42E4180059686E /* NewJobViewModel.swift in Sources */,
+				693AD1A42D42E3F60059686E /* NewJobView.swift in Sources */,
 				693AD1A32D42C5AE0059686E /* BaseViewModel.swift in Sources */,
 				693AD1A02D42C49D0059686E /* NetworkHelpers.swift in Sources */,
 				693AD19E2D42C4920059686E /* CompanyInfo.swift in Sources */,
