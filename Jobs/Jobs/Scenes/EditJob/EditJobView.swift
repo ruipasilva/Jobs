@@ -41,7 +41,7 @@ struct EditJobView: View {
         }
         .background(Color(UIColor.systemGroupedBackground))
         .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
-            LogoOptionsView(job: editJobViewModel.job)
+            LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel())
         }
         .alert("Important Notice", isPresented: $editJobViewModel.isShowingWarnings) {
             Button("Go!", role: .none) {

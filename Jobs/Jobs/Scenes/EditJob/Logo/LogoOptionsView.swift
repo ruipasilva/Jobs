@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct LogoOptionsView: View {
-    @StateObject private var logoOptionsViewModel: LogoOptionsViewModel
+    @ObservedObject private var logoOptionsViewModel: LogoOptionsViewModel
     @Environment(\.dismiss) private var dismiss
     
-    public init(job: Job) {
-        self._logoOptionsViewModel = .init(wrappedValue: .init(job: job))
+    public init(logoOptionsViewModel: LogoOptionsViewModel) {
+        self.logoOptionsViewModel = logoOptionsViewModel
+        
+        logoOptionsViewModel.setProperties()
+        
+        Task {
+            await logoOptionsViewModel.getLogos(
+                company: logoOptionsViewModel.company)
+        }
     }
     
     var body: some View {
@@ -24,13 +31,22 @@ struct LogoOptionsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Update") {
+                        logoOptionsViewModel.updateJob()
                         dismiss()
                     }
                     .disabled(logoOptionsViewModel.isTitleOrCompanyEmpty())
                 }
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
-                        dismiss()
+                        logoOptionsViewModel.showDiscardDialog()
+                    }.confirmationDialog("Are you sure you want to discard this edit?",
+                                        isPresented: $logoOptionsViewModel.showingCancelActionSheet,
+                                        titleVisibility: .visible) {
+                        Button(role: .destructive, action: {
+                            dismiss()
+                        }) {
+                            Text("Discard Edit")
+                        }
                     }
                 }
             }
@@ -43,22 +59,22 @@ struct LogoOptionsView: View {
     
     private var mainInfoView: some View {
         Section {
-            AnimatedTextField(text: $logoOptionsViewModel.job.company, label: {
+            AnimatedTextField(text: $logoOptionsViewModel.company, label: {
                 Text("Company Name")
             })
-            .onChange(of: logoOptionsViewModel.job.company) { _, _ in
+            .onChange(of: logoOptionsViewModel.company) { _, _ in
                 Task {
                     await logoOptionsViewModel.getLogos(
-                        company: logoOptionsViewModel.job.company)
+                        company: logoOptionsViewModel.company)
                 }
             }
             .submitLabel(.continue)
             
-            AnimatedTextField(text: $logoOptionsViewModel.job.title, label: {
+            AnimatedTextField(text: $logoOptionsViewModel.title, label: {
                 Text("Job Title")
             })
             
-            AnimatedTextField(text: $logoOptionsViewModel.job.companyWebsite, label: {
+            AnimatedTextField(text: $logoOptionsViewModel.companyWebsite, label: {
                 Text("Company Website")
             })
         } header: {
@@ -68,7 +84,7 @@ struct LogoOptionsView: View {
     
     private var pickLogoView: some View {
         Group {
-            if !logoOptionsViewModel.job.company.isEmpty {
+            if !logoOptionsViewModel.company.isEmpty {
                 Section {
                     switch logoOptionsViewModel.loadingLogoState {
                     case .na:
@@ -76,9 +92,8 @@ struct LogoOptionsView: View {
                     case let .success(result):
                         ForEach(result, id: \.logo) { data in
                             Button(action: {
-                                logoOptionsViewModel.job.logoURL = data.logo
-                                logoOptionsViewModel.job.companyWebsite =
-                                data.domain
+                                logoOptionsViewModel.logoURL = data.logo
+                                logoOptionsViewModel.companyWebsite = data.domain
                             }, label: {
                                 HStack {
                                     AsyncImage(url: URL(string: data.logo),
@@ -121,7 +136,7 @@ struct LogoOptionsView: View {
                                     )
                                     .padding(.leading, 6)
                                     Spacer()
-                                    if logoOptionsViewModel.job.logoURL == data.logo {
+                                    if logoOptionsViewModel.logoURL == data.logo {
                                         Text("Current")
                                             .padding(4)
                                             .foregroundColor(
