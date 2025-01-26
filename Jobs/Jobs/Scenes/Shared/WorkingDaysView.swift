@@ -9,34 +9,34 @@ import SwiftUI
 
 struct WorkingDaysView: View {
     
-    @Binding private var workingDaysToSave: [String]
+    @Binding private var workingDays: [String]
     
-    private let workingDays: [String]
+    private let workingDaysToSave: [String]
     
-    public init(workingDaysToSave: Binding<[String]>,
-                workingDays: [String]) {
-        self._workingDaysToSave = workingDaysToSave
-        self.workingDays = workingDays
+    public init(workingDays: Binding<[String]>,
+                workingDaysToSave: [String]) {
+        self._workingDays = workingDays
+        self.workingDaysToSave = workingDaysToSave
     }
     
     var body: some View {
         HStack(alignment: .center) {
-            ForEach(workingDays, id: \.self) { item in
+            ForEach(workingDaysToSave, id: \.self) { item in
                 VStack(alignment: .center) {
                     Text(item)
                         .padding(.bottom, 2)
                     Button(action: {
-                        let index = workingDaysToSave.firstIndex(of: item)
-                        if workingDaysToSave.contains(item) {
-                            workingDaysToSave.remove(at: index!)
+                        let index = workingDays.firstIndex(of: item)
+                        if workingDays.contains(item) {
+                            workingDays.remove(at: index!)
                         } else {
-                            workingDaysToSave.append(item)
+                            workingDays.append(item)
                         }
                     }, label: {
-                        Image(systemName: workingDaysToSave.contains(item) ? "checkmark.circle.fill" : "circle")
+                        Image(systemName: workingDays.contains(item) ? "checkmark.circle.fill" : "circle")
                             .imageScale(.large)
                             .foregroundStyle(
-                                workingDaysToSave.contains(item) ? Color.accentColor : Color(uiColor: .tertiaryLabel))
+                                workingDays.contains(item) ? Color.accentColor : Color(uiColor: .tertiaryLabel))
                     })
                     .buttonStyle(.plain)
                     .tint(.accentColor)

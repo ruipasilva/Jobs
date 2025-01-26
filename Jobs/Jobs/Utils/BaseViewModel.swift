@@ -26,15 +26,14 @@ public class BaseViewModel: ObservableObject {
     @Published public var recruiterName = ""
     @Published public var recruiterEmail = ""
     @Published public var recruiterNumber = ""
-    @Published public var url = ""
+    @Published public var jobURLPosting = ""
     @Published public var notes = ""
     @Published public var logoURL = ""
     @Published public var companyWebsite = ""
-    @Published public var interviewQuestions: [InterviewQuestion] = []
-    @Published public var workingDaysToSave: [String] = []
+    @Published public var workingDays: [String] = []
     @Published public var currencyType: CurrencyType = .dolar
     
-    public let workingDays: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri"]
+    public let workingDaysToSave: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri"]
     
     @Published public var showingCancelActionSheet = false
     @Published private var isTyping: Bool = false
@@ -44,10 +43,6 @@ public class BaseViewModel: ObservableObject {
     
     public func isLocationRemote() -> Bool {
         return locationType == .remote
-    }
-    
-    public func isTitleOrCompanyEmpty() -> Bool {
-        return title.isEmpty || company.isEmpty
     }
     
     @MainActor

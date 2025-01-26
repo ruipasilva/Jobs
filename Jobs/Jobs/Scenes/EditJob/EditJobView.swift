@@ -35,14 +35,13 @@ struct EditJobView: View {
                 extraInfoView
                 recruiterInfoView
                 notesView
-                interviewQuestionsView
                 notificationAndReminders
             }
             .padding(.bottom)
         }
         .background(Color(UIColor.systemGroupedBackground))
         .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
-            LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel())
+            LogoOptionsView(job: editJobViewModel.job)
         }
         .alert("Important Notice", isPresented: $editJobViewModel.isShowingWarnings) {
             Button("Go!", role: .none) {
@@ -51,10 +50,6 @@ struct EditJobView: View {
             Button("Cancel", role: .cancel) {}
         } message: {
             Text("Websites might not be accurate. You can edit them by tapping the logo above")
-        }
-        
-        .toolbar {
-            toolbarTrailing
         }
         
         // TODO: uncomment when work on maps functionality
@@ -93,7 +88,7 @@ struct EditJobView: View {
     }
     
     private var imageView: some View {
-        AsyncImage(url: URL(string: editJobViewModel.logoURL)) { phase in
+        AsyncImage(url: URL(string: editJobViewModel.job.logoURL)) { phase in
             switch phase {
             case .empty, .failure(_):
                 defaultImage
@@ -117,9 +112,9 @@ struct EditJobView: View {
     
     private var titleView: some View {
         VStack {
-            Text(editJobViewModel.company)
+            Text(editJobViewModel.job.company)
                 .font(.title)
-            Text(editJobViewModel.title)
+            Text(editJobViewModel.job.title)
                 .font(.body)
                 .foregroundStyle(Color(UIColor.secondaryLabel))
             
@@ -127,16 +122,16 @@ struct EditJobView: View {
                 if editJobViewModel.count < 1 {
                     editJobViewModel.setupWebsiteWarning()
                 } else {
-                    openURL(URL(string: "https://www.\(editJobViewModel.companyWebsite)")!)
+                    openURL(URL(string: "https://www.\(editJobViewModel.job.companyWebsite)")!)
                 }
             },label: {
                 Label("Visit website", systemImage: "safari")
                     .font(.subheadline)
                     .foregroundColor(.accentColor)
-                    .disabled(editJobViewModel.companyWebsite.isEmpty)
             })
             .padding(.top, 6)
             .padding(.bottom, 32)
+            .disabled(editJobViewModel.job.companyWebsite.isEmpty)
         }
     }
     
@@ -145,7 +140,7 @@ struct EditJobView: View {
             Text("Status")
                 .padding(.leading)
             Spacer()
-            Picker("Status", selection: $editJobViewModel.jobApplicationStatus) {
+            Picker("Status", selection: $editJobViewModel.job.jobApplicationStatus) {
                 ForEach(JobApplicationStatus.allCases, id: \.id) { status in
                     Text(status.status).tag(status)
                 }
@@ -160,19 +155,19 @@ struct EditJobView: View {
                 Text("Location")
                     .padding(.leading)
                 Spacer()
-                Picker("Location", selection: $editJobViewModel.locationType.animation()) {
+                Picker("Location", selection: $editJobViewModel.job.locationType.animation()) {
                     ForEach(LocationType.allCases, id: \.self) { type in
                         Text(type.type).tag(type)
                     }
                 }
             }
-            if !editJobViewModel.isLocationRemote() {
+            if !editJobViewModel.isLocationOnSite() {
                 Divider()
-                TextField("Add Location", text: $editJobViewModel.location)
+                TextField("Add Location", text: $editJobViewModel.job.location)
                     .cellPadding()
                 Divider()
-                WorkingDaysView(workingDaysToSave: $editJobViewModel.workingDaysToSave,
-                                workingDays: editJobViewModel.workingDays)
+                WorkingDaysView(workingDays: $editJobViewModel.job.workingDays,
+                                workingDaysToSave: editJobViewModel.workingDaysToSave)
                 .cellPadding()
             }
         }
@@ -184,34 +179,34 @@ struct EditJobView: View {
             HStack {
                 Text("Salary")
                 Menu {
-                    Picker("currency", selection: $editJobViewModel.currencyType) {
+                    Picker("currency", selection: $editJobViewModel.job.currencyType) {
                         ForEach(CurrencyType.allCases) {
                             Text($0.symbol)
                         }
                     }
                 } label: {
-                    Text(editJobViewModel.currencyType.symbol)
+                    Text(editJobViewModel.job.currencyType.symbol)
                 }
                 Spacer()
-                TextField("Amount", text: $editJobViewModel.salary)
+                TextField("Amount", text: $editJobViewModel.job.salary)
                     .multilineTextAlignment(.trailing)
                     .keyboardType(.numberPad)
             }
             .cellPadding()
             Divider()
             HStack {
-                TextField("Link to job posting", text: $editJobViewModel.url)
+                TextField("Link to job posting", text: $editJobViewModel.job.jobURLPosting)
                     .textCase(.lowercase)
                     .autocapitalization(.none)
                 Spacer()
                 Button(action: {
-                    openURL(URL(string: editJobViewModel.url)!)
+                    openURL(URL(string: editJobViewModel.job.jobURLPosting)!)
                 }, label: {
                     Image(systemName: "arrow.up.forward.app.fill")
                         .imageScale(.large)
                         .foregroundStyle(Color.accentColor)
                 })
-                .disabled(editJobViewModel.url.isEmpty)
+                .disabled(editJobViewModel.job.jobURLPosting.isEmpty)
                 .buttonStyle(.plain)
             }
             .cellPadding()
@@ -236,7 +231,7 @@ struct EditJobView: View {
                     })
                     .buttonStyle(.plain)
                     
-                    TextField("Recruiter's name", text: $editJobViewModel.recruiterName)
+                    TextField("Recruiter's name", text: $editJobViewModel.job.recruiterName)
                     Spacer()
                     Button(action: {
                         // TODO: action to add to calendar
@@ -245,34 +240,34 @@ struct EditJobView: View {
                             .foregroundStyle(Color.accentColor)
                             .imageScale(.large)
                     })
-                    .disabled(editJobViewModel.recruiterNumber.isEmpty)
+                    .disabled(editJobViewModel.job.recruiterNumber.isEmpty)
                     
                     Button(action: {
                         EmailHelper
                             .shared
                             .askUserForTheirPreference(
-                                email: editJobViewModel.recruiterEmail,
+                                email: editJobViewModel.job.recruiterEmail,
                                 subject:
-                                    "Interview at \(editJobViewModel.company) follow up",
+                                    "Interview at \(editJobViewModel.job.company) follow up",
                                 body:
-                                    "Hi, \(editJobViewModel.recruiterName)")
+                                    "Hi, \(editJobViewModel.job.recruiterName)")
                     },label: {
                         Image(systemName: "envelope.circle.fill")
                             .foregroundStyle(Color.accentColor)
                             .imageScale(.large)
                     })
                     .buttonStyle(.plain)
-                    .disabled(editJobViewModel.recruiterEmail.isEmpty)
+                    .disabled(editJobViewModel.job.recruiterEmail.isEmpty)
                 }
                 .cellPadding()
                 
                 if editJobViewModel.isShowingRecruiterDetails {
                     Divider()
-                    TextField( "Phone number", text: $editJobViewModel.recruiterNumber)
+                    TextField( "Phone number", text: $editJobViewModel.job.recruiterNumber)
                         .keyboardType(.numberPad)
                         .cellPadding()
                     Divider()
-                    TextField("Email", text: $editJobViewModel.recruiterEmail)
+                    TextField("Email", text: $editJobViewModel.job.recruiterEmail)
                         .keyboardType(.emailAddress)
                         .cellPadding()
                 }
@@ -285,58 +280,10 @@ struct EditJobView: View {
         VStack(alignment: .leading) {
             customSectionHeader(title: "YOUR NOTES")
             
-            TextField("Notes", text: $editJobViewModel.notes, axis: .vertical)
+            TextField("Notes", text: $editJobViewModel.job.notes, axis: .vertical)
                 .lineLimit(5...10)
                 .cellPadding()
                 .cellBackground()
-        }
-    }
-    
-    private var interviewQuestionsView: some View {
-        VStack(alignment: .leading) {
-            customSectionHeader(title: "INTERVIEW QUESTIONS")
-            VStack(alignment: .leading) {
-                ForEach($editJobViewModel.interviewQuestions.sorted(by: {
-                    $0.dateAdded.wrappedValue < $1.dateAdded.wrappedValue
-                }), id: \.id) { $question in
-                    HStack {
-                        Image(systemName: question.completed ? "checkmark.circle.fill" : "circle")
-                            .symbolEffect(.bounce, value: question.completed ? question.completed : nil)
-                            .foregroundStyle(question.completed ? .accent : .secondary)
-                            .sensoryFeedback(.impact(weight: .heavy, intensity: 1),
-                                             trigger: question.completed)
-                            .onTapGesture {
-                                $question.completed.wrappedValue.toggle()
-                            }
-                        TextField("Type your question...", text: $question.question)
-                        Spacer()
-                        Button(action: {
-                            editJobViewModel.interviewQuestions.removeAll { q in
-                                q == question
-                            }
-                        },label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundStyle(.red)
-                        })
-                    }
-                    .cellPadding()
-                    Divider()
-                }
-                
-                Button {
-                    withAnimation {
-                        let interviewQuestion = InterviewQuestion(completed: false,
-                                                                  question: "",
-                                                                  dateAdded: .now)
-                        editJobViewModel.interviewQuestions.append(interviewQuestion)
-                    }
-                } label: {
-                    Label("Add New", systemImage: "plus")
-                }
-                .frame(maxWidth: .infinity)
-                .cellPadding()
-            }
-            .cellBackground()
         }
     }
     
@@ -373,14 +320,5 @@ struct EditJobView: View {
             .font(.caption)
             .padding(.leading, 36)
             .foregroundStyle(.secondary)
-    }
-    
-    private var toolbarTrailing: some ToolbarContent {
-        ToolbarItem(placement: .topBarTrailing) {
-            Button("Update") {
-                editJobViewModel.updateJob()
-                dismiss()
-            }
-        }
     }
 }

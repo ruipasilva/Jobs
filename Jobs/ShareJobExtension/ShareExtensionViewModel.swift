@@ -40,7 +40,10 @@ public class ShareExtensionViewModel: BaseViewModel {
                          workingDays: workingDaysToSave,
                          currencyType: currencyType)
         context.insert(newJob)
-        newJob.interviewQuestions = interviewQuestions
+    }
+    
+    public func isTitleOrCompanyEmpty() -> Bool {
+        return title.isEmpty || company.isEmpty
     }
     
     public func saveJob(context: ModelContext) {

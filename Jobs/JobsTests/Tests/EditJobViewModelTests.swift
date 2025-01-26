@@ -36,22 +36,4 @@ final class EditJobViewModelTests: XCTestCase {
         
         XCTAssertFalse(sut.isLocationRemote())
     }
-    
-    func testUpdateProperties() {
-        sut.updateJob()
-        
-        XCTAssertEqual(sut.job, Mocks.mockJob)
-    }
-    
-    func testSetProperties() {
-        sut.setProperties()
-        
-        XCTAssertEqual(sut.job, Mocks.mockJob)
-    }
-    
-    func testLogoViewModelIsNotNil_WhenViewModelIsInitialised() {
-        let logoOptionsViewModel = sut.getLogoOptionsViewModel()
-        
-        XCTAssertNotNil(logoOptionsViewModel)
-    }
 }

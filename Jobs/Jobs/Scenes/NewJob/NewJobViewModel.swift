@@ -20,6 +20,10 @@ public final class NewJobViewModel: BaseViewModel {
         showingCancelActionSheet = true
     }
     
+    public func isTitleOrCompanyEmpty() -> Bool {
+        return title.isEmpty || company.isEmpty
+    }
+    
     private func addNewJob(context: ModelContext) {
         let newJob = Job(localNotificationID: self.localNotificationID,
                          title: title,
@@ -38,13 +42,12 @@ public final class NewJobViewModel: BaseViewModel {
                          addToCalendar: addInterviewToCalendar,
                          addToCalendarDate: addInterviewToCalendarDate,
                          isEventAllDay: isEventAllDay,
-                         jobURLPosting: url,
+                         jobURLPosting: jobURLPosting,
                          logoURL:  logoURL,
                          companyWebsite: companyWebsite,
-                         workingDays: workingDaysToSave,
+                         workingDays: workingDays,
                          currencyType: currencyType)
         context.insert(newJob)
-        newJob.interviewQuestions = interviewQuestions
     }
     
     public func saveJob(context: ModelContext) {

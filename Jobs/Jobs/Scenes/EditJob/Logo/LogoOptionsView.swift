@@ -8,18 +8,11 @@
 import SwiftUI
 
 struct LogoOptionsView: View {
-    @ObservedObject private var logoOptionsViewModel: LogoOptionsViewModel
+    @StateObject private var logoOptionsViewModel: LogoOptionsViewModel
     @Environment(\.dismiss) private var dismiss
     
-    public init(logoOptionsViewModel: LogoOptionsViewModel) {
-        self.logoOptionsViewModel = logoOptionsViewModel
-        
-        logoOptionsViewModel.setProperties()
-        
-        Task {
-            await logoOptionsViewModel.getLogos(
-                company: logoOptionsViewModel.company)
-        }
+    public init(job: Job) {
+        self._logoOptionsViewModel = .init(wrappedValue: .init(job: job))
     }
     
     var body: some View {
@@ -31,7 +24,6 @@ struct LogoOptionsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Update") {
-                        logoOptionsViewModel.updateJob()
                         dismiss()
                     }
                     .disabled(logoOptionsViewModel.isTitleOrCompanyEmpty())
@@ -43,27 +35,30 @@ struct LogoOptionsView: View {
                 }
             }
         }
+        .task {
+            await logoOptionsViewModel.getLogos(
+                company: logoOptionsViewModel.job.company)
+        }
     }
     
     private var mainInfoView: some View {
         Section {
-            AnimatedTextField(text: $logoOptionsViewModel.company, label: {
+            AnimatedTextField(text: $logoOptionsViewModel.job.company, label: {
                 Text("Company Name")
             })
-            .onChange(of: logoOptionsViewModel.company) { _, _ in
+            .onChange(of: logoOptionsViewModel.job.company) { _, _ in
                 Task {
                     await logoOptionsViewModel.getLogos(
-                        company: logoOptionsViewModel.company)
+                        company: logoOptionsViewModel.job.company)
                 }
-                logoOptionsViewModel.updateJob()
             }
             .submitLabel(.continue)
             
-            AnimatedTextField(text: $logoOptionsViewModel.title, label: {
+            AnimatedTextField(text: $logoOptionsViewModel.job.title, label: {
                 Text("Job Title")
             })
             
-            AnimatedTextField(text: $logoOptionsViewModel.companyWebsite, label: {
+            AnimatedTextField(text: $logoOptionsViewModel.job.companyWebsite, label: {
                 Text("Company Website")
             })
         } header: {
@@ -73,7 +68,7 @@ struct LogoOptionsView: View {
     
     private var pickLogoView: some View {
         Group {
-            if !logoOptionsViewModel.company.isEmpty {
+            if !logoOptionsViewModel.job.company.isEmpty {
                 Section {
                     switch logoOptionsViewModel.loadingLogoState {
                     case .na:
@@ -81,8 +76,8 @@ struct LogoOptionsView: View {
                     case let .success(result):
                         ForEach(result, id: \.logo) { data in
                             Button(action: {
-                                logoOptionsViewModel.logoURL = data.logo
-                                logoOptionsViewModel.companyWebsite =
+                                logoOptionsViewModel.job.logoURL = data.logo
+                                logoOptionsViewModel.job.companyWebsite =
                                 data.domain
                             }, label: {
                                 HStack {
@@ -126,7 +121,7 @@ struct LogoOptionsView: View {
                                     )
                                     .padding(.leading, 6)
                                     Spacer()
-                                    if logoOptionsViewModel.logoURL == data.logo {
+                                    if logoOptionsViewModel.job.logoURL == data.logo {
                                         Text("Current")
                                             .padding(4)
                                             .foregroundColor(

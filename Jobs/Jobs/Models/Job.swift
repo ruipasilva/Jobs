@@ -9,23 +9,6 @@ import SwiftUI
 import SwiftData
 
 @Model
-public final class InterviewQuestion: Hashable {
-    public var completed: Bool = false
-    public var question: String = ""
-    public var dateAdded: Date = Date.now
-    // .cascade deletes all the related models
-    @Relationship(deleteRule: .cascade, inverse: \Job.interviewQuestions) var job: Job?
-    
-    public init(completed: Bool,
-         question: String,
-         dateAdded: Date) {
-        self.completed = completed
-        self.question = question
-        self.dateAdded = dateAdded
-    }
-}
-
-@Model
 public final class Job {
     // All properties need a default value as cloudKit requires it
     public var localNotificationID: String?
@@ -49,7 +32,6 @@ public final class Job {
     public var jobURLPosting: String = ""
     public var logoURL: String = ""
     public var companyWebsite: String = ""
-    public var interviewQuestions: [InterviewQuestion]?
     public var workingDays: [String] = []
     public var currencyType: CurrencyType = CurrencyType.dolar
 
@@ -74,7 +56,6 @@ public final class Job {
          jobURLPosting: String,
          logoURL: String,
          companyWebsite: String,
-         interviewQuestions: [InterviewQuestion]? = nil,
          workingDays: [String],
          currencyType: CurrencyType) {
         self.localNotificationID = localNotificationID
@@ -98,7 +79,6 @@ public final class Job {
         self.jobURLPosting = jobURLPosting
         self.logoURL = logoURL
         self.companyWebsite = companyWebsite
-        self.interviewQuestions = interviewQuestions
         self.workingDays = workingDays
         self.currencyType = currencyType
     }

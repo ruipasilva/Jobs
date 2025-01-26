@@ -91,9 +91,7 @@ public struct NewJobView: View {
                 FloatingTextField(
                     title: "Location", text: $newJobViewModel.location,
                     image: "mappin")
-                WorkingDaysView(
-                    workingDaysToSave: $newJobViewModel.workingDaysToSave,
-                    workingDays: newJobViewModel.workingDays)
+                WorkingDaysView(workingDays: $newJobViewModel.workingDays, workingDaysToSave: newJobViewModel.workingDaysToSave)
             }
         } header: {
             Text("Location")
@@ -158,7 +156,7 @@ public struct NewJobView: View {
         Section {
             FloatingTextField(title: "Salary", text: $newJobViewModel.salary, image: "creditcard")
                 .keyboardType(.numberPad)
-            FloatingTextField(title: "URL", text: $newJobViewModel.url, image: "link")
+            FloatingTextField(title: "URL", text: $newJobViewModel.jobURLPosting, image: "link")
                 .submitLabel(.next)
                 .onSubmit {
                     focusState = .notes

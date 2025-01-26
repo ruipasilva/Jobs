@@ -18,7 +18,7 @@ class ShareExtensionModelContainer {
 
         do {
             let configuration = ModelConfiguration(url: storeURL)
-            return try ModelContainer(for: Job.self, InterviewQuestion.self, configurations: configuration)
+            return try ModelContainer(for: Job.self, configurations: configuration)
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }
