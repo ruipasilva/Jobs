@@ -52,7 +52,7 @@ public final class LogoOptionsViewModel: ObservableObject {
     }
     
     public func isTitleOrCompanyEmpty() -> Bool {
-        return job.title.isEmpty || job.company.isEmpty
+        return title.isEmpty || company.isEmpty
     }
     
     @MainActor

@@ -46,7 +46,7 @@ public struct NewJobView: View {
     
     private var mainInfoView: some View {
         Section {
-            FloatingTextField(title: "Company Name", text: $newJobViewModel.company, image: "building.2")
+            FloatingTextField(title: newJobViewModel.company.isEmpty ? "Company Name (required)" : "Company Name", text: $newJobViewModel.company, image: "building.2")
                 .submitLabel(.next)
                 .focused($focusState, equals: .companyName)
                 .onChange(of: newJobViewModel.company) { _, _ in
@@ -55,7 +55,7 @@ public struct NewJobView: View {
                 .onSubmit {
                     focusState = .jobTitle
                 }
-            FloatingTextField(title: "Job Title", text: $newJobViewModel.title, image: "person")
+            FloatingTextField(title: newJobViewModel.title.isEmpty ? "Job Title (required)" : "Job Title", text: $newJobViewModel.title, image: "person")
                 .focused($focusState, equals: .jobTitle)
         } header: {
             Text("Main Info")
