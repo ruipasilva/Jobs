@@ -13,7 +13,7 @@ struct TabViewRoot: View {
         TabView {
             MainView()
                 .tabItem {
-                    Label("Home", systemImage: "list.clipboard")
+                    Label("Jobs", systemImage: "list.clipboard")
                 }
             
 //            OnlineJobsView()

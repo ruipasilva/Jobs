@@ -10,13 +10,13 @@ import TipKit
 
 public struct EditTip: Tip {
     public var title: Text {
-        Text("Wrong info or logo?")
+        Text("Wrong information or logo?")
     }
 
     public var message: Text? {
         Text(
             """
-            Tap the logo to edit. Tap x to dismiss.
+            To choose a different logo or edit the company information, tap any of the items above.
             """
         )
     }

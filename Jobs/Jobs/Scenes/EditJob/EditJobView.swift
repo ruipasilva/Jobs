@@ -125,11 +125,11 @@ struct EditJobView: View {
                     openURL(URL(string: "https://www.\(editJobViewModel.job.companyWebsite)")!)
                 }
             },label: {
-                Label("Visit website", systemImage: "safari")
+                Label("Company Website", systemImage: "safari")
+                    .imageScale(.small)
                     .font(.subheadline)
                     .foregroundColor(.accentColor)
             })
-            .padding(.top, 6)
             .padding(.bottom, 32)
             .disabled(editJobViewModel.job.companyWebsite.isEmpty)
         }
@@ -137,7 +137,7 @@ struct EditJobView: View {
     
     private var statusView: some View {
         HStack {
-            Text("Status")
+            Text("Application Status")
                 .padding(.leading)
             Spacer()
             Picker("Status", selection: $editJobViewModel.job.jobApplicationStatus) {
@@ -195,7 +195,7 @@ struct EditJobView: View {
             .cellPadding()
             Divider()
             HStack {
-                TextField("Link to job posting", text: $editJobViewModel.job.jobURLPosting)
+                TextField("URL", text: $editJobViewModel.job.jobURLPosting)
                     .textCase(.lowercase)
                     .autocapitalization(.none)
                 Spacer()
@@ -216,7 +216,7 @@ struct EditJobView: View {
     
     private var recruiterInfoView: some View {
         VStack(alignment: .leading) {
-            customSectionHeader(title: "RECRUITER'S INFO")
+            customSectionHeader(title: "RECRUITER DETAILS")
             VStack {
                 HStack {
                     Button(action: {
@@ -231,10 +231,10 @@ struct EditJobView: View {
                     })
                     .buttonStyle(.plain)
                     
-                    TextField("Recruiter's name", text: $editJobViewModel.job.recruiterName)
+                    TextField("Recruiter's Name", text: $editJobViewModel.job.recruiterName)
                     Spacer()
                     Button(action: {
-                        // TODO: action to add to calendar
+                        // TODO: action to add launch call
                     }, label: {
                         Image(systemName: "phone.circle.fill")
                             .foregroundStyle(Color.accentColor)
@@ -256,14 +256,13 @@ struct EditJobView: View {
                             .foregroundStyle(Color.accentColor)
                             .imageScale(.large)
                     })
-                    .buttonStyle(.plain)
                     .disabled(editJobViewModel.job.recruiterEmail.isEmpty)
                 }
                 .cellPadding()
                 
                 if editJobViewModel.isShowingRecruiterDetails {
                     Divider()
-                    TextField( "Phone number", text: $editJobViewModel.job.recruiterNumber)
+                    TextField( "Phone Number", text: $editJobViewModel.job.recruiterNumber)
                         .keyboardType(.numberPad)
                         .cellPadding()
                     Divider()
@@ -278,8 +277,6 @@ struct EditJobView: View {
     
     private var notesView: some View {
         VStack(alignment: .leading) {
-            customSectionHeader(title: "YOUR NOTES")
-            
             TextField("Notes", text: $editJobViewModel.job.notes, axis: .vertical)
                 .lineLimit(5...10)
                 .cellPadding()

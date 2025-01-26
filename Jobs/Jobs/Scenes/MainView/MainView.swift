@@ -21,7 +21,7 @@ struct MainView: View {
             .padding(.bottom, 10)
             .background(Color(UIColor.systemBackground))
             .searchable(text: $mainViewModel.filter,
-                        prompt: "Search for companies or job titles")
+                        prompt: "Search companies and job titles")
             .toolbar {
                 toolbarTrailing
                 toolBarLeading
@@ -29,7 +29,7 @@ struct MainView: View {
             .sheet(isPresented: $mainViewModel.isShowingNewJobView) {
                 NewJobView(action: {})
             }
-            .navigationTitle("Your Jobs")
+            .navigationTitle("Jobs")
         }
         .tint(.mint)
         .onAppear(perform: {

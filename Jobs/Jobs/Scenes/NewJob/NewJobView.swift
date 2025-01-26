@@ -171,8 +171,6 @@ public struct NewJobView: View {
             TextField("Notes", text: $newJobViewModel.notes, axis: .vertical)
                 .focused($focusState, equals: .notes)
                 .lineLimit(5...10)
-        } header: {
-            Text("Your notes")
         }
     }
     
