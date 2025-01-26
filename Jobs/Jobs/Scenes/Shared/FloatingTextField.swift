@@ -18,14 +18,15 @@ struct FloatingTextField: View {
             ZStack(alignment: .leading) {
                 Text(title)
                     .foregroundColor(Color(.placeholderText))
-                    .offset(y: $text.wrappedValue.isEmpty ? 0 : -25)
+                    .offset(y: $text.wrappedValue.isEmpty ? 0 : -20)
                     .scaleEffect(
                         $text.wrappedValue.isEmpty ? 1 : 0.8, anchor: .leading)
                 TextField("", text: $text)
+                    .padding(.top, text.isEmpty ? 4 : 8)
             }
         }
-        .padding(.top, text.isEmpty ? 10 : 15)
-        .padding(.bottom, 5)
+        .padding(.top, 10)
+        .padding(.bottom, 3)
         .animation(.spring(response: 0.2, dampingFraction: 0.5))
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 public enum FocusedField {
     case companyName
     case jobTitle
+    case companyWebsite
     case recruiterName
     case recruiterEmail
     case recruiterNumber

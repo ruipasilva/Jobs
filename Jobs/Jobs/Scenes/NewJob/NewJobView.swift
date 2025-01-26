@@ -57,9 +57,6 @@ public struct NewJobView: View {
                 }
             FloatingTextField(title: "Job Title", text: $newJobViewModel.title, image: "person")
                 .focused($focusState, equals: .jobTitle)
-                .onSubmit {
-                    focusState = .notes
-                }
         } header: {
             Text("Main Info")
         }

@@ -10,6 +10,7 @@ import SwiftUI
 struct LogoOptionsView: View {
     @ObservedObject private var logoOptionsViewModel: LogoOptionsViewModel
     @Environment(\.dismiss) private var dismiss
+    @FocusState private var focusState: FocusedField?
     
     public init(logoOptionsViewModel: LogoOptionsViewModel) {
         self.logoOptionsViewModel = logoOptionsViewModel
@@ -59,24 +60,29 @@ struct LogoOptionsView: View {
     
     private var mainInfoView: some View {
         Section {
-            AnimatedTextField(text: $logoOptionsViewModel.company, label: {
-                Text("Company Name")
-            })
-            .onChange(of: logoOptionsViewModel.company) { _, _ in
-                Task {
-                    await logoOptionsViewModel.getLogos(
-                        company: logoOptionsViewModel.company)
+            FloatingTextField(title: "Company Name", text: $logoOptionsViewModel.company, image: "building.2")
+                .onChange(of: logoOptionsViewModel.company) { _, _ in
+                    Task {
+                        await logoOptionsViewModel.getLogos(
+                            company: logoOptionsViewModel.company)
+                    }
                 }
-            }
-            .submitLabel(.continue)
+                .submitLabel(.next)
+                .focused($focusState, equals: .companyName)
+                .onSubmit {
+                    focusState = .jobTitle
+                }
             
-            AnimatedTextField(text: $logoOptionsViewModel.title, label: {
-                Text("Job Title")
-            })
+            FloatingTextField(title: "Job Title", text: $logoOptionsViewModel.title, image: "person")
+                .submitLabel(.next)
+                .focused($focusState, equals: .jobTitle)
+                .onSubmit {
+                    focusState = .companyWebsite
+                }
             
-            AnimatedTextField(text: $logoOptionsViewModel.companyWebsite, label: {
-                Text("Company Website")
-            })
+            FloatingTextField(title: "Company Website", text: $logoOptionsViewModel.companyWebsite, image: "globe")
+                .submitLabel(.return)
+                .focused($focusState, equals: .companyWebsite)
         } header: {
             Text("Main Info")
         }
