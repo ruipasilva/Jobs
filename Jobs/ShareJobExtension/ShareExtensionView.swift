@@ -17,14 +17,15 @@ struct ShareExtensionView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack {
-                    mainInfoView
-                    statusView
-                    notesView
-                    addButton
-                    Spacer()
+            ZStack(alignment: .bottom) {
+                ScrollView {
+                    VStack {
+                        mainInfoView
+                        statusView
+                        notesView
+                    }
                 }
+                addButton
             }
             .background(Color(UIColor.systemGroupedBackground))
             .navigationTitle("Shortlist Job")
@@ -32,6 +33,7 @@ struct ShareExtensionView: View {
         }
         .onAppear {
             shareExtensionViewModel.loadSharedContent()
+            focusState = .companyName
         }
     }
     private var statusView: some View {
@@ -51,24 +53,33 @@ struct ShareExtensionView: View {
     
     private var mainInfoView: some View {
         VStack(spacing: .zero) {
-            FloatingTextField(title: shareExtensionViewModel.company.isEmpty ? "Company Name (required)" : "Company Name", text: $shareExtensionViewModel.company, image: "building.2")
-                .submitLabel(.next)
-                .focused($focusState, equals: .companyName)
-                .onChange(of: shareExtensionViewModel.company) { _, _ in
-                    shareExtensionViewModel.handleTyping()
-                }
-                .onSubmit {
-                    focusState = .jobTitle
-                }
-                .cellPadding()
+            HStack {
+                Image(systemName: "building.2")
+                TextField("Company Name (required)", text: $shareExtensionViewModel.company)
+            }
+            .padding(.vertical, 4)
+            .submitLabel(.next)
+            .focused($focusState, equals: .companyName)
+            .onChange(of: shareExtensionViewModel.company) { _, _ in
+                shareExtensionViewModel.handleTyping()
+            }
+            .onSubmit {
+                focusState = .jobTitle
+            }
+            .cellPadding()
             Divider()
-            FloatingTextField(title: shareExtensionViewModel.title.isEmpty ? "Job Title (required)" : "Job Title", text: $shareExtensionViewModel.title, image: "person")
-                .submitLabel(.return)
-                .focused($focusState, equals: .jobTitle)
-                .onSubmit {
-                    focusState = .notes
-                }
-                .cellPadding()
+            HStack {
+                Image (systemName: "person")
+                TextField("Job Title (required)", text: $shareExtensionViewModel.title)
+                
+            }
+            .padding(.vertical, 4)
+            .submitLabel(.return)
+            .focused($focusState, equals: .jobTitle)
+            .onSubmit {
+                focusState = .notes
+            }
+            .cellPadding()
         }
         .cellBackground()
     }
@@ -84,7 +95,6 @@ struct ShareExtensionView: View {
     }
     
     private var addButton: some View {
-       
             Button(action: {
                 shareExtensionViewModel.saveJob(context: container)
                 action()
@@ -93,13 +103,13 @@ struct ShareExtensionView: View {
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
                     .cellPadding()
-                   
+                
             })
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 16)
+            .padding(.bottom)
             .buttonStyle(.borderedProminent)
             .tint(.mint)
             .disabled(shareExtensionViewModel.isTitleOrCompanyEmpty())
-       
     }
     
 }
