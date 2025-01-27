@@ -54,4 +54,13 @@ public class ShareExtensionViewModel: BaseViewModel {
             print("Failed to save changes: \(error)")
         }
     }
+    
+    public func loadSharedContent() {
+        if let sharedDefaults = UserDefaults(suiteName: appGroupID) {
+            if let urlString = sharedDefaults.string(forKey: "url"), let url = URL(string: urlString) {
+                sharedURL = url
+                sharedDefaults.removeObject(forKey: "url")
+            }
+        }
+    }
 }

@@ -36,6 +36,7 @@
 		693AD1A52D42E4180059686E /* NewJobViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352EC32BBC249300B8A77B /* NewJobViewModel.swift */; };
 		693AD1A62D42E42F0059686E /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698006742BB37DF9007C725E /* FloatingTextField.swift */; };
 		693AD1A72D42E4430059686E /* WorkingDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583792C3DD84700084C5E /* WorkingDaysView.swift */; };
+		693AD1AA2D4705C10059686E /* CellBackgroundModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */; };
 		696208572B6A98730045DD39 /* MainViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696208562B6A98730045DD39 /* MainViewViewModel.swift */; };
 		6966B0DD2BB8DF7200BD3424 /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */; };
 		6974A1102C8E495900570472 /* CellBackgroundModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */; };
@@ -586,6 +587,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				693AD1AA2D4705C10059686E /* CellBackgroundModifiers.swift in Sources */,
 				693AD1A72D42E4430059686E /* WorkingDaysView.swift in Sources */,
 				693AD1A62D42E42F0059686E /* FloatingTextField.swift in Sources */,
 				693AD1A52D42E4180059686E /* NewJobViewModel.swift in Sources */,

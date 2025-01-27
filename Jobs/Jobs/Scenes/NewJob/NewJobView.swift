@@ -69,9 +69,7 @@ public struct NewJobView: View {
                     Text(status.status).tag(status)
                 }
             }
-        } header: {
-            Text("Job Application Status")
-        }
+        } 
     }
     
     private var locationView: some View {

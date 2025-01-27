@@ -16,27 +16,42 @@ struct ShareExtensionView: View {
     var action: () -> Void
     
     var body: some View {
-        
         NavigationStack {
-            Form {
-                mainInfoView
-                statusView
-                jobPostingInfoView
+            ScrollView {
+                VStack {
+                    mainInfoView
+                    statusView
+                    notesView
+                    addButton
+                    Spacer()
+                }
             }
-            .toolbar {
-                toolbarTrailing
-            }
-            .navigationTitle("Save Job For Later")
+            .background(Color(UIColor.systemGroupedBackground))
+            .navigationTitle("Shortlist Job")
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
-            loadSharedContent()
+            shareExtensionViewModel.loadSharedContent()
         }
+    }
+    private var statusView: some View {
+        HStack {
+            Text("Application Status")
+                .padding(.leading)
+            Spacer()
+            Picker("Status", selection: $shareExtensionViewModel.jobApplicationStatus) {
+                ForEach(JobApplicationStatus.allCases, id: \.id) { status in
+                    Text(status.status).tag(status)
+                }
+            }
+        }
+        .cellBackground()
+        .tint(.mint)
     }
     
     private var mainInfoView: some View {
-        Section {
-            FloatingTextField(title: "Company Name", text: $shareExtensionViewModel.company, image: "building.2")
+        VStack(spacing: .zero) {
+            FloatingTextField(title: shareExtensionViewModel.company.isEmpty ? "Company Name (required)" : "Company Name", text: $shareExtensionViewModel.company, image: "building.2")
                 .submitLabel(.next)
                 .focused($focusState, equals: .companyName)
                 .onChange(of: shareExtensionViewModel.company) { _, _ in
@@ -45,65 +60,46 @@ struct ShareExtensionView: View {
                 .onSubmit {
                     focusState = .jobTitle
                 }
-            FloatingTextField(title: "Job Title", text: $shareExtensionViewModel.title, image: "person")
+                .cellPadding()
+            Divider()
+            FloatingTextField(title: shareExtensionViewModel.title.isEmpty ? "Job Title (required)" : "Job Title", text: $shareExtensionViewModel.title, image: "person")
+                .submitLabel(.return)
                 .focused($focusState, equals: .jobTitle)
                 .onSubmit {
                     focusState = .notes
                 }
-        } header: {
-            Text("Main Info")
+                .cellPadding()
+        }
+        .cellBackground()
+    }
+    
+    
+    private var notesView: some View {
+        VStack(alignment: .leading) {
+            TextField("Notes", text: $shareExtensionViewModel.notes, axis: .vertical)
+                .lineLimit(5...8)
+                .cellPadding()
+                .cellBackground()
         }
     }
     
-    private var statusView: some View {
-        Section {
-            Picker("Status", selection: $shareExtensionViewModel.jobApplicationStatus) {
-                ForEach(JobApplicationStatus.allCases, id: \.id) { status in
-                    Text(status.status).tag(status)
-                }
-            }
-        } header: {
-            Text("Job Application Status")
-        }
-    }
-    
-    private var jobPostingInfoView: some View {
-        Section {
-            FloatingTextField(title: "Job Posting URL",
-                              text: (shareExtensionViewModel.sharedText.isEmpty ? urlBinding : .constant("No URL found")),
-                              image: "person")
-        } header: {
-            Text("Job Posting Info")
-        }
-    }
-    
-    private func loadSharedContent() {
-        if let sharedDefaults = UserDefaults(suiteName: shareExtensionViewModel.appGroupID) {
-            if let urlString = sharedDefaults.string(forKey: "url"), let url = URL(string: urlString) {
-                shareExtensionViewModel.sharedURL = url
-                sharedDefaults.removeObject(forKey: "url")
-            }
-        }
-    }
-    
-    private var urlBinding: Binding<String> {
-        Binding<String>(
-            get: {
-                shareExtensionViewModel.sharedURL?.absoluteString ?? ""
-            },
-            set: { newValue in
-                shareExtensionViewModel.sharedURL = URL(string: newValue)
-            }
-        )
-    }
-    
-    private var toolbarTrailing: some ToolbarContent {
-        ToolbarItem(placement: .topBarTrailing) {
-            Button("Done") {
+    private var addButton: some View {
+       
+            Button(action: {
                 shareExtensionViewModel.saveJob(context: container)
                 action()
-            }
+            }, label: {
+                Text("Add to Job Tracker App")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .cellPadding()
+                   
+            })
+            .padding(.horizontal, 20)
+            .buttonStyle(.borderedProminent)
+            .tint(.mint)
             .disabled(shareExtensionViewModel.isTitleOrCompanyEmpty())
-        }
+       
     }
+    
 }
