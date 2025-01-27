@@ -192,9 +192,12 @@ public struct NewJobView: View {
     
     private var toolbarTrailing: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            Button("Add") {
+            Button {
                 newJobViewModel.saveJob(context: context)
                 dismiss()
+            } label: {
+                Text("Add")
+                    .fontWeight(.semibold)
             }
             .disabled(newJobViewModel.isTitleOrCompanyEmpty())
         }
