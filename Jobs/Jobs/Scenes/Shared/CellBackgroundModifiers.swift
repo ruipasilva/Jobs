@@ -10,7 +10,7 @@ import SwiftUI
 struct CellBackground: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .padding(.vertical, 6)
+            .padding(.vertical, 4)
             .background {
                 RoundedRectangle(cornerRadius: 8)
                     .foregroundStyle(Color(uiColor: .secondarySystemGroupedBackground))
@@ -23,7 +23,7 @@ struct CellPadding: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(.horizontal)
-            .padding(.vertical, 6)
+            .padding(.vertical, 4)
     }
 }
 

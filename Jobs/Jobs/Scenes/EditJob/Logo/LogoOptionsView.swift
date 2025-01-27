@@ -60,7 +60,7 @@ struct LogoOptionsView: View {
     
     private var mainInfoView: some View {
         Section {
-            FloatingTextField(title: logoOptionsViewModel.company.isEmpty ? "Company Name (required)" : "Company Name", text: $logoOptionsViewModel.company, image: "building.2")
+            TextfieldWithSFSymbol(text: $logoOptionsViewModel.company, placeholder: "Company Name (required)", systemName: "building.2")
                 .onChange(of: logoOptionsViewModel.company) { _, _ in
                     Task {
                         await logoOptionsViewModel.getLogos(
@@ -72,15 +72,13 @@ struct LogoOptionsView: View {
                 .onSubmit {
                     focusState = .jobTitle
                 }
-            
-            FloatingTextField(title: logoOptionsViewModel.title.isEmpty ? "Job Title (required)" : "Job Title", text: $logoOptionsViewModel.title, image: "person")
+            TextfieldWithSFSymbol(text: $logoOptionsViewModel.title, placeholder: "Job Title (required)", systemName: "person")
                 .submitLabel(.next)
                 .focused($focusState, equals: .jobTitle)
                 .onSubmit {
                     focusState = .companyWebsite
                 }
-            
-            FloatingTextField(title: "Company Website", text: $logoOptionsViewModel.companyWebsite, image: "globe")
+            TextfieldWithSFSymbol(text: $logoOptionsViewModel.companyWebsite, placeholder: "Company Website", systemName: "globe")
                 .submitLabel(.return)
                 .focused($focusState, equals: .companyWebsite)
         } header: {

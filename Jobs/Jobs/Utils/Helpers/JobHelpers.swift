@@ -19,14 +19,14 @@ public enum FocusedField {
 }
 
 public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable {
-    case shortlisted, applied, started, rejected, declined, offer
+    case notApplied, applied, started, rejected, declined, offer
     
 
     public var id: Self { self }
 
     public var status: String {
         switch self {
-        case .shortlisted:
+        case .notApplied:
             "Shortlisted"
         case .applied:
             "Applied"

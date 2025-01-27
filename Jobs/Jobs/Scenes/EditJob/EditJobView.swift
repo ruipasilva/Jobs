@@ -194,8 +194,9 @@ struct EditJobView: View {
             }
             .cellPadding()
             Divider()
+                .padding(.leading)
             HStack {
-                TextField("URL", text: $editJobViewModel.job.jobURLPosting)
+                TextfieldWithSFSymbol(text: $editJobViewModel.job.jobURLPosting, placeholder: "URL", systemName: "info.circle")
                     .textCase(.lowercase)
                     .autocapitalization(.none)
                 Spacer()
@@ -219,19 +220,7 @@ struct EditJobView: View {
             customSectionHeader(title: "RECRUITER DETAILS")
             VStack {
                 HStack {
-                    Button(action: {
-                        withAnimation {
-                            editJobViewModel.isShowingRecruiterDetails
-                                .toggle()
-                        }
-                    }, label: {
-                        Image(systemName: "info.circle")
-                            .imageScale(.medium)
-                            .foregroundStyle(Color.accentColor)
-                    })
-                    .buttonStyle(.plain)
-                    
-                    TextField("Recruiter's Name", text: $editJobViewModel.job.recruiterName)
+                    TextfieldWithSFSymbol(text: $editJobViewModel.job.recruiterName, placeholder: "Recruiter's Name", systemName: "person")
                     Spacer()
                     Button(action: {
                         // TODO: action to add launch call
@@ -259,29 +248,26 @@ struct EditJobView: View {
                     .disabled(editJobViewModel.job.recruiterEmail.isEmpty)
                 }
                 .cellPadding()
-                
-                if editJobViewModel.isShowingRecruiterDetails {
-                    Divider()
-                    TextField( "Phone Number", text: $editJobViewModel.job.recruiterNumber)
-                        .keyboardType(.numberPad)
-                        .cellPadding()
-                    Divider()
-                    TextField("Email", text: $editJobViewModel.job.recruiterEmail)
-                        .keyboardType(.emailAddress)
-                        .cellPadding()
-                }
+                Divider()
+                    .padding(.leading)
+                TextfieldWithSFSymbol(text: $editJobViewModel.job.recruiterEmail, placeholder: "Email", systemName: "envelope")
+                    .keyboardType(.emailAddress)
+                    .cellPadding()
+                Divider()
+                    .padding(.leading)
+                TextfieldWithSFSymbol(text: $editJobViewModel.job.recruiterNumber, placeholder: "Phone Number", systemName: "phone")
+                    .keyboardType(.numberPad)
+                    .cellPadding()
             }
             .cellBackground()
         }
     }
     
     private var notesView: some View {
-        VStack(alignment: .leading) {
-            TextField("Notes", text: $editJobViewModel.job.notes, axis: .vertical)
-                .lineLimit(5...10)
-                .cellPadding()
-                .cellBackground()
-        }
+        TextField("Notes", text: $editJobViewModel.job.notes, axis: .vertical)
+            .lineLimit(5...10)
+            .cellPadding()
+            .cellBackground()
     }
     
     // TODO: FINISH UI
@@ -294,7 +280,7 @@ struct EditJobView: View {
                         identifier: &editJobViewModel.job.localNotificationID!)
                 }, label: {
                     Text(editJobViewModel.job.localNotificationID!.isEmpty ? "Add Reminder" : "Delete Reminder")
-                    .frame(maxWidth: .infinity)
+                        .frame(maxWidth: .infinity)
                 })
                 .buttonStyle(.borderedProminent)
                 Button(action: {

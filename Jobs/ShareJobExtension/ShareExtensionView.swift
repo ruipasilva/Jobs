@@ -36,6 +36,7 @@ struct ShareExtensionView: View {
             focusState = .companyName
         }
     }
+    
     private var statusView: some View {
         HStack {
             Text("Application Status")
@@ -53,11 +54,7 @@ struct ShareExtensionView: View {
     
     private var mainInfoView: some View {
         VStack(spacing: .zero) {
-            HStack {
-                Image(systemName: "building.2")
-                TextField("Company Name (required)", text: $shareExtensionViewModel.company)
-            }
-            .padding(.vertical, 4)
+            TextfieldWithSFSymbol(text: $shareExtensionViewModel.company, placeholder: "Company Name (required)", systemName: "building.2")
             .submitLabel(.next)
             .focused($focusState, equals: .companyName)
             .onChange(of: shareExtensionViewModel.company) { _, _ in
@@ -66,20 +63,13 @@ struct ShareExtensionView: View {
             .onSubmit {
                 focusState = .jobTitle
             }
-            .cellPadding()
             Divider()
-            HStack {
-                Image (systemName: "person")
-                TextField("Job Title (required)", text: $shareExtensionViewModel.title)
-                
-            }
-            .padding(.vertical, 4)
+            TextfieldWithSFSymbol(text: $shareExtensionViewModel.title, placeholder: "Job Title (required)", systemName: "person")
             .submitLabel(.return)
             .focused($focusState, equals: .jobTitle)
             .onSubmit {
                 focusState = .notes
             }
-            .cellPadding()
         }
         .cellBackground()
     }

@@ -68,7 +68,7 @@ struct MainListCellView: View {
                 
                 Spacer()
                 
-                if job.jobApplicationStatus == .shortlisted {
+                if job.jobApplicationStatus == .notApplied {
                     Image(systemName: "bookmark")
                         .padding(.horizontal, 8)
                         .padding(.vertical, 5)
@@ -105,7 +105,7 @@ struct MainListCellView: View {
     
     private func setApplicationStatusColor(applicationStatus: JobApplicationStatus) -> Color {
         switch applicationStatus {
-        case .shortlisted:
+        case .notApplied:
             Color(uiColor: .systemGray)
         case .applied:
             Color(uiColor: .systemOrange)

@@ -26,6 +26,7 @@ public struct NewJobView: View {
                 otherInfoView
                 notesView
             }
+            .background(Color(UIColor.systemGroupedBackground))
             .toolbar {
                 toolbarLeading
                 toolbarTrailing
@@ -46,7 +47,7 @@ public struct NewJobView: View {
     
     private var mainInfoView: some View {
         Section {
-            FloatingTextField(title: newJobViewModel.company.isEmpty ? "Company Name (required)" : "Company Name", text: $newJobViewModel.company, image: "building.2")
+            TextfieldWithSFSymbol(text: $newJobViewModel.company, placeholder: "Company Name (required)", systemName: "building.2")
                 .submitLabel(.next)
                 .focused($focusState, equals: .companyName)
                 .onChange(of: newJobViewModel.company) { _, _ in
@@ -55,21 +56,20 @@ public struct NewJobView: View {
                 .onSubmit {
                     focusState = .jobTitle
                 }
-            FloatingTextField(title: newJobViewModel.title.isEmpty ? "Job Title (required)" : "Job Title", text: $newJobViewModel.title, image: "person")
+            TextfieldWithSFSymbol(text: $newJobViewModel.title, placeholder: "Job Title (required)", systemName: "person")
                 .focused($focusState, equals: .jobTitle)
-        } header: {
-            Text("Main Info")
         }
     }
     
+    
     private var statusView: some View {
         Section {
-            Picker("Status", selection: $newJobViewModel.jobApplicationStatus) {
+            Picker("Application Status", selection: $newJobViewModel.jobApplicationStatus) {
                 ForEach(JobApplicationStatus.allCases, id: \.id) { status in
                     Text(status.status).tag(status)
                 }
             }
-        } 
+        }
     }
     
     private var locationView: some View {
@@ -79,17 +79,13 @@ public struct NewJobView: View {
                     Text(location.type).tag(location)
                 }
             }
-            .padding(.vertical, 4)
-            .pickerStyle(.segmented)
             
             if !newJobViewModel.isLocationRemote() {
-                FloatingTextField(
-                    title: "Location", text: $newJobViewModel.location,
-                    image: "mappin")
+                TextfieldWithSFSymbol(text: $newJobViewModel.location, placeholder: "Location", systemName: "mappin")
+                
+                
                 WorkingDaysView(workingDays: $newJobViewModel.workingDays, workingDaysToSave: newJobViewModel.workingDaysToSave)
             }
-        } header: {
-            Text("Location")
         }
     }
     
@@ -125,39 +121,40 @@ public struct NewJobView: View {
     
     private var recruitersInfoView: some View {
         Section {
-            FloatingTextField(title: "Name", text: $newJobViewModel.recruiterName, image: "person.circle")
+            TextfieldWithSFSymbol(text: $newJobViewModel.recruiterName, placeholder: "Name", systemName: "person.circle")
                 .keyboardType(.namePhonePad)
                 .focused($focusState, equals: .recruiterName)
                 .submitLabel(.next)
                 .onSubmit {
                     focusState = .recruiterEmail
                 }
-            FloatingTextField(title: "Email", text: $newJobViewModel.recruiterEmail, image: "envelope")
+            TextfieldWithSFSymbol(text: $newJobViewModel.recruiterEmail, placeholder: "Email", systemName: "envelope")
                 .focused($focusState, equals: .recruiterEmail)
                 .keyboardType(.emailAddress)
                 .submitLabel(.next)
                 .onSubmit {
                     focusState = .recruiterNumber
                 }
-            FloatingTextField(title: "Number", text: $newJobViewModel.recruiterNumber, image: "phone")
+            TextfieldWithSFSymbol(text: $newJobViewModel.recruiterNumber, placeholder: "Number", systemName: "phone")
                 .focused($focusState, equals: .recruiterNumber)
                 .keyboardType(.numberPad)
+            
         } header: {
-            Text("Recruiter's info")
+            Text("Recruiter Information")
         }
     }
     
     private var otherInfoView: some View {
         Section {
-            FloatingTextField(title: "Salary", text: $newJobViewModel.salary, image: "creditcard")
+            TextfieldWithSFSymbol(text: $newJobViewModel.salary, placeholder: "Salary", systemName: "creditcard")
                 .keyboardType(.numberPad)
-            FloatingTextField(title: "URL", text: $newJobViewModel.jobURLPosting, image: "link")
+            TextfieldWithSFSymbol(text: $newJobViewModel.jobURLPosting, placeholder: "URL", systemName: "link")
                 .submitLabel(.next)
                 .onSubmit {
                     focusState = .notes
                 }
         } header: {
-            Text("Extra Info")
+            Text("Extra Information")
         }
     }
     
@@ -167,6 +164,7 @@ public struct NewJobView: View {
                 .focused($focusState, equals: .notes)
                 .lineLimit(5...10)
         }
+        
     }
     
     private var toolbarLeading: some ToolbarContent {
@@ -177,10 +175,10 @@ public struct NewJobView: View {
                 } else {
                     newJobViewModel.showDiscardDialog()
                 }
-            }.confirmationDialog("Are you sure you want to discard this job?",
-                                 isPresented: $newJobViewModel.showingCancelActionSheet,
-                                 titleVisibility: .visible
-            ) {
+            }
+            .confirmationDialog("Are you sure you want to discard this job?",
+                                isPresented: $newJobViewModel.showingCancelActionSheet,
+                                titleVisibility: .visible) {
                 Button(role: .destructive, action: {
                     dismiss()
                 }) {
@@ -202,6 +200,4 @@ public struct NewJobView: View {
             .disabled(newJobViewModel.isTitleOrCompanyEmpty())
         }
     }
-    
-   
 }
