@@ -16,7 +16,7 @@ public final class Job {
     public var company: String = ""
     public var dateAdded: Date = Date.now
     public var notes: String = ""
-    public var jobApplicationStatus: JobApplicationStatus = JobApplicationStatus.notApplied
+    public var jobApplicationStatus: JobApplicationStatus = JobApplicationStatus.shortlisted
     public var jobApplicationStatusPrivate: String = "" // Used to sort order
     public var salary: String = ""
     public var location: String = ""
@@ -40,7 +40,7 @@ public final class Job {
          company: String,
          dateAdded: Date = Date.now,
          notes: String,
-         jobApplicationStatus: JobApplicationStatus = .notApplied,
+         jobApplicationStatus: JobApplicationStatus = .shortlisted,
          jobApplicationStatusPrivate: String,
          salary: String,
          location: String,

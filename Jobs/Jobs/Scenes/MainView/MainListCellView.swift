@@ -28,7 +28,7 @@ struct MainListCellView: View {
 
     private var roundedRectangle: some View {
         RoundedRectangle(cornerRadius: 8)
-            .fill(applyBackgroungColor(for: job))
+            .fill(Color(uiColor: .secondarySystemBackground))
     }
 
     private var infoView: some View {
@@ -54,20 +54,43 @@ struct MainListCellView: View {
             }
             .frame(width: 56, height: 56)
 
-            VStack(alignment: .leading) {
-                HStack {
+            HStack {
+                VStack {
                     Text(job.company.isEmpty ? "Company Name" : job.company)
                         .font(.body)
                         .foregroundColor(Color.init(UIColor.label))
                         .padding(.bottom, 2)
-                    Spacer()
-                    Text(job.jobApplicationStatus.status)
+                    
+                    Text(job.title.isEmpty ? "Job Title" : job.title)
                         .font(.subheadline)
                         .foregroundColor(Color.init(UIColor.secondaryLabel))
                 }
-                Text(job.title.isEmpty ? "Job Title" : job.title)
-                    .font(.subheadline)
-                    .foregroundColor(Color.init(UIColor.secondaryLabel))
+                
+                Spacer()
+                
+                if job.jobApplicationStatus == .shortlisted {
+                    Image(systemName: "bookmark")
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 5)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(setApplicationStatusColor(applicationStatus: job.jobApplicationStatus))
+                        .background {
+                            Circle()
+                                .fill(setApplicationStatusColor(applicationStatus: job.jobApplicationStatus).opacity(0.2))
+                        }
+                } else {
+                    Text(job.jobApplicationStatus.status)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 5)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(setApplicationStatusColor(applicationStatus: job.jobApplicationStatus))
+                        .background {
+                            RoundedRectangle(cornerRadius: 13)
+                                .fill(setApplicationStatusColor(applicationStatus: job.jobApplicationStatus).opacity(0.2))
+                        }
+                }
             }
         }
         .padding(.vertical, 10)
@@ -79,50 +102,19 @@ struct MainListCellView: View {
             .foregroundColor(.mint)
             .frame(width: 42, height: 38)
     }
-
-    private func applyBackgroungColor(for job: Job) -> LinearGradient {
     
-        switch job.jobApplicationStatus {
+    private func setApplicationStatusColor(applicationStatus: JobApplicationStatus) -> Color {
+        switch applicationStatus {
+        case .shortlisted:
+            Color(uiColor: .systemGray)
         case .applied:
-            return LinearGradient(
-                gradient: Gradient(colors: [
-                    .clear, Color.init(UIColor.secondarySystemBackground),
-                    Color.init(UIColor.secondarySystemBackground),
-                    .orange.opacity(0.2),
-                ]), startPoint: .leading, endPoint: .trailing)
+            Color(uiColor: .systemOrange)
         case .started:
-            return LinearGradient(
-                gradient: Gradient(colors: [
-                    .clear, Color.init(UIColor.secondarySystemBackground),
-                    Color.init(UIColor.secondarySystemBackground),
-                    .mint.opacity(0.2),
-                ]), startPoint: .leading, endPoint: .trailing)
-        case .rejected:
-            return LinearGradient(
-                gradient: Gradient(colors: [
-                    .clear, Color.init(UIColor.secondarySystemBackground),
-                    Color.init(UIColor.secondarySystemBackground),
-                    .red.opacity(0.2),
-                ]), startPoint: .leading, endPoint: .trailing)
-        case .hired:
-            return LinearGradient(
-                gradient: Gradient(colors: [
-                    .clear, Color.init(UIColor.secondarySystemBackground),
-                    Color.init(UIColor.secondarySystemBackground),
-                    .green.opacity(0.2),
-                ]), startPoint: .leading, endPoint: .trailing)
-        case .notApplied:
-            return LinearGradient(
-                gradient: Gradient(colors: [
-                    .clear, Color.init(UIColor.secondarySystemBackground),
-                    Color.init(UIColor.secondarySystemBackground),
-                ]), startPoint: .leading, endPoint: .trailing)
-        @unknown default:
-            return LinearGradient(
-                gradient: Gradient(colors: [
-                    .clear, Color.init(UIColor.secondarySystemBackground),
-                    Color.init(UIColor.secondarySystemBackground),
-                ]), startPoint: .leading, endPoint: .trailing)
+            Color(uiColor: .systemIndigo)
+        case .rejected, .declined:
+            Color(uiColor: .systemRed)
+        case .offer:
+            Color(uiColor: .systemGreen)
         }
     }
 }

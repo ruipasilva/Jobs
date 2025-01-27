@@ -38,7 +38,7 @@ struct RectanglesView: View {
             SingleRectangleView(
                 mainViewModel: mainViewModel, totalJobs: appliedJobs.count,
                 interviewStatus: JobApplicationStatus.applied.status,
-                SFSymbol: "clock", circleColor: .orange
+                SFSymbol: "checkmark", circleColor: Color(uiColor: .systemOrange)
             )
             .onTapGesture {
                 mainViewModel.isShowingAppliedJobs = true
@@ -46,7 +46,7 @@ struct RectanglesView: View {
             SingleRectangleView(
                 mainViewModel: mainViewModel, totalJobs: startedJobs.count,
                 interviewStatus: JobApplicationStatus.started.status,
-                SFSymbol: "checkmark", circleColor: .mint
+                SFSymbol: "arrow.right", circleColor: Color(uiColor: .systemIndigo)
             )
             .onTapGesture {
                 mainViewModel.isShowingStartedJobs = true

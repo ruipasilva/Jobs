@@ -100,7 +100,7 @@ struct JobListView: View {
                 Label {
                     Text("Applied")
                 } icon: {
-                    Image(systemName: "paperplane")
+                    Image(systemName: "checkmark")
                 }
                 .tint(.orange)
             }
@@ -111,8 +111,9 @@ struct JobListView: View {
                 Label {
                     Text("Started")
                 } icon: {
-                    Image(systemName: "calendar.badge.checkmark")
+                    Image(systemName: "arrow.right")
                 }
+                .tint(.indigo)
             }
 
             Button(action: {
@@ -121,7 +122,7 @@ struct JobListView: View {
                 Label {
                     Text("Rejected")
                 } icon: {
-                    Image(systemName: "xmark.circle")
+                    Image(systemName: "xmark")
                 }
                 .tint(.red)
             }
