@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject private var mainViewModel = MainViewViewModel()
+    @Environment(\.isSearching) var isSearching
     @Query private var jobs: [Job]
     @AppStorage("sortingOrder") var sortingOrder: SortingOrder = .dateAdded
     

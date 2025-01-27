@@ -57,11 +57,13 @@ struct JobListView: View {
 
     private var jobList: some View {
         List {
-            Section {
-                RectanglesView(mainViewModel: mainViewModel)
+            if mainViewModel.filter.isEmpty {
+                Section {
+                    RectanglesView(mainViewModel: mainViewModel)
+                }
+                .padding(.bottom, -16)
+                .listRowSeparator(.hidden)
             }
-            .padding(.bottom, -16)
-            .listRowSeparator(.hidden)
             Section {
                 ForEach(jobs) { job in
                     ZStack {

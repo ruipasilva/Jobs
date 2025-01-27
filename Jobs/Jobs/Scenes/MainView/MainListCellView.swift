@@ -55,7 +55,7 @@ struct MainListCellView: View {
             .frame(width: 56, height: 56)
 
             HStack {
-                VStack {
+                VStack(alignment: .leading) {
                     Text(job.company.isEmpty ? "Company Name" : job.company)
                         .font(.body)
                         .foregroundColor(Color.init(UIColor.label))
