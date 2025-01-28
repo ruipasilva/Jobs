@@ -16,6 +16,7 @@ public class EditJobViewModel: BaseViewModel {
     @Published public var isShowingRecruiterDetails = false
     @Published public var isShowingLogoDetails = false
     @Published public var isShowingWarnings = false
+    @Published public var isShowingDeleteAlert = false
     
     @Published public var loadingLogoState: LoadingLogoState = .na
     

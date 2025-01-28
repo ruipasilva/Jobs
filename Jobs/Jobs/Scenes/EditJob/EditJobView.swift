@@ -52,6 +52,13 @@ struct EditJobView: View {
         } message: {
             Text("Websites might not be accurate. You can edit them by tapping the logo above")
         }
+        .alert("Delete Job?", isPresented: $editJobViewModel.isShowingDeleteAlert) {
+            Button("Delete", role: .destructive) {
+                context.delete(editJobViewModel.job)
+                dismiss()
+            }
+            Button("Cancel", role: .cancel) {}
+        }
         
         // TODO: uncomment when work on maps functionality
         //        .actionSheet(isPresented: $showingSheet) {
@@ -89,17 +96,19 @@ struct EditJobView: View {
     }
     
     private var imageView: some View {
-        AsyncImage(url: URL(string: editJobViewModel.job.logoURL)) { phase in
-            switch phase {
-            case .empty, .failure(_):
-                defaultImage
-            case let .success(image):
-                image
-                    .cornerRadius(8)
-                    .shadow(radius: 2)
-                    .padding(.top, 10)
-            @unknown default:
-                defaultImage
+        ZStack(alignment: .bottomTrailing) {
+            AsyncImage(url: URL(string: editJobViewModel.job.logoURL)) { phase in
+                switch phase {
+                case .empty, .failure(_):
+                    defaultImage
+                case let .success(image):
+                    image
+                        .cornerRadius(8)
+                        .shadow(radius: 2)
+                        .padding(.top, 10)
+                @unknown default:
+                    defaultImage
+                }
             }
         }
     }
@@ -312,9 +321,8 @@ struct EditJobView: View {
     }
     
     private var deleteButton: some View {
-            Button(action: {
-                context.delete(editJobViewModel.job)
-                dismiss()
+        Button(action: {
+            editJobViewModel.isShowingDeleteAlert = true
             }, label: {
                 Text("Delete Job")
                     .fontWeight(.semibold)
