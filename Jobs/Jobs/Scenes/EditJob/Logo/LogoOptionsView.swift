@@ -39,22 +39,24 @@ struct LogoOptionsView: View {
                 }
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
-                        logoOptionsViewModel.showDiscardDialog()
-                    }.confirmationDialog("Are you sure you want to discard this edit?",
-                                        isPresented: $logoOptionsViewModel.showingCancelActionSheet,
-                                        titleVisibility: .visible) {
-                        Button(role: .destructive, action: {
+                        if logoOptionsViewModel.shouldCancelWithoutDialogAlert()  {
                             dismiss()
-                        }) {
-                            Text("Discard Edit")
+                        } else {
+                            logoOptionsViewModel.showDiscardDialog()
                         }
                     }
                 }
             }
-        }
-        .task {
-            await logoOptionsViewModel.getLogos(
-                company: logoOptionsViewModel.job.company)
+            .confirmationDialog("Are you sure you want to discard this edit?",
+                                isPresented: $logoOptionsViewModel.showingCancelActionSheet,
+                                titleVisibility: .visible) {
+                Button(role: .destructive, action: {
+                    dismiss()
+                }) {
+                    Text("Discard Edit")
+                        .fontWeight(.semibold)
+                }
+            }
         }
     }
     

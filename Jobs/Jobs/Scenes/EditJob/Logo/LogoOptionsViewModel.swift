@@ -17,6 +17,9 @@ public final class LogoOptionsViewModel: ObservableObject {
     @Published public var logoURL: String = ""
     @Published public var companyWebsite: String = ""
     
+    @Published public var initialCompanyName: String = ""
+    @Published public var initialJobTitle: String = ""
+    
     public var subject = PassthroughSubject<Job, Never>()
     
     private var cancellables = Set<AnyCancellable>()
@@ -36,11 +39,17 @@ public final class LogoOptionsViewModel: ObservableObject {
         showingCancelActionSheet = true
     }
     
+    public func shouldCancelWithoutDialogAlert() -> Bool {
+        initialCompanyName == company && initialJobTitle == title
+    }
+    
     public func setProperties() {
         title = job.title
         company = job.company
         logoURL = job.logoURL
         companyWebsite = job.companyWebsite
+        initialCompanyName = job.company
+        initialJobTitle = job.title
     }
     
     public func updateJob() {
