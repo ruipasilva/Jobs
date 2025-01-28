@@ -119,6 +119,7 @@ struct EditJobView: View {
                 .font(.body)
                 .foregroundStyle(Color(UIColor.secondaryLabel))
             
+            
             Button(action: {
                 if editJobViewModel.count < 1 {
                     editJobViewModel.setupWebsiteWarning()
@@ -126,10 +127,14 @@ struct EditJobView: View {
                     openURL(URL(string: "https://www.\(editJobViewModel.job.companyWebsite)")!)
                 }
             },label: {
-                Label("Company Website", systemImage: "safari")
-                    .imageScale(.small)
-                    .font(.subheadline)
-                    .foregroundColor(.accentColor)
+                HStack(alignment: .center, spacing: 2) {
+                    Image(systemName: "safari")
+                        .imageScale(.small)
+                    Text("Company Website")
+                        .font(.subheadline)
+                }
+                .foregroundColor(.accentColor)
+                    
             })
             .padding(.bottom, 32)
             .disabled(editJobViewModel.job.companyWebsite.isEmpty)
