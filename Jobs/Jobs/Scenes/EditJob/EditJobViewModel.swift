@@ -18,6 +18,9 @@ public class EditJobViewModel: BaseViewModel {
     @Published public var isShowingWarnings = false
     @Published public var isShowingDeleteAlert = false
     
+    @Published public var initialCompanyName: String = ""
+    @Published public var initialJobTitle: String = ""
+    
     @Published public var loadingLogoState: LoadingLogoState = .na
     
     //    Using @AppStorage in viewModel because it crashes the app on iOS 17.5.

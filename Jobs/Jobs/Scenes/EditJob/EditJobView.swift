@@ -27,9 +27,6 @@ struct EditJobView: View {
                     tipView
                     titleView
                 }
-                .onTapGesture {
-                    editJobViewModel.isShowingLogoDetails = true
-                }
                 statusView
                 locationView
                 extraInfoView
@@ -58,6 +55,16 @@ struct EditJobView: View {
                 dismiss()
             }
             Button("Cancel", role: .cancel) {}
+        }
+        .onAppear(perform: {
+            editJobViewModel.initialCompanyName = editJobViewModel.job.company
+            editJobViewModel.initialJobTitle = editJobViewModel.job.title
+        })
+        .onDisappear {
+            if editJobViewModel.job.company.isEmpty || editJobViewModel.job.title.isEmpty {
+                editJobViewModel.job.company = editJobViewModel.initialCompanyName
+                editJobViewModel.job.title = editJobViewModel.initialJobTitle
+            }
         }
         
         // TODO: uncomment when work on maps functionality
@@ -110,7 +117,22 @@ struct EditJobView: View {
                     defaultImage
                 }
             }
+            editLogoButton
         }
+    }
+    
+    private var editLogoButton: some View {
+            Button(action: {
+                editJobViewModel.isShowingLogoDetails = true
+            }, label: {
+                Image(systemName: "pencil.circle.fill")
+                    .resizable()
+                    .symbolRenderingMode(.palette)
+                    .frame(width: 30, height: 30)
+                    .foregroundStyle(.white, Color(uiColor: .systemGray))
+            })
+            .padding(.bottom, 6)
+            .padding(.trailing, 7)
     }
     
     private var defaultImage: some View {
@@ -122,12 +144,15 @@ struct EditJobView: View {
     
     private var titleView: some View {
         VStack {
-            Text(editJobViewModel.job.company)
+            TextField("Company Name (required)", text: $editJobViewModel.job.company)
+                .textFieldStyle(.plain)
+                .multilineTextAlignment(.center)
                 .font(.title)
-            Text(editJobViewModel.job.title)
+            TextField("Job Title (required)", text: $editJobViewModel.job.title)
+                .textFieldStyle(.plain)
+                .multilineTextAlignment(.center)
                 .font(.body)
                 .foregroundStyle(Color(UIColor.secondaryLabel))
-            
             
             Button(action: {
                 if editJobViewModel.count < 1 {
@@ -178,7 +203,7 @@ struct EditJobView: View {
             }
             if !editJobViewModel.isLocationOnSite() {
                 Divider()
-                TextField("Add Location", text: $editJobViewModel.job.location)
+                TextfieldWithSFSymbol(text: $editJobViewModel.job.location, placeholder: "Add Location", systemName: "mappin")
                     .cellPadding()
                 Divider()
                 WorkingDaysView(workingDays: $editJobViewModel.job.workingDays,

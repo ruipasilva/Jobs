@@ -16,7 +16,7 @@ public struct EditTip: Tip {
     public var message: Text? {
         Text(
             """
-            To choose a different logo or edit the company information, tap any of the items above.
+            To choose a different logo or edit the company information, tap the edit button.
             """
         )
     }
