@@ -36,6 +36,7 @@ struct EditJobView: View {
                 recruiterInfoView
                 notesView
                 notificationAndReminders
+                deleteButton
             }
             .padding(.bottom)
         }
@@ -303,5 +304,21 @@ struct EditJobView: View {
             .font(.caption)
             .padding(.leading, 36)
             .foregroundStyle(.secondary)
+    }
+    
+    private var deleteButton: some View {
+            Button(action: {
+                context.delete(editJobViewModel.job)
+                dismiss()
+            }, label: {
+                Text("Delete Job")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .cellPadding()
+                
+            })
+            .cellPadding()
+            .buttonStyle(.borderedProminent)
+            .tint(Color(uiColor: .systemRed))
     }
 }
