@@ -87,4 +87,10 @@ public class EditJobViewModel: BaseViewModel {
         
         return viewModel
     }
+    
+    public func makePhoneCall(phoneNumber: String) {
+        if let phoneURL = URL(string: "tel:\(phoneNumber)") {
+            UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+        }
+    }
 }

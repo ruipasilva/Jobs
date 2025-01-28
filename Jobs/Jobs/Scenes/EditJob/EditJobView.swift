@@ -263,7 +263,7 @@ struct EditJobView: View {
                     TextfieldWithSFSymbol(text: $editJobViewModel.job.recruiterName, placeholder: "Recruiter's Name", systemName: "person")
                     Spacer()
                     Button(action: {
-                        // TODO: action to add launch call
+                        editJobViewModel.makePhoneCall(phoneNumber: editJobViewModel.job.recruiterNumber)
                     }, label: {
                         Image(systemName: "phone.circle.fill")
                             .foregroundStyle(Color.accentColor)

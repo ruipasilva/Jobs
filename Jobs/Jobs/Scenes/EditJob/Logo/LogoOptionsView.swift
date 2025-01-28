@@ -83,8 +83,6 @@ struct LogoOptionsView: View {
             TextfieldWithSFSymbol(text: $logoOptionsViewModel.companyWebsite, placeholder: "Company Website", systemName: "globe")
                 .submitLabel(.return)
                 .focused($focusState, equals: .companyWebsite)
-        } header: {
-            Text("Main Info")
         }
     }
     
