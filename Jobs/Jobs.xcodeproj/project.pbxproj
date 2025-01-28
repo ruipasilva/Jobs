@@ -50,6 +50,8 @@
 		699750DB2B614E61000EBCD1 /* JobListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750DA2B614E61000EBCD1 /* JobListView.swift */; };
 		69984B7B2BD9BD3E002C23F2 /* SingleJobStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69984B7A2BD9BD3E002C23F2 /* SingleJobStatusView.swift */; };
 		69984B7D2BED7445002C23F2 /* TabViewRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69984B7C2BED7445002C23F2 /* TabViewRoot.swift */; };
+		69A9F1C92D49878E00652CB6 /* IdentifiableLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A9F1C82D49878E00652CB6 /* IdentifiableLocation.swift */; };
+		69A9F1CA2D49878E00652CB6 /* IdentifiableLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A9F1C82D49878E00652CB6 /* IdentifiableLocation.swift */; };
 		69D583742C39A46900084C5E /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583732C39A46900084C5E /* OverView.swift */; };
 		69D583762C39A4F100084C5E /* OverViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583752C39A4F100084C5E /* OverViewViewModel.swift */; };
 		69D5837A2C3DD84700084C5E /* WorkingDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583792C3DD84700084C5E /* WorkingDaysView.swift */; };
@@ -148,6 +150,7 @@
 		699750DA2B614E61000EBCD1 /* JobListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListView.swift; sourceTree = "<group>"; };
 		69984B7A2BD9BD3E002C23F2 /* SingleJobStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleJobStatusView.swift; sourceTree = "<group>"; };
 		69984B7C2BED7445002C23F2 /* TabViewRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewRoot.swift; sourceTree = "<group>"; };
+		69A9F1C82D49878E00652CB6 /* IdentifiableLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableLocation.swift; sourceTree = "<group>"; };
 		69D00D3B2CE3CF330072DB4A /* JobsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JobsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69D583732C39A46900084C5E /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
 		69D583752C39A4F100084C5E /* OverViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverViewViewModel.swift; sourceTree = "<group>"; };
@@ -293,6 +296,7 @@
 				69352EC82BBD6FC100B8A77B /* CompanyInfo.swift */,
 				69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */,
 				693AD18F2D41800F0059686E /* Job.swift */,
+				69A9F1C82D49878E00652CB6 /* IdentifiableLocation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -593,6 +597,7 @@
 				693AD19D2D42C46D0059686E /* LocalNotificationsManager.swift in Sources */,
 				693AD19A2D42C44A0059686E /* DependencyContainer.swift in Sources */,
 				693AD1972D42C1B90059686E /* JobHelpers.swift in Sources */,
+				69A9F1C92D49878E00652CB6 /* IdentifiableLocation.swift in Sources */,
 				693AD1962D42C1B20059686E /* Job.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,6 +609,7 @@
 				693AD1982D42C25F0059686E /* Job.swift in Sources */,
 				693AD1992D42C25F0059686E /* JobHelpers.swift in Sources */,
 				69D583742C39A46900084C5E /* OverView.swift in Sources */,
+				69A9F1CA2D49878E00652CB6 /* IdentifiableLocation.swift in Sources */,
 				69F725BB2CDCFEB10064C999 /* DependencyContainer.swift in Sources */,
 				699750D92B6007AD000EBCD1 /* EditJobView.swift in Sources */,
 				69352EC92BBD6FC100B8A77B /* CompanyInfo.swift in Sources */,

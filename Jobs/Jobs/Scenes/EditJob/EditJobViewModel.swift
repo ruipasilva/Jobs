@@ -9,6 +9,7 @@ import Factory
 import Foundation
 import SwiftUI
 import Combine
+import MapKit
 
 
 public class EditJobViewModel: BaseViewModel {
@@ -17,11 +18,18 @@ public class EditJobViewModel: BaseViewModel {
     @Published public var isShowingLogoDetails = false
     @Published public var isShowingWarnings = false
     @Published public var isShowingDeleteAlert = false
+    @Published public var isShowingMapView = false
     
     @Published public var initialCompanyName: String = ""
     @Published public var initialJobTitle: String = ""
     
     @Published public var loadingLogoState: LoadingLogoState = .na
+    
+    @Published public var mapRegion = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194), // Default location (e.g., San Francisco)
+            span: MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0)
+        )
+    @Published public var selectedLocation: [IdentifiableLocation] = []
     
     //    Using @AppStorage in viewModel because it crashes the app on iOS 17.5.
     //    only this view why? Does not happen on iOS 18.
@@ -93,4 +101,30 @@ public class EditJobViewModel: BaseViewModel {
             UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
         }
     }
+    
+    
+    public func performMapSearch() {
+        
+        let searchRequest = MKLocalSearch.Request()
+        searchRequest.naturalLanguageQuery = job.location
+        
+        let search = MKLocalSearch(request: searchRequest)
+        search.start { response, error in
+            
+            if let error = error {
+                print("Search error: \(error.localizedDescription)")
+                return
+            }
+            
+            if let coordinate = response?.mapItems.first?.placemark.coordinate {
+                            let location = IdentifiableLocation(coordinate: coordinate)
+                            self.selectedLocation = [location]
+                            self.mapRegion = MKCoordinateRegion(
+                                center: coordinate,
+                                span: MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0)
+                            )
+                        }
+        }
+    }
 }
+

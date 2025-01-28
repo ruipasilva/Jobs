@@ -7,6 +7,7 @@
 
 import SwiftUI
 import TipKit
+import MapKit
 
 struct EditJobView: View {
     @StateObject private var editJobViewModel: EditJobViewModel
@@ -66,34 +67,6 @@ struct EditJobView: View {
                 editJobViewModel.job.title = editJobViewModel.initialJobTitle
             }
         }
-        
-        // TODO: uncomment when work on maps functionality
-        //        .actionSheet(isPresented: $showingSheet) {
-        //                    let latitude = 45.5088
-        //                    let longitude = -73.554
-        //
-        //                    let appleURL = "http://maps.apple.com/?daddr=\(latitude),\(longitude)"
-        //                    let googleURL = "comgooglemaps://?daddr=\(latitude),\(longitude)&directionsmode=driving"
-        //
-        //                    let googleItem = ("Google Map", URL(string:googleURL)!)
-        //                    var installedNavigationApps = [("Apple Maps", URL(string:appleURL)!)]
-        //
-        //                    if UIApplication.shared.canOpenURL(googleItem.1) {
-        //                        installedNavigationApps.append(googleItem)
-        //                    }
-        //
-        //                    var buttons: [ActionSheet.Button] = []
-        //                    for app in installedNavigationApps {
-        //                        let button: ActionSheet.Button = .default(Text(app.0)) {
-        //                            UIApplication.shared.open(app.1, options: [:], completionHandler: nil)
-        //                        }
-        //                        buttons.append(button)
-        //                    }
-        //                    let cancel: ActionSheet.Button = .cancel()
-        //                    buttons.append(cancel)
-        //
-        //                    return ActionSheet(title: Text("Navigate"), message: Text("Select an app..."), buttons: buttons)
-        //                }
     }
     
     private var tipView: some View {
@@ -122,17 +95,17 @@ struct EditJobView: View {
     }
     
     private var editLogoButton: some View {
-            Button(action: {
-                editJobViewModel.isShowingLogoDetails = true
-            }, label: {
-                Image(systemName: "pencil.circle.fill")
-                    .resizable()
-                    .symbolRenderingMode(.palette)
-                    .frame(width: 30, height: 30)
-                    .foregroundStyle(.white, Color(uiColor: .systemGray))
-            })
-            .padding(.bottom, 6)
-            .padding(.trailing, 7)
+        Button(action: {
+            editJobViewModel.isShowingLogoDetails = true
+        }, label: {
+            Image(systemName: "pencil.circle.fill")
+                .resizable()
+                .symbolRenderingMode(.palette)
+                .frame(width: 30, height: 30)
+                .foregroundStyle(.white, Color(uiColor: .systemGray))
+        })
+        .padding(.bottom, 6)
+        .padding(.trailing, 7)
     }
     
     private var defaultImage: some View {
@@ -168,7 +141,7 @@ struct EditJobView: View {
                         .font(.subheadline)
                 }
                 .foregroundColor(.accentColor)
-                    
+                
             })
             .padding(.bottom, 32)
             .disabled(editJobViewModel.job.companyWebsite.isEmpty)
@@ -203,12 +176,43 @@ struct EditJobView: View {
             }
             if !editJobViewModel.isLocationOnSite() {
                 Divider()
-                TextfieldWithSFSymbol(text: $editJobViewModel.job.location, placeholder: "Add Location", systemName: "mappin")
-                    .cellPadding()
+                HStack {
+                    VStack {
+                        
+                        TextField("Search Location", text: $editJobViewModel.job.location, axis: .vertical)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(3...4)
+                            .toolbar {
+                                ToolbarItemGroup(placement: .keyboard) {
+                                    HStack {
+                                        Spacer()
+                                        Button("Search") {
+                                            editJobViewModel.performMapSearch()
+                                        }
+                                        .frame(alignment: .trailing)
+                                    }
+                                }
+                            }
+                        Spacer()
+                    }
+                    Spacer()
+                    
+                    MapView(mapRegion: $editJobViewModel.mapRegion, selectedLocation: $editJobViewModel.selectedLocation)
+                        .onAppear(perform: {
+                            if !editJobViewModel.job.location.isEmpty {
+                                DispatchQueue.main.async {
+                                    editJobViewModel.performMapSearch()
+                                }
+                            }
+                        })
+                }
+                .cellPadding()
                 Divider()
                 WorkingDaysView(workingDays: $editJobViewModel.job.workingDays,
                                 workingDaysToSave: editJobViewModel.workingDaysToSave)
                 .cellPadding()
+                
+                
             }
         }
         .cellBackground()
@@ -348,15 +352,28 @@ struct EditJobView: View {
     private var deleteButton: some View {
         Button(action: {
             editJobViewModel.isShowingDeleteAlert = true
-            }, label: {
-                Text("Delete Job")
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
-                    .cellPadding()
-                
-            })
-            .cellPadding()
-            .buttonStyle(.borderedProminent)
-            .tint(Color(uiColor: .systemRed))
+        }, label: {
+            Text("Delete Job")
+                .fontWeight(.semibold)
+                .frame(maxWidth: .infinity)
+                .cellPadding()
+            
+        })
+        .cellPadding()
+        .buttonStyle(.borderedProminent)
+        .tint(Color(uiColor: .systemRed))
+    }
+}
+
+struct MapView: View {
+    @Binding var mapRegion: MKCoordinateRegion
+    @Binding var selectedLocation: [IdentifiableLocation]
+    
+    var body: some View {
+        Map(coordinateRegion: $mapRegion, annotationItems: selectedLocation) { location in
+            MapMarker(coordinate: location.coordinate)
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .frame(width: 92, height: 92)
     }
 }
