@@ -51,7 +51,6 @@ struct JobListView: View {
     }
 
     private var emptyList: some View {
-        // SwiftUI standard library view
         ContentUnavailableView("No jobs yet", systemImage: "folder")
     }
 

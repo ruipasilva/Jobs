@@ -72,13 +72,6 @@
 			remoteGlobalIDString = 692ABA3E2D405A5E00C54CF7;
 			remoteInfo = ShareJobExtension;
 		};
-		692ABA7E2D414EF300C54CF7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 699750BA2B5ED2DC000EBCD1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 692ABA5C2D41276C00C54CF7;
-			remoteInfo = ShareJobFramework;
-		};
 		69D00D3F2CE3CF330072DB4A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 699750BA2B5ED2DC000EBCD1 /* Project object */;
@@ -455,7 +448,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				692ABA7F2D414EF300C54CF7 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				692ABA402D405A5E00C54CF7 /* ShareJobExtension */,
@@ -661,10 +653,6 @@
 			isa = PBXTargetDependency;
 			target = 692ABA3E2D405A5E00C54CF7 /* ShareJobExtension */;
 			targetProxy = 692ABA472D405A5E00C54CF7 /* PBXContainerItemProxy */;
-		};
-		692ABA7F2D414EF300C54CF7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			targetProxy = 692ABA7E2D414EF300C54CF7 /* PBXContainerItemProxy */;
 		};
 		69D00D402CE3CF330072DB4A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
