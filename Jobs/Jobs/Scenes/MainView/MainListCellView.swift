@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct MainListCellView: View {
     @ObservedObject private var mainViewModel: MainViewViewModel
@@ -38,26 +39,9 @@ struct MainListCellView: View {
     
     private var infoView: some View {
         HStack {
-            AsyncImage(url: URL(string: job.logoURL)) { phase in
-                switch phase {
-                case .empty:
-                    if job.logoURL.isEmpty {
-                        defaultImage
-                    } else {
-                        ProgressView()
-                    }
-                case let .success(image):
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(8)
-                case .failure(_):
-                    defaultImage
-                @unknown default:
-                    defaultImage
-                }
-            }
-            .frame(width: 56, height: 56)
+            CachedImage(url: job.logoURL, defaultLogoSize: 56)
+                .frame(width: 56, height: 56)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
             
             HStack {
                 VStack(alignment: .leading) {
@@ -99,13 +83,6 @@ struct MainListCellView: View {
             }
         }
         .padding(.vertical, 10)
-    }
-    
-    private var defaultImage: some View {
-        Image(systemName: "suitcase")
-            .resizable()
-            .foregroundColor(.mint)
-            .frame(width: 42, height: 38)
     }
     
     private func setApplicationStatusColor(applicationStatus: JobApplicationStatus) -> Color {

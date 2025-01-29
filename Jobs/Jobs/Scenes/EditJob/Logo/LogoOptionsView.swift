@@ -11,6 +11,7 @@ struct LogoOptionsView: View {
     @ObservedObject private var logoOptionsViewModel: LogoOptionsViewModel
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focusState: FocusedField?
+    @Environment(\.modelContext) private var context
     
     public init(logoOptionsViewModel: LogoOptionsViewModel) {
         self.logoOptionsViewModel = logoOptionsViewModel
@@ -33,6 +34,11 @@ struct LogoOptionsView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Update") {
                         logoOptionsViewModel.updateJob()
+                        do {
+                            try context.save()
+                        } catch {
+                            print("Error saving context: \(error)")
+                        }
                         dismiss()
                     }
                     .disabled(logoOptionsViewModel.isTitleOrCompanyEmpty())
@@ -100,27 +106,8 @@ struct LogoOptionsView: View {
                                 logoOptionsViewModel.companyWebsite = data.domain
                             }, label: {
                                 HStack {
-                                    AsyncImage(url: URL(string: data.logo),
-                                               scale: 3) { phase in
-                                        switch phase {
-                                        case .empty:
-                                            ProgressView()
-                                                .frame(alignment: .center)
-                                        case .success(let image):
-                                            image
-                                                .cornerRadius(8)
-                                                .shadow(radius: 2)
-                                        case .failure(_):
-                                            Image(
-                                                systemName: "suitcase.fill"
-                                            )
-                                            .controlSize(.large)
-                                        @unknown default:
-                                            Image(
-                                                systemName: "suitcase.fill")
-                                        }
-                                    }
-                                    
+                                    CachedImage(url: data.logo, defaultLogoSize: 44)
+                                        .frame(width: 44, height: 44)
                                     VStack(alignment: .leading) {
                                         Text(data.name)
                                             .font(.body)

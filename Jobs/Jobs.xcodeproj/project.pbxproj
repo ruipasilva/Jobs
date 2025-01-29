@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		692ABA492D405A5E00C54CF7 /* ShareJobExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 692ABA3F2D405A5E00C54CF7 /* ShareJobExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		693013442D4AE62E00B38851 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 693013432D4AE62E00B38851 /* SDWebImageSwiftUI */; };
 		69352EB62BBB2A3200B8A77B /* SingleRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352EB52BBB2A3200B8A77B /* SingleRectangleView.swift */; };
 		69352EB82BBB2B7A00B8A77B /* RectanglesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352EB72BBB2B7A00B8A77B /* RectanglesView.swift */; };
 		69352EBA2BBB2C4B00B8A77B /* MainListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352EB92BBB2C4B00B8A77B /* MainListCellView.swift */; };
@@ -53,6 +54,9 @@
 		69A9F1C92D49878E00652CB6 /* IdentifiableLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A9F1C82D49878E00652CB6 /* IdentifiableLocation.swift */; };
 		69A9F1CA2D49878E00652CB6 /* IdentifiableLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A9F1C82D49878E00652CB6 /* IdentifiableLocation.swift */; };
 		69A9F1CF2D4A3BC600652CB6 /* SearchableUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A9F1CE2D4A3BC600652CB6 /* SearchableUITextView.swift */; };
+		69A9F1D42D4AE0F300652CB6 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 69A9F1D32D4AE0F300652CB6 /* SDWebImageSwiftUI */; };
+		69A9F1D62D4AE3C900652CB6 /* CachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A9F1D52D4AE3C900652CB6 /* CachedImage.swift */; };
+		69A9F1D72D4AE3C900652CB6 /* CachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A9F1D52D4AE3C900652CB6 /* CachedImage.swift */; };
 		69D583742C39A46900084C5E /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583732C39A46900084C5E /* OverView.swift */; };
 		69D583762C39A4F100084C5E /* OverViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583752C39A4F100084C5E /* OverViewViewModel.swift */; };
 		69D5837A2C3DD84700084C5E /* WorkingDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583792C3DD84700084C5E /* WorkingDaysView.swift */; };
@@ -153,6 +157,7 @@
 		69984B7C2BED7445002C23F2 /* TabViewRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewRoot.swift; sourceTree = "<group>"; };
 		69A9F1C82D49878E00652CB6 /* IdentifiableLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableLocation.swift; sourceTree = "<group>"; };
 		69A9F1CE2D4A3BC600652CB6 /* SearchableUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableUITextView.swift; sourceTree = "<group>"; };
+		69A9F1D52D4AE3C900652CB6 /* CachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImage.swift; sourceTree = "<group>"; };
 		69D00D3B2CE3CF330072DB4A /* JobsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JobsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69D583732C39A46900084C5E /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
 		69D583752C39A4F100084C5E /* OverViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverViewViewModel.swift; sourceTree = "<group>"; };
@@ -204,6 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				693013442D4AE62E00B38851 /* SDWebImageSwiftUI in Frameworks */,
 				693AD1A22D42C4C20059686E /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,6 +218,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69A9F1D42D4AE0F300652CB6 /* SDWebImageSwiftUI in Frameworks */,
 				69F725B92CDCFE510064C999 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,6 +433,7 @@
 				6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */,
 				698006742BB37DF9007C725E /* TextfieldWithSFSymbol.swift */,
 				69A9F1CE2D4A3BC600652CB6 /* SearchableUITextView.swift */,
+				69A9F1D52D4AE3C900652CB6 /* CachedImage.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -462,6 +470,7 @@
 			name = ShareJobExtension;
 			packageProductDependencies = (
 				693AD1A12D42C4C20059686E /* Factory */,
+				693013432D4AE62E00B38851 /* SDWebImageSwiftUI */,
 			);
 			productName = ShareJobExtension;
 			productReference = 692ABA3F2D405A5E00C54CF7 /* ShareJobExtension.appex */;
@@ -542,6 +551,7 @@
 			mainGroup = 699750B92B5ED2DC000EBCD1;
 			packageReferences = (
 				69F725B72CDCFE510064C999 /* XCRemoteSwiftPackageReference "Factory" */,
+				693013422D4AE50400B38851 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			preferredProjectObjectVersion = 56;
 			productRefGroup = 699750C32B5ED2DC000EBCD1 /* Products */;
@@ -599,6 +609,7 @@
 				693AD19C2D42C46D0059686E /* CalendarManager.swift in Sources */,
 				693AD19D2D42C46D0059686E /* LocalNotificationsManager.swift in Sources */,
 				693AD19A2D42C44A0059686E /* DependencyContainer.swift in Sources */,
+				69A9F1D62D4AE3C900652CB6 /* CachedImage.swift in Sources */,
 				693AD1972D42C1B90059686E /* JobHelpers.swift in Sources */,
 				69A9F1C92D49878E00652CB6 /* IdentifiableLocation.swift in Sources */,
 				693AD1962D42C1B20059686E /* Job.swift in Sources */,
@@ -646,6 +657,7 @@
 				69D583762C39A4F100084C5E /* OverViewViewModel.swift in Sources */,
 				69F168032D3EF3FB001F06CC /* OnlineJobsView.swift in Sources */,
 				699750D72B5FF413000EBCD1 /* NewJobView.swift in Sources */,
+				69A9F1D72D4AE3C900652CB6 /* CachedImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1022,6 +1034,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		693013422D4AE50400B38851 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
+		69A9F1D22D4AE0F300652CB6 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
 		69F725B72CDCFE510064C999 /* XCRemoteSwiftPackageReference "Factory" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory";
@@ -1033,10 +1061,20 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		693013432D4AE62E00B38851 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 693013422D4AE50400B38851 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
 		693AD1A12D42C4C20059686E /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 69F725B72CDCFE510064C999 /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
+		};
+		69A9F1D32D4AE0F300652CB6 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69A9F1D22D4AE0F300652CB6 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 		69F725B82CDCFE510064C999 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;

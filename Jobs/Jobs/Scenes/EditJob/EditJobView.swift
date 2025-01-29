@@ -16,7 +16,7 @@ struct EditJobView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
     
-    private let job: Job
+    private var job: Job
     
     public init(job: Job) {
         self._editJobViewModel = .init(wrappedValue: .init(job: job))
@@ -64,9 +64,15 @@ struct EditJobView: View {
             editJobViewModel.initialCompanyName = editJobViewModel.job.company
             editJobViewModel.initialJobTitle = editJobViewModel.job.title
         })
+        .task(id: job) {
+            do {
+                try context.save()
+            } catch {
+                print("Failed to save")
+            }
+        }
         .onDisappear {
             if editJobViewModel.job.company.isEmpty || editJobViewModel.job.title.isEmpty {
-                
                 editJobViewModel.job.company = editJobViewModel.initialCompanyName
                 editJobViewModel.job.title = editJobViewModel.initialJobTitle
             }
@@ -81,19 +87,11 @@ struct EditJobView: View {
     
     private var imageView: some View {
         ZStack(alignment: .bottomTrailing) {
-            AsyncImage(url: URL(string: editJobViewModel.job.logoURL)) { phase in
-                switch phase {
-                case .empty, .failure(_):
-                    defaultImage
-                case let .success(image):
-                    image
-                        .cornerRadius(8)
-                        .shadow(radius: 2)
-                        .padding(.top, 10)
-                @unknown default:
-                    defaultImage
-                }
-            }
+            
+            CachedImage(url: editJobViewModel.job.logoURL, defaultLogoSize: 164)
+                .padding(.top, 10)
+                .frame(width: 164, height: 164)
+            
             editLogoButton
         }
     }
