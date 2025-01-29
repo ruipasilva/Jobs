@@ -76,7 +76,7 @@ struct JobListView: View {
                         .opacity(0)
                     }
                     .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                        makeSwipeView(job: job)
+                        makeSwipeRightView(job: job)
                     }
                 }
                 .onDelete { indexSet in
@@ -93,7 +93,7 @@ struct JobListView: View {
     }
     
     // Possibly change this to an Enum and iterate over cases to reduce code
-    private func makeSwipeView(job: Job) -> some View {
+    private func makeSwipeRightView(job: Job) -> some View {
         Group {
             Button(action: {
                 mainViewModel.setApplicationStatus(job: job, status: .applied)

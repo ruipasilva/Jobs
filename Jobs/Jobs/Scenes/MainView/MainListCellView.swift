@@ -9,28 +9,33 @@ import SwiftUI
 
 struct MainListCellView: View {
     @ObservedObject private var mainViewModel: MainViewViewModel
-
+    @Environment(\.modelContext) private var context
+    
     private var job: Job
-
+    
     public init(mainViewModel: MainViewViewModel,
                 job: Job) {
         self.mainViewModel = mainViewModel
         self.job = job
     }
-
+    
     var body: some View {
         ZStack {
             roundedRectangle
             infoView
                 .padding(.horizontal, 16)
         }
+        
     }
-
+    
     private var roundedRectangle: some View {
         RoundedRectangle(cornerRadius: 8)
             .fill(Color(uiColor: .secondarySystemBackground))
+            .contextMenu {
+                menuItems
+            }
     }
-
+    
     private var infoView: some View {
         HStack {
             AsyncImage(url: URL(string: job.logoURL)) { phase in
@@ -53,7 +58,7 @@ struct MainListCellView: View {
                 }
             }
             .frame(width: 56, height: 56)
-
+            
             HStack {
                 VStack(alignment: .leading) {
                     Text(job.company.isEmpty ? "Company Name" : job.company)
@@ -95,7 +100,7 @@ struct MainListCellView: View {
         }
         .padding(.vertical, 10)
     }
-
+    
     private var defaultImage: some View {
         Image(systemName: "suitcase")
             .resizable()
@@ -115,6 +120,35 @@ struct MainListCellView: View {
             Color(uiColor: .systemRed)
         case .offer:
             Color(uiColor: .systemGreen)
+        }
+    }
+    
+    private var menuItems: some View {
+        Group {
+            ForEach(JobApplicationStatus.allCases, id: \.id) { status in
+                
+                Button(action: {
+                    job.jobApplicationStatus = status
+                }, label: {
+                    HStack {
+                        Text(status.status)
+                        Spacer()
+                        Image(systemName: status.icon)
+                    }
+                })
+            }
+            Section {
+                Button(role: .destructive) {
+                    mainViewModel.objectWillChange.send()
+                    context.delete(job)
+                } label: {
+                    HStack {
+                        Text("Delete")
+                        Spacer()
+                        Image(systemName: "trash")
+                    }
+                }
+            }
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 public enum FocusedField {
     case companyName
@@ -39,6 +40,38 @@ public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable {
             "Declined"
         case .offer:
             "Offer"
+        }
+    }
+    
+    public var icon: String {
+        switch self {
+        case .notApplied:
+            "bookmark"
+        case .applied:
+            "checkmark"
+        case .started:
+            "arrow.right"
+        case .rejected:
+            "xmark"
+        case .declined:
+            "hand.thumbsdown"
+        case .offer:
+            "text.page"
+        }
+    }
+    
+    public var color: Color {
+        switch self {
+        case .notApplied:
+                Color(uiColor: .systemGray)
+        case .applied:
+                .orange
+        case .started:
+                .indigo
+        case .rejected, .declined:
+                .red
+        case .offer:
+                .green
         }
     }
 }
