@@ -52,6 +52,7 @@
 		69984B7D2BED7445002C23F2 /* TabViewRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69984B7C2BED7445002C23F2 /* TabViewRoot.swift */; };
 		69A9F1C92D49878E00652CB6 /* IdentifiableLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A9F1C82D49878E00652CB6 /* IdentifiableLocation.swift */; };
 		69A9F1CA2D49878E00652CB6 /* IdentifiableLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A9F1C82D49878E00652CB6 /* IdentifiableLocation.swift */; };
+		69A9F1CF2D4A3BC600652CB6 /* SearchableUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A9F1CE2D4A3BC600652CB6 /* SearchableUITextView.swift */; };
 		69D583742C39A46900084C5E /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583732C39A46900084C5E /* OverView.swift */; };
 		69D583762C39A4F100084C5E /* OverViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583752C39A4F100084C5E /* OverViewViewModel.swift */; };
 		69D5837A2C3DD84700084C5E /* WorkingDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583792C3DD84700084C5E /* WorkingDaysView.swift */; };
@@ -151,6 +152,7 @@
 		69984B7A2BD9BD3E002C23F2 /* SingleJobStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleJobStatusView.swift; sourceTree = "<group>"; };
 		69984B7C2BED7445002C23F2 /* TabViewRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewRoot.swift; sourceTree = "<group>"; };
 		69A9F1C82D49878E00652CB6 /* IdentifiableLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableLocation.swift; sourceTree = "<group>"; };
+		69A9F1CE2D4A3BC600652CB6 /* SearchableUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableUITextView.swift; sourceTree = "<group>"; };
 		69D00D3B2CE3CF330072DB4A /* JobsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JobsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69D583732C39A46900084C5E /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
 		69D583752C39A4F100084C5E /* OverViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverViewViewModel.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				69D583792C3DD84700084C5E /* WorkingDaysView.swift */,
 				6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */,
 				698006742BB37DF9007C725E /* TextfieldWithSFSymbol.swift */,
+				69A9F1CE2D4A3BC600652CB6 /* SearchableUITextView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				69F168012D3EF3EF001F06CC /* OnlineJobsViewModel.swift in Sources */,
 				699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */,
 				69352ECF2BBEBB6C00B8A77B /* LogoOptionsViewModel.swift in Sources */,
+				69A9F1CF2D4A3BC600652CB6 /* SearchableUITextView.swift in Sources */,
 				69984B7D2BED7445002C23F2 /* TabViewRoot.swift in Sources */,
 				69352ED12BBF603100B8A77B /* EditTip.swift in Sources */,
 				69D583762C39A4F100084C5E /* OverViewViewModel.swift in Sources */,

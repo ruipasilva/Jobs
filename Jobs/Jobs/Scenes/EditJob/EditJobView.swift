@@ -38,7 +38,7 @@ struct EditJobView: View {
             }
             .padding(.bottom)
         }
-        .background(Color(UIColor.systemGroupedBackground))
+        .background(Color(uiColor: .systemGroupedBackground))
         .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
             LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel())
         }
@@ -178,21 +178,10 @@ struct EditJobView: View {
                 Divider()
                 HStack {
                     VStack {
-                        
-                        TextField("Search Location", text: $editJobViewModel.job.location, axis: .vertical)
-                            .multilineTextAlignment(.leading)
-                            .lineLimit(3...4)
-                            .toolbar {
-                                ToolbarItemGroup(placement: .keyboard) {
-                                    HStack {
-                                        Spacer()
-                                        Button("Search") {
-                                            editJobViewModel.performMapSearch()
-                                        }
-                                        .frame(alignment: .trailing)
-                                    }
-                                }
-                            }
+                        SearchableUITextView("Search Location", text: $editJobViewModel.job.location) {
+                            editJobViewModel.performMapSearch()
+                        }
+                        .padding(.leading, -6)
                         Spacer()
                     }
                     Spacer()
@@ -211,8 +200,6 @@ struct EditJobView: View {
                 WorkingDaysView(workingDays: $editJobViewModel.job.workingDays,
                                 workingDaysToSave: editJobViewModel.workingDaysToSave)
                 .cellPadding()
-                
-                
             }
         }
         .cellBackground()

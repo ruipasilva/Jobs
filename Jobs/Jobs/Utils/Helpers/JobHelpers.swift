@@ -16,6 +16,7 @@ public enum FocusedField {
     case recruiterNumber
     case url
     case notes
+    case location
 }
 
 public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable {
