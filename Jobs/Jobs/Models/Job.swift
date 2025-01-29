@@ -83,4 +83,3 @@ public final class Job {
         self.currencyType = currencyType
     }
 }
-

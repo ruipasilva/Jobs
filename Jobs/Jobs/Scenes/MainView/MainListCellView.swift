@@ -126,9 +126,8 @@ struct MainListCellView: View {
     private var menuItems: some View {
         Group {
             ForEach(JobApplicationStatus.allCases, id: \.id) { status in
-                
                 Button(action: {
-                    job.jobApplicationStatus = status
+                    mainViewModel.setApplicationStatus(job: job, status: status)
                 }, label: {
                     HStack {
                         Text(status.status)

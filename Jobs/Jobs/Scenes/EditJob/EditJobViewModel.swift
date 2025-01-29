@@ -60,25 +60,6 @@ public class EditJobViewModel: BaseViewModel {
     public func setProperties() {
         title = job.title
         company = job.company
-        jobApplicationStatus = job.jobApplicationStatus
-        location = job.location
-        locationType = job.locationType
-        salary = job.salary
-        followUp = job.followUp
-        followUpDate = job.followUpDate
-        addInterviewToCalendar = job.addToCalendar
-        addInterviewToCalendarDate = job.addToCalendarDate
-        isEventAllDay = job.isEventAllDay
-        recruiterName = job.recruiterName
-        recruiterEmail = job.recruiterEmail
-        recruiterNumber = job.recruiterNumber
-        jobURLPosting = job.jobURLPosting
-        notes = job.notes
-        logoURL = job.logoURL
-        companyWebsite = job.companyWebsite
-        workingDays = job.workingDays
-        currencyType = job.currencyType
-        localNotificationID = job.localNotificationID ?? ""
     }
     
     public func getLogoOptionsViewModel() -> LogoOptionsViewModel {

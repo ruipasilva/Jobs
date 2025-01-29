@@ -16,8 +16,11 @@ struct EditJobView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
     
+    private let job: Job
+    
     public init(job: Job) {
         self._editJobViewModel = .init(wrappedValue: .init(job: job))
+        self.job = job
     }
     
     var body: some View {
@@ -63,6 +66,7 @@ struct EditJobView: View {
         })
         .onDisappear {
             if editJobViewModel.job.company.isEmpty || editJobViewModel.job.title.isEmpty {
+                
                 editJobViewModel.job.company = editJobViewModel.initialCompanyName
                 editJobViewModel.job.title = editJobViewModel.initialJobTitle
             }
@@ -157,6 +161,12 @@ struct EditJobView: View {
                 ForEach(JobApplicationStatus.allCases, id: \.id) { status in
                     Text(status.status).tag(status)
                 }
+            }
+            /// Need to update jobApplicationStatusPrivate because #predicate used to count
+            /// doesn't work with Enums
+            /// Reminder: this is way this property exists
+            .onChange(of: editJobViewModel.job.jobApplicationStatus) { _, newValue in
+                job.jobApplicationStatusPrivate = newValue.status
             }
         }
         .cellBackground()

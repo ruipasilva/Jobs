@@ -20,7 +20,7 @@ public enum FocusedField {
     case location
 }
 
-public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable {
+public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable, RawRepresentable {
     case notApplied, applied, started, rejected, declined, offer
     
 

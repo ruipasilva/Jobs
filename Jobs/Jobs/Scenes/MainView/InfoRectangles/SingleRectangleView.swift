@@ -23,8 +23,7 @@ struct SingleRectangleView: View {
         ZStack {
             roundedRectangle
             infoView
-                .padding(.vertical, 16)
-                .padding(.horizontal, 16)
+                .padding(16)
         }
         .frame(
             height: horizontalSizeClass == .compact
@@ -36,10 +35,7 @@ struct SingleRectangleView: View {
     
     private var roundedRectangle: some View {
         RoundedRectangle(cornerRadius: 8)
-            .fill(
-                colorScheme == .dark
-                ? Color.init(UIColor.secondarySystemBackground)
-                : Color.init(UIColor.systemGroupedBackground))
+            .fill(colorScheme == .dark ? Color(uiColor: .secondarySystemBackground) : Color(uiColor: .systemGroupedBackground))
     }
     
     private var infoView: some View {
@@ -57,13 +53,13 @@ struct SingleRectangleView: View {
                 Text("\(totalJobs)")
                     .font(.title)
                     .bold()
-                    .foregroundColor(Color(UIColor.label))
+                    .foregroundColor(Color(uiColor: .label))
             }
             Spacer()
             Text(interviewStatus)
                 .font(.body)
                 .bold()
-                .foregroundColor(Color(UIColor.label))
+                .foregroundColor(Color(uiColor: .label))
         }
     }
 }
