@@ -19,7 +19,7 @@ struct LogoOptionsView: View {
         logoOptionsViewModel.setProperties()
         
         Task {
-            await logoOptionsViewModel.getLogos(
+            try await logoOptionsViewModel.getLogos(
                 company: logoOptionsViewModel.company)
         }
     }
@@ -32,7 +32,7 @@ struct LogoOptionsView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Update") {
+                    Button {
                         logoOptionsViewModel.updateJob()
                         do {
                             try context.save()
@@ -40,6 +40,9 @@ struct LogoOptionsView: View {
                             print("Error saving context: \(error)")
                         }
                         dismiss()
+                    } label: {
+                        Text("Done")
+                            .fontWeight(.semibold)
                     }
                     .disabled(logoOptionsViewModel.isTitleOrCompanyEmpty())
                 }
@@ -63,6 +66,8 @@ struct LogoOptionsView: View {
                         .fontWeight(.semibold)
                 }
             }
+            .navigationBarTitle("Edit Company Details")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -70,10 +75,7 @@ struct LogoOptionsView: View {
         Section {
             TextfieldWithSFSymbol(text: $logoOptionsViewModel.company, placeholder: "Company Name (required)", systemName: "building.2")
                 .onChange(of: logoOptionsViewModel.company) { _, _ in
-                    Task {
-                        await logoOptionsViewModel.getLogos(
-                            company: logoOptionsViewModel.company)
-                    }
+                    logoOptionsViewModel.handleTyping()
                 }
                 .submitLabel(.next)
                 .focused($focusState, equals: .companyName)
@@ -98,12 +100,11 @@ struct LogoOptionsView: View {
                 Section {
                     switch logoOptionsViewModel.loadingLogoState {
                     case .na:
-                        ProgressView()
+                        Text("No logos found for \(logoOptionsViewModel.company)")
                     case let .success(result):
                         ForEach(result, id: \.logo) { data in
                             Button(action: {
-                                logoOptionsViewModel.logoURL = data.logo
-                                logoOptionsViewModel.companyWebsite = data.domain
+                                logoOptionsViewModel.setLogoInfo(companyInfo: data)
                             }, label: {
                                 HStack {
                                     CachedImage(url: data.logo, defaultLogoSize: 44)
@@ -127,27 +128,31 @@ struct LogoOptionsView: View {
                                     )
                                     .padding(.leading, 6)
                                     Spacer()
-                                    if logoOptionsViewModel.logoURL == data.logo {
                                         Text("Current")
                                             .padding(4)
                                             .foregroundColor(
-                                                Color.init(
-                                                    UIColor.secondaryLabel)
+                                                Color(uiColor: .secondaryLabel)
                                             )
                                             .cornerRadius(6)
-                                    }
+                                            .opacity(logoOptionsViewModel.logoURL == data.logo ? 1 : 0)
+                                    
                                 }
                             })
                         }
-                    case .failed(_):
-                        Text("No Logos available")
+                    case .failed(let error):
+                        Text("Failed with error: \(error.title)")
+                    case .loading:
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .foregroundStyle(.mint)
+                            
                     }
                 } header: {
-                    Text("Please pick a logo")
+                    Text("Choose a logo")
+                        .font(.body)
                 } footer: {
                     VStack(alignment: .leading) {
-                        Text("Some logos might not be available.")
-                        Text("Logos Provided by clearbit")
+                        Text("Some logos might not be available. Logos Provided by clearbit")
                     }
                 }
             }

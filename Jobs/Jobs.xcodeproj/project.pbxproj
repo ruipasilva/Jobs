@@ -250,8 +250,8 @@
 		69352EBC2BBC23D900B8A77B /* NewJob */ = {
 			isa = PBXGroup;
 			children = (
-				69352EC32BBC249300B8A77B /* NewJobViewModel.swift */,
 				699750D62B5FF413000EBCD1 /* NewJobView.swift */,
+				69352EC32BBC249300B8A77B /* NewJobViewModel.swift */,
 			);
 			path = NewJob;
 			sourceTree = "<group>";

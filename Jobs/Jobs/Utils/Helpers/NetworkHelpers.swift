@@ -32,6 +32,7 @@ public enum NetworkError: Error {
 
 public enum LoadingLogoState {
     case na
+    case loading
     case success(data: [CompanyInfo])
     case failed(error: NetworkError)
 }

@@ -30,6 +30,8 @@ public final class LogoOptionsViewModel: ObservableObject {
     
     @Published public var loadingLogoState: LoadingLogoState = .na
     @Published public var showingCancelActionSheet = false
+    @Published public var isTyping: Bool = false
+    @Published private var timer: Timer? = nil
     
     public init(job: Job) {
         self.job = job
@@ -60,24 +62,46 @@ public final class LogoOptionsViewModel: ObservableObject {
         subject.send(job)
     }
     
+    public func setLogoInfo(companyInfo data: CompanyInfo) {
+        logoURL = data.logo
+        companyWebsite = data.domain
+    }
+    
     public func isTitleOrCompanyEmpty() -> Bool {
         return title.isEmpty || company.isEmpty
     }
     
     @MainActor
-    public func getLogos(company: String) async {
-        loadingLogoState = .na
+    public func getLogos(company: String) async throws {
+        loadingLogoState = .loading
         
         do {
             let logoData = try await networkManager.fetchLogos(query: company)
             
             if logoData.isEmpty {
                 logoURL = ""
+                loadingLogoState = .na
+                return
             }
             
             loadingLogoState = .success(data: logoData)
         } catch {
             loadingLogoState = .failed(error: .unableToComplete)
+        }
+    }
+    
+    public func handleTyping() {
+        isTyping = true
+        loadingLogoState = .loading
+        
+        timer?.invalidate()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
+            guard let self else { return }
+            self.isTyping = false
+            Task {
+                try await self.getLogos(company: self.company)
+            }
         }
     }
 }
