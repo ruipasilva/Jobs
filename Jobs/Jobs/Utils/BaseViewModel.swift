@@ -38,6 +38,7 @@ public class BaseViewModel: ObservableObject {
     @Published public var showingCancelActionSheet = false
     @Published private var isTyping: Bool = false
     @Published private var timer: Timer? = nil
+    @Published public var loadingLogoState: LoadingLogoState = .na
     
     @Injected(\.networkManager) var networkManager
     
@@ -62,6 +63,25 @@ public class BaseViewModel: ObservableObject {
         }
     }
     
+    @MainActor
+    public func getLogos(company: String) async throws {
+        loadingLogoState = .loading
+        
+        do {
+            let logoData = try await networkManager.fetchLogos(query: company)
+            
+            if logoData.isEmpty {
+                logoURL = ""
+                loadingLogoState = .na
+                return
+            }
+            
+            loadingLogoState = .success(data: logoData)
+        } catch {
+            loadingLogoState = .failed(error: .unableToComplete)
+        }
+    }
+    
     public func handleTyping() {
         isTyping = true
         
@@ -72,6 +92,21 @@ public class BaseViewModel: ObservableObject {
             self.isTyping = false
             Task {
                 try await self.getLogo(company: self.company)
+            }
+        }
+    }
+    
+    public func handleShowAllLogosTyping() {
+        isTyping = true
+        loadingLogoState = .loading
+        
+        timer?.invalidate()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
+            guard let self else { return }
+            self.isTyping = false
+            Task {
+                try await self.getLogos(company: self.company)
             }
         }
     }

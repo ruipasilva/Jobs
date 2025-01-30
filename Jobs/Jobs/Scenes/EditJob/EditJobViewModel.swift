@@ -23,8 +23,6 @@ public class EditJobViewModel: BaseViewModel {
     @Published public var initialCompanyName: String = ""
     @Published public var initialJobTitle: String = ""
     
-    @Published public var loadingLogoState: LoadingLogoState = .na
-    
     @Published public var mapRegion = MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194), // Default location (e.g., San Francisco)
             span: MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0)
