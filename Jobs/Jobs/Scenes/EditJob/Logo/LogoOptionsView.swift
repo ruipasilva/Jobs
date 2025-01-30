@@ -101,6 +101,7 @@ struct LogoOptionsView: View {
                     switch logoOptionsViewModel.loadingLogoState {
                     case .na:
                         Text("No logos found for \(logoOptionsViewModel.company)")
+                            .font(.body)
                     case let .success(result):
                         ForEach(result, id: \.logo) { data in
                             Button(action: {
@@ -128,11 +129,11 @@ struct LogoOptionsView: View {
                                     )
                                     .padding(.leading, 6)
                                     Spacer()
-                                        Text("Current")
+                                    Image(systemName: "checkmark")
+                                        .controlSize(.large)
+                                        .fontWeight(.bold)
                                             .padding(4)
-                                            .foregroundColor(
-                                                Color(uiColor: .secondaryLabel)
-                                            )
+                                            .foregroundStyle(Color.accentColor)
                                             .cornerRadius(6)
                                             .opacity(logoOptionsViewModel.logoURL == data.logo ? 1 : 0)
                                     
@@ -149,7 +150,6 @@ struct LogoOptionsView: View {
                     }
                 } header: {
                     Text("Choose a logo")
-                        .font(.body)
                 } footer: {
                     VStack(alignment: .leading) {
                         Text("Some logos might not be available. Logos Provided by clearbit")

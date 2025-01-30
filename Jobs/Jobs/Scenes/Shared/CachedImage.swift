@@ -28,7 +28,7 @@ struct CachedImage: View {
         ZStack {
             Color.white
                 .frame(width: defaultLogoSize, height: defaultLogoSize)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
             Image(systemName: "suitcase")
                 .resizable()
                 .foregroundColor(.mint)
