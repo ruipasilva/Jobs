@@ -40,6 +40,7 @@
 		693AD1AA2D4705C10059686E /* CellBackgroundModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */; };
 		696208572B6A98730045DD39 /* MainViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696208562B6A98730045DD39 /* MainViewViewModel.swift */; };
 		6966B0DD2BB8DF7200BD3424 /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */; };
+		696DCC8D2D5CDB9D00C8071B /* NoJobsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696DCC8C2D5CDB9D00C8071B /* NoJobsViews.swift */; };
 		6974A1102C8E495900570472 /* CellBackgroundModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */; };
 		698006752BB37DF9007C725E /* TextfieldWithSFSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698006742BB37DF9007C725E /* TextfieldWithSFSymbol.swift */; };
 		699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C52B5ED2DC000EBCD1 /* JobsApp.swift */; };
@@ -142,6 +143,7 @@
 		696208552B6A8FE70045DD39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		696208562B6A98730045DD39 /* MainViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewViewModel.swift; sourceTree = "<group>"; };
 		6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailHelper.swift; sourceTree = "<group>"; };
+		696DCC8C2D5CDB9D00C8071B /* NoJobsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoJobsViews.swift; sourceTree = "<group>"; };
 		6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellBackgroundModifiers.swift; sourceTree = "<group>"; };
 		698006742BB37DF9007C725E /* TextfieldWithSFSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldWithSFSymbol.swift; sourceTree = "<group>"; };
 		699750C22B5ED2DC000EBCD1 /* Jobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,6 +245,7 @@
 				69352EBD2BBC23E500B8A77B /* EditJob */,
 				69352EBC2BBC23D900B8A77B /* NewJob */,
 				69F168042D3EF62E001F06CC /* OnlineJob */,
+				696DCC8C2D5CDB9D00C8071B /* NoJobsViews.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				69352EC92BBD6FC100B8A77B /* CompanyInfo.swift in Sources */,
 				69F167FF2D3ECC5C001F06CC /* OnlineJob.swift in Sources */,
 				69352EC22BBC248A00B8A77B /* EditJobViewModel.swift in Sources */,
+				696DCC8D2D5CDB9D00C8071B /* NoJobsViews.swift in Sources */,
 				69352EC42BBC249300B8A77B /* NewJobViewModel.swift in Sources */,
 				69352EC72BBD6DAC00B8A77B /* NetworkManager.swift in Sources */,
 				69352ECB2BBD71EC00B8A77B /* NetworkHelpers.swift in Sources */,

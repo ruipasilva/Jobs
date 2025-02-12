@@ -43,19 +43,15 @@ struct JobListView: View {
     var body: some View {
         Group {
             if jobs.isEmpty {
-                emptyList
+                NoJobsViews()
             } else {
                 jobList
             }
         }
     }
-
-    private var emptyList: some View {
-        ContentUnavailableView("No jobs yet", systemImage: "folder")
-    }
-
-    private var jobList: some View {
-        List {
+    
+    private var topView: some View {
+        Group {
             if mainViewModel.filter.isEmpty {
                 Section {
                     RectanglesView(mainViewModel: mainViewModel)
@@ -63,6 +59,12 @@ struct JobListView: View {
                 .padding(.bottom, -16)
                 .listRowSeparator(.hidden)
             }
+        }
+    }
+
+    private var jobList: some View {
+        List {
+            topView
             Section {
                 ForEach(jobs) { job in
                     ZStack {

@@ -19,9 +19,9 @@ public class BaseViewModel: ObservableObject {
     @Published public var locationType = LocationType.remote
     @Published public var salary = ""
     @Published public var followUp = false
-    @Published public var followUpDate = Date.distantPast
+    @Published public var followUpDate = Date.now
     @Published public var addInterviewToCalendar = false
-    @Published public var addInterviewToCalendarDate = Date.distantPast
+    @Published public var addInterviewToCalendarDate = Date.now
     @Published public var isEventAllDay = false
     @Published public var recruiterName = ""
     @Published public var recruiterEmail = ""

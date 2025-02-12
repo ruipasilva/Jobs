@@ -15,7 +15,7 @@ struct TextfieldWithSFSymbol: View {
     var body: some View {
         HStack {
             Image(systemName: systemName)
-                .frame(width: 30, alignment: .leading)
+                .frame(width: 25, alignment: .leading)
             TextField(placeholder, text: $text)
         }
     }

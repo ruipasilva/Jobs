@@ -95,6 +95,7 @@ public struct NewJobView: View {
             
             if newJobViewModel.followUp {
                 DatePicker(selection: $newJobViewModel.followUpDate,
+                           in: Date.now...,
                            displayedComponents: [.date, .hourAndMinute]) {
                     Text("Reminder:")
                 }

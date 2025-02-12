@@ -50,6 +50,7 @@ public class EditJobViewModel: BaseViewModel {
         return job.locationType == .remote
     }
     
+    
     public func setupWebsiteWarning() {
         count += 1
         isShowingWarnings = true
@@ -81,7 +82,7 @@ public class EditJobViewModel: BaseViewModel {
         }
     }
     
-    
+    @MainActor
     public func performMapSearch() {
         
         let searchRequest = MKLocalSearch.Request()
