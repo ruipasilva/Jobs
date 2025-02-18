@@ -11,29 +11,30 @@ import SwiftData
 @Model
 public final class Job {
     // All properties need a default value as cloudKit requires it
-    public var localNotificationID: String?
-    public var title: String = ""
-    public var company: String = ""
-    public var dateAdded: Date = Date.now
-    public var notes: String = ""
-    public var jobApplicationStatus: JobApplicationStatus = JobApplicationStatus.notApplied
-    public var jobApplicationStatusPrivate: String = "" // Used to sort order
-    public var salary: String = ""
-    public var location: String = ""
-    public var locationType: LocationType = LocationType.onSite
-    public var recruiterName: String = ""
-    public var recruiterNumber: String = ""
-    public var recruiterEmail: String = ""
-    public var followUp: Bool = false
-    public var followUpDate: Date = Date.now
-    public var addToCalendar: Bool = false
-    public var addToCalendarDate: Date = Date.now
-    public var isEventAllDay: Bool = false
-    public var jobURLPosting: String = ""
-    public var logoURL: String = ""
-    public var companyWebsite: String = ""
-    public var workingDays: [String] = []
-    public var currencyType: CurrencyType = CurrencyType.dolar
+    var localNotificationID: String?
+    var title: String = ""
+    var company: String = ""
+    var dateAdded: Date = Date.now
+    var notes: String = ""
+    var jobApplicationStatus: JobApplicationStatus = JobApplicationStatus.notApplied
+    var jobApplicationStatusPrivate: String = "" // Used to sort order and totals: SwiftData doesn't like enums used in the #predicates
+    var appliedDate: Date?
+    var salary: String = ""
+    var location: String = ""
+    var locationType: LocationType = LocationType.onSite
+    var recruiterName: String = ""
+    var recruiterNumber: String = ""
+    var recruiterEmail: String = ""
+    var followUp: Bool = false
+    var followUpDate: Date = Date.now
+    var addToCalendar: Bool = false
+    var addToCalendarDate: Date = Date.now
+    var isEventAllDay: Bool = false
+    var jobURLPosting: String = ""
+    var logoURL: String = ""
+    var companyWebsite: String = ""
+    var workingDays: [String] = []
+    var currencyType: CurrencyType = CurrencyType.dolar
 
     public init(localNotificationID: String? = nil,
          title: String,
@@ -42,6 +43,7 @@ public final class Job {
          notes: String,
          jobApplicationStatus: JobApplicationStatus = .notApplied,
          jobApplicationStatusPrivate: String,
+         appliedDate: Date? = nil,
          salary: String,
          location: String,
          locationType: LocationType = .onSite,
@@ -65,6 +67,7 @@ public final class Job {
         self.notes = notes
         self.jobApplicationStatusPrivate = jobApplicationStatusPrivate
         self.jobApplicationStatus = jobApplicationStatus
+        self.appliedDate = appliedDate
         self.salary = salary
         self.location = location
         self.locationType = locationType

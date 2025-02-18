@@ -30,7 +30,7 @@ struct JobsApp: App {
 
     public init() {
         
-        guard let sharedURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.RuiSilva.Jobs") else {
+        guard let sharedURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupID) else {
                     fatalError("Failed to get the App Group container URL.")
                 }
 

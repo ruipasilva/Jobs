@@ -61,6 +61,14 @@ public class EditJobViewModel: BaseViewModel {
         company = job.company
     }
     
+    func setApplicationDate() {
+        if job.jobApplicationStatus != .notApplied {
+            job.appliedDate = Date()
+        } else {
+            job.appliedDate = nil
+        }
+    }
+    
     public func getLogoOptionsViewModel() -> LogoOptionsViewModel {
         let viewModel = LogoOptionsViewModel(job: job)
         

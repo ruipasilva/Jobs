@@ -13,8 +13,6 @@ public struct NewJobView: View {
     @StateObject private var newJobViewModel = NewJobViewModel()
     @FocusState private var focusState: FocusedField?
     
-    var action: () -> Void
-    
     public var body: some View {
         NavigationStack {
             Form {

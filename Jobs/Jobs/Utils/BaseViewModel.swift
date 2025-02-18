@@ -12,9 +12,11 @@ public class BaseViewModel: ObservableObject {
     @Published public var localNotificationID = ""
     @Published public var title = ""
     @Published public var company = ""
+    @Published public var dateAdded = Date()
     @Published public var applicationStatusPrivate = ""
     @Published public var jobApplicationStatus = JobApplicationStatus.notApplied
     @Published public var jobApplicationStatusPrivate = ""
+    @Published public var appliedData: Date? 
     @Published public var location = ""
     @Published public var locationType = LocationType.remote
     @Published public var salary = ""

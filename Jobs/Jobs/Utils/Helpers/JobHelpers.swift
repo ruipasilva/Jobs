@@ -22,7 +22,6 @@ public enum FocusedField {
 
 public enum JobApplicationStatus: String, Codable, Identifiable, CaseIterable, RawRepresentable {
     case notApplied, applied, started, rejected, declined, offer
-    
 
     public var id: Self { self }
 
@@ -134,6 +133,21 @@ public enum CurrencyType: String, Codable, Identifiable, CaseIterable {
             "€"
         case .yen:
             "¥"
+        }
+    }
+}
+
+public enum WeekOrMonth: String, Identifiable, CaseIterable {
+    case week, month
+    
+    public var id: Self { self }
+    
+    var time: String {
+        switch self {
+        case .week:
+            "Week"
+        case .month:
+            "Month"
         }
     }
 }

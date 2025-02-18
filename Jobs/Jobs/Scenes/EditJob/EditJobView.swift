@@ -151,20 +151,35 @@ struct EditJobView: View {
     }
     
     private var statusView: some View {
-        HStack {
-            Text("Application Status")
-                .padding(.leading)
-            Spacer()
-            Picker("Status", selection: $editJobViewModel.job.jobApplicationStatus) {
-                ForEach(JobApplicationStatus.allCases, id: \.id) { status in
-                    Text(status.status).tag(status)
+        VStack {
+            HStack {
+                Text("Application Status")
+                    .padding(.leading)
+                Spacer()
+                Picker("Status", selection: $editJobViewModel.job.jobApplicationStatus.animation()) {
+                    ForEach(JobApplicationStatus.allCases, id: \.id) { status in
+                        Text(status.status).tag(status)
+                    }
+                }
+                /// Need to update jobApplicationStatusPrivate because #predicate used to count
+                /// doesn't work with Enums
+                /// Reminder: this is way this property exists
+                .onChange(of: editJobViewModel.job.jobApplicationStatus) { _, newValue in
+                    job.jobApplicationStatusPrivate = newValue.status
+                    editJobViewModel.setApplicationDate()
                 }
             }
-            /// Need to update jobApplicationStatusPrivate because #predicate used to count
-            /// doesn't work with Enums
-            /// Reminder: this is way this property exists
-            .onChange(of: editJobViewModel.job.jobApplicationStatus) { _, newValue in
-                job.jobApplicationStatusPrivate = newValue.status
+            if editJobViewModel.job.jobApplicationStatus != .notApplied {
+                Divider()
+                    .padding(.leading)
+                DatePicker("Application Date",
+                           selection: Binding(
+                            get: {
+                                editJobViewModel.job.appliedDate ?? Date()
+                            }, set: { editJobViewModel.job.appliedDate = $0 }),
+                           displayedComponents: .date
+                )
+                .cellPadding()
             }
         }
         .cellBackground()
@@ -197,9 +212,7 @@ struct EditJobView: View {
                     MapView(mapRegion: $editJobViewModel.mapRegion, selectedLocation: $editJobViewModel.selectedLocation)
                         .onAppear(perform: {
                             if !editJobViewModel.job.location.isEmpty {
-                                DispatchQueue.main.async {
-                                    editJobViewModel.performMapSearch()
-                                }
+                                editJobViewModel.performMapSearch()
                             }
                         })
                 }
@@ -366,8 +379,13 @@ struct MapView: View {
     
     var body: some View {
         Map(coordinateRegion: $mapRegion, annotationItems: selectedLocation) { location in
-            MapMarker(coordinate: location.coordinate)
-        }
+                    MapAnnotation(coordinate: location.coordinate) {
+                        Image(systemName: "mappin.circle.fill")
+                            .resizable()
+                            .foregroundColor(.red)
+                            .frame(width: 20, height: 20)
+                    }
+                }
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .frame(width: 92, height: 92)
     }

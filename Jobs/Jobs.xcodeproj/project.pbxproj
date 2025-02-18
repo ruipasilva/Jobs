@@ -58,8 +58,8 @@
 		69A9F1D42D4AE0F300652CB6 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 69A9F1D32D4AE0F300652CB6 /* SDWebImageSwiftUI */; };
 		69A9F1D62D4AE3C900652CB6 /* CachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A9F1D52D4AE3C900652CB6 /* CachedImage.swift */; };
 		69A9F1D72D4AE3C900652CB6 /* CachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A9F1D52D4AE3C900652CB6 /* CachedImage.swift */; };
-		69D583742C39A46900084C5E /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583732C39A46900084C5E /* OverView.swift */; };
-		69D583762C39A4F100084C5E /* OverViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583752C39A4F100084C5E /* OverViewViewModel.swift */; };
+		69D583742C39A46900084C5E /* InsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583732C39A46900084C5E /* InsightsView.swift */; };
+		69D583762C39A4F100084C5E /* InsightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583752C39A4F100084C5E /* InsightsViewModel.swift */; };
 		69D5837A2C3DD84700084C5E /* WorkingDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583792C3DD84700084C5E /* WorkingDaysView.swift */; };
 		69F167FF2D3ECC5C001F06CC /* OnlineJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */; };
 		69F168012D3EF3EF001F06CC /* OnlineJobsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F168002D3EF3EF001F06CC /* OnlineJobsViewModel.swift */; };
@@ -161,8 +161,8 @@
 		69A9F1CE2D4A3BC600652CB6 /* SearchableUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableUITextView.swift; sourceTree = "<group>"; };
 		69A9F1D52D4AE3C900652CB6 /* CachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImage.swift; sourceTree = "<group>"; };
 		69D00D3B2CE3CF330072DB4A /* JobsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JobsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		69D583732C39A46900084C5E /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
-		69D583752C39A4F100084C5E /* OverViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverViewViewModel.swift; sourceTree = "<group>"; };
+		69D583732C39A46900084C5E /* InsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsView.swift; sourceTree = "<group>"; };
+		69D583752C39A4F100084C5E /* InsightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsViewModel.swift; sourceTree = "<group>"; };
 		69D583792C3DD84700084C5E /* WorkingDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingDaysView.swift; sourceTree = "<group>"; };
 		69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineJob.swift; sourceTree = "<group>"; };
 		69F168002D3EF3EF001F06CC /* OnlineJobsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineJobsViewModel.swift; sourceTree = "<group>"; };
@@ -203,6 +203,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		692ABA402D405A5E00C54CF7 /* ShareJobExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (693AD1A92D42F7230059686E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 692ABA4A2D405A5E00C54CF7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 692ABA572D4061EF00C54CF7 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ShareJobExtension; sourceTree = "<group>"; };
+		696DCC912D5D21D200C8071B /* Extensions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Extensions; sourceTree = "<group>"; };
 		69D00D3C2CE3CF330072DB4A /* JobsTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = JobsTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -240,7 +241,7 @@
 			children = (
 				69F725BF2CDD02C30064C999 /* Shared */,
 				69352EBF2BBC242100B8A77B /* MainView */,
-				69D583722C39A45900084C5E /* Overview */,
+				69D583722C39A45900084C5E /* Insights */,
 				69F725B22CD8E8B10064C999 /* Settings */,
 				69352EBD2BBC23E500B8A77B /* EditJob */,
 				69352EBC2BBC23D900B8A77B /* NewJob */,
@@ -297,6 +298,7 @@
 				69F725BD2CDD01610064C999 /* Containers */,
 				69F725C02CDD02F10064C999 /* Helpers */,
 				69F2F7822D35645B008B20D5 /* BaseViewModel.swift */,
+				696DCC912D5D21D200C8071B /* Extensions */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -376,13 +378,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		69D583722C39A45900084C5E /* Overview */ = {
+		69D583722C39A45900084C5E /* Insights */ = {
 			isa = PBXGroup;
 			children = (
-				69D583732C39A46900084C5E /* OverView.swift */,
-				69D583752C39A4F100084C5E /* OverViewViewModel.swift */,
+				69D583732C39A46900084C5E /* InsightsView.swift */,
+				69D583752C39A4F100084C5E /* InsightsViewModel.swift */,
 			);
-			path = Overview;
+			path = Insights;
 			sourceTree = "<group>";
 		};
 		69F168042D3EF62E001F06CC /* OnlineJob */ = {
@@ -469,6 +471,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				692ABA402D405A5E00C54CF7 /* ShareJobExtension */,
+				696DCC912D5D21D200C8071B /* Extensions */,
 			);
 			name = ShareJobExtension;
 			packageProductDependencies = (
@@ -493,6 +496,9 @@
 			);
 			dependencies = (
 				692ABA482D405A5E00C54CF7 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				696DCC912D5D21D200C8071B /* Extensions */,
 			);
 			name = Jobs;
 			productName = Jobs;
@@ -625,7 +631,7 @@
 			files = (
 				693AD1982D42C25F0059686E /* Job.swift in Sources */,
 				693AD1992D42C25F0059686E /* JobHelpers.swift in Sources */,
-				69D583742C39A46900084C5E /* OverView.swift in Sources */,
+				69D583742C39A46900084C5E /* InsightsView.swift in Sources */,
 				69A9F1CA2D49878E00652CB6 /* IdentifiableLocation.swift in Sources */,
 				69F725BB2CDCFEB10064C999 /* DependencyContainer.swift in Sources */,
 				699750D92B6007AD000EBCD1 /* EditJobView.swift in Sources */,
@@ -658,7 +664,7 @@
 				69A9F1CF2D4A3BC600652CB6 /* SearchableUITextView.swift in Sources */,
 				69984B7D2BED7445002C23F2 /* TabViewRoot.swift in Sources */,
 				69352ED12BBF603100B8A77B /* EditTip.swift in Sources */,
-				69D583762C39A4F100084C5E /* OverViewViewModel.swift in Sources */,
+				69D583762C39A4F100084C5E /* InsightsViewModel.swift in Sources */,
 				69F168032D3EF3FB001F06CC /* OnlineJobsView.swift in Sources */,
 				699750D72B5FF413000EBCD1 /* NewJobView.swift in Sources */,
 				69A9F1D72D4AE3C900652CB6 /* CachedImage.swift in Sources */,

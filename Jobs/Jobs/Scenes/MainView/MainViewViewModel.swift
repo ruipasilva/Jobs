@@ -29,5 +29,14 @@ public final class MainViewViewModel: ObservableObject {
     public func setApplicationStatus(job: Job, status: JobApplicationStatus) {
         job.jobApplicationStatus = status
         job.jobApplicationStatusPrivate = status.status
+        setApplicationDate(job: job, status: status)
+    }
+    
+    private func setApplicationDate(job: Job, status: JobApplicationStatus) {
+        if status != .notApplied {
+            job.appliedDate = Date()
+        } else {
+            job.appliedDate = nil
+        }
     }
 }

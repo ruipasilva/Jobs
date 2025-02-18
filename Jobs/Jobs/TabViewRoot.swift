@@ -21,9 +21,9 @@ struct TabViewRoot: View {
 //                    Label("Online", systemImage: "globe")
 //                }
 
-            OverView()
+            InsightsView()
                 .tabItem {
-                    Label("Dashboard", systemImage: "rectangle.3.group.fill")
+                    Label("Insights", systemImage: "chart.pie.fill")
                 }
         }
     }
