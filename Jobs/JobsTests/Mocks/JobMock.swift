@@ -13,7 +13,7 @@ struct JobMock {
     static let mockJob = Job(title: "Title",
                              company: "Company",
                              notes: "Notes",
-                             jobApplicationStatus: .shortlisted,
+                             jobApplicationStatus: .notApplied,
                              jobApplicationStatusPrivate: "Status",
                              salary: "Salary",
                              location: "Location",

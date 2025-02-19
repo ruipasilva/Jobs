@@ -9,6 +9,8 @@ import Foundation
 
 public final class InsightsViewModel: ObservableObject {
     @Published public var weekOrMonth: WeekOrMonth = .week
+    @Published public var isShowingInterviewRateInfo: Bool = false
+    @Published public var isShowingResponseRateInfo: Bool = false
     
     typealias DataInfo = (date: Date, count: Int)
     

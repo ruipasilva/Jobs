@@ -42,9 +42,7 @@ class ShareViewController: UIViewController {
         for item in extensionItems {
             if let attachments = item.attachments {
                 for attachment in attachments {
-                    // Check if the item conforms to "public.url" type
                     if attachment.hasItemConformingToTypeIdentifier("public.url") {
-                        // Load the URL
                         attachment.loadItem(forTypeIdentifier: "public.url", options: nil) { [weak self] (item, error) in
                             guard let self = self else { return }
                             if let error = error {

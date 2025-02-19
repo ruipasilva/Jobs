@@ -12,7 +12,7 @@ public protocol NetworkManaging {
     func fetchOnlineJobs(query: String) async throws -> OnlineJobsResults
 }
 
-public struct NetworkManager: NetworkManaging {
+public class NetworkManager: NetworkManaging {
     
     public func fetchLogos(query: String) async throws -> [CompanyInfo] {
         let host = "https://autocomplete.clearbit.com/v1/companies/suggest?query=:"

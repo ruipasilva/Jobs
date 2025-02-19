@@ -23,6 +23,7 @@ public class ShareExtensionViewModel: BaseViewModel {
                          notes: notes,
                          jobApplicationStatus: jobApplicationStatus,
                          jobApplicationStatusPrivate: jobApplicationStatus.status,
+                         appliedDate: jobApplicationStatus == .notApplied ? nil : Date(),
                          salary: salary,
                          location: location,
                          locationType: locationType,
