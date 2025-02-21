@@ -1,5 +1,5 @@
 //
-//  Extensions.swift
+//  DateExtension.swift
 //  Jobs
 //
 //  Created by Rui Silva on 12/02/2025.
@@ -19,4 +19,5 @@ extension Date {
             formatter.dateFormat = "E" // "E" gives "Mon", "Tue", etc.
             return formatter.string(from: date)
         }
+    
 }

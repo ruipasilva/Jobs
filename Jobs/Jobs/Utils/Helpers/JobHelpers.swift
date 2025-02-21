@@ -137,8 +137,8 @@ public enum CurrencyType: String, Codable, Identifiable, CaseIterable {
     }
 }
 
-public enum WeekOrMonth: String, Identifiable, CaseIterable {
-    case week, month
+public enum WeekOrYear: String, Identifiable, CaseIterable {
+    case week, year
     
     public var id: Self { self }
     
@@ -146,8 +146,8 @@ public enum WeekOrMonth: String, Identifiable, CaseIterable {
         switch self {
         case .week:
             "Week"
-        case .month:
-            "Month"
+        case .year:
+            "Year"
         }
     }
 }

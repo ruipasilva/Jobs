@@ -12,6 +12,8 @@ import Charts
 struct InsightsView: View {
     @StateObject private var insightsViewModel = InsightsViewModel()
     
+    @State var weekOffsets = Array(-52...0)
+    
     @Query private var jobs: [Job]
     @Query private var appliedJobs: [Job]
     @Query private var rejectedJobs: [Job]
@@ -30,13 +32,7 @@ struct InsightsView: View {
         let declined = #Predicate<Job> { $0.jobApplicationStatusPrivate == "Declined" }
         let offeredFileter = #Predicate<Job> { $0.jobApplicationStatusPrivate == "Offer" }
         
-        let jobsPastShortlist = #Predicate<Job> {
-            $0.jobApplicationStatusPrivate == "Applied" &&
-            $0.jobApplicationStatusPrivate == "Rejected" &&
-            $0.jobApplicationStatusPrivate == "Declined" &&
-            $0.jobApplicationStatusPrivate == "Offer" &&
-            $0.jobApplicationStatusPrivate == "Started"
-        }
+        let jobsPastShortlist = #Predicate<Job> { $0.jobApplicationStatusPrivate != "Shortlisted" }
         
         _startedJobs = Query(filter: startedFilter)
         _appliedJobs = Query(filter: appliedFilter)
@@ -52,34 +48,44 @@ struct InsightsView: View {
             ScrollView {
                 totalJobsView
                 rateView
-                Picker("Time", selection: $insightsViewModel.weekOrMonth) {
-                    ForEach(WeekOrMonth.allCases, id: \.id) { time in
+                Picker("Time", selection: $insightsViewModel.weekOrYear) {
+                    ForEach(WeekOrYear.allCases, id: \.id) { time in
                         Text(time.time).tag(time)
                     }
                 }
                 .padding(.bottom)
                 .pickerStyle(.segmented)
-                
                 VStack(alignment: .leading) {
-                    Text("Applications This Week")
+                    Text("Applications This \(insightsViewModel.weekOrYear == .week ? "Week" : "Year")")
                         .font(.callout)
                         .fontWeight(.semibold)
                         .foregroundStyle(.secondary)
-                    Text("\(appliedJobs.count)")
+                    Text("\(insightsViewModel.filteredAppliedJobs(jobs: jobsPastShortlist).count)")
                         .font(.largeTitle)
                         .fontWeight(.medium)
-                    Text(insightsViewModel.getDateWithCurrentWeek())
+                    Text(insightsViewModel.weekOrYear == .week ? insightsViewModel.getDateWithCurrentWeek() : insightsViewModel.getDateWithCurrentYear())
                         .font(.callout)
                         .fontWeight(.semibold)
                         .foregroundStyle(.secondary)
-                    Chart(insightsViewModel.data(jobs: appliedJobs), id: \.date) { date in
-                        BarMark(
-                            x: .value("day", insightsViewModel.showWeekOrMonth(date: date)),
-                            y: .value("Count", date.count)
-                        )
+                    TabView(selection: $insightsViewModel.currentIndex ) {
+                        ForEach(weekOffsets, id: \.self) { index in
+                            VStack(alignment: .leading) {
+                                Chart(insightsViewModel.data(jobs: jobsPastShortlist, offset: index), id: \.date) { date in
+                                    BarMark(
+                                        x: .value("Day", insightsViewModel.showWeekOrMonth(date: date)),
+                                        y: .value("Count", date.count)
+                                    )
+                                }
+                                .chartYScale(domain: 0...(insightsViewModel.data(jobs: jobsPastShortlist, offset: index).map(\.count).max() ?? 2) + 1)
+                                
+                                .padding(.horizontal)
+                                .padding(.top, 4)
+                            }
+                            .tag(index)
+                        }
                     }
-                    .chartYScale(domain: 0...(insightsViewModel.data(jobs: appliedJobs).map(\.count).max() ?? 2) + 1)
-                    .frame(height: 300)
+                    .tabViewStyle(.page(indexDisplayMode: .never))
+                    .frame(height: 350)
                 }
             }
             .sheet(isPresented: $insightsViewModel.isShowingInterviewRateInfo) {
@@ -124,7 +130,7 @@ struct InsightsView: View {
         .overlay {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color(UIColor.systemGray3).opacity(0.48), lineWidth: 1)
-                
+            
         }
         .padding(.top, 19)
         .padding(.bottom, 15)
@@ -140,7 +146,7 @@ struct InsightsView: View {
                 } label: {
                     Image(systemName: "info.circle")
                 }
-
+                
                 Spacer()
                 Text("\(insightsViewModel.getInterviewingRate(started: Double(startedJobs.count), applied: Double(appliedJobs.count), rejected: Double(rejectedJobs.count), declined: Double(declinedJobs.count), offer: Double(offerJobs.count)))%")
                     .font(.body)
@@ -170,23 +176,10 @@ struct InsightsView: View {
         .overlay {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color(UIColor.systemGray3).opacity(0.48), lineWidth: 1)
-                
+            
         }
         .padding(.bottom, 45)
     }
 }
 
-extension Calendar {
-    typealias WeekBoundary = (startOfWeek: Date?, endOfWeek: Date?)
-    
-    func currentWeekBoundary() -> WeekBoundary? {
-        return weekBoundary(for: Date())
-    }
-    
-    func weekBoundary(for date: Date = Date()) -> WeekBoundary? {
-        guard let weekInterval = Self.autoupdatingCurrent.dateInterval(
-                of: .weekOfYear, for: date) else { return nil }
 
-        return (weekInterval.start, weekInterval.end)
-    }
-}

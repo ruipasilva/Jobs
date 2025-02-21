@@ -62,6 +62,9 @@
 		69D583762C39A4F100084C5E /* InsightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583752C39A4F100084C5E /* InsightsViewModel.swift */; };
 		69D5837A2C3DD84700084C5E /* WorkingDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583792C3DD84700084C5E /* WorkingDaysView.swift */; };
 		69E696D12D66581A000C4F33 /* InsightsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E696D02D66581A000C4F33 /* InsightsInfoView.swift */; };
+		69E696D62D6796FC000C4F33 /* ChartViewExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E696D52D6796FC000C4F33 /* ChartViewExample.swift */; };
+		69E696D82D68C665000C4F33 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E696D72D68C665000C4F33 /* ChartData.swift */; };
+		69E696D92D68C665000C4F33 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E696D72D68C665000C4F33 /* ChartData.swift */; };
 		69F167FF2D3ECC5C001F06CC /* OnlineJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */; };
 		69F168012D3EF3EF001F06CC /* OnlineJobsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F168002D3EF3EF001F06CC /* OnlineJobsViewModel.swift */; };
 		69F168032D3EF3FB001F06CC /* OnlineJobsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F168022D3EF3FB001F06CC /* OnlineJobsView.swift */; };
@@ -166,6 +169,8 @@
 		69D583752C39A4F100084C5E /* InsightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsViewModel.swift; sourceTree = "<group>"; };
 		69D583792C3DD84700084C5E /* WorkingDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingDaysView.swift; sourceTree = "<group>"; };
 		69E696D02D66581A000C4F33 /* InsightsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsInfoView.swift; sourceTree = "<group>"; };
+		69E696D52D6796FC000C4F33 /* ChartViewExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewExample.swift; sourceTree = "<group>"; };
+		69E696D72D68C665000C4F33 /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineJob.swift; sourceTree = "<group>"; };
 		69F168002D3EF3EF001F06CC /* OnlineJobsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineJobsViewModel.swift; sourceTree = "<group>"; };
 		69F168022D3EF3FB001F06CC /* OnlineJobsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineJobsView.swift; sourceTree = "<group>"; };
@@ -313,6 +318,7 @@
 				69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */,
 				693AD18F2D41800F0059686E /* Job.swift */,
 				69A9F1C82D49878E00652CB6 /* IdentifiableLocation.swift */,
+				69E696D72D68C665000C4F33 /* ChartData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -384,6 +390,7 @@
 			isa = PBXGroup;
 			children = (
 				69D583732C39A46900084C5E /* InsightsView.swift */,
+				69E696D52D6796FC000C4F33 /* ChartViewExample.swift */,
 				69D583752C39A4F100084C5E /* InsightsViewModel.swift */,
 				69E696D02D66581A000C4F33 /* InsightsInfoView.swift */,
 			);
@@ -624,6 +631,7 @@
 				69A9F1D62D4AE3C900652CB6 /* CachedImage.swift in Sources */,
 				693AD1972D42C1B90059686E /* JobHelpers.swift in Sources */,
 				69A9F1C92D49878E00652CB6 /* IdentifiableLocation.swift in Sources */,
+				69E696D92D68C665000C4F33 /* ChartData.swift in Sources */,
 				693AD1962D42C1B20059686E /* Job.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -661,6 +669,8 @@
 				69F2F7832D35645B008B20D5 /* BaseViewModel.swift in Sources */,
 				69F725B42CDBFD710064C999 /* CalendarManager.swift in Sources */,
 				6974A1102C8E495900570472 /* CellBackgroundModifiers.swift in Sources */,
+				69E696D62D6796FC000C4F33 /* ChartViewExample.swift in Sources */,
+				69E696D82D68C665000C4F33 /* ChartData.swift in Sources */,
 				69F725B12CD8E8A50064C999 /* SettingsView.swift in Sources */,
 				69F168012D3EF3EF001F06CC /* OnlineJobsViewModel.swift in Sources */,
 				699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */,
