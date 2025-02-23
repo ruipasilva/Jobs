@@ -12,8 +12,6 @@ import Charts
 struct InsightsView: View {
     @StateObject private var insightsViewModel = InsightsViewModel()
     
-    @State var weekOffsets = Array(-52...0)
-    
     @Query private var jobs: [Job]
     @Query private var appliedJobs: [Job]
     @Query private var rejectedJobs: [Job]
@@ -48,45 +46,9 @@ struct InsightsView: View {
             ScrollView {
                 totalJobsView
                 rateView
-                Picker("Time", selection: $insightsViewModel.weekOrYear) {
-                    ForEach(WeekOrYear.allCases, id: \.id) { time in
-                        Text(time.time).tag(time)
-                    }
-                }
-                .padding(.bottom)
-                .pickerStyle(.segmented)
-                VStack(alignment: .leading) {
-                    Text("Applications This \(insightsViewModel.weekOrYear == .week ? "Week" : "Year")")
-                        .font(.callout)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.secondary)
-                    Text("\(insightsViewModel.filteredAppliedJobs(jobs: jobsPastShortlist).count)")
-                        .font(.largeTitle)
-                        .fontWeight(.medium)
-                    Text(insightsViewModel.weekOrYear == .week ? insightsViewModel.getDateWithCurrentWeek() : insightsViewModel.getDateWithCurrentYear())
-                        .font(.callout)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.secondary)
-                    TabView(selection: $insightsViewModel.currentIndex ) {
-                        ForEach(weekOffsets, id: \.self) { index in
-                            VStack(alignment: .leading) {
-                                Chart(insightsViewModel.data(jobs: jobsPastShortlist, offset: index), id: \.date) { date in
-                                    BarMark(
-                                        x: .value("Day", insightsViewModel.showWeekOrMonth(date: date)),
-                                        y: .value("Count", date.count)
-                                    )
-                                }
-                                .chartYScale(domain: 0...(insightsViewModel.data(jobs: jobsPastShortlist, offset: index).map(\.count).max() ?? 2) + 1)
-                                
-                                .padding(.horizontal)
-                                .padding(.top, 4)
-                            }
-                            .tag(index)
-                        }
-                    }
-                    .tabViewStyle(.page(indexDisplayMode: .never))
-                    .frame(height: 350)
-                }
+                
+                ChartView(insightsViewModel: insightsViewModel)
+                WeeklyProgress(insightsViewModel: insightsViewModel)
             }
             .sheet(isPresented: $insightsViewModel.isShowingInterviewRateInfo) {
                 InsightsInfoView(title: "Interview Rate",
@@ -148,7 +110,7 @@ struct InsightsView: View {
                 }
                 
                 Spacer()
-                Text("\(insightsViewModel.getInterviewingRate(started: Double(startedJobs.count), applied: Double(appliedJobs.count), rejected: Double(rejectedJobs.count), declined: Double(declinedJobs.count), offer: Double(offerJobs.count)))%")
+                Text("\(insightsViewModel.getInterviewingRate(jobs: jobsPastShortlist, started: Double(startedJobs.count), applied: Double(appliedJobs.count), rejected: Double(rejectedJobs.count), declined: Double(declinedJobs.count), offer: Double(offerJobs.count)))%")
                     .font(.body)
                     .fontWeight(.semibold)
             }
@@ -166,7 +128,7 @@ struct InsightsView: View {
                     Image(systemName: "info.circle")
                 }
                 Spacer()
-                Text("\(insightsViewModel.getApplicationResponseRate(started: Double(startedJobs.count), applied: Double(appliedJobs.count), rejected: Double(rejectedJobs.count), declined: Double(declinedJobs.count), offer: Double(offerJobs.count)))%")
+                Text("\(insightsViewModel.getApplicationResponseRate(jobs: jobsPastShortlist, started: Double(startedJobs.count), applied: Double(appliedJobs.count), rejected: Double(rejectedJobs.count), declined: Double(declinedJobs.count), offer: Double(offerJobs.count)))%")
                     .font(.body)
                     .fontWeight(.semibold)
             }
@@ -178,7 +140,7 @@ struct InsightsView: View {
                 .stroke(Color(UIColor.systemGray3).opacity(0.48), lineWidth: 1)
             
         }
-        .padding(.bottom, 45)
+        .padding(.bottom, 15)
     }
 }
 

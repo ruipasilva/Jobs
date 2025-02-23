@@ -66,7 +66,7 @@ struct JobListView: View {
         List {
             topView
             Section {
-                ForEach(jobs) { job in
+                ForEach(jobs, id: \.id) { job in
                     ZStack {
                         MainListCellView(mainViewModel: mainViewModel,
                                          job: job)
@@ -82,9 +82,17 @@ struct JobListView: View {
                     }
                 }
                 .onDelete { indexSet in
-                    indexSet.forEach { index in
-                        let job = jobs[index]
-                        context.delete(job)
+                    Task {
+                        for index in indexSet.reversed() { // Reverse to avoid index shifting issues
+                            let job = jobs[index]
+                            context.delete(job)
+                        }
+                        
+                        do {
+                            try context.save()
+                        } catch {
+                            print("Failed to delete jobs: \(error.localizedDescription)")
+                        }
                     }
                 }
                 .listRowBackground(Color.clear)
