@@ -18,7 +18,7 @@ struct InsightsInfoView: View {
             VStack(alignment: .center) {
                 Text(description)
                     .font(.body)
-                    .padding(.horizontal)
+                    .padding(.horizontal, 16)
             }
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)

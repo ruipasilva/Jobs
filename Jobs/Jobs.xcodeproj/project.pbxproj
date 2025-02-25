@@ -46,6 +46,7 @@
 		699243312D6A76600082BD38 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699243302D6A76600082BD38 /* ChartView.swift */; };
 		699243342D6A92C60082BD38 /* WeeklyProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699243332D6A92C60082BD38 /* WeeklyProgress.swift */; };
 		699243362D6A98F70082BD38 /* WeeklyProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699243352D6A98F70082BD38 /* WeeklyProgressBar.swift */; };
+		699243402D6E66710082BD38 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6992433F2D6E66710082BD38 /* Secrets.plist */; };
 		699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C52B5ED2DC000EBCD1 /* JobsApp.swift */; };
 		699750C82B5ED2DC000EBCD1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C72B5ED2DC000EBCD1 /* MainView.swift */; };
 		699750CA2B5ED2DD000EBCD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 699750C92B5ED2DD000EBCD1 /* Assets.xcassets */; };
@@ -153,6 +154,7 @@
 		699243302D6A76600082BD38 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		699243332D6A92C60082BD38 /* WeeklyProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyProgress.swift; sourceTree = "<group>"; };
 		699243352D6A98F70082BD38 /* WeeklyProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyProgressBar.swift; sourceTree = "<group>"; };
+		6992433F2D6E66710082BD38 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		699750C22B5ED2DC000EBCD1 /* Jobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		699750C52B5ED2DC000EBCD1 /* JobsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsApp.swift; sourceTree = "<group>"; };
 		699750C72B5ED2DC000EBCD1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				699243302D6A76600082BD38 /* ChartView.swift */,
 				699243332D6A92C60082BD38 /* WeeklyProgress.swift */,
 				699243352D6A98F70082BD38 /* WeeklyProgressBar.swift */,
+				69E696D02D66581A000C4F33 /* InsightsInfoView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				696208552B6A8FE70045DD39 /* Info.plist */,
+				6992433F2D6E66710082BD38 /* Secrets.plist */,
 				696208542B6A8F620045DD39 /* JobsDebug.entitlements */,
 				699750C52B5ED2DC000EBCD1 /* JobsApp.swift */,
 				69984B7C2BED7445002C23F2 /* TabViewRoot.swift */,
@@ -402,7 +406,6 @@
 				69D583732C39A46900084C5E /* InsightsView.swift */,
 				699243322D6A92B80082BD38 /* Components */,
 				69D583752C39A4F100084C5E /* InsightsViewModel.swift */,
-				69E696D02D66581A000C4F33 /* InsightsInfoView.swift */,
 			);
 			path = Insights;
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				699750CE2B5ED2DD000EBCD1 /* Preview Assets.xcassets in Resources */,
+				699243402D6E66710082BD38 /* Secrets.plist in Resources */,
 				699750CA2B5ED2DD000EBCD1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

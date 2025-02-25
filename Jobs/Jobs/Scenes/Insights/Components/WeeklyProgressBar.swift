@@ -31,7 +31,7 @@ struct WeeklyProgressBar: View {
                 
                 Text(text)
                     .padding(.leading, 8)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.primary)
             }
         }
         .frame(height: height)
