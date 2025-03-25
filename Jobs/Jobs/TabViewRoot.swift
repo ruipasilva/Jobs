@@ -15,11 +15,6 @@ struct TabViewRoot: View {
                 .tabItem {
                     Label("Jobs", systemImage: "list.clipboard")
                 }
-            
-//            OnlineJobsView()
-//                .tabItem {
-//                    Label("Online", systemImage: "globe")
-//                }
 
             InsightsView()
                 .tabItem {

@@ -29,7 +29,6 @@
 		693AD19C2D42C46D0059686E /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B32CDBFD710064C999 /* CalendarManager.swift */; };
 		693AD19D2D42C46D0059686E /* LocalNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B52CDBFFA30064C999 /* LocalNotificationsManager.swift */; };
 		693AD19E2D42C4920059686E /* CompanyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352EC82BBD6FC100B8A77B /* CompanyInfo.swift */; };
-		693AD19F2D42C4920059686E /* OnlineJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */; };
 		693AD1A02D42C49D0059686E /* NetworkHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69352ECA2BBD71EC00B8A77B /* NetworkHelpers.swift */; };
 		693AD1A22D42C4C20059686E /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 693AD1A12D42C4C20059686E /* Factory */; };
 		693AD1A32D42C5AE0059686E /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F2F7822D35645B008B20D5 /* BaseViewModel.swift */; };
@@ -38,6 +37,9 @@
 		693AD1A62D42E42F0059686E /* TextfieldWithSFSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698006742BB37DF9007C725E /* TextfieldWithSFSymbol.swift */; };
 		693AD1A72D42E4430059686E /* WorkingDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583792C3DD84700084C5E /* WorkingDaysView.swift */; };
 		693AD1AA2D4705C10059686E /* CellBackgroundModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */; };
+		695BBB432D7B27E400B71871 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695BBB422D7B27E400B71871 /* KeychainManager.swift */; };
+		695BBB442D7B27E400B71871 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695BBB422D7B27E400B71871 /* KeychainManager.swift */; };
+		695BBB462D7B65D400B71871 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695BBB452D7B65D400B71871 /* RootViewModel.swift */; };
 		696208572B6A98730045DD39 /* MainViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696208562B6A98730045DD39 /* MainViewViewModel.swift */; };
 		6966B0DD2BB8DF7200BD3424 /* EmailHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6966B0DC2BB8DF7200BD3424 /* EmailHelper.swift */; };
 		696DCC8D2D5CDB9D00C8071B /* NoJobsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696DCC8C2D5CDB9D00C8071B /* NoJobsViews.swift */; };
@@ -46,7 +48,6 @@
 		699243312D6A76600082BD38 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699243302D6A76600082BD38 /* ChartView.swift */; };
 		699243342D6A92C60082BD38 /* WeeklyProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699243332D6A92C60082BD38 /* WeeklyProgress.swift */; };
 		699243362D6A98F70082BD38 /* WeeklyProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699243352D6A98F70082BD38 /* WeeklyProgressBar.swift */; };
-		699243402D6E66710082BD38 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6992433F2D6E66710082BD38 /* Secrets.plist */; };
 		699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C52B5ED2DC000EBCD1 /* JobsApp.swift */; };
 		699750C82B5ED2DC000EBCD1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699750C72B5ED2DC000EBCD1 /* MainView.swift */; };
 		699750CA2B5ED2DD000EBCD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 699750C92B5ED2DD000EBCD1 /* Assets.xcassets */; };
@@ -66,9 +67,6 @@
 		69D583762C39A4F100084C5E /* InsightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583752C39A4F100084C5E /* InsightsViewModel.swift */; };
 		69D5837A2C3DD84700084C5E /* WorkingDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D583792C3DD84700084C5E /* WorkingDaysView.swift */; };
 		69E696D12D66581A000C4F33 /* InsightsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E696D02D66581A000C4F33 /* InsightsInfoView.swift */; };
-		69F167FF2D3ECC5C001F06CC /* OnlineJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */; };
-		69F168012D3EF3EF001F06CC /* OnlineJobsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F168002D3EF3EF001F06CC /* OnlineJobsViewModel.swift */; };
-		69F168032D3EF3FB001F06CC /* OnlineJobsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F168022D3EF3FB001F06CC /* OnlineJobsView.swift */; };
 		69F2F7832D35645B008B20D5 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F2F7822D35645B008B20D5 /* BaseViewModel.swift */; };
 		69F725B12CD8E8A50064C999 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B02CD8E8A50064C999 /* SettingsView.swift */; };
 		69F725B42CDBFD710064C999 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B32CDBFD710064C999 /* CalendarManager.swift */; };
@@ -144,6 +142,8 @@
 		69352ED02BBF603100B8A77B /* EditTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTip.swift; sourceTree = "<group>"; };
 		693AD18E2D41800F0059686E /* JobHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobHelpers.swift; sourceTree = "<group>"; };
 		693AD18F2D41800F0059686E /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
+		695BBB422D7B27E400B71871 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		695BBB452D7B65D400B71871 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
 		696208542B6A8F620045DD39 /* JobsDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobsDebug.entitlements; sourceTree = "<group>"; };
 		696208552B6A8FE70045DD39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		696208562B6A98730045DD39 /* MainViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewViewModel.swift; sourceTree = "<group>"; };
@@ -154,7 +154,6 @@
 		699243302D6A76600082BD38 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		699243332D6A92C60082BD38 /* WeeklyProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyProgress.swift; sourceTree = "<group>"; };
 		699243352D6A98F70082BD38 /* WeeklyProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyProgressBar.swift; sourceTree = "<group>"; };
-		6992433F2D6E66710082BD38 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		699750C22B5ED2DC000EBCD1 /* Jobs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jobs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		699750C52B5ED2DC000EBCD1 /* JobsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsApp.swift; sourceTree = "<group>"; };
 		699750C72B5ED2DC000EBCD1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -174,9 +173,6 @@
 		69D583752C39A4F100084C5E /* InsightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsViewModel.swift; sourceTree = "<group>"; };
 		69D583792C3DD84700084C5E /* WorkingDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingDaysView.swift; sourceTree = "<group>"; };
 		69E696D02D66581A000C4F33 /* InsightsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsInfoView.swift; sourceTree = "<group>"; };
-		69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineJob.swift; sourceTree = "<group>"; };
-		69F168002D3EF3EF001F06CC /* OnlineJobsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineJobsViewModel.swift; sourceTree = "<group>"; };
-		69F168022D3EF3FB001F06CC /* OnlineJobsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineJobsView.swift; sourceTree = "<group>"; };
 		69F2F7822D35645B008B20D5 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		69F725B02CD8E8A50064C999 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		69F725B32CDBFD710064C999 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
@@ -255,7 +251,6 @@
 				69F725B22CD8E8B10064C999 /* Settings */,
 				69352EBD2BBC23E500B8A77B /* EditJob */,
 				69352EBC2BBC23D900B8A77B /* NewJob */,
-				69F168042D3EF62E001F06CC /* OnlineJob */,
 				696DCC8C2D5CDB9D00C8071B /* NoJobsViews.swift */,
 			);
 			path = Scenes;
@@ -318,7 +313,6 @@
 			children = (
 				69352ED02BBF603100B8A77B /* EditTip.swift */,
 				69352EC82BBD6FC100B8A77B /* CompanyInfo.swift */,
-				69F167FE2D3ECC5C001F06CC /* OnlineJob.swift */,
 				693AD18F2D41800F0059686E /* Job.swift */,
 				69A9F1C82D49878E00652CB6 /* IdentifiableLocation.swift */,
 			);
@@ -378,9 +372,9 @@
 			isa = PBXGroup;
 			children = (
 				696208552B6A8FE70045DD39 /* Info.plist */,
-				6992433F2D6E66710082BD38 /* Secrets.plist */,
 				696208542B6A8F620045DD39 /* JobsDebug.entitlements */,
 				699750C52B5ED2DC000EBCD1 /* JobsApp.swift */,
+				695BBB452D7B65D400B71871 /* RootViewModel.swift */,
 				69984B7C2BED7445002C23F2 /* TabViewRoot.swift */,
 				69352EC52BBC695000B8A77B /* Models */,
 				69352EBB2BBC23C000B8A77B /* Scenes */,
@@ -410,15 +404,6 @@
 			path = Insights;
 			sourceTree = "<group>";
 		};
-		69F168042D3EF62E001F06CC /* OnlineJob */ = {
-			isa = PBXGroup;
-			children = (
-				69F168002D3EF3EF001F06CC /* OnlineJobsViewModel.swift */,
-				69F168022D3EF3FB001F06CC /* OnlineJobsView.swift */,
-			);
-			path = OnlineJob;
-			sourceTree = "<group>";
-		};
 		69F725B22CD8E8B10064C999 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				69352EC62BBD6DAC00B8A77B /* NetworkManager.swift */,
+				695BBB422D7B27E400B71871 /* KeychainManager.swift */,
 				69F725B32CDBFD710064C999 /* CalendarManager.swift */,
 				69F725B52CDBFFA30064C999 /* LocalNotificationsManager.swift */,
 			);
@@ -610,7 +596,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				699750CE2B5ED2DD000EBCD1 /* Preview Assets.xcassets in Resources */,
-				699243402D6E66710082BD38 /* Secrets.plist in Resources */,
 				699750CA2B5ED2DD000EBCD1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -634,10 +619,10 @@
 				693AD1A62D42E42F0059686E /* TextfieldWithSFSymbol.swift in Sources */,
 				693AD1A52D42E4180059686E /* NewJobViewModel.swift in Sources */,
 				693AD1A42D42E3F60059686E /* NewJobView.swift in Sources */,
+				695BBB442D7B27E400B71871 /* KeychainManager.swift in Sources */,
 				693AD1A32D42C5AE0059686E /* BaseViewModel.swift in Sources */,
 				693AD1A02D42C49D0059686E /* NetworkHelpers.swift in Sources */,
 				693AD19E2D42C4920059686E /* CompanyInfo.swift in Sources */,
-				693AD19F2D42C4920059686E /* OnlineJob.swift in Sources */,
 				693AD19B2D42C46D0059686E /* NetworkManager.swift in Sources */,
 				693AD19C2D42C46D0059686E /* CalendarManager.swift in Sources */,
 				693AD19D2D42C46D0059686E /* LocalNotificationsManager.swift in Sources */,
@@ -658,15 +643,16 @@
 				69D583742C39A46900084C5E /* InsightsView.swift in Sources */,
 				69E696D12D66581A000C4F33 /* InsightsInfoView.swift in Sources */,
 				69A9F1CA2D49878E00652CB6 /* IdentifiableLocation.swift in Sources */,
+				695BBB462D7B65D400B71871 /* RootViewModel.swift in Sources */,
 				69F725BB2CDCFEB10064C999 /* DependencyContainer.swift in Sources */,
 				699750D92B6007AD000EBCD1 /* EditJobView.swift in Sources */,
 				69352EC92BBD6FC100B8A77B /* CompanyInfo.swift in Sources */,
-				69F167FF2D3ECC5C001F06CC /* OnlineJob.swift in Sources */,
 				69352EC22BBC248A00B8A77B /* EditJobViewModel.swift in Sources */,
 				696DCC8D2D5CDB9D00C8071B /* NoJobsViews.swift in Sources */,
 				69352EC42BBC249300B8A77B /* NewJobViewModel.swift in Sources */,
 				69352EC72BBD6DAC00B8A77B /* NetworkManager.swift in Sources */,
 				69352ECB2BBD71EC00B8A77B /* NetworkHelpers.swift in Sources */,
+				695BBB432D7B27E400B71871 /* KeychainManager.swift in Sources */,
 				69984B7B2BD9BD3E002C23F2 /* SingleJobStatusView.swift in Sources */,
 				69352EB62BBB2A3200B8A77B /* SingleRectangleView.swift in Sources */,
 				696208572B6A98730045DD39 /* MainViewViewModel.swift in Sources */,
@@ -684,7 +670,6 @@
 				69F725B42CDBFD710064C999 /* CalendarManager.swift in Sources */,
 				6974A1102C8E495900570472 /* CellBackgroundModifiers.swift in Sources */,
 				69F725B12CD8E8A50064C999 /* SettingsView.swift in Sources */,
-				69F168012D3EF3EF001F06CC /* OnlineJobsViewModel.swift in Sources */,
 				699750C62B5ED2DC000EBCD1 /* JobsApp.swift in Sources */,
 				69352ECF2BBEBB6C00B8A77B /* LogoOptionsViewModel.swift in Sources */,
 				69A9F1CF2D4A3BC600652CB6 /* SearchableUITextView.swift in Sources */,
@@ -692,7 +677,6 @@
 				69352ED12BBF603100B8A77B /* EditTip.swift in Sources */,
 				69D583762C39A4F100084C5E /* InsightsViewModel.swift in Sources */,
 				699243342D6A92C60082BD38 /* WeeklyProgress.swift in Sources */,
-				69F168032D3EF3FB001F06CC /* OnlineJobsView.swift in Sources */,
 				699243362D6A98F70082BD38 /* WeeklyProgressBar.swift in Sources */,
 				699750D72B5FF413000EBCD1 /* NewJobView.swift in Sources */,
 				69A9F1D72D4AE3C900652CB6 /* CachedImage.swift in Sources */,

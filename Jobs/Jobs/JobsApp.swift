@@ -10,6 +10,8 @@ import TipKit
 
 @main
 struct JobsApp: App {
+    
+    @StateObject private var rootViewModel = RootViewModel()
 
     public let container: ModelContainer
     
@@ -29,7 +31,6 @@ struct JobsApp: App {
     }
 
     public init() {
-        
         guard let sharedURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupID) else {
                     fatalError("Failed to get the App Group container URL.")
                 }

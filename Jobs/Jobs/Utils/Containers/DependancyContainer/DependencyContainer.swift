@@ -20,4 +20,8 @@ extension Container {
     var networkManager: Factory<NetworkManaging> {
         Factory(self) { NetworkManager() }
     }
+    
+    var keychainManager: Factory<KeychainManaging> {
+        Factory(self) { KeychainManager() }
+    }
 }

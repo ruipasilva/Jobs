@@ -21,11 +21,11 @@ public final class MainViewViewModel: ObservableObject {
     public func sortAscendingOrDescending(order: SortOrder) {
         ascendingDescending = order
     }
-
+    
     public func showNewJobSheet() {
         isShowingNewJobView = true
     }
-
+    
     public func setApplicationStatus(job: Job, status: JobApplicationStatus) {
         job.jobApplicationStatus = status
         job.jobApplicationStatusPrivate = status.status
