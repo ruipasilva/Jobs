@@ -17,7 +17,8 @@ public class ShareExtensionViewModel: BaseViewModel {
     @Published public var sharedText: String = ""
     
     private func addNewJob(context: ModelContext) {
-        let newJob = Job(localNotificationID: self.localNotificationID,
+        let newJob = Job(id: UUID(),
+                         localNotificationID: localNotificationID,
                          title: title,
                          company: company,
                          notes: notes,

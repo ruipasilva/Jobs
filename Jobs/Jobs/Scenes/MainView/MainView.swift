@@ -19,7 +19,6 @@ struct MainView: View {
             JobListView(mainViewModel: mainViewModel,
                         sortOrder: sortingOrder,
                         filterString: mainViewModel.filter)
-            .padding(.bottom, 10)
             .background(Color(UIColor.systemBackground))
             .searchable(text: $mainViewModel.filter,
                         prompt: "Search companies and job titles")

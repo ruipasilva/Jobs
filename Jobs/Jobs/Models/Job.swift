@@ -10,6 +10,7 @@ import SwiftData
 
 @Model
 public final class Job {
+    @Attribute(.unique) public var id: UUID
     // All properties need a default value as cloudKit requires it
     var localNotificationID: String?
     var title: String = ""
@@ -35,31 +36,33 @@ public final class Job {
     var companyWebsite: String = ""
     var workingDays: [String] = []
     var currencyType: CurrencyType = CurrencyType.dolar
-
-    public init(localNotificationID: String? = nil,
-         title: String,
-         company: String,
-         dateAdded: Date = Date.now,
-         notes: String,
-         jobApplicationStatus: JobApplicationStatus = .notApplied,
-         jobApplicationStatusPrivate: String,
-         appliedDate: Date? = nil,
-         salary: String,
-         location: String,
-         locationType: LocationType = .onSite,
-         recruiterName: String,
-         recruiterNumber: String,
-         recruiterEmail: String,
-         followUp: Bool,
-         followUpDate: Date = Date.now,
-         addToCalendar: Bool,
-         addToCalendarDate: Date = Date.now,
-         isEventAllDay: Bool,
-         jobURLPosting: String,
-         logoURL: String,
-         companyWebsite: String,
-         workingDays: [String],
-         currencyType: CurrencyType) {
+    
+    public init(id: UUID,
+                localNotificationID: String? = nil,
+                title: String,
+                company: String,
+                dateAdded: Date = Date.now,
+                notes: String,
+                jobApplicationStatus: JobApplicationStatus = .notApplied,
+                jobApplicationStatusPrivate: String,
+                appliedDate: Date? = nil,
+                salary: String,
+                location: String,
+                locationType: LocationType = .onSite,
+                recruiterName: String,
+                recruiterNumber: String,
+                recruiterEmail: String,
+                followUp: Bool,
+                followUpDate: Date = Date.now,
+                addToCalendar: Bool,
+                addToCalendarDate: Date = Date.now,
+                isEventAllDay: Bool,
+                jobURLPosting: String,
+                logoURL: String,
+                companyWebsite: String,
+                workingDays: [String],
+                currencyType: CurrencyType) {
+        self.id = id
         self.localNotificationID = localNotificationID
         self.title = title
         self.company = company

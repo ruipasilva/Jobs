@@ -71,7 +71,7 @@ struct JobListView: View {
                         MainListCellView(mainViewModel: mainViewModel,
                                          job: job)
                         NavigationLink {
-                            EditJobView(job: job)
+                            EditJobViewNew(job: job)
                         } label: {
                             EmptyView()
                         }

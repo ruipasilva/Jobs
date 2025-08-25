@@ -16,7 +16,7 @@ public class BaseViewModel: ObservableObject {
     @Published public var applicationStatusPrivate = ""
     @Published public var jobApplicationStatus = JobApplicationStatus.notApplied
     @Published public var jobApplicationStatusPrivate = ""
-    @Published public var appliedData: Date? 
+    @Published public var appliedDate: Date? 
     @Published public var location = ""
     @Published public var locationType = LocationType.remote
     @Published public var salary = ""

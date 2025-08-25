@@ -28,9 +28,9 @@ struct CellPadding: ViewModifier {
 }
 
 extension View {
-    func cellBackground() -> some View {
+    func cellBackground(isAnotherCellBellow: Bool? = true) -> some View {
         modifier(CellBackground())
-            .padding(.bottom, 28)
+            .padding(.bottom, isAnotherCellBellow! ? 28 : 0)
     }
 
     func cellPadding() -> some View {

@@ -24,4 +24,8 @@ extension Container {
     var keychainManager: Factory<KeychainManaging> {
         Factory(self) { KeychainManager() }
     }
+    
+    var storageManager: Factory<StorageManaging> {
+        Factory(self) { StorageManager() }
+    }
 }

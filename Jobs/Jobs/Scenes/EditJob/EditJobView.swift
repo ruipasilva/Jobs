@@ -18,6 +18,8 @@ struct EditJobView: View {
     
     private var job: Job
     
+//    let interviewString = """WE’LL ANALYSE YOUR PROFILE AGAINST THE JOB DESCRIPTION AND HELP YOU PREPARE THE INTERVIEW"""
+    
     public init(job: Job) {
         self._editJobViewModel = .init(wrappedValue: .init(job: job))
         self.job = job
@@ -47,7 +49,7 @@ struct EditJobView: View {
         }
         .alert("Important Notice", isPresented: $editJobViewModel.isShowingWarnings) {
             Button("Go!", role: .none) {
-                openURL(URL(string: "https://www.\(editJobViewModel.companyWebsite)")!)
+                openURL(URL(string: "https://www.\(editJobViewModel.job.companyWebsite)")!)
             }
             Button("Cancel", role: .cancel) {}
         } message: {
@@ -182,7 +184,58 @@ struct EditJobView: View {
                 .cellPadding()
             }
         }
-        .cellBackground()
+        .cellBackground(isAnotherCellBellow: editJobViewModel.job.jobApplicationStatus != .notApplied ? false : true)
+    }
+    
+    private var prepareForInterviewView: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                   .strokeBorder(Color.mint, lineWidth: 0.5)
+                   .background(
+                       RoundedRectangle(cornerRadius: 10)
+                           .fill(Color.mint.opacity(0.1))
+                   )
+            
+            HStack {
+                VStack {
+                    Image(systemName: "newspaper")
+                        .resizable()
+                        .frame(width: 22, height: 22)
+                    Spacer()
+                }
+                .padding(.horizontal, 22)
+                
+                .padding(.bottom, 90)
+                VStack(alignment: .leading) {
+                    Text("Prepare for Interviews")
+                        .font(.body)
+                        .bold()
+                    
+                    Text("""
+                        WE’LL ANALYSE YOUR PROFILE AGAINST 
+                        THE JOB DESCRIPTION AND HELP YOU 
+                        PREPARE THE INTERVIEW
+                        """)
+                    .font(.callout)
+                    
+                    Divider()
+                        .frame(height: 0.5)
+                    
+                    Button {
+                        
+                    } label: {
+                        Text("Start")
+                            .font(.body)
+                            .bold()
+                    }
+                }
+                .padding(.bottom, 13)
+            }
+            .padding(.top, 28)
+           
+        }
+        
+        .padding()
     }
     
     private var locationView: some View {

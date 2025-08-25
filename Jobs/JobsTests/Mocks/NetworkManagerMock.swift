@@ -9,6 +9,7 @@ import Foundation
 @testable import Jobs
 
 class NetworkManagerMock: NetworkManaging {
+    
     var shouldReturnError = false
     var logos: [CompanyInfo]?
     var onlineJobs: Jobs.OnlineJobsResults?

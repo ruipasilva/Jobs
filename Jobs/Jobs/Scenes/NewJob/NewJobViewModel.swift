@@ -15,6 +15,7 @@ public final class NewJobViewModel: BaseViewModel {
     
     @Injected(\.calendarManager) public var calendarManager
     @Injected(\.notificationManager) public var notificationManager
+    @Injected(\.storageManager) public var storeManager
     
     public func showDiscardDialog() {
         showingCancelActionSheet = true
@@ -24,15 +25,23 @@ public final class NewJobViewModel: BaseViewModel {
         return title.isEmpty || company.isEmpty
     }
     
+    public func setApplicationDate() {
+        print(appliedDate)
+        if jobApplicationStatus == .notApplied {
+            appliedDate = nil
+        }
+    }
+    
     private func addNewJob(context: ModelContext) {
-        let newJob = Job(localNotificationID: self.localNotificationID,
+        let newJob = Job(id: UUID(),
+                         localNotificationID: self.localNotificationID,
                          title: title,
                          company: company,
-                         dateAdded: Date(),
+                         dateAdded: dateAdded,
                          notes: notes,
                          jobApplicationStatus: jobApplicationStatus,
                          jobApplicationStatusPrivate: jobApplicationStatus.status,
-                         appliedDate: jobApplicationStatus == .notApplied ? nil : Date(),
+                         appliedDate: appliedDate,
                          salary: salary,
                          location: location,
                          locationType: locationType,
@@ -49,7 +58,7 @@ public final class NewJobViewModel: BaseViewModel {
                          companyWebsite: companyWebsite,
                          workingDays: workingDays,
                          currencyType: currencyType)
-        context.insert(newJob)
+        storeManager.save(context: context, job: newJob)
     }
     
     public func saveJob(context: ModelContext) {

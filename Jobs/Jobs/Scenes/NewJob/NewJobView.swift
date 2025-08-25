@@ -17,8 +17,15 @@ public struct NewJobView: View {
         NavigationStack {
             Form {
                 mainInfoView
-                statusView
-                locationView
+                ApplicationStatusView(applicationStatus: $newJobViewModel.jobApplicationStatus,
+                                      aplicationStatusPrivate: $newJobViewModel.jobApplicationStatusPrivate,
+                                      appliedDate: $newJobViewModel.appliedDate,
+                                      onChange: { newJobViewModel.setApplicationDate() })
+                
+                LocationTypeView(locationType: $newJobViewModel.locationType,
+                                 location: $newJobViewModel.location,
+                                 workingDays: $newJobViewModel.workingDays,
+                                 workingDaysToSave: newJobViewModel.workingDaysToSave)
                 remindersView
                 recruitersInfoView
                 otherInfoView
@@ -56,34 +63,6 @@ public struct NewJobView: View {
                 }
             TextfieldWithSFSymbol(text: $newJobViewModel.title, placeholder: "Job Title (required)", systemName: "person")
                 .focused($focusState, equals: .jobTitle)
-        }
-    }
-    
-    
-    private var statusView: some View {
-        Section {
-            Picker("Application Status", selection: $newJobViewModel.jobApplicationStatus) {
-                ForEach(JobApplicationStatus.allCases, id: \.id) { status in
-                    Text(status.status).tag(status)
-                }
-            }
-        }
-    }
-    
-    private var locationView: some View {
-        Section {
-            Picker("Job Type", selection: $newJobViewModel.locationType.animation()) {
-                ForEach(LocationType.allCases, id: \.self) { location in
-                    Text(location.type).tag(location)
-                }
-            }
-            
-            if !newJobViewModel.isLocationRemote() {
-                TextfieldWithSFSymbol(text: $newJobViewModel.location, placeholder: "Location", systemName: "mappin")
-                
-                
-                WorkingDaysView(workingDays: $newJobViewModel.workingDays, workingDaysToSave: newJobViewModel.workingDaysToSave)
-            }
         }
     }
     

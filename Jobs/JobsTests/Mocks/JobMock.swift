@@ -10,7 +10,8 @@ import Foundation
 @testable import Jobs
 
 struct JobMock {
-    static let mockJob = Job(title: "Title",
+    static let mockJob = Job(id: UUID(),
+                             title: "Title",
                              company: "Company",
                              notes: "Notes",
                              jobApplicationStatus: .notApplied,

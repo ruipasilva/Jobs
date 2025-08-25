@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import Combine
 import MapKit
+import SwiftData
 
 
 public class EditJobViewModel: BaseViewModel {
@@ -38,6 +39,7 @@ public class EditJobViewModel: BaseViewModel {
     
     @Injected(\.notificationManager) public var notificationManager
     @Injected(\.calendarManager) public var calendarManager
+    @Injected(\.storageManager) public var storageManager
     
     private var subcriptions = Set<AnyCancellable>()
     
@@ -46,10 +48,25 @@ public class EditJobViewModel: BaseViewModel {
         super.init()
     }
     
+    public func onAppear() {
+        initialCompanyName = job.company
+        initialJobTitle = job.title
+    }
+    
+    public func onDisappear() {
+        storageManager.edit(initialJobTitle: initialJobTitle,
+                            initialCompanyName: initialCompanyName,
+                            jobTitle: &job.title,
+                            jobCompany: &job.company)
+    }
+    
+    public func deleteJob(context: ModelContext) {
+        storageManager.delete(job: job, context: context)
+    }
+    
     public func isLocationOnSite() -> Bool {
         return job.locationType == .remote
     }
-    
     
     public func setupWebsiteWarning() {
         count += 1
@@ -61,10 +78,8 @@ public class EditJobViewModel: BaseViewModel {
         company = job.company
     }
     
-    func setApplicationDate() {
-        if job.jobApplicationStatus != .notApplied {
-            job.appliedDate = Date()
-        } else {
+    public func setApplicationDate() {
+        if job.jobApplicationStatus == .notApplied {
             job.appliedDate = nil
         }
     }
