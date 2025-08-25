@@ -45,7 +45,7 @@ struct SingleJobStatusView: View {
         List(jobs, id: \.id) { job in
             MainListCellView(mainViewModel: mainViewModel, job: job)
                 .listRowInsets(
-                    .init(top: 0, leading: 16, bottom: 8, trailing: 16)
+                    .init(top: 6, leading: 16, bottom: 6, trailing: 16)
                 )
                 .listRowSeparator(.hidden)
         }

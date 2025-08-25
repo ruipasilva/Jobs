@@ -12,34 +12,34 @@ struct JobListView: View {
     @ObservedObject private var mainViewModel: MainViewViewModel
     @Environment(\.modelContext) private var context
     @Query private var jobs: [Job]
-
+    
     init(mainViewModel: MainViewViewModel,
-        sortOrder: SortingOrder,
-        filterString: String) {
+         sortOrder: SortingOrder,
+         filterString: String) {
         self.mainViewModel = mainViewModel
-
+        
         let sortDescriptors: [SortDescriptor<Job>] =
-            switch sortOrder {
-            case .status:
-                [SortDescriptor(\Job.jobApplicationStatusPrivate, order: mainViewModel.ascendingDescending), SortDescriptor(\Job.dateAdded)]
-            case .title:
-                [SortDescriptor(\Job.title, order: mainViewModel.ascendingDescending)]
-            case .company:
-                [SortDescriptor(\Job.company, order: mainViewModel.ascendingDescending)]
-            case .salary:
-                [SortDescriptor(\Job.salary, order: mainViewModel.ascendingDescending)]
-            case .dateAdded:
-                [SortDescriptor(\Job.dateAdded, order: mainViewModel.ascendingDescending)]
-            @unknown default:
-                [SortDescriptor(\Job.company, order: mainViewModel.ascendingDescending)]
-            }
+        switch sortOrder {
+        case .status:
+            [SortDescriptor(\Job.jobApplicationStatusPrivate, order: mainViewModel.ascendingDescending), SortDescriptor(\Job.dateAdded)]
+        case .title:
+            [SortDescriptor(\Job.title, order: mainViewModel.ascendingDescending)]
+        case .company:
+            [SortDescriptor(\Job.company, order: mainViewModel.ascendingDescending)]
+        case .salary:
+            [SortDescriptor(\Job.salary, order: mainViewModel.ascendingDescending)]
+        case .dateAdded:
+            [SortDescriptor(\Job.dateAdded, order: mainViewModel.ascendingDescending)]
+        @unknown default:
+            [SortDescriptor(\Job.company, order: mainViewModel.ascendingDescending)]
+        }
         
         let filter = #Predicate<Job> { job in
             job.company.localizedStandardContains(filterString) || job.title.localizedStandardContains(filterString) || filterString.isEmpty
         }
         _jobs = Query(filter: filter, sort: sortDescriptors)
     }
-
+    
     var body: some View {
         Group {
             if jobs.isEmpty {
@@ -56,48 +56,15 @@ struct JobListView: View {
                 Section {
                     RectanglesView(mainViewModel: mainViewModel)
                 }
-                .padding(.bottom, -16)
                 .listRowSeparator(.hidden)
             }
         }
     }
-
+    
     private var jobList: some View {
         List {
             topView
-            Section {
-                ForEach(jobs, id: \.id) { job in
-                    ZStack {
-                        MainListCellView(mainViewModel: mainViewModel,
-                                         job: job)
-                        NavigationLink {
-                            EditJobViewNew(job: job)
-                        } label: {
-                            EmptyView()
-                        }
-                        .opacity(0)
-                    }
-                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                        makeSwipeRightView(job: job)
-                    }
-                }
-                .onDelete { indexSet in
-                    Task {
-                        for index in indexSet.reversed() { // Reverse to avoid index shifting issues
-                            let job = jobs[index]
-                            context.delete(job)
-                        }
-                        
-                        do {
-                            try context.save()
-                        } catch {
-                            print("Failed to delete jobs: \(error.localizedDescription)")
-                        }
-                    }
-                }
-                .listRowBackground(Color.clear)
-            }
-            .listRowSeparator(.hidden)
+            jobListView
         }
         .listStyle(.plain)
     }
@@ -126,7 +93,7 @@ struct JobListView: View {
                 }
                 .tint(.indigo)
             }
-
+            
             Button(action: {
                 mainViewModel.setApplicationStatus(job: job, status: .rejected)
             }) {
@@ -138,5 +105,43 @@ struct JobListView: View {
                 .tint(.red)
             }
         }
+    }
+    
+    private var jobListView: some View {
+        ForEach(jobs, id: \.id) { job in
+            
+            ZStack {
+                MainListCellView(mainViewModel: mainViewModel,
+                                 job: job)
+                
+                NavigationLink {
+                    EditJobViewNew(job: job)
+                } label: {
+                    EmptyView()
+                }
+                .opacity(0)
+            }
+            .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                makeSwipeRightView(job: job)
+            }
+        }
+        .onDelete { indexSet in
+            Task {
+                for index in indexSet {
+                    let job = jobs[index]
+                    context.delete(job)
+                }
+                
+                do {
+                    try context.save()
+                } catch {
+                    print("Failed to delete jobs: \(error.localizedDescription)")
+                }
+            }
+        }
+        .listRowSeparator(.hidden)
+        .listRowInsets(
+            .init(top: 6, leading: 16, bottom: 6, trailing: 16)
+        )
     }
 }

@@ -45,8 +45,10 @@ struct EditJobViewNew: View {
             extraInfoView
             recruiterInfoView
             notesView
-            deleteButton
         }
+        .toolbar(content: {
+            toolbarTrailing
+        })
         .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
             LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel())
         }
@@ -228,18 +230,15 @@ struct EditJobViewNew: View {
         }
     }
     
-    private var deleteButton: some View {
-        Button(action: {
-            editJobViewModel.isShowingDeleteAlert = true
-        }, label: {
-            Text("Delete Job")
-                .fontWeight(.semibold)
-                .frame(maxWidth: .infinity)
-                .cellPadding()
-            
-        })
-        .buttonStyle(.borderedProminent)
-        .tint(Color(uiColor: .systemRed))
+    private var toolbarTrailing: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button {
+                editJobViewModel.isShowingDeleteAlert = true
+            } label: {
+                Image(systemName: "trash")
+                    .foregroundStyle(Color.red)
+            }
+        }
     }
 }
 
