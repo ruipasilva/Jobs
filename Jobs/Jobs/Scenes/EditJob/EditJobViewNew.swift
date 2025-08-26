@@ -32,6 +32,7 @@ struct EditJobViewNew: View {
                     tipView
                     titleView
                 }
+                .listRowBackground(Color.clear)
             }
             ApplicationStatusView(applicationStatus: $editJobViewModel.job.jobApplicationStatus,
                                   aplicationStatusPrivate: $editJobViewModel.job.jobApplicationStatusPrivate,
@@ -95,6 +96,9 @@ struct EditJobViewNew: View {
             
             editLogoButton
         }
+        .onTapGesture {
+            editJobViewModel.isShowingLogoDetails = true
+        }
     }
     
     private var tipView: some View {
@@ -104,17 +108,13 @@ struct EditJobViewNew: View {
     }
     
     private var editLogoButton: some View {
-        Button(action: {
-            editJobViewModel.isShowingLogoDetails = true
-        }, label: {
             Image(systemName: "pencil.circle.fill")
                 .resizable()
                 .symbolRenderingMode(.palette)
                 .frame(width: 30, height: 30)
                 .foregroundStyle(.white, Color(uiColor: .systemGray))
-        })
-        .padding(.bottom, 6)
-        .padding(.trailing, 7)
+                .padding(.bottom, 6)
+                .padding(.trailing, 7)
     }
     
     private var titleView: some View {
@@ -129,24 +129,21 @@ struct EditJobViewNew: View {
                 .font(.body)
                 .foregroundStyle(Color(UIColor.secondaryLabel))
             
-            Button(action: {
-                if editJobViewModel.count < 1 {
-                    editJobViewModel.setupWebsiteWarning()
-                } else {
-                    openURL(URL(string: "https://www.\(editJobViewModel.job.companyWebsite)")!)
-                }
-            },label: {
-                HStack(alignment: .center, spacing: 2) {
+            HStack(alignment: .center, spacing: 2) {
                     Image(systemName: "safari")
                         .imageScale(.small)
                     Text("Company Website")
                         .font(.subheadline)
                 }
                 .foregroundColor(.accentColor)
-                
-            })
-            .padding(.bottom, 32)
-            .disabled(editJobViewModel.job.companyWebsite.isEmpty)
+                .disabled(editJobViewModel.job.companyWebsite.isEmpty)
+                .onTapGesture {
+                    if editJobViewModel.count < 1 {
+                        editJobViewModel.setupWebsiteWarning()
+                    } else {
+                        openURL(URL(string: "https://www.\(editJobViewModel.job.companyWebsite)")!)
+                    }
+                }
         }
     }
     
