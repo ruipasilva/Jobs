@@ -66,6 +66,7 @@ struct EditJobView: View {
             editJobViewModel.initialCompanyName = editJobViewModel.job.company
             editJobViewModel.initialJobTitle = editJobViewModel.job.title
         })
+        //test
         .task(id: job) {
             do {
                 try context.save()
