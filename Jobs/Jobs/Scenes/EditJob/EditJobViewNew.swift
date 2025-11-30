@@ -53,9 +53,12 @@ struct EditJobViewNew: View {
         .sheet(isPresented: $editJobViewModel.isShowingLogoDetails) {
             LogoOptionsView(logoOptionsViewModel: editJobViewModel.getLogoOptionsViewModel())
         }
+        .sheet(isPresented: $editJobViewModel.isShowingPrepareInterview) {
+            Text("Interview preparation")
+        }
         .alert("Important Notice", isPresented: $editJobViewModel.isShowingWarnings) {
             Button("Go!", role: .none) {
-                openURL(URL(string: "https://www.\(editJobViewModel.companyWebsite)")!)
+                openURL(URL(string: "https://www.\(editJobViewModel.job.companyWebsite)")!)
             }
             Button("Cancel", role: .cancel) {}
         } message: {
@@ -227,14 +230,25 @@ struct EditJobViewNew: View {
         }
     }
     
-    private var toolbarTrailing: some ToolbarContent {
-        ToolbarItem(placement: .topBarTrailing) {
+    @ToolbarContentBuilder private var toolbarTrailing: some ToolbarContent {
+        ToolbarItemGroup(placement: .topBarTrailing) {
+            
+            Button {
+                editJobViewModel.isShowingPrepareInterview = true
+            } label: {
+                Image(systemName: "bubble.left.and.bubble.right.fill")
+                    .foregroundStyle(Color.blue)
+            }
+            
             Button {
                 editJobViewModel.isShowingDeleteAlert = true
             } label: {
                 Image(systemName: "trash")
                     .foregroundStyle(Color.red)
             }
+            
+            
+           
         }
     }
 }
@@ -245,4 +259,3 @@ struct ScrollOffsetPreferenceKey: PreferenceKey {
         value = nextValue()
     }
 }
-

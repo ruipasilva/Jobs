@@ -26,7 +26,6 @@ public final class NewJobViewModel: BaseViewModel {
     }
     
     public func setApplicationDate() {
-        print(appliedDate)
         if jobApplicationStatus == .notApplied {
             appliedDate = nil
         }

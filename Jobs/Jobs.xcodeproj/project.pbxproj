@@ -80,6 +80,8 @@
 		69F725B62CDBFFA30064C999 /* LocalNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725B52CDBFFA30064C999 /* LocalNotificationsManager.swift */; };
 		69F725B92CDCFE510064C999 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 69F725B82CDCFE510064C999 /* Factory */; };
 		69F725BB2CDCFEB10064C999 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F725BA2CDCFEB10064C999 /* DependencyContainer.swift */; };
+		69FB8FD02EDC6BAE0050EB24 /* IsSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FB8FCF2EDC6BAE0050EB24 /* IsSearchable.swift */; };
+		69FB8FD12EDC6BAE0050EB24 /* IsSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FB8FCF2EDC6BAE0050EB24 /* IsSearchable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +191,7 @@
 		69F725B32CDBFD710064C999 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		69F725B52CDBFFA30064C999 /* LocalNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsManager.swift; sourceTree = "<group>"; };
 		69F725BA2CDCFEB10064C999 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		69FB8FCF2EDC6BAE0050EB24 /* IsSearchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsSearchable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -465,6 +468,7 @@
 		69F725BF2CDD02C30064C999 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				69FB8FCE2EDC6B8F0050EB24 /* ViewModifiers */,
 				69D583792C3DD84700084C5E /* WorkingDaysView.swift */,
 				6974A10F2C8E495900570472 /* CellBackgroundModifiers.swift */,
 				698006742BB37DF9007C725E /* TextfieldWithSFSymbol.swift */,
@@ -483,6 +487,14 @@
 				693AD18E2D41800F0059686E /* JobHelpers.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		69FB8FCE2EDC6B8F0050EB24 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				69FB8FCF2EDC6BAE0050EB24 /* IsSearchable.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -653,6 +665,7 @@
 				693AD19D2D42C46D0059686E /* LocalNotificationsManager.swift in Sources */,
 				69DD197F2E5D20FE005C0C55 /* LocationTypeView.swift in Sources */,
 				693AD19A2D42C44A0059686E /* DependencyContainer.swift in Sources */,
+				69FB8FD02EDC6BAE0050EB24 /* IsSearchable.swift in Sources */,
 				69A9F1D62D4AE3C900652CB6 /* CachedImage.swift in Sources */,
 				693AD1972D42C1B90059686E /* JobHelpers.swift in Sources */,
 				69A9F1C92D49878E00652CB6 /* IdentifiableLocation.swift in Sources */,
@@ -664,6 +677,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69FB8FD12EDC6BAE0050EB24 /* IsSearchable.swift in Sources */,
 				693AD1982D42C25F0059686E /* Job.swift in Sources */,
 				692ADAE42E302C0500D406BF /* StorageManager.swift in Sources */,
 				693AD1992D42C25F0059686E /* JobHelpers.swift in Sources */,
@@ -933,6 +947,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Jobs/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -944,7 +959,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -976,6 +991,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Jobs/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -987,7 +1003,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;

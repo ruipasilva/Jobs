@@ -75,6 +75,8 @@ struct InsightsView: View {
             .scrollIndicators(.hidden)
             .padding(.horizontal)
             .navigationTitle("Insights")
+            .navigationBarTitleDisplayMode(.automatic)
+            .toolbarBackground(.hidden, for: .navigationBar)
         }
     }
     

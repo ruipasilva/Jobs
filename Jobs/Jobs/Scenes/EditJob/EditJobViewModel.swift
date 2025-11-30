@@ -20,6 +20,7 @@ public class EditJobViewModel: BaseViewModel {
     @Published public var isShowingWarnings = false
     @Published public var isShowingDeleteAlert = false
     @Published public var isShowingMapView = false
+    @Published public var isShowingPrepareInterview = false
     
     @Published public var initialCompanyName: String = ""
     @Published public var initialJobTitle: String = ""

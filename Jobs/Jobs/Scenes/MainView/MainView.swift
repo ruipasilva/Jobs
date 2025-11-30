@@ -11,8 +11,9 @@ import SwiftUI
 struct MainView: View {
     @StateObject private var mainViewModel = MainViewViewModel()
     @Environment(\.isSearching) var isSearching
-    @Query private var jobs: [Job]
     @AppStorage("sortingOrder") var sortingOrder: SortingOrder = .dateAdded
+    @SceneStorage("SelectedTab") var selectedTab = 0
+    @Query private var jobs: [Job]
     
     var body: some View {
         NavigationStack {
@@ -20,8 +21,7 @@ struct MainView: View {
                         sortOrder: sortingOrder,
                         filterString: mainViewModel.filter)
             .background(Color(UIColor.systemBackground))
-            .searchable(text: $mainViewModel.filter,
-                        prompt: "Search companies and job titles")
+            .isSearchable(selectedTab: selectedTab, filter: $mainViewModel.filter)
             .toolbar {
                 toolbarTrailing
                 toolBarLeading
