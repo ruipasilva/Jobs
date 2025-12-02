@@ -44,39 +44,39 @@ struct InsightsView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                totalJobsView
-                rateView
-                
-                ChartView(insightsViewModel: insightsViewModel)
-                WeeklyProgress(insightsViewModel: insightsViewModel)
-            }
-            .sheet(isPresented: $insightsViewModel.isShowingInterviewRateInfo) {
-                InsightsInfoView(title: "Interview Rate",
-                                 description:
-                                    """
-                                    • How often you're getting interviews after applying.
-                                    • Focuses on progress rather then rejection.
-                                    • Encourages to improve resumes, networking and applications if the rate is low.
-                                    """
-                )
-                .presentationDetents([.fraction(0.3)])
-            }
-            .sheet(isPresented: $insightsViewModel.isShowingResponseRateInfo) {
-                InsightsInfoView(title: "Application Response Rate",
-                                 description:
-                                    """
-                                    • Shows how often applications get a response, even if it's not an offer.
-                                    • Tweak your approach is response rate is low.
-                                    • Encourages outreach follow-ups if needed.
-                                    """
-                )
-                .presentationDetents([.fraction(0.3)])
+                VStack {
+                    totalJobsView
+                    rateView
+                    ChartView(insightsViewModel: insightsViewModel)
+                    WeeklyProgress(insightsViewModel: insightsViewModel)
+                }
+                .padding(.horizontal)
             }
             .scrollIndicators(.hidden)
-            .padding(.horizontal)
             .navigationTitle("Insights")
-            .navigationBarTitleDisplayMode(.automatic)
-            .toolbarBackground(.hidden, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.large)
+        }
+        .sheet(isPresented: $insightsViewModel.isShowingInterviewRateInfo) {
+            InsightsInfoView(title: "Interview Rate",
+                             description:
+                                """
+                                • How often you're getting interviews after applying.
+                                • Focuses on progress rather then rejection.
+                                • Encourages to improve resumes, networking and applications if the rate is low.
+                                """
+            )
+            .presentationDetents([.fraction(0.3)])
+        }
+        .sheet(isPresented: $insightsViewModel.isShowingResponseRateInfo) {
+            InsightsInfoView(title: "Application Response Rate",
+                             description:
+                                """
+                                • Shows how often applications get a response, even if it's not an offer.
+                                • Tweak your approach is response rate is low.
+                                • Encourages outreach follow-ups if needed.
+                                """
+            )
+            .presentationDetents([.fraction(0.3)])
         }
     }
     
