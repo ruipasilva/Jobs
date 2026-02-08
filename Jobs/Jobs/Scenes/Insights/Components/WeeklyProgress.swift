@@ -11,9 +11,9 @@ import SwiftData
 struct WeeklyProgress: View {
     @ObservedObject private var insightsViewModel: InsightsViewModel
     @AppStorage("target") private var weeklyTarget: Int = 0
-    
-    @Query private var jobsPastShortlist: [Job]
-    
+
+    private let jobsPastShortlist: [Job]
+
     private var weeklyTargetBinding: Binding<String> {
         Binding(
             get: { String(weeklyTarget) },
@@ -24,22 +24,20 @@ struct WeeklyProgress: View {
             }
         )
     }
-    
+
     var thisWeekProgress: Double {
         let appliedJobs = insightsViewModel.filteredAppliedJobsForCurrentWeek(jobs: jobsPastShortlist).count
         return weeklyTarget > 0 ? min(Double(appliedJobs) / Double(weeklyTarget), 1.0) : 0.0
     }
-    
+
     var previousWeekProgress: Double {
         let appliedJobs = insightsViewModel.filteredAppliedJobsForPreviousWeek(jobs: jobsPastShortlist).count
         return weeklyTarget > 0 ? min(Double(appliedJobs) / Double(weeklyTarget), 1.0) : 0.0
     }
-    
-    public init(insightsViewModel: InsightsViewModel) {
+
+    public init(insightsViewModel: InsightsViewModel, jobsPastShortlist: [Job]) {
         self.insightsViewModel = insightsViewModel
-        
-        let jobsPastShortlist = #Predicate<Job> { $0.jobApplicationStatusPrivate != "Shortlisted" }
-        _jobsPastShortlist = Query(filter: jobsPastShortlist)
+        self.jobsPastShortlist = jobsPastShortlist
     }
     
     var body: some View {

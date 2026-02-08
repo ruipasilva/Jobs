@@ -11,22 +11,11 @@ import Charts
 
 struct ChartView: View {
     @ObservedObject private var insightsViewModel: InsightsViewModel
-    
-    @Query private var jobs: [Job]
-    @Query private var appliedJobs: [Job]
-    @Query private var rejectedJobs: [Job]
-    @Query private var shorlistedJobs: [Job]
-    @Query private var startedJobs: [Job]
-    @Query private var declinedJobs: [Job]
-    @Query private var offerJobs: [Job]
-    
-    @Query private var jobsPastShortlist: [Job]
-    
-    public init(insightsViewModel: InsightsViewModel) {
+    private let jobsPastShortlist: [Job]
+
+    public init(insightsViewModel: InsightsViewModel, jobsPastShortlist: [Job]) {
         self.insightsViewModel = insightsViewModel
-        
-        let jobsPastShortlist = #Predicate<Job> { $0.jobApplicationStatusPrivate != "Shortlisted" }
-        _jobsPastShortlist = Query(filter: jobsPastShortlist)
+        self.jobsPastShortlist = jobsPastShortlist
     }
     var body: some View {
         Picker("Time", selection: $insightsViewModel.weekOrYear) {

@@ -74,9 +74,6 @@ struct LogoOptionsView: View {
     private var mainInfoView: some View {
         Section {
             TextfieldWithSFSymbol(text: $logoOptionsViewModel.company, placeholder: "Company Name (required)", systemName: "building.2")
-                .onChange(of: logoOptionsViewModel.company) { _, _ in
-                    logoOptionsViewModel.handleShowAllLogosTyping()
-                }
                 .submitLabel(.next)
                 .focused($focusState, equals: .companyName)
                 .onSubmit {

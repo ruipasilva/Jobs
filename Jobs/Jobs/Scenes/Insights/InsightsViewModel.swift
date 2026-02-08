@@ -11,11 +11,36 @@ public final class InsightsViewModel: ObservableObject {
     @Published public var weekOrYear: WeekOrYear = .week
     @Published public var isShowingInterviewRateInfo: Bool = false
     @Published public var isShowingResponseRateInfo: Bool = false
-    
+
     @Published public var currentIndex: Int = 0
     @Published public var weekOffsets = Array(-52...0)
-    
+
     typealias DataInfo = (date: Date, count: Int)
+
+    // Cached DateFormatters (expensive to create, reuse them)
+    private static let dayFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
+        return formatter
+    }()
+
+    private static let monthFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM"
+        return formatter
+    }()
+
+    private static let yearFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        return formatter
+    }()
+
+    private static let weekdayFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "E"
+        return formatter
+    }()
     
     func getDateWithCurrentWeek() -> String {
         let calendar = Calendar.current
@@ -30,13 +55,7 @@ public final class InsightsViewModel: ObservableObject {
         let adjustedStartOfWeek = calendar.date(byAdding: .weekOfYear, value: currentIndex, to: startOfWeek)!
         let adjustedEndOfWeek = calendar.date(byAdding: .day, value: 6, to: adjustedStartOfWeek)!
 
-        let dayFormatter = DateFormatter()
-        dayFormatter.dateFormat = "d"
-
-        let monthFormatter = DateFormatter()
-        monthFormatter.dateFormat = "MMM"
-
-        let combinedDateString = "\(monthFormatter.string(from: adjustedStartOfWeek)) \(dayFormatter.string(from: adjustedStartOfWeek))-\(dayFormatter.string(from: adjustedEndOfWeek)), \(currentYear)"
+        let combinedDateString = "\(Self.monthFormatter.string(from: adjustedStartOfWeek)) \(Self.dayFormatter.string(from: adjustedStartOfWeek))-\(Self.dayFormatter.string(from: adjustedEndOfWeek)), \(currentYear)"
 
         return combinedDateString
     }
@@ -49,10 +68,7 @@ public final class InsightsViewModel: ObservableObject {
             return ""
         }
 
-        let yearFormatter = DateFormatter()
-        yearFormatter.dateFormat = "yyyy"
-        
-        return yearFormatter.string(from: adjustedYearDate)
+        return Self.yearFormatter.string(from: adjustedYearDate)
     }
     
     func filteredAppliedJobsByWeek(jobs: [Job]) -> [Job] {
@@ -207,15 +223,11 @@ public final class InsightsViewModel: ObservableObject {
     }
     
     public func monthName(from date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM"
-        return formatter.string(from: date)
+        return Self.monthFormatter.string(from: date)
     }
-    
+
     public func weekdayName(from date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "E"
-        return formatter.string(from: date)
+        return Self.weekdayFormatter.string(from: date)
     }
     
     public func showWeekOrMonth(date: (date: Date, count: Int)) -> String {

@@ -117,6 +117,7 @@ struct MainListCellView: View {
                 Button(role: .destructive) {
                     mainViewModel.objectWillChange.send()
                     context.delete(job)
+                    try? context.save()
                 } label: {
                     HStack {
                         Text("Delete")

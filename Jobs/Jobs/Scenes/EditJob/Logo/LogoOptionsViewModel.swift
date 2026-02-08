@@ -21,12 +21,23 @@ public final class LogoOptionsViewModel: BaseViewModel {
     private var cancellables = Set<AnyCancellable>()
     
     public let job: Job
-    
-    @Published public var isTyping: Bool = false
-    @Published private var timer: Timer? = nil
-    
+
     public init(job: Job) {
         self.job = job
+        super.init()
+
+        // Debounce company input to avoid excessive API calls
+        $company
+            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .filter { !$0.isEmpty }
+            .sink { [weak self] companyName in
+                guard let self = self else { return }
+                Task { @MainActor in
+                    try? await self.getLogos(company: companyName)
+                }
+            }
+            .store(in: &cancellables)
     }
     
     public func showDiscardDialog() {

@@ -10,12 +10,32 @@ import Factory
 import Foundation
 import SwiftData
 import UserNotifications
+import Combine
 
 public final class NewJobViewModel: BaseViewModel {
-    
+
     @Injected(\.calendarManager) public var calendarManager
     @Injected(\.notificationManager) public var notificationManager
     @Injected(\.storageManager) public var storeManager
+
+    private var cancellables = Set<AnyCancellable>()
+
+    override public init() {
+        super.init()
+
+        // Debounce company input to avoid excessive API calls
+        $company
+            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .filter { !$0.isEmpty }
+            .sink { [weak self] companyName in
+                guard let self = self else { return }
+                Task { @MainActor in
+                    try? await self.getLogo(company: companyName)
+                }
+            }
+            .store(in: &cancellables)
+    }
     
     public func showDiscardDialog() {
         showingCancelActionSheet = true

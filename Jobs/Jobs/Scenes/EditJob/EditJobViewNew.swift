@@ -67,6 +67,7 @@ struct EditJobViewNew: View {
         .alert("Delete Job?", isPresented: $editJobViewModel.isShowingDeleteAlert) {
             Button("Delete", role: .destructive) {
                 context.delete(editJobViewModel.job)
+                try? context.save()
                 dismiss()
             }
             Button("Cancel", role: .cancel) {}

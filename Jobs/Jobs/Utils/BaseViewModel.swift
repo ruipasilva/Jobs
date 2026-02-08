@@ -7,6 +7,7 @@
 
 import Foundation
 import Factory
+import Combine
 
 public class BaseViewModel: ObservableObject {
     @Published public var localNotificationID = ""
@@ -16,7 +17,7 @@ public class BaseViewModel: ObservableObject {
     @Published public var applicationStatusPrivate = ""
     @Published public var jobApplicationStatus = JobApplicationStatus.notApplied
     @Published public var jobApplicationStatusPrivate = ""
-    @Published public var appliedDate: Date? 
+    @Published public var appliedDate: Date?
     @Published public var location = ""
     @Published public var locationType = LocationType.remote
     @Published public var salary = ""
@@ -34,15 +35,15 @@ public class BaseViewModel: ObservableObject {
     @Published public var companyWebsite = ""
     @Published public var workingDays: [String] = []
     @Published public var currencyType: CurrencyType = .dolar
-    
+
     public let workingDaysToSave: [String] = ["Mon", "Tue", "Wed", "Thu", "Fri"]
-    
+
     @Published public var showingCancelActionSheet = false
-    @Published private var isTyping: Bool = false
-    @Published private var timer: Timer? = nil
     @Published public var loadingLogoState: LoadingLogoState = .na
-    
+
     @Injected(\.networkManager) var networkManager
+
+    private var cancellables = Set<AnyCancellable>()
     
     public func isLocationRemote() -> Bool {
         return locationType == .remote
@@ -81,35 +82,6 @@ public class BaseViewModel: ObservableObject {
             loadingLogoState = .success(data: logoData)
         } catch {
             loadingLogoState = .failed(error: .unableToComplete)
-        }
-    }
-    
-    public func handleTyping() {
-        isTyping = true
-        
-        timer?.invalidate()
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
-            guard let self else { return }
-            self.isTyping = false
-            Task {
-                try await self.getLogo(company: self.company)
-            }
-        }
-    }
-    
-    public func handleShowAllLogosTyping() {
-        isTyping = true
-        loadingLogoState = .loading
-        
-        timer?.invalidate()
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
-            guard let self else { return }
-            self.isTyping = false
-            Task {
-                try await self.getLogos(company: self.company)
-            }
         }
     }
 }

@@ -8,13 +8,33 @@
 import Foundation
 import SwiftData
 import Factory
+import Combine
 
 public class ShareExtensionViewModel: BaseViewModel {
-    
+
     let appGroupID = "group.com.RuiSilva.Jobs"
-    
+
     @Published public var sharedURL: URL?
     @Published public var sharedText: String = ""
+
+    private var cancellables = Set<AnyCancellable>()
+
+    override public init() {
+        super.init()
+
+        // Debounce company input to avoid excessive API calls
+        $company
+            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .filter { !$0.isEmpty }
+            .sink { [weak self] companyName in
+                guard let self = self else { return }
+                Task { @MainActor in
+                    try? await self.getLogo(company: companyName)
+                }
+            }
+            .store(in: &cancellables)
+    }
     
     private func addNewJob(context: ModelContext) {
         let newJob = Job(id: UUID(),

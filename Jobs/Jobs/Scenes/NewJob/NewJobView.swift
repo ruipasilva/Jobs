@@ -55,9 +55,6 @@ public struct NewJobView: View {
             TextfieldWithSFSymbol(text: $newJobViewModel.company, placeholder: "Company Name (required)", systemName: "building.2")
                 .submitLabel(.next)
                 .focused($focusState, equals: .companyName)
-                .onChange(of: newJobViewModel.company) { _, _ in
-                    newJobViewModel.handleTyping()
-                }
                 .onSubmit {
                     focusState = .jobTitle
                 }

@@ -126,12 +126,12 @@ struct JobListView: View {
             }
         }
         .onDelete { indexSet in
-            Task {
+            Task { @MainActor in
                 for index in indexSet {
                     let job = jobs[index]
                     context.delete(job)
                 }
-                
+
                 do {
                     try context.save()
                 } catch {

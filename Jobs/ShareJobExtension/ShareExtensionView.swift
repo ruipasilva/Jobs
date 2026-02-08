@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ShareExtensionView: View {
-    @Environment(\.modelContext) var container
+    @Environment(\.modelContext) var context
     @FocusState private var focusState: FocusedField?
     @StateObject var shareExtensionViewModel = ShareExtensionViewModel()
     
@@ -51,9 +51,6 @@ struct ShareExtensionView: View {
             TextfieldWithSFSymbol(text: $shareExtensionViewModel.company, placeholder: "Company Name (required)", systemName: "building.2")
                 .submitLabel(.next)
                 .focused($focusState, equals: .companyName)
-                .onChange(of: shareExtensionViewModel.company) { _, _ in
-                    shareExtensionViewModel.handleTyping()
-                }
                 .onSubmit {
                     focusState = .jobTitle
                 }
@@ -75,7 +72,7 @@ struct ShareExtensionView: View {
     
     private var addButton: some View {
         Button(action: {
-            shareExtensionViewModel.saveJob(context: container)
+            shareExtensionViewModel.saveJob(context: context)
             action()
         }, label: {
             Text("Add to Job Tracker App")

@@ -11,34 +11,32 @@ import Charts
 
 struct InsightsView: View {
     @StateObject private var insightsViewModel = InsightsViewModel()
-    
+
     @Query private var jobs: [Job]
-    @Query private var appliedJobs: [Job]
-    @Query private var rejectedJobs: [Job]
-    @Query private var shorlistedJobs: [Job]
-    @Query private var startedJobs: [Job]
-    @Query private var declinedJobs: [Job]
-    @Query private var offerJobs: [Job]
-    
-    @Query private var jobsPastShortlist: [Job]
-    
-    init() {
-        let startedFilter = #Predicate<Job> { $0.jobApplicationStatusPrivate == "Started" }
-        let appliedFilter = #Predicate<Job> { $0.jobApplicationStatusPrivate == "Applied" }
-        let rejectedFilter = #Predicate<Job> { $0.jobApplicationStatusPrivate == "Rejected" }
-        let shortlisted = #Predicate<Job> { $0.jobApplicationStatusPrivate == "NotApplied" }
-        let declined = #Predicate<Job> { $0.jobApplicationStatusPrivate == "Declined" }
-        let offeredFileter = #Predicate<Job> { $0.jobApplicationStatusPrivate == "Offer" }
-        
-        let jobsPastShortlist = #Predicate<Job> { $0.jobApplicationStatusPrivate != "Shortlisted" }
-        
-        _startedJobs = Query(filter: startedFilter)
-        _appliedJobs = Query(filter: appliedFilter)
-        _rejectedJobs = Query(filter: rejectedFilter)
-        _shorlistedJobs = Query(filter: shortlisted)
-        _offerJobs = Query(filter: offeredFileter)
-        _declinedJobs = Query(filter: declined)
-        _jobsPastShortlist = Query(filter: jobsPastShortlist)
+
+    // Computed properties for filtered jobs (single pass through data)
+    private var startedJobs: [Job] {
+        jobs.filter { $0.jobApplicationStatusPrivate == "Started" }
+    }
+
+    private var appliedJobs: [Job] {
+        jobs.filter { $0.jobApplicationStatusPrivate == "Applied" }
+    }
+
+    private var rejectedJobs: [Job] {
+        jobs.filter { $0.jobApplicationStatusPrivate == "Rejected" }
+    }
+
+    private var declinedJobs: [Job] {
+        jobs.filter { $0.jobApplicationStatusPrivate == "Declined" }
+    }
+
+    private var offerJobs: [Job] {
+        jobs.filter { $0.jobApplicationStatusPrivate == "Offer" }
+    }
+
+    private var jobsPastShortlist: [Job] {
+        jobs.filter { $0.jobApplicationStatusPrivate != "Shortlisted" }
     }
     
     var body: some View {
@@ -47,8 +45,8 @@ struct InsightsView: View {
                 VStack {
                     totalJobsView
                     rateView
-                    ChartView(insightsViewModel: insightsViewModel)
-                    WeeklyProgress(insightsViewModel: insightsViewModel)
+                    ChartView(insightsViewModel: insightsViewModel, jobsPastShortlist: jobsPastShortlist)
+                    WeeklyProgress(insightsViewModel: insightsViewModel, jobsPastShortlist: jobsPastShortlist)
                 }
                 .padding(.horizontal)
             }
